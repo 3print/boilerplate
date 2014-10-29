@@ -17,6 +17,7 @@ fr:
       string: 'Saisissez votre texte ici'
       number: 'Insérer un nombre ici'
       datetime: 'JJ/MM/AAAA'
+      email: 'prenom.nom@entreprise.fr'
 
     hints:
       user:
