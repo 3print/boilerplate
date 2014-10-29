@@ -1,0 +1,8 @@
+- if resource_class && resource_collection
+  - resource_name = resource_class.model_name.human.underscore
+  - resource_plural_name = resource_class.t
+
+  .row
+    .col-md-12
+      = widget_box resource_class.t, content_class: 'nopadding', before_title: collection_counter(resource_collection) do
+        = collection resource_collection

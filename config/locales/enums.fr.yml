@@ -1,0 +1,8 @@
+
+fr:
+  enums:
+    user:
+      role:
+        user: Utilisateur
+        admin: Administrateur
+    

@@ -1,0 +1,111 @@
+input[type=checkbox], input[type=radio]
+  display: none
+
+input[type=checkbox] + label
+  padding-left: 26px
+  position: relative
+  overflow: hidden
+
+  &:before, &:after
+    content: ''
+    top: 50%
+    margin-top: -10px
+    left: 0
+    font-family: FontAwesome
+    display: block
+    position: absolute
+    font-weight: normal
+    text-align: center
+
+  &:before
+    width: 20px
+    height: 20px
+    background: $color_grey_light
+    +border-radius(4px)
+    +transition(all 0.3s)
+    +box-shadow(inset 0 1px 3px rgba(0,0,0,0.2))
+
+  &:after
+    content: '\f00c'
+    width: 20px
+    height: 20px
+    left: 0px
+    color: white
+    text-indent: -40px
+    +transition(all 0.3s)
+
+input[type=checkbox]:checked + label, .checked label
+  &:before
+    background: $color_green
+
+  &:after
+    text-indent: 0px
+
+input[type=checkbox][readonly] + label
+  &:before
+    background: $color_grey_lighter
+
+input[type=checkbox][readonly]:checked + label, .checked [readonly] + label
+  &:before
+    background: $color_blue
+
+
+input[type=radio] + label
+  padding-left: 26px
+  position: relative
+  overflow: hidden
+  height: 22px
+
+  &:before, &:after
+    content: ''
+    top: 50%
+    margin-top: -10px
+    font-family: FontAwesome
+    display: block
+    position: absolute
+    font-weight: normal
+
+  &:before
+    width: 20px
+    height: 20px
+    background: #d7dcde
+    +border-radius(50%)
+    +transition(all 0.3s)
+    +box-shadow(inset 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px white)
+
+  &:after
+    content: '\f00c'
+    width: 20px
+    height: 20px
+    color: white
+    text-indent: -20px
+    +transition(all 0.3s)
+
+  &:not(.right)
+    &:before
+      left: 0
+
+    &:after
+      left: 3px
+
+  &.right
+    padding-left: 0
+    padding-right: 26px
+
+    &:before
+      right: 0
+      left: initial
+
+    &:after
+      right: -23px
+      left: initial
+
+input[type=radio]:checked + label, .checked label
+  &:before
+    background: #2c97ce
+
+  &:after
+    text-indent: 0px
+
+  &.right:after
+    right: 3px

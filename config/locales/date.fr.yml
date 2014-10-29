@@ -1,0 +1,28 @@
+fr:
+  time: &time
+    formats:
+      default: '%d/%m/%Y %H:%M:%S'
+      short: '%H:%M:%S'
+
+  date: &date
+    formats:
+      default: '%d/%m/%Y'
+      short: '%d/%m/%Y'
+      medium: '%d %B %Y'
+    month_names:
+      -
+      - janvier
+      - février
+      - mars
+      - avril
+      - mai
+      - juin
+      - juillet
+      - août
+      - septembre
+      - octobre
+      - novembre
+      - décembre
+
+  time:
+    <<: *date

@@ -1,0 +1,22 @@
+fr:
+  identified: &identified
+    first_name:
+      blank: Le champ prénom est obligatoire
+    last_name:
+      blank: Le champ nom est obligatoire
+    email:
+      blank: Le champ email est obligatoire
+      taken: L'email renseigné a déjà été enregistré
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            <<: *identified
+            password:
+              blank: Le champ mot de passe est obligatoire
+              too_short: Le mot de passe est trop court
+            password_confirmation:
+              blank: La confirmation du mot de passe est obligatoire
+              confirmation: La confirmation du mot de passe ne correspond pas au mot de passe

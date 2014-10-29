@@ -1,0 +1,15 @@
+- columns = default_columns_for_object(resource)
+
+= widget_box 'labels.informations'.t, :info, content_class: 'nopadding' do
+  %ul.list-group.nomargin
+    - columns.each do |col|
+      %li.list-group-item
+        - out = resource.send(col)
+        - column = controller.resource_class.columns_hash[col.to_s]
+        - type = column.present? ? column.type : :association
+        - if type == :boolean || col =~ /_at$/
+          %input{type: :checkbox, readonly: true, checked: out}
+          %label= "models.fields.#{controller.resource_name.singularize}.#{col}".t
+        - else
+          %strong= "models.fields.#{controller.resource_name.singularize}.#{col}".tc
+          = out.respond_to?(:to_sentence) ? out.select(&:present?).to_sentence : out

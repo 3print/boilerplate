@@ -1,0 +1,62 @@
+!!!
+= cc_html lang: :fr, class: 'no-js' do
+  %head
+    %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=no", name: "viewport"}/
+    %meta{charset: "utf-8"}
+
+    %title= content_for?(:title) ? yield(:title) : 'admin_app_name'.t
+
+    %meta{name: "description", content: "#{content_for?(:description) ? yield(:description) : 'admin_app_name'.t}"}
+
+    %link{href: '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', media: 'screen', rel: 'stylesheet'}
+
+    = stylesheet_link_tag 'admin', media: 'all'
+    = csrf_meta_tags
+
+  - body_class = "#{yield :extra_body_class} #{controller_name} #{action_name}".strip
+  %body{class: body_class}
+    %nav.navbar.navbar-default{role: :navigation}
+
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
+            %span.sr-only Toggle navigation
+            %i.fa.fa-navicon
+          %a.navbar-brand{href: "/"}
+            %span.text= 'app_name'.t
+
+        #menu.collapse.navbar-collapse{role: :navigation}
+          = render partial: 'shared/session'
+
+          %ul.nav.navbar-nav
+            = render_partial_for_user 'shared/navigation/nav'
+
+    .scroll-wrapper
+      .inner-scroll-wrapper
+        = render partial: 'shared/flash', locals: { flash: flash }
+        .container-fluid
+          #content
+            = yield :before_page
+
+            #content-header
+              %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'admin_app_name'.t
+              = yield :content_header
+
+            = yield :before_content
+
+
+            = yield
+
+            = yield :after_content
+            = yield :after_page
+
+    <!--[if IE 8]>
+    = javascript_include_tag 'shame'
+    <![endif]-->
+
+    <!--[if IE 9]>
+    = javascript_include_tag 'shame'
+    <![endif]-->
+
+    = javascript_include_tag "admin"
+    = yield :scripts

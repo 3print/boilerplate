@@ -1,13 +1,19 @@
+
 describe User do
 
-  before(:each) { @user = User.new(email: 'user@example.com') }
+  it { should validate_presence_of :first_name }
+  it { should validate_presence_of :last_name }
+  it { should validate_presence_of :email }
 
-  subject { @user }
+  context 'when a user does not have an encryted password' do
+    subject { build :user, :no_password }
 
-  it { should respond_to(:email) }
+    it 'validates the password and password_confirmation' do
+      subject.valid?
 
-  it "#email returns a string" do
-    expect(@user.email).to match 'user@example.com'
+      subject.errors.messages[:password].should be_present
+      subject.errors.messages[:password_confirmation].should be_present
+    end
   end
 
 end

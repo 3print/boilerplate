@@ -1,0 +1,39 @@
+
+=before($content: '')
+  &:before
+    content: $content
+
+    @content
+
+=after($content: '')
+  &:after
+    content: $content
+
+    @content
+
+=before-and-after($content: '')
+  +before($content)
+    @content
+
+  +after($content)
+    @content
+
+=expand-outside-gutter()
+  +relative
+
+  +before-and-after
+    background: inherit
+    +box(100%)
+    +absolute(0,0,0)
+    @content
+
+  +before
+    left: 1px
+    margin-left: -100%
+
+  +after
+    right: 1px
+    margin-left: 100%
+
+  +for-phone
+    +before-and-after(none)

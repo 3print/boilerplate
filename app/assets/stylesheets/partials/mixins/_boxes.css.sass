@@ -1,0 +1,37 @@
+=vendor-prefix($name, $arguments...)
+  -webkit-#{$name}: #{$arguments}
+  -moz-#{$name}: #{$arguments}
+  -ms-#{$name}: #{$arguments}
+  -o-#{$name}: #{$arguments}
+  #{$name}: #{$arguments}
+
+=bounds($top: initial, $left: initial, $bottom: initial, $right: initial)
+  top: $top
+  left: $left
+  bottom: $bottom
+  right: $right
+
+=absolute($top: initial, $left: initial, $bottom: initial, $right: initial)
+  position: absolute
+  +bounds($top, $left, $bottom, $right)
+
+=relative($top: initial, $left: initial, $bottom: initial, $right: initial)
+  position: relative
+  +bounds($top, $left, $bottom, $right)
+
+=fixed($top: initial, $left: initial, $bottom: initial, $right: initial)
+  position: fixed
+  +bounds($top, $left, $bottom, $right)
+
+=box($width: auto, $height: $width)
+  display: block
+  width: $width
+  height: $height
+
+=box-inline($width: auto, $height: $width)
+  display: inline-block
+  width: $width
+  height: $height
+
+=box-sizing($sizing: border-box)
+  +vendor-prefix(box-sizing, $sizing)

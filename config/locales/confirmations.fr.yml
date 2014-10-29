@@ -1,0 +1,4 @@
+fr:
+  confirmations:
+    default: "Souhaitez-vous poursuivre cette action ?"
+    destroy: "Souhaitez-vous supprimer définitivement cette entrée ?"

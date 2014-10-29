@@ -1,0 +1,9 @@
+- flash_type_map = { notice: 'success', alert: 'danger', error: 'danger' }
+
+- if flash.present? && flash.any?
+  .container-fluid
+    - flash.each do |name, msg|
+      - if msg.is_a?(String)
+        .alert.alert-dismissable{ class: "alert-#{flash_type_map[name.intern] || name}" }
+          %button.close{ type: :button, data: { dismiss: 'alert' } }= icon(:times)
+          != msg

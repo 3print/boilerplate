@@ -1,0 +1,85 @@
++upto-tablet
+  .navbar-header
+    +relative
+    z-index: 101
+    background: $color_grey_lighter
+
+  .navbar, .container-fluid
+    position: static
+  #menu
+    height: auto !important
+    display: block !important
+    z-index: 100
+    background: white
+    width: 300px
+    overflow-y: auto
+    -webkit-overflow-scrolling: touch
+    +absolute(69px, initial, 0, 0)
+    +transform(translate3d(100%, 0,0))
+    +transition(all 0.3s)
+    +box-shadow(0 0 10px rgba(0,0,0,0.3))
+
+    &.collapse.in, &.collapsing
+      +transform(translate3d(0,0,0))
+
+    .dropdown-menu
+      +box-shadow(none)
+
+
++for-phone
+  .btn .text, .pagination .text
+    display: none
+
+  .nav.navbar-nav
+    margin: 0
+    margin-top: 10px
+
+  .navbar-default .navbar-toggle
+    font-size: 24px
+    +box(48px)
+
+
+  table
+    thead
+      display: none
+
+    tbody
+      tr
+        border-bottom: 1px solid #ddd
+        clear: left
+        overflow: hidden
+
+        &:hover td.id
+          background: #5BC0DE
+          color: white
+
+      td
+        display: block
+        border: none !important
+
+        &.id
+          float: left
+          background: #5BC0DE
+          color: white
+          font-size: 14px
+          line-height: 14px
+          padding: 3px 6px
+          margin: 8px 0px 8px 4px
+          +border-radius(3px)
+
+        &.item
+          float: left
+
+        &.actions
+          float: right
+
+    &.table-hover
+      tr:hover
+        background: #F5F5F5
+
+    &.news
+      .image
+        float: left
+
+      .published
+        float: right

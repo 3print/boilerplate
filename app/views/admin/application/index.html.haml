@@ -1,0 +1,8 @@
+- content_for :before_page do
+  = render_partial_for_user 'index_wrapper_start'
+
+= render_partial_for_user 'index_header'
+= render_partial_for_user 'index'
+
+- content_for :after_page do
+  = render_partial_for_user 'index_wrapper_end'

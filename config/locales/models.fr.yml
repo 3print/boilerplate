@@ -1,0 +1,12 @@
+fr:
+  collections: &collections
+    users: Utilisateurs
+
+  models: &models
+    <<: *collections
+
+    user: Utilisateur
+
+  admin:
+    collections: *collections
+    models: *models

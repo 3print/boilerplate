@@ -1,0 +1,43 @@
+.avatar
+  overflow: hidden
+  +border-radius(50%)
+
+  &.medium
+    +box-inline(300px)
+
+    i
+      line-height: 300px
+      font-size: 200px
+
+  &.default
+    background: $color_grey_lighter
+    text-align: center
+
+    i
+      color: white
+
+.welcome
+  width: 250px
+  text-align: right
+  .session
+    padding: 8px 0
+    > .text
+      font-size: 16px
+      color: $color_grey
+
+
+
+  .avatar
+    margin-left: 10px
+    margin-top: 3px
+    +box-inline(60px)
+
+    i
+      line-height: 60px
+      font-size: 40px
+
+  +upto-tablet
+    float: none !important
+
+    .avatar
+      margin-right: 20px

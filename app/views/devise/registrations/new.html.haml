@@ -1,0 +1,29 @@
+- content_for :content_header do
+  %h3= 'actions.sign_in'.t
+
+- content_for :breadcrumb do
+  - breadcrumb 'actions.sign_in'.t
+  - breadcrumbs do
+    = 'labels.breadcrumb'.tc
+
+.row.sign-in
+  .col-md-6.grey
+    = simple_form_for(User.new, url: session_path(:user), :html => { :role => 'form'}) do |f|
+      %h3.red= 'actions.sign_in'.t
+      = f.input :email, :autofocus => true
+      = f.input :password
+      = f.input :remember_me, as: :boolean
+
+      = f.submit 'actions.connect'.t, :class => 'btn btn-red btn-block'
+
+  .col-md-6
+    = simple_form_for(resource, url: registration_path(resource_name), :html => { :role => 'form'}) do |f|
+      %h3.grey-light= 'actions.sign_up'.t
+
+      = f.input :first_name
+      = f.input :last_name
+      = f.input :email
+      = f.input :password
+      = f.input :password_confirmation
+
+      = f.submit 'actions.sign_up'.t, :class => 'btn btn-grey btn-block'

@@ -1,0 +1,215 @@
+
+@import "partials/variables"
+@import "partials/fonts"
+@import "partials/responsive"
+@import "partials/mixins/boxes"
+@import "partials/mixins/pseudo_elements"
+@import "partials/mixins/feat_detection"
+@import "partials/mixins/text"
+
+
+nav.navbar
+  height: 68px
+  margin: 0
+  margin-top: -1px
+  margin-bottom: 2px
+  clear: both
+
+h1, h2, h3, h4, h5, h6
+  font-family: $font-title
+
+  &.red
+    color: $color_red
+
+  &.blue
+    color: $color_blue
+
+  &.green
+    color: $color_green
+
+  &.uppercase
+    text-transform: uppercase
+
+  &.grey-light
+    color: $color_grey_light
+
+[class*='col-']
+  &.min-320
+    min-height: 320px
+
+    +for-phone
+      min-height: auto
+
+.container-fluid > .alert
+  margin: 10px -15px 0
+
+.breadcrumb
+  background: none
+  margin: 0
+  border-bottom: 1px solid $color_grey_lighter
+  +border-radius(0)
+  +box-sizing(border-box)
+
+  +expand-outside-gutter
+    border: inherit
+    height: auto
+    bottom: -1px
+
+.breadcrumb
+  color: $color_grey
+  padding: 15px 0
+  margin: 0 -15px
+
+  & > li + li:before
+    content: '\226B'
+  a
+    color: $color_grey_darker
+    text-decoration: none
+
+    &.active
+      color: $color_red
+      font-weight: bold
+
+  +upto-tablet
+    padding: 0
+    overflow-x: auto
+    overflow-y: hidden
+    background: $color_grey_darker
+    white-space: nowrap
+    +relative
+
+    .text
+      display: none
+
+    li
+      +relative
+      +box-shadow(1px 0 10px 4px rgba(0,0,0,0.3))
+
+      @for $i from 1 through 10
+        &:nth-child(#{$i})
+          z-index: 11 - $i
+
+      a
+        padding: 10px
+        background: white
+        +box-inline
+
+        &.active
+          background: $color_red
+          color: white
+          font-weight: bold
+
+    & > li + li:before
+      content: none
+
+select
+  -webkit-appearance: none
+  background: $color_grey_lighter
+  border: none
+  font-size: 16px
+  padding: 4px
+  margin-top: -2px
+  +border-radius(6px)
+
+.btn
+
+  &.btn-red
+    background: $color_red
+    color: white
+
+    &.btn-icon .fa
+      color: $color_red_darker
+
+  &.btn-blue
+    background: $color_blue_dark
+    color: white
+
+    &.btn-icon .fa
+      color: $color_blue_light
+
+  &.btn-blue-light
+    background: $color_blue_light
+    color: white
+
+    &.btn-icon .fa
+      color: $color_blue_dark
+
+  &.btn-grey
+    background: $color_grey_dark
+    color: white
+
+  &.btn-grey-light
+    background: $color_grey
+    color: white
+
+  &.btn-small
+    font-size: 14px
+    padding: 4px 10px 5px
+
+  &.btn-icon
+    padding-right: 40px
+    +relative
+    .fa
+      border-left: 1px solid rgba(0,0,0,0.3)
+      line-height: 30px
+      +box(30px)
+      +absolute(-1px, initial, 0, 0)
+
+.popover.top > .arrow
+  top: initial !important
+
+.row [class*=col-]
+  &.grey
+    background: $color_grey_lighter
+
+.form-group
+  .control-label
+    // text-transform: uppercase
+    font-weight: normal
+
+  .alert
+    display: block
+    border-top-width: 0
+    padding: 8px
+    +border-radius(0)
+
+  &.boolean .alert
+    border-top-width: 1px
+
+.form-control
+  +border-radius(0)
+
+textarea
+  min-height: 150px
+
+.media
+  padding: 20px
+  h4
+    a
+      color: $color_grey_dark
+
+  & > .pull-left
+    margin-right: 20px
+
+  .content
+    margin: 10px 0
+    font-size: 12px
+    color: $color_grey
+
+    a.btn
+      margin-top: 10px
+      color: white
+      text-decoration: none
+      font-weight: normal
+
+.datepicker.dropdown-menu
+  margin-top: 32px
+
+.select2-container .select2-choice
+  background: white !important
+  +border-radius(0 !important)
+  .col-sm-6:last-child > .select &
+    margin-right: 1px
+
+.input-group-addon
+  +border-radius(0)

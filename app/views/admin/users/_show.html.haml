@@ -1,0 +1,29 @@
+
+.row
+  .col-md-4
+    - if resource.avatar.present?
+      .avatar.medium
+        = image_tag resource.avatar.medium
+    - else
+      .avatar.medium.default
+        = icon :user
+
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        - if current_user.admin?
+          .pull-right.label.label-warning= 'roles.admin'.t
+        - else
+          .pull-right.label.label-info= "roles.#{current_user.role}".t
+
+        %h5.panel-title
+          = icon :info
+          Informations
+
+      %ul.list-group
+        %li.list-group-item
+          %strong
+            = icon :envelope
+            Email :
+
+          = resource.email

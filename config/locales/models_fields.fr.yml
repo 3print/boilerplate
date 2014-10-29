@@ -1,0 +1,25 @@
+fr:
+  identified: &identified
+    email: Email
+    first_name: Prénom
+    last_name: Nom
+
+  contactable: &contactable
+    phone: Téléphone
+    address: Addresse
+    zipcode: Code Postal
+
+  orderable: &orderable
+    sequence: Ordre
+
+  manageable: &manageable
+    handled_at: Traité
+
+  models:
+    fields: &fields
+      user:
+        <<: *identified
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        role: Role
+        remember_me: Se souvenir de moi

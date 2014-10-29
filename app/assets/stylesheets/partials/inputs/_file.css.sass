@@ -1,0 +1,55 @@
+.file
+  padding: 10px 0
+  +relative
+
+  input
+    opacity: 0
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    z-index: 1
+    height: 100%
+    display: none
+
+  .controls
+    @extend .form-control
+    height: auto
+    position: relative
+
+  .progress
+    height: 4px
+    +absolute(0,0,initial,0)
+
+  .preview
+    min-height: 21px
+    overflow: hidden
+    img
+      margin: 0
+
+      &.loaded
+        max-width: 80px
+        max-height: 80px
+
+    .label
+      display: inline-block
+      margin-top: 4px
+      left: 0
+      max-width: 100%
+      overflow: hidden
+      text-overflow: ellipsis
+
+    .meta
+      padding: 3px
+      top: 0
+      right: 0
+
+      .dimensions, .size
+        float: left
+        width: 50%
+
+.well.gallery .file .controls
+  height: 140px
+
+.list-group-item .file
+  padding: 0

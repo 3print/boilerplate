@@ -1,0 +1,170 @@
+@import "select2"
+
+.select2-container.select2-image-container
+  .select2-single
+    height: 80px
+
+    span
+      height: 80px
+      background-size: auto 80px
+      background-position: left center
+      padding-left: 90px
+
+  .select2-results li
+    height: 80px
+    background-size: auto 80px
+    background-position: left center
+    padding-left: 90px
+
+  .select2-choices
+    .search-choice
+      background-size: 80px auto
+      height: 80px
+      width: 80px
+      text-indent: -9999px
+      background-position: left top
+
+.select2-container
+  font-size: 14px
+
+  .select2-choice
+    min-width: initial !important
+
+  // &:not(.select2-disabled) .select2-single:hover
+  //   background: $button-hover-background
+
+  &.input-group-addon
+    display: table-cell
+    padding: 0
+    border: none
+
+    .select2-single
+      +border-top-left-radius(0)
+      +border-bottom-left-radius(0)
+      border-left: none
+
+    .select2-search-choice-close
+      right: 20px
+      top: 10px
+
+    .select2-drop
+      margin-top: -4px
+      text-align: left
+
+  .select2-choice
+    height: 34px
+    line-height: 30px
+    border-color: #CCC
+    // background: $button-background
+    // color: $gray
+    +box-shadow(none)
+    +border-radius(4px)
+
+    .select2-chosen
+      font-size: 14px
+      color: $gray-light
+
+    span.select2-arrow
+      background: transparent !important
+      border: none !important
+      +box-shadow(none !important)
+
+      b
+        background-position: 0 3px
+  .select2-choices
+    width: 100%
+
+  &.select2-allowclear .select2-choice
+    .select2-chosen
+      color: $gray
+
+
+    .search-choice-close
+      top: 11px
+
+  &.select2-with-drop
+    .select2-choice span b
+      background-position: -18px 7px
+
+.has-error
+  .select2-choice, .select2-choices
+    border-color: #B94A48 !important
+
+.select2-disabled
+  .select2-choice
+    // background: $gray-lighter
+    border-color: #ccc
+    // color: $gray
+
+.select2-container-multi
+  .select2-choices
+    min-height: 34px
+    border: 1px solid rgb(204, 204, 204)
+    vertical-align: middle
+    display: inline-block
+    padding-bottom: 4px
+
+    +box-shadow(inset 0px 1px 1px rgba(0, 0, 0, 0.075))
+    +transition(all 0.2s linear)
+    +border-radius(4px)
+
+    li.select2-search-field
+      width: 100%
+
+    li.select2-search-field input[type="text"]
+      height: 25px !important
+      padding: 4px 8px 0
+      margin: 3px 0px -5px
+      min-width: 250px
+
+    li.select2-search-field input[type="text"].default
+      font-size: 14px
+      height: 20px !important
+      line-height: 20px
+      color: rgb(85,85,85)
+      // width: auto !important
+      width: 100% !important
+
+    li.search-choice
+      margin-top: 6px
+      margin-bottom: 0px
+      // background: $brand-info
+      +box-shadow(none)
+      // color: white
+      // border: 1px solid darken($brand-info, 10%)
+
+      // .search-choice-close
+      //   color: white
+
+.select2-container-multi .select2-choices li.select2-search-field input.default[type="text"]
+  line-height: 24px
+  height: 30px !important
+  // color: $gray-light
+  margin: 0
+
+.select.has-feedback
+  .form-control-feedback
+    right: 6px
+  .select2-container
+    border: none
+    background: transparent
+    padding: 0
+
+.controls
+  .select2-container
+    width: 100%
+
+.input-append
+  .select2-single
+    text-align: right
+
+    +border-top-right-radius(0)
+    +border-bottom-right-radius(0)
+
+    span
+      padding-right: 10px
+
+#sidebar > ul ul.select2-results
+  display: block
+  background: none
+  +box-shadow(none)

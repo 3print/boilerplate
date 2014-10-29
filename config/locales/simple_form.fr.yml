@@ -1,0 +1,37 @@
+fr:
+  markdown: &markdown "Le texte peut être mis en forme en suivant les règles de la syntaxe <a href='http://fr.wikipedia.org/wiki/Markdown'>Markdown</a>."
+  <%= YAML::include("models_fields.fr.yml") %>
+  simple_form:
+    "yes": 'Oui'
+    "no": 'Non'
+
+    required:
+      text: 'obligatoire'
+      mark: '*'
+
+    labels:
+      <<: *fields
+
+    placeholders:
+      file: 'Choisissez un fichier'
+      string: 'Saisissez votre texte ici'
+      number: 'Insérer un nombre ici'
+      datetime: 'JJ/MM/AAAA'
+
+    hints:
+      user:
+        password: Le mot de passe doit contenir 8 caractères minimum
+
+      support_request:
+        serial_number: 'Pour savoir où trouver le numéro de série de votre poêle Bestove, <a href="/faq">veillez à consulter la faq</a>.'
+
+      product_registration:
+        serial_number: 'Pour savoir où trouver le numéro de série de votre poêle Bestove, <a href="/faq">veillez à consulter la faq</a>.'
+
+      home_item:
+        title: *markdown
+        body: *markdown
+
+      news:
+        excerpt: *markdown
+        content: *markdown

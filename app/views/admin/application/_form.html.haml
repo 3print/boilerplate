@@ -1,0 +1,8 @@
+= simple_nested_form_for resource, url: controller.controller_namespace + [resource] do |f|
+  %fieldset.inputs.panel-body
+    = inputs_for resource, f
+    = render_partial_for_user 'extra_form_fields', locals: {form: f}
+
+  = default_actions
+
+= render 'direct_download'

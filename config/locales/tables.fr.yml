@@ -1,0 +1,29 @@
+fr:
+  <%= YAML::include("models.fr.yml") %>
+  tables:
+    columns:
+      <<: *models
+
+      id: ID
+      actions: Actions
+      preview: Aperçu
+      resource_label: Nom
+      email: Email
+      field: Champ
+      type: Type
+      name: Nom
+      slug: Permalien
+      image: Image
+      extension: Extensions
+      name: Nom
+      checked: Vérifié
+      price: Prix
+      key: Clé
+      value: Valeur
+      start_on: Début
+      end_on: Fin
+      tokens: Jetons
+      dates: Dates
+      index: Index
+      published: Publié
+      order: Ordre

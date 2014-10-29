@@ -1,0 +1,4 @@
+fr:
+  prefix:
+    models:
+      user: "L'%{label}"

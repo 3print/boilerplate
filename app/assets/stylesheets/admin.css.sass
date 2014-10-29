@@ -1,0 +1,34 @@
+
+@import "compass"
+
+@import "partials/common"
+@import "admin_framework_and_overrides"
+@import "select_and_overrides"
+
+@import "partials/inputs/file"
+@import "partials/inputs/checkboxes_radios"
+@import "partials/inputs/datepicker"
+
+@import "partials/admin/welcome"
+@import "partials/admin/mobile"
+
+.gallery_image
+  +relative
+  height: 140px
+  margin-bottom: 20px
+
+  .btn-danger
+    +absolute(18px,initial,initial,23px)
+    z-index: 10
+
+  .btn-success
+    +absolute(10px, 15px, -10px, 15px)
+    text-align: center
+    padding-top: 30px
+
+    .fa
+      display: block
+
+.direct-upload-section
+  visibility: none
+  +fixed

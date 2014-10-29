@@ -1,0 +1,9 @@
+- resource_name = resource_class.t
+
+%table.table.table-bordered.table-stripped.table-hover
+  %thead
+    %tr= contextual_partial 'list_header', locals: {resource_name: resource_name}
+
+  %tbody
+    - collection.each do |item|
+      %tr= contextual_partial 'list_row', locals: {item: item}

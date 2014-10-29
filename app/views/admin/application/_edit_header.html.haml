@@ -1,0 +1,20 @@
+= contextual_partial 'instances_header_pills_extra', locals: {resource: resource}
+
+- if can?(:destroy, resource) && controller.route_exists_for?(:destroy)
+  - pill controller.resource_path(:destroy), method: :delete, data: {confirm: 'confirmations.destroy'.t}, class: 'btn-danger' do
+    = icon(:times)
+    %span.text= 'admin.actions.destroy'.t
+
+- controller_breadcrumb
+
+- breadcrumb resource_class.t, controller.resource_location(:index)
+- breadcrumb resource_label, controller.resource_path_for(resource, :show)
+- breadcrumb 'admin.actions.edit'.t
+
+- content_for :content_header do
+  = pills
+- content_for :before_content do
+  = breadcrumbs
+
+- content_for :page_title do
+  = resource_label_for(resource) || resource_class.t

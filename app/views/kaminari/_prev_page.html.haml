@@ -1,0 +1,11 @@
+-#  Link to the "Previous" page
+-#  available local variables
+-#    url:           url to the previous page
+-#    current_page:  a page object for the currently displayed page
+-#    total_pages:   total number of pages
+-#    per_page:      number of items to fetch per page
+-#    remote:        data-remote
+%li.prev{class: current_page.first? ? 'disabled' : '' }
+  = link_to url, rel: 'prev', remote: remote do
+    = icon 'angle-left'
+    %span.text=raw(t 'views.pagination.previous')

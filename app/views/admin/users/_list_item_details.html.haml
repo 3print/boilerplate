@@ -1,0 +1,11 @@
+= "(#{item.email})"
+.details
+  - if item.role == 'admin'
+    .label.label-warning= item.role
+  - else
+    .label.label-info= item.role
+
+  -# - if item.approved?
+  -#   .label.label-success= 'labels.approved'.t
+  -# - else
+  -#   .label.label-danger= 'labels.not_approved'.t

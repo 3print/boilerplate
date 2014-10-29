@@ -1,0 +1,78 @@
+
+=for-webkit()
+  @media screen and (-webkit-min-device-pixel-ratio:0)
+    @content
+
+=for-gecko()
+  @-moz-document url-prefix()
+    @content
+
+=for-opera()
+  doesnotexist:-o-prefocus, &
+    @content
+
+=for-retina()
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2)
+    @content
+
+=for-ie($max-version: null)
+  @if $max-version
+    html.lte-ie#{$max-version}
+      &
+        @content
+  @else
+    html.ie
+      &
+        @content
+
+=for-ie-10-mobile()
+  @media (-ms-high-contrast: active), (-ms-high-contrast: none)
+    @content
+
+=for-small-phone()
+  @media (max-width: $breakpoint-phone)
+    @content
+
+=for-phone()
+  @media (max-width: $breakpoint-tablet-1)
+    @content
+
+=for-tablet()
+  @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop-1)
+    @content
+
+=for-small-desktop()
+  @media (min-width: $breakpoint-desktop) and (max-width: $breakpoint-large-1)
+    @content
+
+=for-desktop()
+  @media (min-width: $breakpoint-desktop)
+    @content
+
+=for-large-desktop()
+  @media (min-width: $breakpoint-large)
+    @content
+
+=for-extra-large-desktop()
+  @media (min-width: $breakpoint-extra-large)
+    @content
+
+=upto-tablet()
+  @media (max-width: $breakpoint-desktop-1)
+    @content
+
+=upto-small-desktop()
+  @media (max-width: $breakpoint-extra-large-1)
+    @content
+
+=downfrom-desktop()
+  @media (min-width: $breakpoint-desktop)
+    @content
+
+=downfrom-tablet()
+  @media (min-width: $breakpoint-tablet)
+    @content
+
+=downfrom-phone()
+  @media (min-width: $breakpoint-phone)
+    @content

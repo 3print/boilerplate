@@ -1,0 +1,7 @@
+.btn-group
+  = link_to url_index, class: 'btn btn-default' do
+    = 'actions.view_all'.t
+
+  = link_to url_new, class: 'btn btn-success' do
+    = icon(:plus)
+    %span.text= 'actions.create_new'.t

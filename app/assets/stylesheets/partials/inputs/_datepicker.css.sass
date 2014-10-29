@@ -1,0 +1,16 @@
+.date, .datetime
+  .form-control-feedback
+    z-index: 4
+  .input-group
+    +relative
+    .form-control.value
+      +absolute(0,37px, initial, 0)
+      width: auto
+      z-index: 3
+      pointer-events: none
+
+  .input-group .overlay
+    @extend .form-control
+    +absolute(0,37px, 0, 0)
+    width: auto
+    z-index: 3

@@ -1,0 +1,15 @@
+- edit_url ||= controller.resource_path_for(item, :edit)
+- destroy_url ||= controller.resource_path_for(item, :destroy)
+
+
+- if can? :edit, item
+  = link_to edit_url, class: 'btn btn-default' do
+    = icon(:edit)
+    %span.text= 'admin.actions.edit'.t
+
+= render partial: 'list_item_actions_extra', locals: {item: item}
+
+- if can? :destroy, item
+  = link_to destroy_url, method: :delete, class: 'btn btn-danger', data: {confirm: 'confirmations.destroy'.t} do
+    = icon(:times)
+    %span.text= 'admin.actions.destroy'.t

@@ -1,0 +1,21 @@
+- if user_signed_in?
+  %span.welcome.pull-right
+    .pull-right
+      = link_to admin_user_path(current_user) do
+        - if current_user.avatar.present?
+          .avatar= image_tag current_user.avatar.thumb
+        - else
+          .avatar.default
+            = icon :user
+
+    .session
+      = link_to admin_user_path(current_user) do
+        %span.text= current_user.name
+      .details
+        - if current_user.admin?
+          .label.label-warning= 'roles.admin'.t
+        - else
+          .label.label-info= "roles.#{current_user.role}".t
+        = link_to destroy_user_session_path, class: 'btn btn-danger btn-xs', method: :delete do
+          = icon 'sign-out'
+          %span.text= 'actions.sign_out'.t

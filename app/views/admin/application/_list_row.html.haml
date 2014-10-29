@@ -1,0 +1,7 @@
+%td.id
+  .id= item.id
+%td.item= contextual_partial 'list_item', locals: {item: item}
+= contextual_partial 'list_row_extra', locals: {item: item}
+%td.actions
+  .btn-group
+    = contextual_partial 'list_item_actions', locals: {item: item}

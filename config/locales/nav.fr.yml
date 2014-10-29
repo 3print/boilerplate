@@ -1,0 +1,15 @@
+fr:
+  <%= YAML::include("models.fr.yml") %>
+
+  root: &root Accueil
+
+  admin:
+    root: *root
+  nav:
+    root: *root
+    <<: *models
+
+    admin:
+      root: Admin
+      resources: Resources
+      <<: *models

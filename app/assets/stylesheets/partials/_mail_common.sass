@@ -1,0 +1,124 @@
+@import "variables.css.sass"
+@import "mixins/boxes.css.sass"
+@import "mixins/pseudo_elements.css.sass"
+@import "mixins/feat_detection.css.sass"
+@import "mixins/text.css.sass"
+
+$font-title: Oswald, Helvetica, sans-serif
+$font-interface: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif, sans
+
+=no_margin()
+  margin: 0
+
+=no_padding()
+  padding: 0
+
+=no_border()
+  border: none
+
+=padding()
+  padding: 20px
+
+=small_padding()
+  padding: 10px 20px
+
+=reset_box()
+  +no_margin
+  +no_padding
+
+=border_bottom()
+  border-bottom: 1px solid $color_grey_lighter
+
+=section()
+  +padding
+  +border_bottom
+
+=centered_box()
+  margin: 0 auto
+
+=font_interface()
+  font-family: $font-interface
+
+=font_title()
+  font-family: $font-title
+
+=align_center()
+  text-align: center
+
+=align_right()
+  text-align: right
+
+=align_left()
+  text-align: left
+
+=image_default()
+  +no_margin
+  border: none
+  width: 100%
+  display: block
+
+=body()
+  background: $color_grey_lighter
+  +reset_box
+  +align_center
+
+=title_medium()
+  font-size: 20px
+  font-weight: normal
+  text-transform: uppercase
+  color: $color_grey_dark
+
+=title_large()
+  font-size: 30px
+  font-weight: bold
+
+=link()
+  text-decoration: none
+  cursor: pointer
+  color: $color_blue
+
+=list()
+  +no_margin
+  +no_padding
+  margin-top: 20px
+
+=list_item()
+  +no_margin
+  +no_padding
+  list-style: none
+
+=base_tables()
+  border-collapse: collapse
+
+=common_tables()
+  +base_tables
+  clear: both
+  margin-bottom: 0px
+  width: 640px
+
+=common_p()
+  font-size: 16px
+  line-height: 24px
+
+=footer()
+  background: $color_grey_darker
+
+=section_space()
+  margin-top: $double-padding
+
+=in_section_space()
+  margin-top: $padding
+
+=article_space()
+  margin-top: $half-padding
+
+=article_desktop_title()
+  margin-top: -5px
+
+=button()
+  background: $color_grey_darker
+  color: white
+  text-transform: uppercase
+  padding: 6px 10px 8px
+  text-decoration: none
+  font-size: 18px

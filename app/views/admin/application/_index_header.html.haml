@@ -1,0 +1,18 @@
+- controller_breadcrumb
+
+= contextual_partial 'collection_header_pills_extra', locals: {resource: resource}
+
+- if resource_class && can?(:create, resource_class) && controller.route_exists_for?(:new)
+  - pill controller.resource_path(:new), class: 'btn-success' do
+    = icon(:plus)
+    %span.text= 'actions.create'.t
+
+- breadcrumb resource_class.t if resource_class
+
+- content_for :content_header do
+  = pills
+- content_for :before_content do
+  = breadcrumbs
+
+- content_for :page_title do
+  = resource_class ? resource_class.t : 'EasyPLV  '

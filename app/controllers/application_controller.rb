@@ -1,5 +1,15 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+  include ResourceExtensions
+  include TraficExtensions
+  include ResponseExtensions
+  include DeviseExtensions
+  include CustomsExtensions
+  include ToggleExtensions
+
+  respond_to :html
   protect_from_forgery with: :exception
+
+  def is_admin?
+    false
+  end
 end
