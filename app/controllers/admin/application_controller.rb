@@ -2,9 +2,11 @@ class Admin::ApplicationController < ApplicationController
   include Pundit
   layout 'admin'
 
+  rescue_from Pundit::NotAuthorizedError, with: :access_denied
+
   before_filter :reject_unauthorized_user!
 
-  rescue_from Pundit::NotAuthorizedError, with: :access_denied
+  load_and_authorize_resource
 
   def controller_namespace
     [:admin]

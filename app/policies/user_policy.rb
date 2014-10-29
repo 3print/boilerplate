@@ -13,12 +13,4 @@ class UserPolicy < AdminPolicy
     user.admin? || user == record
   end
 
-  def approve?
-    user.admin?
-  end
-
-  def revocate?
-    user.admin?
-  end
-
 end
