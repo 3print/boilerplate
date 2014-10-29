@@ -42,65 +42,53 @@ h1, h2, h3, h4, h5, h6
 
 .container-fluid > .alert
   margin: 10px -15px 0
-
-.breadcrumb
-  background: none
-  margin: 0
-  border-bottom: 1px solid $color_grey_lighter
-  +border-radius(0)
-  +box-sizing(border-box)
-
-  +expand-outside-gutter
-    border: inherit
-    height: auto
-    bottom: -1px
-
-.breadcrumb
-  color: $color_grey
-  padding: 15px 0
-  margin: 0 -15px
-
-  & > li + li:before
-    content: '\226B'
-  a
-    color: $color_grey_darker
-    text-decoration: none
-
-    &.active
-      color: $color_red
-      font-weight: bold
-
-  +upto-tablet
-    padding: 0
-    overflow-x: auto
-    overflow-y: hidden
-    background: $color_grey_darker
-    white-space: nowrap
-    +relative
-
-    .text
-      display: none
-
-    li
-      +relative
-      +box-shadow(1px 0 10px 4px rgba(0,0,0,0.3))
-
-      @for $i from 1 through 10
-        &:nth-child(#{$i})
-          z-index: 11 - $i
-
-      a
-        padding: 10px
-        background: white
-        +box-inline
-
-        &.active
-          background: $color_red
-          color: white
-          font-weight: bold
-
-    & > li + li:before
-      content: none
+//
+// .breadcrumb
+//   color: $color_grey
+//   padding: 15px 0
+//   margin: 0 -15px
+//
+//   & > li + li:before
+//     content: '\226B'
+//   a
+//     color: $color_grey_darker
+//     text-decoration: none
+//
+//     &.active
+//       color: $color_red
+//       font-weight: bold
+//
+//   +upto-tablet
+//     padding: 0
+//     overflow-x: auto
+//     overflow-y: hidden
+//     background: $color_grey_darker
+//     white-space: nowrap
+//     +relative
+//
+//     .text
+//       display: none
+//
+//     li
+//       +relative
+//       +box-shadow(1px 0 10px 4px rgba(0,0,0,0.3))
+//
+//       @for $i from 1 through 10
+//         &:nth-child(#{$i})
+//           z-index: 11 - $i
+//
+//       a
+//         padding: 10px
+//         background: white
+//         +box-inline
+//
+//         &.active
+//           background: $color_red
+//           color: white
+//           font-weight: bold
+//
+//     & > li + li:before
+//       content: none
 
 select
   -webkit-appearance: none
