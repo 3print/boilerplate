@@ -37,6 +37,7 @@ gem 'compass-rails'
 gem 'annotate'
 gem 'kaminari'
 gem 'verbs'
+gem 'uuidtools'
 
 # Uploaders
 gem 'rmagick', require: false
