@@ -2,6 +2,10 @@ module I18n
   def self.tc(key, params={})
     'label_with_colon'.t label: key.t(params)
   end
+
+  def self.tp(key, params={})
+    "prefix.#{key}".t(label: key.t(params))
+  end
 end
 
 class Symbol
@@ -47,7 +51,13 @@ class ActiveRecord::Base
     "models.#{model_name.to_s.underscore.gsub('/', '_').pluralize}".t
   end
 
+  def self.tp(params={})
+    key = "models.#{model_name.to_s.underscore.gsub('/', '_')}"
+    I18n.tp(key, params)
+  end
+
   def tc(params={})
     I18n.tc(self, params)
   end
+
 end
