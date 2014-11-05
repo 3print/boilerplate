@@ -35,4 +35,14 @@ module PartialsHelper
       render({ partial: original_partial }.merge(options))
     end
   end
+
+  def partial_exist?(partial)
+    controller_prefixes = controller.send(:_prefixes)
+    path_elements = partial.split('/')
+    partial = "_#{path_elements.pop}"
+    prefix = path_elements.join('/')
+    prefixes = prefix.empty? ? controller_prefixes : [prefix]
+
+    lookup_context.exists? partial, prefixes
+  end
 end
