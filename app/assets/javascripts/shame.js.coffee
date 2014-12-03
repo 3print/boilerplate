@@ -1,2 +1,2 @@
-#= require jquery.iframe-transport
-#= require jquery.xdomainrequest.min
+#= #require jquery.iframe-transport
+#= #require jquery.xdomainrequest.min

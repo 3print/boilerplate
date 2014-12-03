@@ -61,6 +61,7 @@ widgets.define 'filepicker', (element, options) ->
 
       send: (e, data) ->
         preview.find('img').fadeOut()
+        true
 
       progress: (e, data) ->
         # This is what makes everything really cool, thanks to that callback
@@ -69,10 +70,10 @@ widgets.define 'filepicker', (element, options) ->
         preview.find('.progress-bar').css('width', percent + '%')
 
       fail: (e, data) ->
-        console.log('fail', data.errorThrown)
+        console.log('fail')
+        console.log(JSON.stringify(data))
 
       success: (data) ->
-        console.log data
         if data.indexOf('<?xml') is -1
           url = uploader.attr('action') + '/' + data.split('&')[1].split('=')[1]
         else

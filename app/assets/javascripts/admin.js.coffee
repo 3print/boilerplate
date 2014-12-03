@@ -1,6 +1,8 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery.widget
+#= require jquery.iframe-transport
+#= # require jquery.xdomainrequest.min
 #= require jquery.fileupload
 #= require bootstrap
 #= require datepicker
