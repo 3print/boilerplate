@@ -12,6 +12,15 @@
 
     = stylesheet_link_tag 'admin', media: 'all'
     = csrf_meta_tags
+    = javascript_include_tag 'critical'
+
+    <!--[if IE 8]>
+    = stylesheet_link_tag 'shame', media: 'all'
+    <![endif]-->
+
+    <!--[if IE 9]>
+    = stylesheet_link_tag 'shame', media: 'all'
+    <![endif]-->
 
   - body_class = "#{yield :extra_body_class} #{controller_name} #{action_name}".strip
   %body{class: body_class}
@@ -44,11 +53,14 @@
 
             = yield :before_content
 
-
             = yield
 
             = yield :after_content
             = yield :after_page
+
+
+
+    = javascript_include_tag "admin"
 
     <!--[if IE 8]>
     = javascript_include_tag 'shame'
@@ -58,5 +70,4 @@
     = javascript_include_tag 'shame'
     <![endif]-->
 
-    = javascript_include_tag "admin"
     = yield :scripts

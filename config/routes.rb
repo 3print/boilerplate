@@ -3,11 +3,13 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: "registrations", sessions: "sessions" }
 
+  get '/result', to: 'static#s3_results', as: :s3_results
+
   namespace :admin do
     root to: 'home#index'
 
     resources :users
-    
+
     resources :signed_urls, only: :index
   end
 end

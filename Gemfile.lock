@@ -378,6 +378,7 @@ GEM
     unicorn-rails (2.2.0)
       rack
       unicorn
+    uuidtools (2.1.5)
     verbs (2.1.4)
       activesupport (>= 2.3.4)
       i18n
@@ -447,4 +448,5 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn
   unicorn-rails
+  uuidtools
   verbs
