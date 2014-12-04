@@ -1,3 +1,6 @@
+$file_fields = []
+i = 0
+
 widgets.define 'filepicker', (element, options) ->
   $.support.cors = true
 
@@ -5,7 +8,16 @@ widgets.define 'filepicker', (element, options) ->
   preview   = $element.find('.preview').first()
   hidden    = $element.find('input[type="hidden"]').first()
   uploader  = $('.direct-upload').first().clone()
-  $element.find('label').attr('for', '')
+  $element.find('label').attr('for', "s3-uploader-#{i}")
+
+  $file_field = uploader.find('input[type="file"]')
+  $file_field.attr('id', "s3-uploader-#{i}")
+
+  $label = $("<label for='s3-uploader-#{i}'></label>")
+  $element.find('.controls').append($label)
+
+  # return if $(input[0]).attr('id') in $file_fields
+  # $file_fields.push $(input[0]).attr('id')
 
   if preview.length and uploader.length
 
@@ -126,3 +138,5 @@ widgets.define 'filepicker', (element, options) ->
       value = $input.val()
       $value.toggleClass('placeholder', value is '')
       $value.text(value or 'placeholder')
+
+  i++
