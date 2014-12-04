@@ -15,7 +15,6 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'importers'
 require 'faker'
 require 'uuidtools'
 
