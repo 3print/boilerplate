@@ -2,7 +2,7 @@ require 'active_support/concern'
 
 module TraficExtensions
   extend ActiveSupport::Concern
-  
+
 
   def index
     respond_with resource
@@ -10,6 +10,7 @@ module TraficExtensions
 
   included do
     rescue_from ActiveRecord::RecordInvalid, with: :handle_invalid_record
+    rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
   end
 
   [:new, :show, :edit].each do |name|
@@ -68,4 +69,10 @@ module TraficExtensions
     end
   end
 
+  def handle_record_not_found
+    respond_to do |format|
+      format.html
+      format.json { render json: { status: :not_found }, status: 404 }
+    end
+  end
 end
