@@ -14,8 +14,11 @@ module ToggleExtensions
       define_method base do
         referer = request.referer
 
+        send "before_#{base}" if respond_to?("before_#{base}")
+
         unless resource.send(bool_attr)
           if resource.send(base)
+            send "#{base}_response" if respond_to?("#{base}_response")
             redirect_to referer
           else
             p resource, resource.errors
@@ -30,8 +33,11 @@ module ToggleExtensions
       define_method off do
         referer = request.referer
 
+        send "before_#{off}" if respond_to?("before_#{off}")
+
         if resource.send(bool_attr)
           if resource.send(off)
+            send "#{off}_response" if respond_to?("#{off}_response")
             redirect_to referer
           else
             p resource, resource.errors
