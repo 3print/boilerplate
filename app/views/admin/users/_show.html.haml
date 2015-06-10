@@ -11,10 +11,10 @@
   .col-md-8
     .panel.panel-default
       .panel-heading
-        - if current_user.admin?
+        - if resource.admin?
           .pull-right.label.label-warning= 'roles.admin'.t
         - else
-          .pull-right.label.label-info= "roles.#{current_user.role}".t
+          .pull-right.label.label-info= "roles.#{resource.role}".t
 
         %h5.panel-title
           = icon :info
