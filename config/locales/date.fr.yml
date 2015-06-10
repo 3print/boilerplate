@@ -8,7 +8,11 @@ fr:
     formats:
       default: '%d/%m/%Y'
       short: '%d/%m/%Y'
-      medium: '%d %B %Y'
+      medium: '%e %B %Y'
+      month: '%B %Y'
+      long: '%d/%m/%Y %H:%M'
+      time: '%H:%M'
+
     month_names:
       -
       - janvier
@@ -26,3 +30,7 @@ fr:
 
   time:
     <<: *date
+
+  timedelta:
+    same_day: "Le %{date} de %{start_time} à %{end_time}"
+    differents_day: "Du %{start_date} à %{start_time} au %{end_date} à %{end_time}"
