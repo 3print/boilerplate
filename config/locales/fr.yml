@@ -38,6 +38,15 @@ fr:
       two_words_connector: " et "
       last_word_connector: " et "
 
+  number:
+    currency:
+      format:
+        unit: '€'
+        delimiter: '&nbsp;'
+        separator: ','
+        precision: 2
+        format: '%n&nbsp;%u'
+
   tips:
     models_count:
       zero: "0 %{plural} au total"
