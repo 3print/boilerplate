@@ -1,11 +1,31 @@
 
 widgets.define 'datepicker', (el) ->
   $el = $(el)
-  $clone = $("<input type='text' name='#{$el.attr('name')}' value='#{$el.val()}' id='#{$el.attr('id')}' class='#{$el.attr('class')}' placeholder='#{$el.attr('placeholder')}'></input>")
-  $el.after($clone)
-  $el.remove()
 
-  $clone.datepicker defaultDate: "+1w", numberOfMonths: 2, format: 'yyyy-mm-dd', altFormat: 'dd/mm/yyyy', language: 'fr'
+  try
+    $el.datetimepicker
+      format: 'YYYY-MM-DD'
+      displayFormat: 'DD/MM/YYYY'
+      locale: 'fr'
+      # inline: true
+      calendarWeeks: true
+      sideBySide: true
+  catch e
+    console.error(e)
+
+widgets.define 'datetimepicker', (el) ->
+  $el = $(el)
+
+  try
+    $el.datetimepicker
+      format: 'YYYY-MM-DD HH:mm'
+      displayFormat: 'DD/MM/YYYY HH:mm'
+      locale: 'fr'
+      # inline: true
+      calendarWeeks: true
+      sideBySide: true
+  catch e
+    console.error(e)
 
 widgets.define 'datepicker_mobile', (el) ->
   $el = $(el)
@@ -14,7 +34,13 @@ widgets.define 'datepicker_mobile', (el) ->
     value = new Date().toISOString()
   else
     value = ''
-  $handler = $("<input type='datetime-local' value='#{value}' class='overlay' placeholder='#{$el.attr('placeholder')}'>")
+  $handler = $("""
+    <input type='datetime-local'
+           value='#{value}'
+           class='overlay'
+           placeholder='#{$el.attr('placeholder')}'>
+    </input>
+  """)
   $el.after($handler)
 
   $handler.on 'change', ->

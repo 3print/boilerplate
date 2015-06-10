@@ -6,6 +6,7 @@
 #= require jquery.fileupload
 #= require bootstrap
 #= require datepicker
+#= require datetimepicker
 #= require fastclick
 #= require widgets
 #= require select2

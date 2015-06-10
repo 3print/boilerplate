@@ -4,6 +4,7 @@
 #= require touch-swipe
 #= require bootstrap
 #= require datepicker
+#= require datetimepicker
 #= require select2
 #= require_tree ./widgets
 

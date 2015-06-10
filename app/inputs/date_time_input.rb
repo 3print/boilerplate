@@ -1,6 +1,11 @@
 class DateTimeInput < SimpleForm::Inputs::DateTimeInput
   def input
-    input_html_classes.unshift("datepicker")
+    if options[:type] == :datetime
+      input_html_classes.unshift("datetimepicker")
+    else
+      input_html_classes.unshift("datepicker")
+    end
+    options.delete(:type)
     input_html_options[:type] = 'text'
     input_html_options[:placeholder] = 'simple_form.placeholders.datetime'.t
 
