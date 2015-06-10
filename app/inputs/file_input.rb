@@ -1,17 +1,12 @@
 class FileInput < SimpleForm::Inputs::FileInput
 
   def input
-    use_aws = CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog
+    use_aws = CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog || (Rails.env.development? && !ENV['NO_AWS'])
+    return super unless use_aws
     buffer = ''
-    if use_aws
-      opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
-      buffer << @builder.hidden_field(:"remote_#{attribute_name}_url", opts)
-      buffer << preview
-      buffer.html_safe
-    else
-      buffer << @builder.file_field(attribute_name, input_html_options)
-      buffer << default_field_label
-    end
+    opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
+    buffer << @builder.hidden_field(:"remote_#{attribute_name}_url", opts)
+    buffer << preview
     buffer.html_safe
   end
 
