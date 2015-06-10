@@ -5,6 +5,7 @@
 #= # require jquery.xdomainrequest.min
 #= require jquery.fileupload
 #= require bootstrap
+#= require moment.min
 #= require datepicker
 #= require datetimepicker
 #= require fastclick
@@ -23,9 +24,11 @@ widgets 'filepicker', '.form-group.file', on: DEFAULT_EVENTS
 widgets 'boolean', '.boolean', on: DEFAULT_EVENTS
 widgets 'collapse', '.collapse', on: DEFAULT_EVENTS
 widgets 'datepicker', '.datepicker', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'datetimepicker', '.datetimepicker', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'datepicker_mobile', '.datepicker', on: DEFAULT_EVENTS, if: is_mobile
 widgets 'select2', 'select', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'order_table', '.orderable', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'propagate_input_value', 'input, select', on: DEFAULT_EVENTS
 
 old_insertFields = NestedFormEvents::insertFields
 NestedFormEvents::insertFields = (content, assoc, link) ->

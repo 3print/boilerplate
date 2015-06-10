@@ -3,6 +3,7 @@
 #= require fastclick
 #= require touch-swipe
 #= require bootstrap
+#= require moment.min
 #= require datepicker
 #= require datetimepicker
 #= require select2
@@ -18,9 +19,11 @@ widgets 'boolean', '.boolean', on: DEFAULT_EVENTS
 widgets 'auto_resize', 'textarea', on: DEFAULT_EVENTS
 widgets 'select2', 'select', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'datepicker', '.datepicker', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'datetimepicker', '.datetimepicker', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'datepicker_mobile', '.datepicker', on: DEFAULT_EVENTS, if: is_mobile
 widgets 'select_url', '[data-toggle=url]', on: DEFAULT_EVENTS
 widgets 'color_button', '.color-icon-wrapper[data-url]', on: DEFAULT_EVENTS
+widgets 'propagate_input_value', 'input, select', on: DEFAULT_EVENTS
 
 $ ->
   FastClick.attach(document.body)
