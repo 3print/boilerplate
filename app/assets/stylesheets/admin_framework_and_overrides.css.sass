@@ -20,15 +20,42 @@ img
     padding-top: 24px
     padding-bottom: 24px
 
-  .dropdown-menu > li.active a
-    padding-bottom: 24px
-    border-bottom: none
-    background: $color_red
-    color: white
+  .col-md-6
+    padding: 0
 
-  li.active a
+  .badge
+    background: $color_red
+    margin-right: 4px
+    margin-top: -4px
+
+  .dropdown-menu
+    .badge
+      +absolute(initial, initial, initial, 8px)
+      margin: 0
+
+    li a
+      padding-right: 40px
+
+  & > li.active a
     padding-bottom: 20px
     border-bottom: 4px solid $color_red
+
+  +for-desktop
+    .dropdown-menu
+      li
+        +relative
+        a
+          padding: 16px 40px 16px 52px
+          i
+            color: $color_blue_dark
+            font-size: 2em
+            text-align: center
+            +box(28px)
+            +absolute(12px, 12px)
+
+        &.active a i
+          color: white
+
 
   +upto-tablet
     li a
@@ -50,8 +77,6 @@ img
         display: block
         float: none
         +relative
-
-
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
