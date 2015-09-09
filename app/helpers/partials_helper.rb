@@ -7,6 +7,8 @@ module PartialsHelper
     filename = [filename_parts[0..-2], "_#{filename_parts.last}.html.haml"].join("/")
     if lookup_context.exists? "_#{filename_parts.last}", (prefixes + filename_parts[0..-2]).join('/')
       html = render({partial: (prefixes + [partial]).join('/')}.update(options))
+    elsif lookup_context.exists? "_#{name}", "application"
+      html = render({partial: "application/#{name}"}.update(options))
     else
       html = render({partial: "admin/application/#{name}"}.update(options))
     end
