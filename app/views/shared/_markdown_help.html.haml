@@ -1,0 +1,117 @@
+.markdown-help
+  %button.btn.btn-default
+    = icon :times
+
+  .wrapper
+    %h2 Aide Markdown
+
+    %h3 Styles de texte
+
+    .row.section
+      - content = capture_haml do
+        :plain
+          _Italique_
+          *Italique*
+          __Gras__
+          **Gras**
+          ~~Raturé~~
+          [Lien](http://www.groupebigardrecrute.fr/)
+          > Citation
+
+      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
+      .col-md-6.preview
+        = markdown(content)
+
+    %h3 Titraille
+
+    .row.section
+      - content = capture_haml do
+        :plain
+          # Titre 1
+          ## Titre 2
+          ### Titre 3
+          #### Titre 4
+          ##### Titre 5
+          ###### Titre 6
+
+      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
+      .col-md-6.preview= markdown(content)
+
+    %h3 Images
+
+    .row.section
+      - content = capture_haml do
+        :plain
+          ![Texte image non disponible](http://www.bigard.fr/sites/all/themes/bigard/images/marqueBigard1.jpg "Légende au survol")
+      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
+      .col-md-6.preview
+        = markdown(content)
+
+    %h3 Listes
+
+    .row.section
+      - content = capture_haml do
+        :plain
+          - Item 1
+          * Item 2
+          + Item 3
+
+          1. Item 1
+          2. Item 2
+          3. Item 3
+
+      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
+      .col-md-6.preview
+        = markdown(content)
+
+    %h3 Table
+
+    .row.section
+      - content = capture_haml do
+        :plain
+          Titre Colonne 1|Titre Colonne 2
+          ---|---
+          Cellule ligne 1, colonne 1|Cellule ligne 1, colonne 2
+          Cellule ligne 2, colonne 1|Cellule ligne 2, colonne 2
+
+      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
+      .col-md-6.preview
+        = markdown(content)
+
+    %h3 Lettrines
+
+    .row.section
+      - content = capture_haml do
+        :plain
+          ^Ut^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
+
+          ^^Ut^^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
+
+          ^^^Ut^^^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+
+          ^^^^Ut^^^^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+
+      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
+      .col-md-6.preview
+        = markdown(content)
+
+    %h3 Encarts
+
+    .row.section
+      - content = capture_haml do
+        :plain
+          Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
+
+          %%%
+          Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
+          %%%
+
+          Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+
+          %%
+          Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+          %%
+
+      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
+      .col-md-6.preview
+        = markdown(content)
