@@ -1,0 +1,8 @@
+
+%strong= "models.fields.#{controller.resource_name.singularize}.#{column}".t
+- if value.present?
+  %pre
+    %code.json= JSON.pretty_generate(value)
+
+- else
+  Aucun paramètres

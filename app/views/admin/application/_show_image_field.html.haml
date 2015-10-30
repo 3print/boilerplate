@@ -1,5 +1,2 @@
 %strong= "models.fields.#{controller.resource_name.singularize}.#{column}".tc
-- if value.present?
-  = value.l
-- else
-  Non définie
+= image_tag(value.thumb)

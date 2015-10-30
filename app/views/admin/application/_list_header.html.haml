@@ -1,4 +1,5 @@
 %th= 'tables.columns.id'.t
+= contextual_partial 'list_header_before_name', locals: {resource_name: resource_name}
 %th= resource_name
-= contextual_partial 'list_header_extra', locals: {resource_name: resource_name}
+= contextual_partial 'list_header_after_name', locals: {resource_name: resource_name}
 %th= 'tables.columns.actions'.t
