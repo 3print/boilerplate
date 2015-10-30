@@ -1,0 +1,6 @@
+= "(#{item.email})"
+.details
+  - if item.role == 'admin'
+    .label.label-warning= "roles.#{item.role}".t
+  - else
+    .label.label-info=  "roles.#{item.role}".t

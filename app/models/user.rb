@@ -24,9 +24,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-
   def name
     'user_name'.t(first_name: first_name, last_name: last_name)
+  end
+
+  def super_admin?
+    self.admin?
   end
 
   def admin?

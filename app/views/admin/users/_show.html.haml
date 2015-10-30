@@ -12,7 +12,7 @@
     .panel.panel-default
       .panel-heading
         - if resource.admin?
-          .pull-right.label.label-warning= 'roles.admin'.t
+          .pull-right.label.label-warning= "roles.#{resource.role}".t
         - else
           .pull-right.label.label-info= "roles.#{resource.role}".t
 

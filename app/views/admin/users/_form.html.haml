@@ -1,0 +1,26 @@
+
+= simple_nested_form_for resource, url: controller.controller_namespace + [resource] do |f|
+  %fieldset.inputs.panel-body
+    .row
+      .col-md-4
+        = f.input :avatar
+      .col-md-8
+        .row
+          .col-md-6= f.input :first_name
+          .col-md-6= f.input :last_name
+
+        - if !resource.persisted? || resource == current_user
+          .row
+            .col-md-6= f.input :password
+            .col-md-6= f.input :password_confirmation
+
+        = f.input :email
+
+        - if current_user.admin?
+          = f.input :role
+
+        = render_partial_for_user 'extra_form_fields', locals: {form: f}
+
+  = default_actions
+
+= render 'direct_download'
