@@ -55,10 +55,7 @@ gem 'runtimeerror_notifier'
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
-  gem 'guard-bundler'
-  gem 'guard-rails'
-  gem 'guard-rspec'
+  # gem 'binding_of_caller', platforms: [:mri_19, :mri_20, :mri_21, :rbx]
   gem 'html2haml'
   gem 'quiet_assets'
   gem 'rails_layout'
@@ -66,6 +63,17 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
   gem 'rsense'
+  # Guard
+  gem 'guard', '1.4.0'
+  gem 'guard-bundler', '1.0.0'
+  gem 'guard-rails', '0.4.7'
+  gem 'guard-rspec', '2.5.4'
+  gem 'rspec-its'
+  gem 'guard-spork', '1.5.1'
+  gem 'guard-livereload', '1.0.3'
+  gem 'listen', '1.3.0'
+  gem 'spork', '1.0.0rc3'
+
 end
 group :development, :test do
   gem 'factory_girl_rails'
