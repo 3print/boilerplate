@@ -16,7 +16,11 @@ task :clone, [:name] do |t, args|
   to_be_removed = [
     "config/database.yml",
     "lib/tasks/clone.rake",
-    "app/models/bp_*"
+    "app/models/bp_*",
+    "app/views/bp_*",
+    "app/views/admin/bp_*",
+    "spec/models/bp_*",
+    "spec/factories/bp_*",
   ]
   to_be_removed.each_with_index do |tgt, i|
     TPrint.log "Cleaning #{"." * (i%3)}", kill_line: true
