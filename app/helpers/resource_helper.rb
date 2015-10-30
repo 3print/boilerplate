@@ -106,4 +106,7 @@ module ResourceHelper
     resource_label_for resource
   end
 
+  def file_uploader field_name, value, options={}
+    render partial: 'shared/file_upload', locals: options.update(field_name: field_name, value: value)
+  end
 end

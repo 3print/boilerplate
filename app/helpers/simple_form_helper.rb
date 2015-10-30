@@ -11,8 +11,10 @@ module SimpleFormHelper
     :remember_created_at, :approved_at,
 
     # CarrierWave Meta
-    :avatar_meta, :image_meta, :thumb_meta, :datasheet_meta, :visual_meta,
-    :gallery, :color_gallery,
+    :avatar_meta, :image_meta,
+
+    # Misc
+    :avatar_tmp, :image_tmp,
 
     # Syncables
     :uuid
