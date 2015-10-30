@@ -1,0 +1,139 @@
+<%
+use_aws = Rails.env.production? || Rails.env.staging? || ENV['FORCE_AWS']
+
+ignored = ["'cmdCode'"]
+ignored << "'cmdImage'" if use_aws
+%>
+
+id = 0
+
+insertImage = (link, e) ->
+  # Give ![] surround the selection and prepend the image link
+  chunk = undefined
+  cursor = undefined
+  selected = e.getSelection()
+  content = e.getContent()
+  if selected.length == 0
+    # Give extra word
+    chunk = e.__localize('enter image description here')
+  else
+    chunk = selected.text
+
+  sanitizedLink = $('<div>' + link + '</div>').text()
+  # transform selection and set the cursor into chunked text
+  e.replaceSelection '![' + chunk + '](' + sanitizedLink + ' "' + e.__localize('enter image title here') + '")'
+  cursor = selected.start + 2
+  # Set the next tab
+  e.setNextTab e.__localize('enter image title here')
+  # Set the cursor
+  e.setSelection cursor, cursor + chunk.length
+
+uploadFile = (editor, e) ->
+  uploader  = $('.direct-upload').first().clone()
+  uploader.insertAfter($('.direct-upload').first())
+  redirect_url = document.location.protocol + '//' + document.location.host + '/result.html'
+  progress = editor.find('.progress')
+
+  $file_field = uploader.find('input[type="file"]')
+  $file_field.attr('id', "markdown-uploader-#{id}")
+
+  is_ie = $('html').hasClass('ie9') or $('html').hasClass('lt-ie9')
+
+  $(uploader).fileupload
+    url:          uploader.attr('action')
+    type:         'POST'
+    autoUpload:   true
+    sequentialUploads: true
+    crossDomain: true
+    redirect: redirect_url if is_ie
+    redirectParamName: 'success_action_redirect' if is_ie
+    forceIframeTransport: is_ie
+
+    # This is really important as s3 gives us back the url of the file in a XML document
+    # dataType:     'xml',
+    dataType:     'text',
+
+    add: (event, data) ->
+      signed_data =
+        doc:
+          title: data.files[0].name
+
+      signed_data['success_action_redirect'] = redirect_url if is_ie
+
+      $.ajax
+        url:      '/admin/signed_urls'
+        type:     'GET'
+        dataType: 'json'
+        async:    false
+
+        # send the file name to the server so it can generate the key param
+        data: signed_data
+
+        success:  (data) ->
+          # Now that we have our data, we update the form so it contains all
+          # the needed data to sign the request
+          uploader.find('input[name=key]').val(String(data.key))
+          uploader.find('input[name=policy]').val(String(data.policy))
+          uploader.find('input[name=signature]').val(String(data.signature))
+
+      prevUpload.abort() if prevUpload
+      prevUpload = data.submit()
+
+    send: (e, data) ->
+      progress.fadeIn(100)
+
+    progress: (e, data) ->
+      # This is what makes everything really cool, thanks to that callback
+      # you can now update the progress bar based on the upload progress
+      percent = Math.round((e.loaded / e.total) * 100)
+      progress.find('.progress-bar').css('width', percent + '%')
+
+    fail: (e, data) ->
+      console.log(e, data)
+
+    success: (data) ->
+      if data.indexOf('<?xml') is -1
+        url = uploader.attr('action') + '/' + data.split('&')[1].split('=')[1]
+        insertImage(url, e)
+      else
+        # Here we get the file url on s3 in an xml doc
+        url = $(data).find('Location').text()
+        insertImage(url, e)
+
+    done: (event, data) ->
+      progress.fadeOut 300, -> progress.find('.progress-bar').css('width', 0)
+
+  $file_field.trigger('click')
+
+  id++
+
+widgets.define 'markdown', (el) ->
+  $md_editor = null
+  $(el).markdown({
+    hiddenButtons: [<%= ignored.join(', ') %>]
+    additionalButtons: [
+      {
+        name: "groupLink"
+        data: [
+          <% if use_aws %>
+          {
+            name: "cmdUploadImage"
+            toggle: false
+            title: "Image"
+            icon: "fa fa-picture-o"
+            callback: (e) ->
+              uploadFile($md_editor, e)
+          }
+          <% end %>
+        ]
+      }
+    ]
+    footer: (e) ->
+      """
+      <div class="progress" style="display: none; height: 10px;">
+        <div class="progress-bar progress-bar-success"></div>
+      </div>
+      """
+  })
+
+  $md_editor = $(el).parent('.md-editor')

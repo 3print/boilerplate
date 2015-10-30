@@ -6,7 +6,10 @@ widgets.define 'auto_resize', (el) ->
     $txt.height(txt.scrollHeight)
 
   $this = $(el)
-  resize(el)
   $this.on 'input', ->
     resize(el)
     true
+
+  setTimeout ->
+    resize(el)
+  , 500

@@ -18,17 +18,29 @@ DEFAULT_EVENTS = 'load nested:fieldAdded'
 
 is_mobile = -> $(window).width() < 992
 
-widgets 'navigation_highlight', 'body', on: DEFAULT_EVENTS
-widgets 'auto_resize', 'textarea', on: DEFAULT_EVENTS
+widgets 'navigation_highlight', '.navbar-nav', on: DEFAULT_EVENTS
 widgets 'filepicker', '.form-group.file', on: DEFAULT_EVENTS
 widgets 'boolean', '.boolean', on: DEFAULT_EVENTS
 widgets 'collapse', '.collapse', on: DEFAULT_EVENTS
+widgets 'collapse_toggle', '.open-settings', on: DEFAULT_EVENTS
 widgets 'datepicker', '.datepicker', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'datetimepicker', '.datetimepicker', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'datepicker_mobile', '.datepicker', on: DEFAULT_EVENTS, if: is_mobile
-widgets 'select2', 'select', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'select2', 'select, .select2', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'markdown', '[data-editor="markdown"]', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'order_table', '.orderable', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'order_list', '.orderable-list', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'blueprint_button', 'button[data-blueprint]', on: DEFAULT_EVENTS
+widgets 'blueprint_remove_button', 'button[data-remove]', on: DEFAULT_EVENTS
+widgets 'settings_editor', '.settings_editor', on: DEFAULT_EVENTS
+widgets 'drag_source', '[data-transferable]', on: DEFAULT_EVENTS
+widgets 'drop_target', '[data-drop]', on: DEFAULT_EVENTS
+widgets 'auto_resize', 'textarea', on: DEFAULT_EVENTS
+
 widgets 'propagate_input_value', 'input, select', on: DEFAULT_EVENTS
+
+I18n.attachToWindow()
+
 
 old_insertFields = NestedFormEvents::insertFields
 NestedFormEvents::insertFields = (content, assoc, link) ->

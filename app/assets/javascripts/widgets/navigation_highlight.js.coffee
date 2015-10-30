@@ -1,9 +1,7 @@
-widgets.define 'navigation_highlight', (body) ->
+widgets.define 'navigation_highlight', (nav) ->
 
-  if body.classList.length
-    nav = document.querySelector('.navbar-nav')
-
-    current_controller = body.className.split(' ').map((s) -> ".#{s}").join(', ')
+  if document.body.classList.length
+    current_controller = document.body.className.split(' ').map((s) -> ".#{s}").join(', ')
 
     active = nav.querySelector(current_controller)
     if active?
