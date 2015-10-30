@@ -29,7 +29,7 @@ module PublicUploader
 
     # if Rails.env.production?
     if base.storage.name == base.storage_engines[:fog]
-      base.asset_host   "http://#{ ENV['ASSET_HOST'] }"
+      base.asset_host   "https://#{ ENV['ASSET_HOST'] }"
       base.fog_public   true
     end
   end
