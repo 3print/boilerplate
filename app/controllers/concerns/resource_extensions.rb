@@ -8,10 +8,14 @@ module ResourceExtensions
   included do
     def self.resource_name
       self.name.gsub('Controller', '').split('::').last.underscore
+    rescue
+      nil
     end
 
     def self.resource_class
       self.name.gsub('Controller', '').split('::').last.singularize.constantize
+    rescue
+      nil
     end
 
     def self.load_resource(options={})
@@ -76,9 +80,14 @@ module ResourceExtensions
   end
 
   def resource opts={}
+    return nil if resource_class.nil?
+
     authorize = opts.delete(:authorize)
     action = params[:action]
-    class_scope = authorize ? policy_scope(resource_class) : resource_class
+    class_scope = policy_scope(resource_class)
+
+    return if class_scope.nil?
+
     case action
     when 'new', 'create'
       key = :"@#{resource_name.singularize}"
@@ -88,7 +97,7 @@ module ResourceExtensions
     when 'index'
       key = :"@#{resource_name}"
       unless results = instance_variable_get(key)
-        instance_variable_set(key, results = class_scope.all)
+        instance_variable_set(key, results = class_scope)
       end
     else
       if params[:id].present?
@@ -100,7 +109,7 @@ module ResourceExtensions
       else
         key = :"@#{resource_name}"
         unless results = instance_variable_get(key)
-          instance_variable_set(key, results = class_scope.all)
+          instance_variable_set(key, results = class_scope)
         end
       end
     end
