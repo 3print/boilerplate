@@ -1,4 +1,9 @@
 class Admin::ApplicationController < ApplicationController
+  if Rails.env.dev?
+    after_action :verify_authorized, :except => :index
+    after_action :verify_policy_scoped, :only => :index
+  end
+
   layout 'admin'
 
   before_filter :reject_unauthorized_user!
