@@ -33,5 +33,20 @@ module Boilerplate
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :fr
+
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   end
+end
+
+if ENV["SLACK_WEBHOOK_URL"].present?
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+    :slack => {
+      :webhook_url => ENV["SLACK_WEBHOOK_URL"],
+      :channel => "#exceptions",
+      :additional_parameters => {
+        icon_url: "http://TODO",
+        mrkdwn: true,
+        username: "TODO-#{Rails.env}"
+      }
+    }
 end
