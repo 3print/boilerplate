@@ -1,2 +1,7 @@
 %strong= "models.fields.#{controller.resource_name.singularize}.#{column}".tc
-= image_tag(value.thumb)
+- if value.class == PdfUploader
+  = link_to value.url do
+    = icon 'file-pdf-o'
+    = value
+- elsif value.respond_to?(:thumb)
+  = image_tag(value.thumb)
