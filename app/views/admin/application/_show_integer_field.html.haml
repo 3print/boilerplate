@@ -1,0 +1,5 @@
+%strong= "models.fields.#{controller.resource_name.singularize}.#{column}".tc
+- if controller.resource_class.respond_to?(column.to_s.pluralize)
+  = "enums.#{controller.resource_name.singularize}.#{column}.#{value}".t
+- else
+  = value
