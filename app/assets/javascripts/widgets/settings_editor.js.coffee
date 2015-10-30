@@ -95,7 +95,7 @@ class SettingsEditor
     $input.on 'change input', =>
       $row.removeClass 'has-error'
       if @validate $input.val()
-        $hidden.attr('name', "#{$(@table).data 'model'}[settings][#{$input.val()}]")
+        $hidden.attr('name', "#{$(@table).data 'model'}[#{@table.getAttribute('data-attribute-name')}][#{$input.val()}]")
       else
         $row.addClass 'has-error'
 

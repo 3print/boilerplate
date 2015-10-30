@@ -1,0 +1,2 @@
+class BpTestPolicy < AdminPolicy
+end

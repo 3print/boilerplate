@@ -1,11 +1,13 @@
 fr:
   collections: &collections
     users: Utilisateurs
+    bp_tests: Tests
 
   models: &models
     <<: *collections
 
     user: Utilisateur
+    bp_test: Test
 
   admin:
     collections: *collections

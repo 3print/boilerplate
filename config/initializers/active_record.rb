@@ -1,5 +1,7 @@
 module ActiveRecord
   class Base
+    include TprintExtensions
+
     set_callback :validate do
       @validated = true
     end

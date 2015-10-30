@@ -85,7 +85,6 @@ module ResourceExtensions
     authorize = opts.delete(:authorize)
     action = params[:action]
     class_scope = policy_scope(resource_class)
-
     return if class_scope.nil?
 
     case action
@@ -96,6 +95,7 @@ module ResourceExtensions
       end
     when 'index'
       key = :"@#{resource_name}"
+
       unless results = instance_variable_get(key)
         instance_variable_set(key, results = class_scope)
       end

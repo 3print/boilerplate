@@ -12,6 +12,9 @@
 #= require widgets
 #= require select2
 #= require nested_form
+#= require bootstrap-markdown
+#= require bootstrap-markdown.fr
+#= require markdown
 #= require_tree ./widgets
 
 DEFAULT_EVENTS = 'load nested:fieldAdded'

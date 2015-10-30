@@ -3,8 +3,6 @@ module NavigationHelper
 
     resource_class = controller == :home ? nil : controller.to_s.singularize.camelize.constantize
 
-    return '' if resource_class.present? && !can?(:edit, resource_class)
-
     ico, options = [nil, ico] if ico.is_a?(Hash)
 
     li_class = controller.to_s

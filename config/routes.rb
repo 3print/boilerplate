@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     root to: 'home#index'
 
     resources :users
+    resources :bp_tests
 
     resources :signed_urls, only: :index
   end

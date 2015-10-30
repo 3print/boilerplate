@@ -75,7 +75,7 @@ module SimpleFormHelper
     cols = []
     cols += content_columns(model)
     cols -= SKIPPED_COLUMNS
-    cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present?
+    cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
 
     cols.compact
 

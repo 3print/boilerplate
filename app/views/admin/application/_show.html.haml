@@ -7,9 +7,7 @@
       %li.list-group-item
         :ruby
           out = resource.send(col)
-          column = controller.resource_class.columns_hash[col.to_s]
-          type = column.present? ? column.type : :association
-          type = :image if out.present? and out.is_a?(CarrierWave::Uploader::Base)
+          type = resource.col_type(col)
 
           field_partial = "show_#{controller.resource_name}_#{col}"
           type_partial = "show_#{type}_field"

@@ -55,7 +55,7 @@ class AdminPolicy
     end
 
     def resolve
-      scope
+      scope.all
     end
   end
 end

@@ -1,7 +1,7 @@
 class SettingsInput < SimpleForm::Inputs::TextInput
   def input
     class_name = @builder.object.class.name.singularize.underscore
-    res = "<table class='settings_editor table table-bordered table-stripped' data-row-blueprint='#{light_escape(get_field_row '', '')}' data-model='#{class_name}'>"
+    res = "<table class='settings_editor table table-bordered table-stripped' data-row-blueprint='#{light_escape(get_field_row '', '')}' data-model='#{class_name}' data-attribute-name='#{attribute_name}'>"
 
     res += '<thead><tr>'
     %w(field type).each do |k|
@@ -51,7 +51,7 @@ class SettingsInput < SimpleForm::Inputs::TextInput
     row = '<tr>'
 
     row += '<td>'
-    row += "<input type=\"hidden\" name=\"#{class_name}[settings][#{field}]\" value=\"#{value}\"></input>"
+    row += "<input type=\"hidden\" name=\"#{class_name}[#{attribute_name}][#{field}]\" value=\"#{value}\"></input>"
     row += "<input type=\"text\" value=\"#{field}\" class=\"form-control\"></input>"
     row += '</td>'
     row += "<td><select data-original-value=\"#{value}\" data-original-type=\"#{initial_type}\" style=\"width: 100%\">"
