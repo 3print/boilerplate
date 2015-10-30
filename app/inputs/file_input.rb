@@ -5,7 +5,11 @@ class FileInput < SimpleForm::Inputs::FileInput
     return super unless use_aws
     buffer = ''
     opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
-    buffer << @builder.hidden_field(:"remote_#{attribute_name}_url", opts)
+    if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog
+      buffer << @builder.hidden_field(:"remote_#{attribute_name}_url", opts)
+    else
+      buffer << super
+    end
     buffer << preview
     buffer.html_safe
   end
