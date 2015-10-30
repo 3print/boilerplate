@@ -7,7 +7,7 @@
       %li.list-group-item
         :ruby
           out = resource.send(col)
-          type = resource.col_type(col)
+          type = resource.column_display_type(col)
 
           field_partial = "show_#{controller.resource_name}_#{col}"
           type_partial = "show_#{type}_field"

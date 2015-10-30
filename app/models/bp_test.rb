@@ -6,5 +6,5 @@ class BpTest < ActiveRecord::Base
 
   enumerize :enum, in: %w(foo bar baz)
 
-  col_type :markdown, :markdown
+  markdown_attr :markdown
 end
