@@ -52,6 +52,7 @@ gem 'delayed_job'
 gem 'delayed_job_active_record'
 
 gem 'runtimeerror_notifier'
+gem 'tprint-debug', git: 'https://github.com/3print/tprint-debug'
 
 group :development do
   gem 'better_errors'

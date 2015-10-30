@@ -9,7 +9,7 @@ end
 
 guard 'rails' do
   watch('Gemfile.lock')
-  watch(%r{^(config|lib)/.*})
+  # watch(%r{^(config|lib)/.*})
 end
 
 guard 'livereload' do
@@ -20,7 +20,6 @@ guard 'livereload' do
   # Rails Assets Pipeline
   watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html))).*}) { |m| "/assets/#{m[3]}" }
 end
-
 
 # Note: The cmd option is now required due to the increasing number of ways
 #       rspec may be run, below are examples of the most common uses.
