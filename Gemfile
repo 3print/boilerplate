@@ -65,10 +65,11 @@ group :development do
   gem 'rb-inotify', :require=>false
   gem 'rsense'
   # Guard
-  gem 'guard', '1.4.0'
-  gem 'guard-bundler', '1.0.0'
-  gem 'guard-rails', '0.4.7'
-  gem 'guard-rspec', '2.5.4'
+  gem 'guard'
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'guard-rspec'
+  gem 'rspec', '>=3.0'
   gem 'rspec-its'
   gem 'guard-spork', '1.5.1'
   gem 'guard-livereload', '1.0.3'
