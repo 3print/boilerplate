@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get '/result', to: 'static#s3_results', as: :s3_results
 
+  resources :bp_tests
   namespace :admin do
     root to: 'home#index'
 

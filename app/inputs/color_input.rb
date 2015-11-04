@@ -1,5 +1,5 @@
 class ColorInput < SimpleForm::Inputs::TextInput
-  def input
+  def input(wrapper_options = nil)
     input_html_classes.unshift("color")
     input_html_options[:type] = 'color'
     input_html_options[:placeholder] = 'simple_form.placeholders.color'.t

@@ -1,30 +1,75 @@
 module I18n
   def self.tc(key, params={})
-    'label_with_colon'.t label: key.t(params)
+    self.t('label_with_colon', label: key.t(params)).html_safe
   end
 
   def self.tp(key, params={})
-    "prefix.#{key}".t(label: key.t(params))
+    self.t("prefix.#{key}", label: key.t(params)).html_safe
+  end
+
+  def self.tmf(key, params={})
+    model, col = key.split "."
+    begin
+      self.t "models.fields.#{key}", {raise: true}.update(params)
+    rescue
+      begin
+        self.t "models.fields.common.#{col}", {raise: true}.update(params)
+      rescue
+        "models.fields.#{key}".t params
+      end
+    end
+  end
+
+  def self.tmfc(key, params={})
+    self.t('label_with_colon', label: self.tmf(key, params)).html_safe
+  end
+
+  def self.t_with_default(key, params={})
+    begin
+      self.t(key, {raise: true}.update(params))
+    rescue
+      if Rails.env.development?
+        "<span class='label label-danger' title='#{self.t(key, params)}'>!</span>#{key.split('.').last}".html_safe
+      else
+        key.split('.').last
+      end
+    end
   end
 end
 
 class Symbol
   def t(params={})
-    I18n.t(self, params)
+    I18n.t_with_default(self, params)
   end
 
   def tc(params={})
     I18n.tc(self, params)
+  end
+
+  def tmf(params={})
+    I18n.tmf(self, params)
+  end
+
+  def tmfc(params={})
+    I18n.tmfc(self, params)
   end
 end
 
 class String
   def t(params={})
-    I18n.t(self.to_s, params)
+    I18n.t_with_default(self.to_s, params)
   end
 
   def tc(params={})
     I18n.tc(self, params)
+  end
+
+  def tmf(params={})
+    I18n.tmf(self, params)
+  end
+
+  def tmfc(params={})
+    I18n.tmfc(self, params)
   end
 end
 

@@ -1,4 +1,4 @@
-%strong= "models.fields.#{controller.resource_name.singularize}.#{column}".tc
+%strong= "#{controller.resource_name.singularize}.#{column}".tmf
 - if value.class == PdfUploader
   = link_to value.url do
     = icon 'file-pdf-o'

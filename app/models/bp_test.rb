@@ -4,7 +4,11 @@ class BpTest < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   mount_uploader :pdf, PdfUploader
 
-  enumerize :enum, in: %w(foo bar baz)
+  enumerize :enum, in: %i(foo bar baz)
 
   markdown_attr :markdown
+
+  def caption
+    "Test ##{id}"
+  end
 end

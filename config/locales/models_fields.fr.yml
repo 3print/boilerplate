@@ -4,6 +4,10 @@ fr:
     first_name: Prénom
     last_name: Nom
 
+  common: &common
+    image: image
+    pdf: pdf
+
   contactable: &contactable
     phone: Téléphone
     address: Addresse
@@ -17,6 +21,9 @@ fr:
 
   models:
     fields: &fields
+      common:
+        <<: *common
+
       user:
         <<: *identified
         password: Mot de passe

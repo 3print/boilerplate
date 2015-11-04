@@ -1,6 +1,5 @@
 class FileInput < SimpleForm::Inputs::FileInput
-
-  def input
+  def input(wrapper_options = nil)
     use_aws = CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog || (Rails.env.development? && !ENV['NO_AWS'])
     return super unless use_aws
     buffer = ''

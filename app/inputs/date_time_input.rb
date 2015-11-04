@@ -1,5 +1,5 @@
 class DateTimeInput < SimpleForm::Inputs::DateTimeInput
-  def input
+  def input(wrapper_options = nil)
     if options[:type] == :datetime
       input_html_classes.unshift("datetimepicker")
     else

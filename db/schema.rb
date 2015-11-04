@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20151030143544) do
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "enum"
+    t.string   "enum"
   end
 
   create_table "users", force: true do |t|

@@ -1,5 +1,5 @@
 class SettingsInput < SimpleForm::Inputs::TextInput
-  def input
+  def input(wrapper_options = nil)
     class_name = @builder.object.class.name.singularize.underscore
     res = "<table class='settings_editor table table-bordered table-stripped' data-row-blueprint='#{light_escape(get_field_row '', '')}' data-model='#{class_name}' data-attribute-name='#{attribute_name}'>"
 

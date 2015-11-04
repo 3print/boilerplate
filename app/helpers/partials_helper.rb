@@ -5,10 +5,14 @@ module PartialsHelper
     partial = options[:partial] || "#{resource_class.name.tableize}/#{name}"
     filename_parts = partial.split "/"
     filename = [filename_parts[0..-2], "_#{filename_parts.last}.html.haml"].join("/")
+
+    TPrint.debug prefixes
     if lookup_context.exists? "_#{filename_parts.last}", (prefixes + filename_parts[0..-2]).join('/')
       html = render({partial: (prefixes + [partial]).join('/')}.update(options))
-    else
+    elsif prefixes.include?("admin") && lookup_context.exists?("_#{filename_parts.last}", (["admin"] + filename_parts[0..-2]).join('/'))
       html = render({partial: "admin/application/#{name}"}.update(options))
+    else
+      html = render({partial: "application/#{name}"}.update(options))
     end
     html
   end
