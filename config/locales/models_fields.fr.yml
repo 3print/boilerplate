@@ -1,17 +1,20 @@
 fr:
   identified: &identified
+    civility: Civilité
     email: Email
     first_name: Prénom
     last_name: Nom
-
-  common: &common
-    image: image
-    pdf: pdf
 
   contactable: &contactable
     phone: Téléphone
     address: Addresse
     zipcode: Code Postal
+    zip_code: Code Postal
+    city: Ville
+
+  common: &common
+    image: image
+    pdf: pdf
 
   orderable: &orderable
     sequence: Ordre
