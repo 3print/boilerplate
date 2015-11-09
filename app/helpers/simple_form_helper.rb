@@ -76,12 +76,22 @@ module SimpleFormHelper
     cols += content_columns(model)
     cols -= SKIPPED_COLUMNS
     cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
+    cols += model.class::EXTRA_COLUMNS.map(&:intern) if model.class::EXTRA_COLUMNS.present? rescue false
 
     cols.compact
 
     res = ''
     cols.each do |col|
-      res << form_builder.input(col, placeholder: placeholder_for(model, col, form_builder), label: "#{model.class.name.underscore}.#{col}".tmf)
+      col_type = model.get_column_display_type(col)
+      field_partial = "application/input_#{col_type}"
+      admin_field_partial = "admin/application/input_#{col_type}"
+      if partial_exist?(admin_field_partial)
+        res << render(partial: admin_field_partial, locals: { model: model, col: col, form: form_builder }).to_s
+      elsif partial_exist?(field_partial)
+        res << render(partial: field_partial, locals: { model: model, col: col, form: form_builder }).to_s
+      else
+        res << form_builder.input(col, placeholder: placeholder_for(model, col, form_builder), label: "#{model.class.name.underscore}.#{col}".tmf)
+      end
     end
 
     cols = association_columns(model, :belongs_to)
