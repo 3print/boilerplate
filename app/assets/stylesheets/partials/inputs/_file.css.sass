@@ -25,15 +25,16 @@
     height: 4px
     +absolute(0,0,initial,0)
 
-  .preview
+   .preview
     min-height: 21px
     overflow: hidden
     img
       margin: 0
-
+      display: none
       &.loaded
         max-width: 80px
         max-height: 80px
+        display: block
 
     .label
       display: inline-block

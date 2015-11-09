@@ -53,8 +53,8 @@ NestedFormEvents::insertFields = (content, assoc, link) ->
     $tr = $(link).closest('tr')
     $(content).insertBefore($tr)
   else if content.indexOf('<li') isnt -1
-    $ul = $(link).parents('.panel').find('.list-group')
-    $ul.append(content)
+    $li = $(link).closest('li')
+    $(content).insertBefore($li)
   else
     old_insertFields.call(this, content, assoc, link)
 

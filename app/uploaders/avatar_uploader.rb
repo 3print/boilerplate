@@ -1,7 +1,7 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include PublicUploader
   include CarrierWave::RMagick
-  include CarrierWave::Meta  
+  include CarrierWave::Meta
   include Sprockets::Rails::Helper
 
   process store_meta: [{md5sum: true}]
@@ -28,10 +28,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   version :medium do
-    process resize_to_fit: [300, 300]
+    process resize_to_fill: [300, 300]
   end
 
   version :thumb do
-    process resize_to_fit: [60, 60]
+    process resize_to_fill: [60, 60]
   end
 end
