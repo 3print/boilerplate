@@ -6,6 +6,7 @@ task :clone, [:name] do |t, args|
   to_be_removed = [
     "lib/tasks/clone.rake",
     "app/models/bp_*",
+    "app/controllers/**/bp_*",
     "app/views/bp_*",
     "app/views/admin/bp_*",
     "spec/models/bp_*",
@@ -44,8 +45,10 @@ task :clone, [:name] do |t, args|
   end
 
   to_be_removed.each_with_index do |tgt, i|
-    TPrint.log "Cleaning #{"." * (i%3)}", kill_line: true
-    FileUtils.rm_rf "#{rel_path}/#{tgt}"
+    Dir["#{rel_path}/#{tgt}"].each do |f|
+      TPrint.log "Cleaning #{"." * (i%3)}", kill_line: true
+      FileUtils.rm_rf f
+    end
   end
 
   if project_initialization
@@ -69,6 +72,9 @@ task :clone, [:name] do |t, args|
   end
 
   TPrint.log "Replacing project name"
+
+  %x(cd #{rel_path}; grep -Rl BOILERPLATE_ONLY * | xargs sed -i '' 's/.*BOILERPLATE_ONLY.*//g')
+
   replacements = {
     "config/application.rb" => name.parameterize.underscore.camelcase,
     "config/locales/*.yml" => name.capitalize,
@@ -84,7 +90,6 @@ task :clone, [:name] do |t, args|
       f.close
     end
   end
-  %x(cd #{rel_path}; grep -Rl BOILERPLATE_ONLY * | xargs sed -i '' 's/.*BOILERPLATE_ONLY.*//g')
 
   TPrint.log "Done !"
 end

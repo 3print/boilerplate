@@ -1,13 +1,13 @@
 fr:
   collections: &collections
     users: Utilisateurs
-    bp_tests: Tests
+    bp_tests: Tests # BOILERPLATE_ONLY
 
   models: &models
     <<: *collections
 
     user: Utilisateur
-    bp_test: Test
+    bp_test: Test # BOILERPLATE_ONLY
 
   admin:
     collections: *collections

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get '/result', to: 'static#s3_results', as: :s3_results
 
-  resources :bp_tests
+  resources :bp_tests # BOILERPLATE_ONLY
   namespace :admin do
     root to: 'home#index'
 

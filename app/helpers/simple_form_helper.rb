@@ -81,13 +81,13 @@ module SimpleFormHelper
 
     res = ''
     cols.each do |col|
-      res << form_builder.input(col, placeholder: placeholder_for(model, col, form_builder))
+      res << form_builder.input(col, placeholder: placeholder_for(model, col, form_builder), label: "#{model.class.name.underscore}.#{col}".tmf)
     end
 
     cols = association_columns(model, :belongs_to)
     cols -= SKIPPED_COLUMNS
     cols.each do |col|
-      res << form_builder.association(col, placeholder: placeholder_for(model, col, form_builder))
+      res << form_builder.association(col, placeholder: placeholder_for(model, col, form_builder), label: "#{model.class.name.underscore}.#{col}".tmf)
     end
 
     res.html_safe

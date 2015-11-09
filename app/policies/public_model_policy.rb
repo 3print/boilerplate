@@ -12,10 +12,10 @@ class PublicModelPolicy < AdminPolicy
   end
 
   def handle?
-    user.admin?
+    user && user.admin?
   end
 
-  def unhandle? 
-    user.admin?
+  def unhandle?
+    user && user.admin?
   end
 end
