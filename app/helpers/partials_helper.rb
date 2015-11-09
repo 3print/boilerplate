@@ -6,7 +6,6 @@ module PartialsHelper
     filename_parts = partial.split "/"
     filename = [filename_parts[0..-2], "_#{filename_parts.last}.html.haml"].join("/")
 
-    TPrint.debug prefixes
     if lookup_context.exists? "_#{filename_parts.last}", (prefixes + filename_parts[0..-2]).join('/')
       html = render({partial: (prefixes + [partial]).join('/')}.update(options))
     elsif prefixes.include?("admin") && lookup_context.exists?("_#{filename_parts.last}", (["admin"] + filename_parts[0..-2]).join('/'))

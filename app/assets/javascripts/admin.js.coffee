@@ -15,6 +15,8 @@
 #= require bootstrap-markdown
 #= require bootstrap-markdown.fr
 #= require markdown
+#= require locales
+#= require i18n
 #= require_tree ./widgets
 
 DEFAULT_EVENTS = 'load nested:fieldAdded'
