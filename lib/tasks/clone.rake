@@ -9,6 +9,7 @@ task :clone, [:name] do |t, args|
     "app/views/bp_*",
     "app/views/admin/bp_*",
     "spec/models/bp_*",
+    "db/migrate/*_bp_*",
     "spec/factories/bp_*",
     "bp-gemfile.rb",
   ]
@@ -83,6 +84,7 @@ task :clone, [:name] do |t, args|
       f.close
     end
   end
+  %x(cd #{rel_path}; grep -Rl BOILERPLATE_ONLY * | xargs sed -i '' 's/.*BOILERPLATE_ONLY.*//g')
 
   TPrint.log "Done !"
 end
