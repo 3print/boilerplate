@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Boilerplate
+module Ladouys
   class Application < Rails::Application
     config.generators do |g|
       g.test_framework :rspec,
@@ -44,9 +44,9 @@ if ENV["SLACK_WEBHOOK_URL"].present?
       :webhook_url => ENV["SLACK_WEBHOOK_URL"],
       :channel => "#exceptions",
       :additional_parameters => {
-        icon_url: "http://TODO",
+        icon_url: "http://Boilerplate",
         mrkdwn: true,
-        username: "TODO-#{Rails.env}"
+        username: "Boilerplate-#{Rails.env}"
       }
     }
 end

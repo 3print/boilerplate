@@ -10,15 +10,15 @@ authentication: &authentication
 
 development:
   <<: *connection
-  <<: *authentication
-  database: db_development
+  # <<: *authentication
+  database: PROJECT_NAME_development
 
 test:
   <<: *connection
-  <<: *authentication
-  database: db_test
+  # <<: *authentication
+  database: PROJECT_NAME_test
 
 production:
   <<: *connection
   <<: *authentication
-  database: db_production
+  database: PROJECT_NAME_production

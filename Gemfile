@@ -91,3 +91,8 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
 end
+
+Dir["./*-gemfile.rb"].each do |f|
+  puts "loading custom Gemfile: #{f}"
+  eval File.read(f), nil, f
+end
