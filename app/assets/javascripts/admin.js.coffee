@@ -33,8 +33,8 @@ widgets 'datetimepicker', '.datetimepicker', on: DEFAULT_EVENTS, unless: is_mobi
 widgets 'datepicker_mobile', '.datepicker', on: DEFAULT_EVENTS, if: is_mobile
 widgets 'select2', 'select, .select2', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'markdown', '[data-editor="markdown"]', on: DEFAULT_EVENTS, unless: is_mobile
-widgets 'order_table', '.orderable', on: DEFAULT_EVENTS, unless: is_mobile
-widgets 'order_list', '.orderable-list', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'order_table', '.sortable', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'order_list', '.sortable-list', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'blueprint_button', 'button[data-blueprint]', on: DEFAULT_EVENTS
 widgets 'blueprint_remove_button', 'button[data-remove]', on: DEFAULT_EVENTS
 widgets 'settings_editor', '.settings_editor', on: DEFAULT_EVENTS

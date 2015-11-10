@@ -1,0 +1,13 @@
+table
+  .sortable &
+    tr
+      cursor: move
+  &.dragged
+    pointer-events: none
+
+    td, tr:hover td
+      background: #f5f5f5
+
+  .dnd-placeholder
+    background-color: #F5F5F5
+    border-top: 1px solid #DDD

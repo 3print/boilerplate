@@ -89,7 +89,7 @@ widgets.define 'order_list', (el, options={}) ->
     $dragged.remove()
 
     update_sequence()
-    $el.trigger('orderable:changed')
+    $el.trigger('sortable:changed')
 
   update_sequence = ->
     order_callback($list)

@@ -16,7 +16,7 @@ fr:
     image: image
     pdf: pdf
 
-  orderable: &orderable
+  sortable: &sortable
     sequence: Ordre
 
   manageable: &manageable
