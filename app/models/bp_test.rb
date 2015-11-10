@@ -8,6 +8,8 @@ class BpTest < ActiveRecord::Base
 
   markdown_attr :markdown
 
+  add_to_dashboard weight: 2
+
   def caption
     "Test ##{id}"
   end

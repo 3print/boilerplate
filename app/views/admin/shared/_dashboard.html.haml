@@ -1,0 +1,5 @@
+.row.dashboard
+  - Dashboard.items.each do |klass, weight|
+    %div{class: "col-md-#{weight*6}"}
+      = widget_box "models.#{klass.name.underscore.pluralize.downcase}".t, class: "panel-default #{weight == 1 && 'short-actions'}", before_title: collection_counter(klass.where(nil)) do
+        = collection klass.order('created_at DESC').limit(5), resource_class: klass

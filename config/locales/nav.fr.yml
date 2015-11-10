@@ -12,4 +12,5 @@ fr:
     admin:
       root: Admin
       resources: Resources
+      dashboard: Dashboard
       <<: *models

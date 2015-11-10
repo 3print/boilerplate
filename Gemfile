@@ -93,6 +93,5 @@ group :test do
 end
 
 Dir["./*-gemfile.rb"].each do |f|
-  puts "loading custom Gemfile: #{f}"
   eval File.read(f), nil, f
 end

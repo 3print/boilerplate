@@ -1,0 +1,163 @@
+From 9f28dc0c5678e8f563c965dbb07fb375725bbf03 Mon Sep 17 00:00:00 2001
+From: Zog <johan@about-blank.fr>
+Date: Tue, 10 Nov 2015 09:37:45 +0100
+Subject: [PATCH] Add dashboard helper
+
+---
+ .../admin_framework_and_overrides.css.sass          |  5 ++++-
+ app/helpers/dashboard_helper.rb                     |  5 +++++
+ app/models/concerns/dashboard_extensions.rb         |  9 +++++++++
+ app/views/admin/shared/_dashboard.html.haml         |  4 ++++
+ app/views/shared/navigation/_nav.html.haml          |  1 +
+ config/application.rb                               |  1 +
+ config/initializers/active_record.rb                |  1 +
+ config/locales/nav.fr.yml                           |  1 +
+ lib/dashboard.rb                                    | 14 ++++++++++++++
+ lib/dashboard/railtie.rb                            | 21 +++++++++++++++++++++
+ 10 files changed, 61 insertions(+), 1 deletion(-)
+ create mode 100644 app/helpers/dashboard_helper.rb
+ create mode 100644 app/models/concerns/dashboard_extensions.rb
+ create mode 100644 app/views/admin/shared/_dashboard.html.haml
+ create mode 100644 lib/dashboard.rb
+ create mode 100644 lib/dashboard/railtie.rb
+
+diff --git a/app/assets/stylesheets/admin_framework_and_overrides.css.sass b/app/assets/stylesheets/admin_framework_and_overrides.css.sass
+index fdc9aa9..8ab2188 100644
+--- a/app/assets/stylesheets/admin_framework_and_overrides.css.sass
++++ b/app/assets/stylesheets/admin_framework_and_overrides.css.sass
+@@ -36,7 +36,7 @@ img
+     li a
+       padding-right: 40px
+
+-  & > li.active a
++  & > li.active > a
+     padding-bottom: 20px
+     border-bottom: 4px solid $color_red
+
+@@ -158,6 +158,9 @@ section
+   +placeholder
+     font-weight: normal
+
++.short-actions .actions .btn span
++  display: none
++
+ input, textarea
+   width: 100%
+
+diff --git a/app/helpers/dashboard_helper.rb b/app/helpers/dashboard_helper.rb
+new file mode 100644
+index 0000000..a4e99a7
+--- /dev/null
++++ b/app/helpers/dashboard_helper.rb
+@@ -0,0 +1,5 @@
++module DashboardHelper
++  def dashboard
++    render partial: 'admin/shared/dashboard'
++  end
++end
+diff --git a/app/models/concerns/dashboard_extensions.rb b/app/models/concerns/dashboard_extensions.rb
+new file mode 100644
+index 0000000..8736999
+--- /dev/null
++++ b/app/models/concerns/dashboard_extensions.rb
+@@ -0,0 +1,9 @@
++module DashboardExtensions
++  extend ActiveSupport::Concern
++
++  included do
++    def self.add_to_dashboard options={}
++      Dashboard.add self, options
++    end
++  end
++end
+diff --git a/app/views/admin/shared/_dashboard.html.haml b/app/views/admin/shared/_dashboard.html.haml
+new file mode 100644
+index 0000000..9e61e63
+--- /dev/null
++++ b/app/views/admin/shared/_dashboard.html.haml
+@@ -0,0 +1,4 @@
++- Dashboard.items.each do |klass, weight|
++  .col-md-6
++    = widget_box "models.#{klass.name.pluralize.downcase}".t, class: 'panel-default short-actions', before_title: collection_counter(klass.where(nil)) do
++      = collection klass.order('created_at DESC').limit(5), resource_class: klass
+diff --git a/config/application.rb b/config/application.rb
+index 5b05abd..8ad8b70 100644
+--- a/config/application.rb
++++ b/config/application.rb
+@@ -35,6 +35,7 @@ class Application < Rails::Application
+     config.i18n.default_locale = :fr
+
+     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
++    config.autoload_paths += %W(#{config.root}/lib)
+   end
+ end
+
+diff --git a/config/initializers/active_record.rb b/config/initializers/active_record.rb
+index 7891a48..87079fa 100644
+--- a/config/initializers/active_record.rb
++++ b/config/initializers/active_record.rb
+@@ -1,6 +1,7 @@
+ module ActiveRecord
+   class Base
+     include TprintExtensions
++    include DashboardExtensions
+
+     set_callback :validate do
+       @validated = true
+diff --git a/config/locales/nav.fr.yml b/config/locales/nav.fr.yml
+index 6344a5d..871ce2b 100644
+--- a/config/locales/nav.fr.yml
++++ b/config/locales/nav.fr.yml
+@@ -12,4 +12,5 @@ fr:
+     admin:
+       root: Admin
+       resources: Resources
++      dashboard: Dashboard
+       <<: *models
+diff --git a/lib/dashboard.rb b/lib/dashboard.rb
+new file mode 100644
+index 0000000..60ce80c
+--- /dev/null
++++ b/lib/dashboard.rb
+@@ -0,0 +1,14 @@
++class Dashboard
++  def self.add klass, options={}
++    TPrint.debug "Adding #{klass.name} to dashboard"
++    options.symbolize_keys!
++    self.items[klass] = options[:weight] || 1
++  end
++
++  def self.items
++    @items ||= {}
++    @items
++  end
++end
++
++require 'dashboard/railtie'
+diff --git a/lib/dashboard/railtie.rb b/lib/dashboard/railtie.rb
+new file mode 100644
+index 0000000..39f7ccd
+--- /dev/null
++++ b/lib/dashboard/railtie.rb
+@@ -0,0 +1,21 @@
++class Dashboard
++  class Railtie < Rails::Railtie
++    config.after_initialize do
++      paths = Rails.application.paths['app/models'].to_a
++      Rails.application.railties.each do |tie|
++        next unless tie.respond_to? :paths
++        paths += tie.paths['app/models'].to_a
++      end
++
++      paths.each do |path|
++        next unless File.directory?(path)
++        Dir.chdir path do
++          Dir['**/*.rb'].each do |src|
++            TPrint.debug "loading #{src[0..-4].classify}"
++            src[0..-4].classify.constantize rescue nil
++          end
++        end
++      end
++    end
++  end
++end

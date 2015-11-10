@@ -87,7 +87,7 @@ module ModelsHelper
       if options[:partial].present?
         html = render partial: options[:partial], locals: { collection: collection, resource_class: resource_class }
       else
-        html = contextual_partial 'list', locals:{ collection: collection }, resource_class: collection_class
+        html = contextual_partial 'list', locals:{ collection: collection, resource_class: collection_class }, resource_class: collection_class
       end
       pagination = paginate(collection, param_name: page_param)
       resource_name = resource_class.model_name.human.pluralize(I18n.locale).underscore
