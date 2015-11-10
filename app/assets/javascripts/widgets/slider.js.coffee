@@ -1,4 +1,51 @@
-
+# A Slider should have the following minimal structure:
+#
+# .slider
+#   .slider-content
+#     .slider-loader
+#       .icon-wrapper= icon 'circle-o-notch', class: 'fa-spin'
+#
+#     .slider-next
+#     .slider-previous
+#     .slider-wrapper
+#       .slider-items
+#         .slider-item{data: {index: index}}
+#
+#       .slider-thumbnails
+#         %a{data: {index: index}}
+#
+# The `.slider-loader` div is used as a placeholder during the loading
+# of the slider items. It can be omitted.
+#
+# The `.slider-next` and `slider-previous` reprensents the controls to navigate
+# the slider. Again, they can be omitted if needed.
+#
+# The `.slider-thumbnails` can contains the items' thumbnails. They can contain
+# a link with a `data-index` to navigate to a given item on click. It's also
+# optional.
+#
+# The `.slider` div can take several data attributes to customize its behavior:
+#
+# `data-no-mobile` - If defined, the slider won't initialize on device with a
+#                    width < 768px
+# `data-auto-run` || `data-autorun` - Whether the slider automatically rotates
+#                                     the slides or not.
+# `data-margin` - An amount of pixels to use between each slide.
+# `data-no-active-item` - Whether to apply an `active` class to the slider
+#                         items.
+# `data-onchange` - The name of a function on `window` that will be called
+#                   when a new slide become active.
+# `data-timeout` - The duration of each slide when autorun is enabled.
+# `data-force-full-width` - Whether to force the size of the slider items to
+#                           take the full available width or not.
+# `data-fix-width` - Whether to fix the width of the items after the
+#                    initialization of the slider. If true, each item gets a
+#                    style attribute correspodning to its current width.
+# `data-no-vertical-align` - Whether to center every item vertically or not.
+# `data-thumbnail-selector` - The slider can be configured to use thumbnails
+#                             lying outside it. In that case the attribute value
+#                             is the selector of a parent of the `a[data-index]`
+#                             to use a thumbnail controls.
 widgets.define 'slider', (el) ->
   slideTimeout = null
   $slider = $(el)

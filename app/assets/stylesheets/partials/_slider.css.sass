@@ -1,0 +1,215 @@
+
+.slider
+  height: 100%
+  +relative
+
+  &.no-controls
+    .slider-next, .slider-previous
+      display: none
+
+  .slider-next, .slider-previous
+    z-index: 1
+    cursor: pointer
+    font-family: 'FontAwesome'
+    font-size: 60px
+    line-height: 60px
+    margin-top: -30px
+
+    +transition(color 0.2s)
+
+  .slider-previous
+    text-align: right
+    +absolute(50%, 0)
+    @extend .icon-chevron-left
+
+  .slider-next
+    +absolute(50%, initial, initial, 0)
+    @extend .icon-chevron-right
+
+  .slider-wrapper
+    overflow: hidden
+    clear: both
+    +box(100%)
+    +relative
+
+  .slider-items
+    white-space: nowrap
+    height: 100%
+
+  .slider-item
+    display: inline-block
+    vertical-align: top
+    height: 100%
+
+    img
+      max-height: 100%
+
+    p
+      white-space: normal
+
+.slider-loader
+  z-index: 4
+  +absolute(0,0,0,0)
+
+  .icon-wrapper
+    +absolute(50%, 50%)
+    +transform(translate(-50%, -50%))
+
+  i
+    +absolute
+    font-size: 40px
+
+.slider-thumbnails
+  position: relative
+
+.slider-dots
+  height: 16px
+  line-height: 16px
+  text-align: center
+  +absolute(initial,0,0,0)
+
+  .slider-dot
+    background: darken($color_grey, 10%)
+    border-radius: 50%
+    vertical-align: top
+    +box-inline(8px)
+
+    &.active
+      background: $color_grey_darker
+
+.slider-content
+  position: relative
+
+.slider.slider-home
+  margin-top: 0
+
+  p
+    margin: 20px 0
+
+  img
+    width: 100%
+
+  .slider-item
+    +relative
+    +opacity(0)
+    +transition(opacity 0.2s)
+
+    &.active
+      +transition(opacity 0.3s ease 0.3s)
+      +opacity(1)
+
+  .slider-item-content
+    text-align: center
+    padding: 0 150px 30px
+    +absolute(initial, 0, 0, 0)
+
+    h4
+      text-transform: uppercase
+      // font-weight: bold
+      font-size: 2em
+
+    .btn
+      text-transform: uppercase
+      font-size: 0.9em
+
+      & + .btn
+        margin-left: 4px
+
+.slider.slider-job
+  .slider-content
+    padding: 0 30px
+
+  &.no-controls .slider-content
+    padding: 0
+
+  .slider-items
+    letter-spacing: -0.31em
+
+    & > *
+      letter-spacing: normal
+
+  &.no-controls
+    padding: 0
+    border-bottom: 1px solid $color_grey_lighter
+    margin-bottom: 20px
+
+  .slider-next, .slider-previous
+    background: $color_grey_lighter
+    width: 30px
+    font-size: 40px
+    line-height: 1em
+    top: 0
+    bottom: 0
+    margin: 0
+    text-align: center
+    text-indent: -0.1em
+    +transition(background-color 0.2s)
+
+    &:hover
+      background: $color_grey_light
+
+    &::before
+      top: 50%
+      display: inline
+      margin-top: -0.5em
+      position: absolute
+      left: 0
+
+  .slider-previous
+    left: 0
+
+  .slider-next
+    right: 0
+
+  figure > img
+    width: 100%
+
+  figcaption
+    width: auto
+    padding: 10px
+
+    &:empty
+      display: none
+
+.slider.slider-thumbnails
+  margin-top: 10px
+  border-top: 1px solid $color_grey_lighter
+
+  .slider-content
+    padding: 0 20px
+
+  a
+    +box-inline(120px, 90px)
+    +relative
+    vertical-align: top
+
+    &::before
+      content: ''
+      background: rgba(0,0,0,0)
+      +box
+      +absolute(0,0,0,0)
+      +transition(background-color 0.2s)
+
+    &.active::before
+      background: rgba(0,0,0,0.5)
+
+    img
+      width: 100%
+
+  .slider-next, .slider-previous
+    top: 0
+    bottom: 0
+    font-size: 20px
+    height: auto
+    margin-top: 0
+    width: 20px
+
+  .video::after
+    font-family: 'FontAwesome'
+    line-height: 90px
+    text-align: center
+    font-size: 40px
+    color: $color_red
+    content: '\f16a'
+    +box
+    +absolute(0,0,0,0)
