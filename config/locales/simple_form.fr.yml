@@ -18,6 +18,7 @@ fr:
       number: 'Insérer un nombre ici'
       datetime: 'JJ/MM/AAAA'
       email: 'prenom.nom@entreprise.fr'
+      enum:  'Choisissez une valeur'
 
     hints:
       user:
