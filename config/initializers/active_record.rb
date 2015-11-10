@@ -1,7 +1,6 @@
 module ActiveRecord
   class Base
     include TprintExtensions
-    include DashboardExtensions
 
     set_callback :validate do
       @validated = true
