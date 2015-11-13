@@ -1,0 +1,17 @@
+.slider.slider-header{data: options}
+  - if options[:loader]
+    .slider-loader
+      .icon-wrapper
+        = icon 'circle-o-notch', class: 'fa-spin'
+
+  .slider-next
+  .slider-previous
+  .slider-wrapper
+    .slider-items
+      - items.each_with_index do |item,index|
+        .slider-item{data: {index: index}}
+          .visual{style: "background-color: #{item.try(:bg_color)}; background-image: url(#{item.carousel})"}
+            - if item.respond_to?(:title)
+              .content.hidden-xs
+                %h3{style: "color: #{item.try(:title_color)};"}!= item.title
+                %div{style: "color: #{item.try(:body_color)};"}!= item.try(:body)

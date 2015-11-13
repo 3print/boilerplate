@@ -46,6 +46,7 @@
 #                             lying outside it. In that case the attribute value
 #                             is the selector of a parent of the `a[data-index]`
 #                             to use a thumbnail controls.
+
 widgets.define 'slider', (el) ->
   slideTimeout = null
   $slider = $(el)
@@ -53,7 +54,7 @@ widgets.define 'slider', (el) ->
   $wrapper = $slider.find('.slider-items')
   itemsMargin = $slider.data('margin') or 0
   autorun = $slider.data('auto-run') ? $slider.data('autorun')
-  withLoader = $slider.data('has-loader')
+  withLoader = $slider.data('loader')?
   noActiveItem = $slider.data('no-active-item')
   handler = window[$slider.data('onchange')]
   timeoutDuration = $slider.data('timeout') or 3000
@@ -113,10 +114,12 @@ widgets.define 'slider', (el) ->
       $thumbs.filter("[data-index=#{$nextItem.data('index')}]").addClass('active')
 
     handler($nextItem, $firstItem) if handler?
+    for n in [0...index]
+      $wrapper.append($wrapper.children().first().clone())
+
     $wrapper.animate marginLeft: "-#{$nextItem[0].offsetLeft + itemsMargin}px", duration: 300, ->
       for n in [0...index]
-        $wrapper.append($wrapper.children().first())
-
+        $wrapper.children().first().remove()
       $wrapper.css(marginLeft: 0)
       cb?()
 
@@ -131,7 +134,7 @@ widgets.define 'slider', (el) ->
     $prevItem = $slider.find('.slider-item:nth-child(1)')
 
     handler($lastItem, $prevItem) if handler?
-    $wrapper.prepend($lastItem).css marginLeft: "-#{$lastItem.width() + itemsMargin}px"
+    $wrapper.prepend($lastItem.clone()).css marginLeft: "-#{$lastItem.width() + itemsMargin}px"
 
     unless noActiveItem
       $prevItem.removeClass('active')
@@ -142,6 +145,7 @@ widgets.define 'slider', (el) ->
       $thumbs.filter("[data-index=#{index}]").addClass('active')
 
     $wrapper.animate marginLeft: '0px', duration: 300, ->
+      $lastItem.remove()
       cb?()
 
     slideTimeout = setTimeout(next, timeoutDuration) if autorun
@@ -179,3 +183,4 @@ widgets.define 'slider', (el) ->
     slideTimeout = setTimeout ->
       next()
     , parseInt(timeoutDuration)
+
