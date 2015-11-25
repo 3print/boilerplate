@@ -119,6 +119,9 @@ GEM
       activesupport (>= 3.2)
     erubis (2.7.0)
     eventmachine (1.0.8)
+    exception_notification (4.1.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     excon (0.45.4)
     execjs (2.6.0)
     factory_girl (4.5.0)
@@ -526,6 +529,7 @@ DEPENDENCIES
   devise-i18n
   enum_help
   enumerize
+  exception_notification
   factory_girl_rails
   faker
   fog
