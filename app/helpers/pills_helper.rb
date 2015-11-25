@@ -14,7 +14,7 @@ module PillsHelper
   def pills
     return nil unless @_pills.present?
 
-    content_tag :div, class: 'pull-right btn-group' do
+    out = content_tag :div, class: 'pull-right btn-group' do
       @_pills.each do |path|
         caption = path[0]
 
@@ -36,5 +36,7 @@ module PillsHelper
         concat caption.html_safe# content_tag(:li, caption, class: "btn #{li_class}")
       end
     end
+    @_pills = []
+    out
   end
 end

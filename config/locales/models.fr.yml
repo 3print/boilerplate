@@ -8,6 +8,8 @@ fr:
 
     user: Utilisateur
     bp_test: Test # BOILERPLATE_ONLY
+    dashboard:
+      <<: *collections
 
   admin:
     collections: *collections
