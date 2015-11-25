@@ -4,6 +4,8 @@ fr:
     sign_out: Se déconnecter
     sign_up: S'inscrire
     edit_account: Profil
+    show_profile: Voir mon profil
+    edit_profile: Modifier mon profil
 
     admin: Admin
     add: Ajouter
