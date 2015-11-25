@@ -7,7 +7,7 @@ module PunditExtensions
     end
 
     def self.shared_policy
-      class_variable_get '@@shared_policy'
+      class_variable_get '@@shared_policy' rescue nil
     end
   end
 

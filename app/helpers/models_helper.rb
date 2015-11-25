@@ -65,7 +65,7 @@ module ModelsHelper
     local = options[:local] || collection.klass.name.tableize.to_sym
     page_param = options[:page_param] || (action_name == 'index' ? :page : "#{local}_page")
     resource_class = options[:resource_class] || self.resource_class
-    collection = collection.page(params[page_param])
+    collection = collection.page(params[page_param]) unless options[:no_pagination]
     # collection = collection.order("#{resource_class.table_name}.created_at DESC").page(params[page_param])
     self.collection_class = collection.klass
 
@@ -89,7 +89,7 @@ module ModelsHelper
       else
         html = contextual_partial 'list', locals:{ collection: collection, resource_class: collection_class }, resource_class: collection_class
       end
-      pagination = paginate(collection, param_name: page_param)
+            pagination = options[:no_pagination] ? "" : paginate(collection, param_name: page_param)
       resource_name = resource_class.model_name.human.pluralize(I18n.locale).underscore
 
       res = ''
