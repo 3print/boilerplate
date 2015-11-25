@@ -1,16 +1,18 @@
 
 class UserPolicy < AdminPolicy
-
   def show?
     user.admin? || user == record
   end
 
   def edit?
-    user.admin? || user == record
+    user.super_admin? || (user.admin? && !record.super_admin?) || user == record
   end
 
   def update?
-    user.admin? || user == record
+    user.super_admin? || (user.admin? && !record.super_admin?) || user == record
   end
 
+  def destroy?
+    user.super_admin? || (user.admin? && !record.super_admin?)
+  end
 end

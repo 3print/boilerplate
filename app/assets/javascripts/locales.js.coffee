@@ -1,2 +1,3 @@
 window.locales =
+  en: {}
   fr: {}

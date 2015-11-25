@@ -9,7 +9,7 @@
     %meta{name: "description", content: "#{content_for?(:description) ? yield(:description) : 'app_name'.t}"}/
     = yield :meta
 
-    %link{href: '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', media: 'screen', rel: 'stylesheet'}
+    %link{href: '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', media: 'screen', rel: 'stylesheet'}
 
     %meta{name: "apple-mobile-web-app-capable", content: "yes"}/
     %meta{name: "mobile-web-app-capable", content: "yes"}/
@@ -33,6 +33,7 @@
             %span.sr-only Toggle navigation
             %i.fa.fa-navicon
           %a.navbar-brand{href: "/"}
+            = icon :flag
             %span.text= 'app_name'.t
 
     .scroll-wrapper

@@ -1,11 +1,10 @@
 class BpTest < ActiveRecord::Base
-  extend Enumerize
   include CommonExtensions
 
   mount_uploader :image, ImageUploader
   mount_uploader :pdf, PdfUploader
 
-  enumerize :enum, in: %i(foo bar baz)
+  enum enum: %i(foo bar baz)
 
   markdown_attr :markdown
 

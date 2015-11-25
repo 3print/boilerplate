@@ -2,8 +2,7 @@
 #= require jquery_ujs
 #= require jquery.widget
 #= require jquery.iframe-transport
-#= # require jquery.xdomainrequest.min
-#= require jquery.fileupload
+#= require utils/jquery.fileupload
 #= require bootstrap
 #= require moment.min
 #= require datepicker
@@ -14,7 +13,7 @@
 #= require nested_form
 #= require bootstrap-markdown
 #= require bootstrap-markdown.fr
-#= require markdown
+#= require utils/markdown
 #= require locales
 #= require i18n
 #= require_tree ./widgets
