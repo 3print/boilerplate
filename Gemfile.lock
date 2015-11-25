@@ -115,8 +115,6 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     enum_help (0.0.14)
-    enumerize (1.0.0)
-      activesupport (>= 3.2)
     erubis (2.7.0)
     eventmachine (1.0.8)
     exception_notification (4.1.1)
@@ -528,7 +526,6 @@ DEPENDENCIES
   devise
   devise-i18n
   enum_help
-  enumerize
   exception_notification
   factory_girl_rails
   faker
