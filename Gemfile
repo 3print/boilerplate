@@ -38,7 +38,6 @@ gem 'annotate'
 gem 'kaminari'
 gem 'verbs'
 gem 'uuidtools'
-gem 'enumerize'
 
 # Uploaders
 gem 'rmagick', require: false

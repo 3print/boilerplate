@@ -115,8 +115,6 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     enum_help (0.0.14)
-    enumerize (1.0.0)
-      activesupport (>= 3.2)
     erubis (2.7.0)
     eventmachine (1.0.8)
     excon (0.45.4)
@@ -525,7 +523,6 @@ DEPENDENCIES
   devise
   devise-i18n
   enum_help
-  enumerize
   factory_girl_rails
   faker
   fog
