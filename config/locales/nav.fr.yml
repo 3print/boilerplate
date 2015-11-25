@@ -5,12 +5,13 @@ fr:
 
   admin:
     root: *root
+
   nav:
     root: *root
     <<: *models
 
     admin:
+      <<: *models
       root: Admin
       resources: Resources
       dashboard: Dashboard
-      <<: *models
