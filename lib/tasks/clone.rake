@@ -29,12 +29,28 @@ task :clone, [:name] do |t, args|
     FileUtils.touch "#{rel_path}/#{name.parameterize}-gemfile.rb"
     to_be_removed += [
       "config/database.yml",
-      ".git",
+      ".git/",
       "Readme",
       "Readme.md",
       "log",
       "tmp",
     ]
+  end
+
+  unless project_initialization
+    backups = [
+      "config/database.yml",
+      "config/locales/*",
+      "app/views/*",
+      "app/helpers/application_helper.rb"
+    ]
+
+    backups.each_with_index do |tgt, i|
+      Dir["#{rel_path}/#{tgt}"].each do |f|
+        TPrint.log "Backing up #{"." * (i%3)}", kill_line: true
+        FileUtils.cp f, "#{f}.bak"
+      end
+    end
   end
 
   TPrint.log "Copying files"
@@ -60,6 +76,13 @@ task :clone, [:name] do |t, args|
     f = open("#{rel_path}/config/database.yml", 'w')
     f.write db_config
     f.close
+  else
+    backups.each_with_index do |tgt, i|
+      Dir["#{rel_path}/#{tgt}"].each do |f|
+        TPrint.log "Restoring back up #{"." * (i%3)}", kill_line: true
+        FileUtils.cp "#{f}.bak", f
+      end
+    end
   end
 
   TPrint.log "Installing bundle"

@@ -96,8 +96,14 @@ module SimpleFormHelper
 
     cols = association_columns(model, :belongs_to)
     cols -= SKIPPED_COLUMNS
+    cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
     cols.each do |col|
-      res << form_builder.association(col, placeholder: placeholder_for(model, col, form_builder), label: "#{model.class.name.underscore}.#{col}".tmf)
+      val = instance_variable_get("@#{col}") rescue nil
+      if val
+        res << form_builder.hidden_field(model.class.reflections[col].foreign_key, value: val.id)
+      else
+        res << form_builder.association(col, placeholder: placeholder_for(model, col, form_builder), label: "#{model.class.name.underscore}.#{col}".tmf)
+      end
     end
 
     res.html_safe
