@@ -1,10 +1,26 @@
 - admin = (controller_name =~ /admin/ ? 'admin' : nil)
 .row.dashboard
   - Dashboard.weighed_items.each do |klass, opts|
-    - size = opts[:size] || 1
-    - scope = opts[:scope].present? ? klass.send(opts[:scope]) : klass
-    - scope = opts[:order].present? ? scope.order(opts[:order]) : scope.order('created_at DESC')
-    - scope = opts[:limit].present? ? scope.limit(opts[:limit]) : scope.limit(5)
+    :ruby
+      unless_clause = opts[:unless]
+      if unless_clause
+        next if instance_exec(&unless_clause)
+      end
+      if_clause = opts[:if]
+      if if_clause
+        next unless instance_exec(&if_clause)
+      end
+      size = opts[:size] || 1
+
+      if opts[:scope].present?
+        scope = opts[:scope]
+        scope = scope.is_a?(Array) ? klass.send(scope[0], instance_exec(&scope[1])) : klass.send(scope)
+      else
+        scope = klass
+      end
+
+      scope = opts[:order].present? ? scope.order(opts[:order]) : scope.order('created_at DESC')
+      scope = opts[:limit].present? ? scope.limit(opts[:limit]) : scope.limit(5)
     %div{class: "col-md-#{size*6}"}
       - title_content = opts[:title] || "models.dashboard.#{klass.name.pluralize.underscore}".t(default: render_partial_for_user('index_panel_header', locals: {resource_class: klass}))
       = widget_box title_content, class: "panel-default #{size == 1 && 'short-actions'}", before_title: collection_counter(klass.where(nil)) do

@@ -1,14 +1,8 @@
-class UsersController < ApplicationController
-  def show
-    @user = User.find(params[:id])
-    # render view: 'users/show', locals: {user: my_user}
-  end
+class Admin::UsersController < Admin::ApplicationController
+  load_resource
+  sort_resource by: 'last_name ASC'
 
-  def create
-    user_params = params[:user]
-
-    user_params.permit(:first_name, :last_name)
-
-    user = User.new user_params
+  def resource_params
+    params.require(:user).permit(:first_name, :last_name, :email, :avatar, :role, :message, :remote_avatar_url)
   end
 end

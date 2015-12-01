@@ -6,12 +6,15 @@ module NavigationHelper
     ico, options = [nil, ico] if ico.is_a?(Hash)
 
     li_class = controller.to_s
+    TPrint.debug options
 
     if block_given?
       li_class += ' dropdown'
 
       content_tag(:li, class: li_class) do
-        concat(link_to(url, class: 'dropdown-toggle', data: { toggle: 'dropdown' }) do
+        opts = {class: 'dropdown-toggle', data: { toggle: 'dropdown' }}
+        opts[:method] = options[:method] if options[:method].present?
+        concat(link_to(url, opts) do
           concat(icon(ico)) if ico.present?
           concat(content_tag(:span, label))
           concat(icon('chevron-down'))
@@ -23,7 +26,10 @@ module NavigationHelper
       end
     else
       content_tag(:li, class: li_class) do
-        concat(link_to(url) do
+        opts = {}
+        opts[:method] = options[:method] if options[:method].present?
+
+        concat(link_to(url, opts) do
           concat(icon(ico)) if ico.present?
           concat(content_tag(:span, label))
         end)
