@@ -8,10 +8,13 @@ class BpTest < ActiveRecord::Base
 
   markdown_attr :markdown
 
-  add_to_dashboard weight: 2
+  add_to_dashboard weight: 0, size: 2
   set_shared_policy PublicModelPolicy
 
   def caption
     "Test ##{id}"
   end
+
+  attr_toggle :approve, off: :revocate
+  attr_toggle :validate
 end

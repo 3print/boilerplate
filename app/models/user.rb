@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 
   paginates_per 10
 
+  add_to_dashboard size: 1, weight: 2
+
   validates :email, :first_name, :last_name, presence: true
   validates :password, :password_confirmation, presence: true, if: :password_required?
 

@@ -5,4 +5,15 @@ fr:
       role:
         user: Utilisateur
         admin: Administrateur
-    
+
+    settings:
+      types:
+        float: Nombre avec décimal
+        integer: Nombre entier
+        boolean: Interrupteur vrai/faux
+        string: Texte
+        markdown: MarkDown
+        collection: Collection de valeur
+        job: Fiche Métier
+        date: Date
+        date_range: Période

@@ -14,9 +14,9 @@
             type_partial = "show_#{type}_field"
 
           - if partial_exist?(field_partial)
-            = render partial: field_partial, locals: { value: out, type: type, column: col }
+            = contextual_partial field_partial, locals: { value: out, type: type, column: col }
           - elsif partial_exist?(type_partial)
-            = render partial: type_partial, locals: { value: out, type: type, column: col }
+            = contextual_partial type_partial, locals: { value: out, type: type, column: col }
           - elsif out.is_a?(ActiveRecord::Base)
             %strong= "#{controller.resource_name.singularize}.#{col}".tmfc
             = link_to out, [:admin, out]

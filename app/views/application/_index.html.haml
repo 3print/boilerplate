@@ -6,8 +6,8 @@
   .row
     .col-md-12
       = widget_box title_content, content_class: 'nopadding', before_title: collection_counter(resource_collection) do
-        = render partial: 'index_before_collection'
+        = contextual_partial 'index_before_collection'
 
         = collection resource_collection
 
-        = render partial: 'index_after_collection'
+        = contextual_partial 'index_after_collection'

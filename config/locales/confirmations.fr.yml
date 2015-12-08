@@ -2,3 +2,8 @@ fr:
   confirmations:
     default: "Souhaitez-vous poursuivre cette action ?"
     destroy: "Souhaitez-vous supprimer définitivement cette entrée ?"
+    bp_test:                                                   # BOILERPLATE_ONLY
+      approve: "Souhaitez-vous approuver cet utilisateur ?"    # BOILERPLATE_ONLY
+      revocate: "Souhaitez-vous approuver cet utilisateur ?"   # BOILERPLATE_ONLY
+      validate: "Souhaitez-vous valider cet utilisateur ?"     # BOILERPLATE_ONLY
+      unvalidate: "Souhaitez-vous invalider cet utilisateur ?" # BOILERPLATE_ONLY

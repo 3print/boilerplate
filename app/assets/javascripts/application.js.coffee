@@ -13,17 +13,18 @@ DEFAULT_EVENTS = 'load'
 
 is_mobile = -> $(window).width() < 992
 
-widgets 'popover', '[data-toggle=popover]', on: DEFAULT_EVENTS
-widgets 'slider', '.slider', on: DEFAULT_EVENTS
-widgets 'boolean', '.boolean', on: DEFAULT_EVENTS
 widgets 'auto_resize', 'textarea', on: DEFAULT_EVENTS
-widgets 'select2', 'select', on: DEFAULT_EVENTS, unless: is_mobile
-widgets 'datepicker', '.datepicker', on: DEFAULT_EVENTS, unless: is_mobile
-widgets 'datetimepicker', '.datetimepicker', on: DEFAULT_EVENTS, unless: is_mobile
-widgets 'datepicker_mobile', '.datepicker', on: DEFAULT_EVENTS, if: is_mobile
-widgets 'select_url', '[data-toggle=url]', on: DEFAULT_EVENTS
+widgets 'boolean', '.boolean', on: DEFAULT_EVENTS
 widgets 'color_button', '.color-icon-wrapper[data-url]', on: DEFAULT_EVENTS
+widgets 'datepicker', '.datepicker', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'datepicker_mobile', '.datepicker', on: DEFAULT_EVENTS, if: is_mobile
+widgets 'datetimepicker', '.datetimepicker', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'popover', '[data-toggle=popover]', on: DEFAULT_EVENTS
 widgets 'propagate_input_value', 'input, select', on: DEFAULT_EVENTS
+widgets 'select2', 'select', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'select_url', '[data-toggle=url]', on: DEFAULT_EVENTS
+widgets 'settings_editor', '.settings_editor', on: DEFAULT_EVENTS
+widgets 'slider', '.slider', on: DEFAULT_EVENTS
 
 $ ->
   FastClick.attach(document.body)
