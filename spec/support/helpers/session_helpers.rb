@@ -1,4 +1,3 @@
-
 module SessionHelpers
 
   module ExampleMethods
