@@ -17,5 +17,8 @@
     "ASSET_HOST": {
       "description": "URL of your S3 bucket (without the 'http://')"
     }
+  },
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate; bundle exec rake db:seed"
   }
 }
