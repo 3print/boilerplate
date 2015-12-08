@@ -1,48 +1,68 @@
 Boilerplate
 ================
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+#Main Purpose
+This project serves a base for our various projects. Its main goal is to gather the helpers we use on almost every new site.
 
-Rails Composer is open source and supported by subscribers. Please join RailsApps to support development of Rails Composer.
+#Setup
+* clone the project
+  ```bash
+    git clone https://github.com/3print/boilerplate
+    cd boilerplate
+  ```
+* create a new project from the boilerplate
 
-Problems? Issues?
------------
+  ```bash
+    rake clone[my-new-project]
+  ```
+* Enjoy!
 
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
+For proper use, you'll need a AWS S3 bucket to work with. Create your bucket as usual, and then don't forget to add a complaining CORS configuration, for instance:
 
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
+```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+    <CORSRule>
+        <AllowedOrigin>*</AllowedOrigin>
+        <AllowedMethod>GET</AllowedMethod>
+        <AllowedMethod>POST</AllowedMethod>
+        <AllowedMethod>PUT</AllowedMethod>
+        <AllowedHeader>*</AllowedHeader>
+    </CORSRule>
+  </CORSConfiguration>
+```
+#Features
 
-If the application doesn’t work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
+## Controllers
+All default actions for basic CRUD are defined in the controllers. For more info, look into [`app/controllers/concerns`](tree/master/app/controllers/concerns)
+## Models
+### Uploaders
+By default 3 uploaders are defined for you to use:
+* [AvatarUploader](tree/master/app/uploaders/avatar_uploader.rb)
+* [ImageUploader](tree/master/app/uploaders/image_uploader.rb)
+* [PdfUploader](tree/master/app/uploaders/pdf_uploader.rb)
 
-Ruby on Rails
--------------
+### Policies
+You can tell your model tu use a shared Pundit policy, instead of having to define one for each new model. This is done as follows:
 
-This application requires:
+```ruby
+  set_shared_policy PublicModelPolicy
+```
 
-- Ruby 2.1.1
-- Rails 4.1.5
+## Views
+### Default views and overrides
+### Forms
+### Dashboard
+## Debug
+The gem 'tprint-debug' is loaded by default in the Gemfile. You can use it to output logs
+```ruby
+  TPrint.debug my_object # will only show if TPrint.log_level >= 2
+  TPrint.log my_object
+```
 
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
 
-Getting Started
----------------
+The 'tprint-debug' output includes the location from where it's been called, so it's easier to clean up your code once you're done with the debugging.
 
-Documentation and Support
--------------------------
+## Tests
 
-Issues
--------------
 
-Similar Projects
-----------------
-
-Contributing
-------------
-
-Credits
--------
-
-License
--------
