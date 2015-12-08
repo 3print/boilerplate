@@ -50,7 +50,19 @@
 
         - content_class = yield :extra_content_class
         #content{class: content_class}
-          .container-fluid= yield
+          .container-fluid
+            = yield :before_page
+
+            #content-header
+              %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'app_name'.t
+              = yield :content_header
+
+            = yield :before_content
+
+            = yield
+
+            = yield :after_content
+            = yield :after_page
 
 
     <!--[if IE 8]>

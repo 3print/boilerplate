@@ -61,7 +61,7 @@ Each view is built from several partials, that can be overridden individually in
 #### Pills
 You can use the `pill` helper (syntax similar to `link_to`) to add actions to the action bar present next to the page title. Pills can be displayed with the corresponding `pills`
 helper. Once pills have been displayed, there are removed from the pills pools, and won't be displayed by subsequent calls to `pills`
-You can also use the `toggle_pill` and `toggle_actions` helpers, which will repectively create pills and buttons used to toggle a given attribute on a model. See [`app/views/admin/users/_instances_header_pills_extra.html.haml`](tree/master/app/views/admin/users/_instances_header_pills_extra.html.haml) and [`app/views/admin/users/_list_item_actions_after.html.haml`](tree/master/app/views/admin/users/_list_item_actions_after.html.haml) for full examples.
+You can also use the `toggle_pill` and `toggle_actions` helpers, which will repectively create pills and buttons used to toggle a given attribute on a model. See [`app/views/admin/bp_tests/_instances_header_pills_extra.html.haml`](tree/master/app/views/admin/bp_tests/_instances_header_pills_extra.html.haml) and [`app/views/admin/bp_tests/_list_item_actions_after.html.haml`](tree/master/app/views/admin/bp_tests/_list_item_actions_after.html.haml) for full examples. This is intended to be used with the `attr_toggle` and `toggle_action`in the Model and the Controller.
 
 
 ### Forms
