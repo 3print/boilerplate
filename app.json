@@ -13,6 +13,9 @@
     },
     "AWS_SECRET_ACCESS_KEY": {
       "description": "AWS Access Secret Key"
+    },
+    "ASSET_HOST": {
+      "description": "URL of your S3 bucket (without the 'http://')"
     }
   }
 }
