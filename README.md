@@ -51,6 +51,19 @@ You can tell your model tu use a shared Pundit policy, instead of having to defi
 
 ## Views
 ### Default views and overrides
+
+All views needed for basic CRUD are covered and can be found in [`app/views/application`](tree/master/app/views/application)
+Each view is built from several partials, that can be overridden individually in the corresponding `views` subfolder (see example in [`app/views/admin/users`](tree/master/app/views/admin/users) )
+
+### Helpers
+
+
+#### Pills
+You can use the `pill` helper (syntax similar to `link_to`) to add actions to the action bar present next to the page title. Pills can be displayed with the corresponding `pills`
+helper. Once pills have been displayed, there are removed from the pills pools, and won't be displayed by subsequent calls to `pills`
+You can also use the `toggle_pill` and `toggle_actions` helpers, which will repectively create pills and buttons used to toggle a given attribute on a model. See [`app/views/admin/users/_instances_header_pills_extra.html.haml`](tree/master/app/views/admin/users/_instances_header_pills_extra.html.haml) and [`app/views/admin/users/_list_item_actions_after.html.haml`](tree/master/app/views/admin/users/_list_item_actions_after.html.haml) for full examples.
+
+
 ### Forms
 ### Dashboard
 ## Debug
