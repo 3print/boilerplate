@@ -50,6 +50,18 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  root = Rails.root
+  require root.join('spec/support/helpers/base_helper.rb')
+  Dir[root.join("spec/support/matchers/*.rb")].each {|f| require f }
+
+  Dir[root.join("spec/support/helpers/*.rb")].each do |f|
+    const = f.split("/").last.split(".").first.classify.constantize
+    RSpec::Core::ExampleGroup.send :include, const
+  end
+
+  TPrint.log_level = 2
+
 end
 
 Shoulda::Matchers.configure do |config|

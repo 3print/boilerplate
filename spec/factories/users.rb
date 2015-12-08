@@ -14,5 +14,12 @@ FactoryGirl.define do
       password nil
       password_confirmation nil
     end
+    (User.roles.keys - ["user"]).each do |k|
+      factory k do
+        after(:build) do |u|
+          u.role = k
+        end
+      end
+    end
   end
 end
