@@ -37,10 +37,10 @@
             %span.text= 'app_name'.t
 
         #menu.collapse.navbar-collapse{role: :navigation}
-          = render partial: 'shared/session'
+          = render partial: 'admin/shared/session'
 
           %ul.nav.navbar-nav
-            = render_partial_for_user 'shared/navigation/nav'
+            = render_partial_for_user 'admin/shared/nav'
 
     .scroll-wrapper
       .inner-scroll-wrapper
