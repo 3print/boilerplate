@@ -50,18 +50,6 @@ module ResourceHelper
     end
   end
 
-  def admin_templates_groups_proc
-    resource_field_proc :templates_group do |item|
-      link_to item.localized_name, [:admin, item]
-    end
-  end
-
-  def admin_store_proc
-    resource_field_proc :store do |item|
-      link_to resource_label_for(item.store), [:admin, item.store]
-    end
-  end
-
   def masquerade_proc
     resource_field_proc :masquerade do |item|
       s = icon('sign-in')
