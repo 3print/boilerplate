@@ -1,5 +1,5 @@
 %td.id
-  .id= item.id
+  .id.label.label-info= item.id
 = contextual_partial 'list_row_before_name', locals: {item: item}
 %td.item= contextual_partial 'list_item', locals: {item: item}
 = contextual_partial 'list_row_after_name', locals: {item: item}
