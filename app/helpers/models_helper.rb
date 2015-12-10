@@ -6,6 +6,47 @@ module ModelsHelper
     end
   end
 
+  def phone_number(phone)
+    return '' if phone.nil?
+    match = /(.+)?(\d{10})/.match phone.gsub(/[^\d\+]/, '')
+    return phone if match.nil?
+
+    prefix = match[1]
+    numbers = match[2].gsub(/(.{2})/, '\1 ')
+    [prefix, numbers].compact.join(' ')
+  end
+
+  def show_field(col, options={})
+    out = resource.send(col)
+
+    if options[:as].present?
+      type = options[:as]
+      type_partial = "show_#{type}_field"
+      if partial_exist?(type_partial)
+        render partial: type_partial, locals: { value: out, type: type, column: col }
+      else
+        render partial: 'show_default_field', locals: { value: out, type: type, column: col }
+      end
+    else
+      column = controller.resource_class.columns_hash[col.to_s]
+      type = column.present? ? column.type : :association
+      type = :image if out.present? and out.is_a?(CarrierWave::Uploader::Base)
+
+      field_partial = "show_#{controller.resource_name}_#{col}"
+      type_partial = "show_#{type}_field"
+
+      if partial_exist?(field_partial)
+        render partial: field_partial, locals: { value: out, type: type, column: col }
+      elsif partial_exist?(type_partial)
+        render partial: type_partial, locals: { value: out, type: type, column: col }
+      elsif out.is_a?(ActiveRecord::Base)
+        render partial: 'show_active_record_field', locals: { value: out, type: type, column: col }
+      else
+        render partial: 'show_default_field', locals: { value: out, type: type, column: col }
+      end
+    end
+  end
+
   # Collection
   def models_list(collection, options={}, &block)
     columns = options[:columns] || [:id, resource_label_proc]
@@ -15,8 +56,12 @@ module ModelsHelper
     resource_name = col_class.name.underscore.pluralize
     page_param = :"#{resource_name}_page"
 
-    collection = collection.page(params[page_param])
-    pagination = paginate(collection, param_name: page_param)
+    per = options[:per] || options[:limit] || 10
+
+    unless options[:no_pagination]
+      collection = collection.page(params[page_param]).per(per)
+      pagination = paginate(collection, param_name: page_param)
+    end
 
     if collection.empty?
       raw "<div class='row panel-body'><em class='col-md-12'>#{:no_data_no_creation.t}</em></div>"
@@ -45,7 +90,11 @@ module ModelsHelper
 
           if pagination.present?
             concat(content_tag(:tr) do
-              concat(content_tag(:td, pagination, colspan: columns.size, class: 'fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix', style: 'display: table-cell;'))
+              concat(content_tag(:td, pagination, colspan: columns.size, class: 'table-footer', style: 'display: table-cell;'))
+            end)
+          elsif options[:footer]
+            concat(content_tag(:tr) do
+              concat(content_tag(:td, options[:footer].html_safe, colspan: columns.size, class: 'table-footer', style: 'display: table-cell;'))
             end)
           end
         end)
@@ -65,8 +114,7 @@ module ModelsHelper
     local = options[:local] || collection.klass.name.tableize.to_sym
     page_param = options[:page_param] || (action_name == 'index' ? :page : "#{local}_page")
     resource_class = options[:resource_class] || self.resource_class
-    collection = collection.page(params[page_param]) unless options[:no_pagination]
-    # collection = collection.order("#{resource_class.table_name}.created_at DESC").page(params[page_param])
+    collection = collection.page(params[page_param])
     self.collection_class = collection.klass
 
     if collection.empty?
@@ -89,15 +137,17 @@ module ModelsHelper
       else
         html = contextual_partial 'list', locals:{ collection: collection, resource_class: collection_class }, resource_class: collection_class
       end
-            pagination = options[:no_pagination] ? "" : paginate(collection, param_name: page_param)
+      pagination = paginate(collection, param_name: page_param)
       resource_name = resource_class.model_name.human.pluralize(I18n.locale).underscore
 
       res = ''
       # res += pagination if pagination.present?
       res += html
-      res += content_tag :div, class: 'panel-footer' do
-        concat(pagination)
-      end if pagination.present?
+      if pagination.present?
+        res += content_tag :div, class: 'panel-footer' do
+          concat(pagination)
+        end
+      end
 
       res.html_safe
     end
