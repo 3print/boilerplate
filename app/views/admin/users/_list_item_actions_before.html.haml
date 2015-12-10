@@ -2,4 +2,4 @@
 - if can? :masquerade, item
   = link_to user_masquerade_path(item), class: 'btn btn-warning' do
     = icon('user-secret')
-    = 'actions.masquerade'.t
+    %span.text= 'actions.masquerade'.t
