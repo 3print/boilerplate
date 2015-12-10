@@ -76,6 +76,18 @@ module ResourceHelper
     resource_field_proc :email do |item| mail_to item.email end
   end
 
+  def resource_phone_proc
+    resource_field_proc :phone do |item|
+      link_to phone_number(item.phone), "tel:#{item.phone}"
+    end
+  end
+
+  def resource_user_card_proc
+    resource_field_proc :user_card do |item|
+      render partial: 'shared/user_card', locals: {user: item}
+    end
+  end
+
   def resource_label_for resource
     if resource.respond_to?(:caption) && resource.caption.present?
       label = resource.caption

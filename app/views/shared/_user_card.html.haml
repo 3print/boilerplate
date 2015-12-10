@@ -1,0 +1,15 @@
+- if user.avatar.present?
+  .avatar= image_tag user.avatar.thumb
+
+- if can? :edit, user
+  = link_to user.name, [:admin, user]
+- else
+  = user.name
+
+= "(#{user.email})"
+- if !user.user?
+  .details
+    - if user.role == 'admin'
+      .label.label-warning= "roles.#{user.role}".t
+    - else
+      .label.label-info=  "roles.#{user.role}".t
