@@ -3,12 +3,12 @@
 
   - if can?(:edit, resource) && controller.route_exists_for?(:edit)
     - pill controller.resource_path(:edit), class: 'btn-default' do
-      = icon(:pencil)
+      = icon_for(:edit)
       %span.text= 'admin.actions.edit'.t
 
   - if can?(:destroy, resource) && controller.route_exists_for?(:destroy)
     - pill controller.resource_path(:destroy), method: :delete, data: {confirm: 'confirmations.destroy'.t}, class: 'btn-danger' do
-      = icon(:times)
+      = icon_for(:destroy)
       %span.text= 'admin.actions.destroy'.t
 
   = contextual_partial 'instances_header_pills_after', locals: {resource: resource}

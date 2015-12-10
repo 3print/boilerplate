@@ -2,7 +2,7 @@
 
 - if can?(:destroy, resource) && controller.route_exists_for?(:destroy)
   - pill controller.resource_path(:destroy), method: :delete, data: {confirm: 'confirmations.destroy'.t}, class: 'btn-danger' do
-    = icon(:times)
+    = icon_for(:destroy)
     %span.text= 'admin.actions.destroy'.t
 
 = contextual_partial 'instances_header_pills_after', locals: {resource: resource}

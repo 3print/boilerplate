@@ -5,7 +5,7 @@
 - in_admin do
   - if resource_class && can?(:create, resource_class) && controller.route_exists_for?(:new)
     - pill controller.resource_path(:new), class: 'btn-success' do
-      = icon(:plus)
+      = icon_for(:create)
       %span.text= 'actions.create'.t
 
 - breadcrumb resource_class.t if resource_class

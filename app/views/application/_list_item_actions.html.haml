@@ -5,12 +5,12 @@
 
 - if can? :edit, item
   = link_to edit_url, class: 'btn btn-default' do
-    = icon(:edit)
+    = icon_for(:edit)
     %span.text= 'admin.actions.edit'.t
 
 - if can? :destroy, item
   = link_to destroy_url, method: :delete, class: 'btn btn-danger', data: {confirm: 'confirmations.destroy'.t} do
-    = icon(:times)
+    = icon_for(:destroy)
     %span.text= 'admin.actions.destroy'.t
 
 = contextual_partial 'list_item_actions_after', locals: {item: item}

@@ -25,6 +25,10 @@
     %div{class: "col-md-#{size*6}"}
       - title_content = opts[:title] || "models.dashboard.#{klass.name.pluralize.underscore}".t(default: render_partial_for_user('index_panel_header', locals: {resource_class: klass}))
 
+      - title = capture_haml do
+        = icon_for(klass)
+        = title_content
+
       - if opts[:columns].present?
         :ruby
           url = [:admin, klass]
@@ -38,17 +42,24 @@
         .panel.panel-default
           .panel-heading
             = collection_counter(scope)
+            = icon_for(klass)
             %h5.panel-title
               = link_to url do
                 = title_content
 
           = models_list scope, options
 
-      - else
-        = widget_box title_content, class: "panel-default #{size == 1 && 'short-actions'}", before_title: collection_counter(klass.where(nil)) do
-          = collection scope, resource_class: klass, no_pagination: true
-          .panel-footer
-            - if can?(:create, klass) && (new_url = url_for([:new, admin, klass.name.underscore.downcase].compact) rescue nil)
+          - if can?(:create, klass) && (new_url = url_for([:new, admin, klass.name.underscore.downcase].compact) rescue nil)
+            .panel-footer
               = link_to new_url, class: 'btn btn-success' do
-                = icon(:plus)
+                = icon_for(:create)
+                %span.text= 'admin.actions.add'.t
+
+      - else
+        = widget_box title, class: "panel-default #{size == 1 && 'short-actions'}", before_title: collection_counter(klass.where(nil)) do
+          = collection scope, resource_class: klass, no_pagination: true
+          - if can?(:create, klass) && (new_url = url_for([:new, admin, klass.name.underscore.downcase].compact) rescue nil)
+            .panel-footer
+              = link_to new_url, class: 'btn btn-success' do
+                = icon_for(:create)
                 %span.text= 'admin.actions.add'.t
