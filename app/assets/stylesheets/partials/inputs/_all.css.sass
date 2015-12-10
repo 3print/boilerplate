@@ -1,0 +1,64 @@
+@import "partials/inputs/checkboxes_radios"
+@import "partials/inputs/datepicker"
+@import "partials/inputs/file"
+@import "partials/inputs/markdown"
+@import "partials/inputs/settings"
+
+=sharp_corner_inputs
+  .input-group-addon
+    +border-radius(0)
+
+  .select2-container .select2-choice
+    +border-radius(0 !important)
+
+  .form-control
+    +border-radius(0)
+
+  .alert
+    +border-radius(0)
+
+=round_corner_inputs
+  .form-group.date, .form-group.datetime
+    .form-control
+      border-radius: 0 3px 3px 0 !important
+
+    &.has-error
+      .input-group-addon
+        border-bottom-left-radius: 0
+
+      .form-control
+        border-bottom-right-radius: 0 !important
+
+  .form-group.has-error
+    .form-control, .select2-choice
+      border-radius: 3px 3px 0 0
+
+    .alert
+      border-radius: 0 0 3px 3px
+
+=uppercase_labels
+  .control-label
+    text-transform: uppercase
+
+.form-group
+  .control-label
+    font-weight: normal
+
+  .alert
+    display: block
+    border-top-width: 0
+    padding: 8px
+
+  &.boolean .alert
+    border-top-width: 1px
+
+input, textarea
+  width: 100%
+
+textarea
+  min-height: 150px
+
+input
+  -webkit-appearance: none
+
++round_corner_inputs

@@ -17,8 +17,12 @@ fr:
       string: 'Saisissez votre texte ici'
       number: 'Insérer un nombre ici'
       datetime: 'JJ/MM/AAAA'
-      email: 'prenom.nom@entreprise.fr'
-      enum:  'Choisissez une valeur'
+      email: 'par ex: prenom.nom@entreprise.fr'
+      enum: 'Choisissez une option'
+      text: 'Saisissez votre texte'
+      markdown: 'Saisissez votre texte'
+      tel: 'par ex: 06 00 00 00 00'
+
 
     hints:
       user:

@@ -1,17 +1,23 @@
 @import "compass"
+@import "bootstrap-markdown"
 
 @import "partials/common"
 
 @import "framework_and_overrides"
 @import "select_and_overrides"
 
-@import "partials/inputs/checkboxes_radios"
-@import "partials/inputs/datepicker"
+@import "partials/inputs/all"
 
+@import "partials/admin/welcome"
+@import "partials/admin/mobile"
+
+.direct-upload-section
+  visibility: hidden
+  +fixed
 
 html, body
   width: 100%
   height: 100%
   margin: 0
   overflow-x: hidden
-  background-color: $color_cream
+  background-color: $color_grey_lighter

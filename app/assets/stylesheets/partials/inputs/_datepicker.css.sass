@@ -1,8 +1,10 @@
-.date, .datetime
+.form-group.date, .form-group.datetime
   .form-control-feedback
     z-index: 4
+
   .input-group
     +relative
+
     .form-control.value
       +absolute(0,37px, initial, 0)
       width: auto
@@ -14,3 +16,6 @@
     +absolute(0,37px, 0, 0)
     width: auto
     z-index: 3
+
+.datepicker.dropdown-menu
+  margin-top: 32px

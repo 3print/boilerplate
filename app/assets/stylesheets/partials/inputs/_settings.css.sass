@@ -1,0 +1,20 @@
+.form-group.settings
+  .table
+    margin-bottom: 0
+
+  &.has-error
+    .table
+      border-color: $color_red
+
+      th, td
+        &:first-child
+          border-left-color: $color_red
+
+        &:last-child
+          border-right-color: $color_red
+
+        .form-control, .select2-choice
+          border-radius: 3px
+
+      tbody tr:last-child td
+        border-bottom-color: $color_red

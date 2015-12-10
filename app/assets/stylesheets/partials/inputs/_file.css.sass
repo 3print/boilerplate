@@ -1,5 +1,5 @@
 .file
-  padding: 10px 0
+  // padding: 10px 0
   +relative
 
   input
@@ -31,10 +31,9 @@
     img
       margin: 0
 
-      &.loaded, &[src]
+      &.loaded
         max-width: 80px
         max-height: 80px
-        display: block
 
     .label
       display: inline-block
@@ -58,3 +57,16 @@
 
 .list-group-item .file
   padding: 0
+
+.has-error.file
+  .controls
+    padding-bottom: 0
+    border-color: $color_red
+
+  .alert.alert-danger
+    margin-bottom: 0
+    margin-left: -12px
+    margin-right: -12px
+    border: none
+    margin-top: 6px
+    border-top: 1px solid $color_red

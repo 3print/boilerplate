@@ -3,6 +3,8 @@
 @import "partials/responsive"
 @import "partials/mixins"
 
+@import "partials/panel"
+
 // make all images responsive by default
 img
   @extend .img-responsive
@@ -149,64 +151,11 @@ section
   @extend .btn-primary
   @extend .btn-xs
 
-.panel-heading
-  .fa
-    float: left
-    font-size: 1.2em
-    margin-right: 10px
-
-.panel-title input
-  font-weight: normal
-
-  +placeholder
-    font-weight: normal
-
 .short-actions .actions .btn span
   display: none
 
-input, textarea
-  width: 100%
-
-textarea
-  min-height: 100px
-
-.panel .nopadding
-  ul, table
-    margin-bottom: 0
-
-.panel-footer .pagination,
-td .pagination
-  letter-spacing: -0.31em
-  width: 100%
-  text-align: right
-
-  & > li > a, & > li > span
-    float: none
-    letter-spacing: normal
-
 td .pagination
   margin: -8px 0
-
-.panel-footer .pagination
-  margin: 0
-
-input
-  -webkit-appearance: none
-
-.form-group
-  .alert
-    display: block
-    border-top-width: 0
-    padding: 8px
-    +border-radius(0)
-
-    .btn-group
-      overflow: hidden
-      margin-top: 10px
-      +box
-
-  &.boolean .alert
-    border-top-width: 1px
 
 .alert
   overflow: hidden
@@ -222,3 +171,10 @@ table
     .btn
       letter-spacing: normal
       float: none
+
+.tooltip .tooltip-inner
+  max-width: 300px
+  text-align: left
+
+.table-footer
+  background: whitesmoke

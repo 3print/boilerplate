@@ -1,0 +1,43 @@
+
+.btn
+  &.btn-red
+    background: $color_red
+    color: white
+
+    &.btn-icon .fa
+      color: $color_red_darker
+
+  &.btn-blue
+    background: $color_blue_dark
+    color: white
+
+    &.btn-icon .fa
+      color: $color_blue_light
+
+  &.btn-blue-light
+    background: $color_blue_light
+    color: white
+
+    &.btn-icon .fa
+      color: $color_blue_dark
+
+  &.btn-grey
+    background: $color_grey_dark
+    color: white
+
+  &.btn-grey-light
+    background: $color_grey
+    color: white
+
+  &.btn-small
+    font-size: 14px
+    padding: 4px 10px 5px
+
+  &.btn-icon
+    padding-right: 40px
+    +relative
+    .fa
+      border-left: 1px solid rgba(0,0,0,0.3)
+      line-height: 30px
+      +box(30px)
+      +absolute(-1px, initial, 0, 0)
