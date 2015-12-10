@@ -17,6 +17,6 @@ class UserPolicy < AdminPolicy
   end
 
   def masquerade?
-    user.super_admin?
+    user.super_admin? && user != record
   end
 end
