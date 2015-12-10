@@ -13,7 +13,7 @@ Iconic.config do |i|
   i.set_icon :main_nav, :cogs
 
   i.set_icon User, :user
-  i.set_icon BpTest, :cubes
+  i.set_icon BpTest, :cubes # BOILERPLATE_ONLY
 end
 
 module IconHelper
