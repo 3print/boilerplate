@@ -11,6 +11,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Auth
 gem 'devise'
 gem 'devise-i18n'
+gem 'devise_masquerade'
 gem 'pundit'
 gem 'createsend'
 

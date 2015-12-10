@@ -8,6 +8,8 @@ fr:
   'yes': Oui
   'no': Non
   user_name: '%{first_name} %{last_name}'
+  masqueraded: '<small>Connecté en tant que</small><br/><span>%{user}</span>'
+  reverse_masquerade: 'Quitter le mode mascarade'
 
   errors:
     toggle: "Impossible de réaliser l'action demandée"

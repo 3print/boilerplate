@@ -110,6 +110,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     devise-i18n (0.12.1)
+    devise_masquerade (0.1.7)
+      devise (>= 2.1.0)
+      railties (>= 3.0)
     diff-lcs (1.2.5)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
@@ -520,6 +523,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   devise-i18n
+  devise_masquerade
   enum_help
   exception_notification
   factory_girl_rails

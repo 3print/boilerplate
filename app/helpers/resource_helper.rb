@@ -52,8 +52,8 @@ module ResourceHelper
 
   def masquerade_proc
     resource_field_proc :masquerade do |item|
-      s = icon('sign-in')
-      s += 'actions.masquerade'.t
+      s = icon('user-secret')
+      s += "<span class='text'>#{'actions.masquerade'.t}</span>".html_safe
       link_to s, user_masquerade_path(item), class: 'btn btn-warning btn-block'
     end
   end

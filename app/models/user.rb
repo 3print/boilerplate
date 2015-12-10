@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
     self.avatar_meta = nil if avatar_meta.is_a?(String)
   end
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :masqueradable,
          :recoverable, :rememberable, :trackable, :validatable
 
   def name

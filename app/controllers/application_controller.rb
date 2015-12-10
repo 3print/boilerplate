@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :access_denied
 
+  before_filter :masquerade_user!
+
   before_filter do
     # there MUST be a cleaner way :/
     if Rails.env.development?

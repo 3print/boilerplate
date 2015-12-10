@@ -48,6 +48,7 @@ fr:
     update: Enregistrer
     validate: Valider
     view_all: Voir tout
+    masquerade: Mascarade
 
   admin:
     actions: *actions

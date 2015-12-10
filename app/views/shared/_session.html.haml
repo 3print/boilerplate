@@ -20,14 +20,25 @@
           = icon :cog
           %span.text= 'actions.edit_profile'.t
 
-      %li
-        = link_to destroy_user_session_path do
-          = icon 'sign-out'
-          %span.text= 'actions.sign_out'.t
+      - if user_masquerade?
+        %li
+          = link_to back_user_masquerade_index_path do
+            = icon 'sign-out'
+            %span.text= 'reverse_masquerade'.t
+
+      - else
+        %li
+          = link_to destroy_user_session_path, method: :delete do
+            = icon 'sign-out'
+            %span.text= 'actions.sign_out'.t
 
     .session
-      = link_to admin_user_path(current_user) do
-        %span.text= current_user.name
+      - if user_masquerade?
+        %span.text.masqueraded!= 'masqueraded'.t user: current_user.name
+      - else
+        = link_to admin_user_path(current_user) do
+          %span.text= current_user.name
+
       .details
         - if current_user.admin?
           .label.label-warning= "roles.#{current_user.role}".t
