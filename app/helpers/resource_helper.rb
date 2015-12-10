@@ -1,5 +1,4 @@
 module ResourceHelper
-
   def resource
     controller.resource
   end
@@ -12,20 +11,46 @@ module ResourceHelper
     controller.resource_class
   end
 
-  def resource_field_proc(label, &block)
-    proc = Proc.new(&block)
-    mod = Module.new do
-      def to_s
-        @label.to_s
-      end
+  def admin_resource_label_proc
+    resource_field_proc :resource_label do |item|
+      link_to resource_label_for(item), [:admin, item]
+    end
+  end
 
-      def to_sym
-        :"#{@label.to_s}"
+  def admin_resource_actions_proc(*actions)
+    def resolve_url(action, item)
+      case action.to_s
+      when 'update' then [:admin, item]
+      when 'create' then [:admin, item.class]
+      when 'index' then [:admin, item.class]
+      when 'destroy' then [:admin, item]
+      when 'show' then [:admin, item]
+      when 'new' then [:new, :admin, singular]
+      else
+        [action.to_sym, :admin, item]
       end
     end
-    proc.send(:instance_variable_set, :@label, label)
-    proc.send(:extend, mod)
-    proc
+    resource_field_proc :actions do |item|
+      "<div class='btn-group'>#{actions.map do |a|
+        if a.is_a?(Hash)
+          a.map do |k,v|
+            label = icon_and_text("actions.#{k}".t, icon_name_for(k))
+
+            if v.is_a?(Hash)
+              link_to label, resolve_url(k, item), {class: "btn btn-#{classname_for_action(k)}"}.merge(v)
+            elsif v.is_a?(Symbol)
+              link_to label, send(v, item), {class: "btn btn-#{classname_for_action(k)}"}
+            else
+              link_to label, v, {class: "btn btn-#{classname_for_action(k)}"}
+            end
+          end
+        else
+          label = icon_and_text("actions.#{a}".t, icon_name_for(a))
+          link_to label, resolve_url(a, item), class: "btn btn-#{classname_for_action(a)}"
+        end
+      end.flatten.compact.join
+      }</div>".html_safe
+    end
   end
 
   def resource_label_proc
@@ -35,18 +60,6 @@ module ResourceHelper
   def resource_link_proc
     resource_field_proc :resource_label do |item|
       link_to resource_label_for(item), [item]
-    end
-  end
-
-  def admin_resource_label_proc
-    resource_field_proc :resource_label do |item|
-      link_to resource_label_for(item), [:admin, item]
-    end
-  end
-
-  def admin_resource_formats_proc
-    resource_field_proc :resource_label do |item|
-      item.formats.to_a.to_sentence
     end
   end
 
@@ -66,12 +79,6 @@ module ResourceHelper
     end
   end
 
-  def resource_actions_proc(label, path)
-    resource_field_proc :resource_label do |item|
-      link_to label, path + [item]
-    end
-  end
-
   def resource_email_proc
     resource_field_proc :email do |item| mail_to item.email end
   end
@@ -86,6 +93,22 @@ module ResourceHelper
     resource_field_proc :user_card do |item|
       render partial: 'shared/user_card', locals: {user: item}
     end
+  end
+
+  def resource_field_proc(label, &block)
+    proc = Proc.new(&block)
+    mod = Module.new do
+      def to_s
+        @label.to_s
+      end
+
+      def to_sym
+        :"#{@label.to_s}"
+      end
+    end
+    proc.send(:instance_variable_set, :@label, label)
+    proc.send(:extend, mod)
+    proc
   end
 
   def resource_label_for resource
@@ -104,9 +127,5 @@ module ResourceHelper
 
   def resource_label
     resource_label_for resource
-  end
-
-  def file_uploader field_name, value, options={}
-    render partial: 'shared/file_upload', locals: options.update(field_name: field_name, value: value)
   end
 end

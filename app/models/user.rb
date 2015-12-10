@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
 
   paginates_per 10
 
-  add_to_dashboard size: 1, weight: 2
+  add_to_dashboard size: 1, weight: 2, columns: [:user_card, actions: [:edit, masquerade: :user_masquerade_path, destroy: {method: :delete}]]
 
   validates :email, :first_name, :last_name, presence: true
   validates :password, :password_confirmation, presence: true, if: :password_required?

@@ -33,13 +33,26 @@
         :ruby
           url = [:admin, klass]
 
+          def get_proc(c, *args)
+            try(:"admin_resource_#{c}_proc", *args) ||
+            try(:"resource_#{c}_proc", *args) ||
+            try(:"#{c}_proc", *args) ||
+            try(c, *args)
+          end
+
           options = {
             columns: opts[:columns].map { |c|
-              try(:"admin_resource_#{c}_proc") || try(:"resource_#{c}_proc") || try(:"#{c}_proc") || try(c)
-            },
+              if c.is_a?(Hash)
+                c.map do |k,v|
+                  get_proc(k, *v)
+                end
+              else
+                get_proc(c)
+              end
+            }.flatten.compact,
           }.reverse_merge(opts)
 
-        .panel.panel-default
+        .panel.panel-default{class: size == 1 && 'short-actions'}
           .panel-heading
             = collection_counter(scope)
             = icon_for(klass)
