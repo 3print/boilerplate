@@ -1,0 +1,5 @@
+- first_name: Admin
+  last_name: BoilerPlate
+  email: admin@boilerplate.com
+  password: adminboilerplate
+  password_confirmation: adminboilerplate
