@@ -13,6 +13,9 @@ fr:
 
   errors:
     toggle: "Impossible de réaliser l'action demandée"
+    not_found:
+      title: "Erreur 404"
+      content: "La page demandée n'existe pas"
 
   roles:
     admin: Admin

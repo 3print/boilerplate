@@ -21,4 +21,10 @@ Rails.application.routes.draw do
 
     resources :signed_urls, only: :index
   end
+
+  get "/404", to: "errors#routing"
+  post "/404", to: "errors#routing"
+  put "/404", to: "errors#routing"
+  patch "/404", to: "errors#routing"
+  delete "/404", to: "errors#routing"
 end

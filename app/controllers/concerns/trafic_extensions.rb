@@ -10,7 +10,7 @@ module TraficExtensions
 
   included do
     rescue_from ActiveRecord::RecordInvalid, with: :handle_invalid_record
-    rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
+    rescue_from ActiveRecord::RecordNotFound, with: :render_404
   end
 
   [:new, :show, :edit].each do |name|
@@ -69,7 +69,7 @@ module TraficExtensions
     end
   end
 
-  def handle_record_not_found
+  def render_404
     respond_to do |format|
       format.html { render 'shared/404', status: :not_found }
       format.json { render json: { status: :not_found }, status: 404 }
