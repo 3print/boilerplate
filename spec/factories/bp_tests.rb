@@ -18,10 +18,13 @@
 
 FactoryGirl.define do
   factory :bp_test do
-    image "MyString"
-    int 1
-    json '{"string": "MyString"}'
-    markdown "MyText"
-    text "MyText"
+    image { fixture_file_upload('/files/sumo.png') }
+    pdf { fixture_file_upload('/files/sumo.pdf') }
+    int { rand(10) }
+    json { JSON.dump({"string": Faker::Lorem.sentence}) }
+    markdown { Faker::Lorem.paragraph }
+    text { Faker::Lorem.paragraph }
+    enum { 'foo' }
+    validated_at { Time.now }
   end
 end
