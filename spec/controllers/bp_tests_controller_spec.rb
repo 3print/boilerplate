@@ -1,4 +1,3 @@
-require 'rails_helper'
 
 describe BpTestsController do
   describe 'GET index' do

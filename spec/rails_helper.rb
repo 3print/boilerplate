@@ -1,10 +1,11 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
-require 'spec_helper'
 require 'typographic_cleaner'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'shoulda-matchers'
+require 'faker'
+require 'uuidtools'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -26,6 +27,14 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
+
+module ActionDispatch::TestProcess
+  def fixture_path
+    File.join(Rails.root, 'spec', 'fixtures')
+  end
+end
+
+include ActionDispatch::TestProcess
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -51,6 +60,33 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  config.expect_with :rspec do |expectations|
+    # This option will default to `true` in RSpec 4. It makes the `description`
+    # and `failure_message` of custom matchers include text for helper methods
+    # defined using `chain`, e.g.:
+    # be_bigger_than(2).and_smaller_than(4).description
+    #   # => "be bigger than 2 and smaller than 4"
+    # ...rather than:
+    #   # => "be bigger than 2"
+    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
+
+  # rspec-mocks config goes here. You can use an alternate test double
+  # library (such as bogus or mocha) by changing the `mock_with` option here.
+  config.mock_with :rspec do |mocks|
+    # Prevents you from mocking or stubbing a method that does not exist on
+    # a real object. This is generally recommended, and will default to
+    # `true` in RSpec 4.
+    mocks.verify_partial_doubles = true
+  end
+
+  config.filter_run :focus
+  config.run_all_when_everything_filtered = true
+  config.order = :random
+  # config.profile_examples = 10
+
+  config.alias_it_should_behave_like_to :it_should, "it should"
+
   root = Rails.root
   require root.join('spec/support/helpers/base_helper.rb')
   Dir[root.join("spec/support/matchers/*.rb")].each {|f| require f }
@@ -62,6 +98,22 @@ RSpec.configure do |config|
 
   TPrint.log_level = 2
 
+  Kernel.srand config.seed
+
+  module Faker
+    class Base
+      class << self
+        alias_method :old_fetch, :fetch
+        def fetch(*args)
+          res = old_fetch(*args)
+          unless args.include? "internet.domain_suffix"
+            res += "-#{UUIDTools::UUID.timestamp_create.to_s[0..50]}" if res.is_a?(String)
+          end
+          res
+        end
+      end
+    end
+  end
 end
 
 Shoulda::Matchers.configure do |config|
@@ -70,4 +122,3 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
-

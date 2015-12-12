@@ -1,4 +1,3 @@
-require 'rails_helper'
 
 describe TypographicCleaner do
   before { I18n.locale = :en }
