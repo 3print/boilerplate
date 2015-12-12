@@ -1,4 +1,4 @@
-require 'tprint/statuses'
+require 'statuses'
 
 RSpec::Matchers.define :have_role do |role|
   match do |actual|

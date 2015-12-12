@@ -1,14 +1,14 @@
-require 'tprint/statuses'
+require 'statuses'
 
 RSpec::Matchers.define :respond_by do |expected|
   label = nil
   status = nil
   if expected.is_a? Symbol
-    status = TPrint::Statuses.find_status(expected)
+    status = Statuses.find_status(expected)
     label = expected
   else
     status = expected
-    label = TPrint::Statuses.find_label(expected)
+    label = Statuses.find_label(expected)
   end
 
   match do |actual|
@@ -19,7 +19,7 @@ RSpec::Matchers.define :respond_by do |expected|
   failure_message do |actual|
     if is_valid_response? actual
 
-      "expected that #{TPrint::Statuses.find_label actual.response_code} (#{actual.response_code}) would respond by #{label} (#{status}})"
+      "expected that #{Statuses.find_label actual.response_code} (#{actual.response_code}) would respond by #{label} (#{status}})"
     else
       "expected that #{actual} would respond by #{label} (#{status})"
     end
@@ -27,7 +27,7 @@ RSpec::Matchers.define :respond_by do |expected|
 
   failure_message_when_negated do |actual|
     if is_valid_response? actual
-      "expected that #{TPrint::Statuses.find_label actual.response_code} (#{actual.response_code}) would not respond by #{label} (#{status}})"
+      "expected that #{Statuses.find_label actual.response_code} (#{actual.response_code}) would not respond by #{label} (#{status}})"
     else
       "expected that #{actual} would not respond by #{label} (#{status})"
     end
