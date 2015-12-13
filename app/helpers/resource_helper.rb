@@ -17,19 +17,21 @@ module ResourceHelper
     end
   end
 
-  def admin_resource_actions_proc(*actions)
+  def resource_actions_proc(*actions)
     def resolve_url(action, item)
+      base = controller.is_admin? ? [:admin] : []
       case action.to_s
-      when 'update' then [:admin, item]
-      when 'create' then [:admin, item.class]
-      when 'index' then [:admin, item.class]
-      when 'destroy' then [:admin, item]
-      when 'show' then [:admin, item]
-      when 'new' then [:new, :admin, singular]
+      when 'update' then base + [item]
+      when 'create' then base + [item.class]
+      when 'index' then base + [item.class]
+      when 'destroy' then base + [item]
+      when 'show' then base + [item]
+      when 'new' then [:new] + base + [singular]
       else
-        [action.to_sym, :admin, item]
+        [action.to_sym] + base + [item]
       end
     end
+
     resource_field_proc :actions do |item|
       "<div class='btn-group'>#{actions.map do |a|
         if a.is_a?(Hash)
