@@ -1,12 +1,59 @@
+SKIPPED_COLUMNS = [
+  :created_at, :updated_at, :created_on, :updated_on,
+  :lock_version, :version,
+
+  # Devise
+  :encrypted_password, :reset_password_token, :reset_password_sent_at,
+  :last_sign_in_at, :last_sign_in_ip,
+  :current_sign_in_at, :current_sign_in_ip,
+  :remember_created_at, :approved_at,
+
+  # CarrierWave Meta
+  :avatar_meta, :image_meta,
+
+  # Misc
+  :avatar_tmp, :image_tmp,
+
+  # Syncables
+  :uuid
+]
+
 module ModelsHelper
-  def collection_counter(collection)
-    count = collection.size
-    content_tag(:div, class: 'label label-info tip-left pull-right', title: 'tips.models_count'.t(count: count, singular: "models.#{collection.klass.name.underscore}".t.downcase, plural: "models.#{collection.klass.name.pluralize.underscore}".t.downcase)) do
-        concat(count)
+  def skipped_columns
+    SKIPPED_COLUMNS
+  end
+
+  def default_columns_for_object(model)
+    cols = association_columns(model, :belongs_to)
+    cols += content_columns(model)
+    cols -= skipped_columns
+    cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
+    cols += model.class::EXTRA_COLUMNS.map(&:intern) if model.class::EXTRA_COLUMNS.present? rescue false
+
+    cols.compact
+  end
+
+  def association_columns(object, *by_associations)
+    if object.present? && object.class.respond_to?(:reflections)
+      object.class.reflections.collect do |name, association_reflection|
+        if by_associations.present?
+          if by_associations.include?(association_reflection.macro) && association_reflection.options[:polymorphic] != true
+            name
+          end
+        else
+          name
+        end
+      end.compact
+    else
+      []
     end
   end
 
-
+  def content_columns(object)
+    # TODO: NameError is raised by Inflector.constantize. Consider checking if it exists instead.
+    klass = object.class
+    return [] unless klass.respond_to?(:content_columns)
+    klass.content_columns.collect { |c| c.name.to_sym }.compact
   end
 
   def show_field(col, options={})
@@ -40,6 +87,22 @@ module ModelsHelper
   end
 
   # Collection
+
+  def collection_class= klass
+    @collection_class = klass
+  end
+
+  def collection_class
+    @collection_class || self.resource_class
+  end
+
+  def collection_counter(collection)
+    count = collection.size
+    content_tag(:div, class: 'label label-info tip-left pull-right', title: 'tips.models_count'.t(count: count, singular: "models.#{collection.klass.name.underscore}".t.downcase, plural: "models.#{collection.klass.name.pluralize.underscore}".t.downcase)) do
+        concat(count)
+    end
+  end
+
   def models_list(collection, options={}, &block)
     columns = options[:columns] || [:id, resource_label_proc]
 
@@ -92,14 +155,6 @@ module ModelsHelper
         end)
       end
     end
-  end
-
-  def collection_class= klass
-    @collection_class = klass
-  end
-
-  def collection_class
-    @collection_class || self.resource_class
   end
 
   def collection collection, options={}

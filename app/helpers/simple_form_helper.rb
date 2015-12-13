@@ -1,25 +1,4 @@
-module SimpleFormHelper
-  # inputs_for excluded fields
-  SKIPPED_COLUMNS = [
-    :created_at, :updated_at, :created_on, :updated_on,
-    :lock_version, :version,
-
-    # Devise
-    :encrypted_password, :reset_password_token, :reset_password_sent_at,
-    :last_sign_in_at, :last_sign_in_ip,
-    :current_sign_in_at, :current_sign_in_ip,
-    :remember_created_at, :approved_at,
-
-    # CarrierWave Meta
-    :avatar_meta, :image_meta,
-
-    # Misc
-    :avatar_tmp, :image_tmp,
-
-    # Syncables
-    :uuid
-  ]
-
+module SimpleFormHelper  
   def initialize(*args)
     super *args
 
@@ -70,7 +49,7 @@ module SimpleFormHelper
   def inputs_for(model, form_builder)
     cols = []
     cols += content_columns(model)
-    cols -= SKIPPED_COLUMNS
+    cols -= skipped_columns
     cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
     cols += model.class::EXTRA_COLUMNS.map(&:intern) if model.class::EXTRA_COLUMNS.present? rescue false
 
@@ -104,39 +83,4 @@ module SimpleFormHelper
 
     res.html_safe
   end
-
-  def association_columns(object, *by_associations)
-    if object.present? && object.class.respond_to?(:reflections)
-      object.class.reflections.collect do |name, association_reflection|
-        if by_associations.present?
-          if by_associations.include?(association_reflection.macro) && association_reflection.options[:polymorphic] != true
-            name
-          end
-        else
-          name
-        end
-      end.compact
-    else
-      []
-    end
-  end
-
-  def default_columns_for_object(model)
-    cols = association_columns(model, :belongs_to)
-    cols += content_columns(model)
-    cols -= SKIPPED_COLUMNS
-    cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
-    cols += model.class::EXTRA_COLUMNS.map(&:intern) if model.class::EXTRA_COLUMNS.present? rescue false
-
-    cols.compact
-  end
-
-  def content_columns(object)
-    # TODO: NameError is raised by Inflector.constantize. Consider checking if it exists instead.
-    klass = object.class
-    return [] unless klass.respond_to?(:content_columns)
-    klass.content_columns.collect { |c| c.name.to_sym }.compact
-  end
-
-
 end
