@@ -1,4 +1,4 @@
-module TprintExtensions
+module Displayable
   extend ActiveSupport::Concern
 
   included do
