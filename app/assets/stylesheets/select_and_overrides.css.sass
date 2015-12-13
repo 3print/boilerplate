@@ -68,7 +68,11 @@
 
 .has-error
   .select2-choice, .select2-choices
-    border-color: #B94A48 !important
+    border-color: $color_red !important
+
+.has-success
+  .select2-choice, .select2-choices
+    border-color: $color_green !important
 
 .select2-disabled
   .select2-choice
@@ -122,9 +126,9 @@
   // color: $gray-light
   margin: 0
 
-.select.has-feedback
+.select.has-feedback, .enum.has-feedback
   .form-control-feedback
-    right: 6px
+    right: 8px
   .select2-container
     border: none
     background: transparent

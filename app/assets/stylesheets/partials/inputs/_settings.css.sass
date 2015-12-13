@@ -18,3 +18,20 @@
 
       tbody tr:last-child td
         border-bottom-color: $color_red
+
+  &.has-success
+    .table
+      border-color: $color_green
+
+      th, td
+        &:first-child
+          border-left-color: $color_green
+
+        &:last-child
+          border-right-color: $color_green
+
+        .form-control, .select2-choice
+          border-radius: 3px
+
+      tbody tr:last-child td
+        border-bottom-color: $color_green
