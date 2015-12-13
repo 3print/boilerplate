@@ -48,6 +48,10 @@ class User < ActiveRecord::Base
     self.avatar_meta = nil if avatar_meta.is_a?(String)
   end
 
+  before_validation do
+    self.encrypted_password = nil if password != password_confirmation
+  end
+
   devise :database_authenticatable, :registerable, :masqueradable,
          :recoverable, :rememberable, :trackable, :validatable
 
