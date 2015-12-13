@@ -1,5 +1,5 @@
 - in_admin do
-  = contextual_partial 'instances_header_pills_before', locals: {resource: resource}
+  = contextual_partial 'instances_header_before_pills', locals: {resource: resource}
 
   - if can?(:edit, resource) && controller.route_exists_for?(:edit)
     - pill controller.resource_path(:edit), class: 'btn-default' do
@@ -11,7 +11,7 @@
       = icon_for(:destroy)
       %span.text= 'admin.actions.destroy'.t
 
-  = contextual_partial 'instances_header_pills_after', locals: {resource: resource}
+  = contextual_partial 'instances_header_after_pills', locals: {resource: resource}
 
 - controller_breadcrumb
 
