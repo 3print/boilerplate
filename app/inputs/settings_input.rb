@@ -47,6 +47,7 @@ class SettingsInput < SimpleForm::Inputs::TextInput
       :date,
       :date_range
     ]
+    placeholder = 'simple_form.placeholders.type'.t
 
     row = '<tr>'
 
@@ -54,7 +55,7 @@ class SettingsInput < SimpleForm::Inputs::TextInput
     row += "<input type=\"hidden\" name=\"#{class_name}[#{attribute_name}][#{field}]\" value=\"#{value}\"></input>"
     row += "<input type=\"text\" value=\"#{field}\" class=\"form-control\"></input>"
     row += '</td>'
-    row += "<td><select data-original-value=\"#{value}\" data-original-type=\"#{initial_type}\" style=\"width: 100%\">"
+    row += "<td><select data-original-value=\"#{value}\" data-original-type=\"#{initial_type}\" style=\"width: 100%\" placeholder=\"#{placeholder}\">"
 
     ([''] + types).each do |type|
       selected = type.to_s == initial_type.to_s

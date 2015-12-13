@@ -25,6 +25,7 @@ fr:
       pwdcalc_simple: '••••••••'
       tel: 'par ex: 06 00 00 00 00'
       integer: 'Saisissez une valeur'
+      type: 'Choisissez une option'
 
     hints:
       user:
