@@ -34,19 +34,23 @@ module ResourceHelper
       "<div class='btn-group'>#{actions.map do |a|
         if a.is_a?(Hash)
           a.map do |k,v|
-            label = icon_and_text("actions.#{k}".t, icon_name_for(k))
+            if can? k, item
+              label = icon_and_text("actions.#{k}".t, icon_name_for(k))
 
-            if v.is_a?(Hash)
-              link_to label, resolve_url(k, item), {class: "btn btn-#{classname_for_action(k)}"}.merge(v)
-            elsif v.is_a?(Symbol)
-              link_to label, send(v, item), {class: "btn btn-#{classname_for_action(k)}"}
-            else
-              link_to label, v, {class: "btn btn-#{classname_for_action(k)}"}
+              if v.is_a?(Hash)
+                link_to label, resolve_url(k, item), {class: "btn btn-#{classname_for_action(k)}"}.merge(v)
+              elsif v.is_a?(Symbol)
+                link_to label, send(v, item), {class: "btn btn-#{classname_for_action(k)}"}
+              else
+                link_to label, v, {class: "btn btn-#{classname_for_action(k)}"}
+              end
             end
           end
         else
-          label = icon_and_text("actions.#{a}".t, icon_name_for(a))
-          link_to label, resolve_url(a, item), class: "btn btn-#{classname_for_action(a)}"
+          if can? a, item
+            label = icon_and_text("actions.#{a}".t, icon_name_for(a))
+            link_to label, resolve_url(a, item), class: "btn btn-#{classname_for_action(a)}"
+          end
         end
       end.flatten.compact.join
       }</div>".html_safe
