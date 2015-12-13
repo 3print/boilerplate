@@ -3,7 +3,7 @@ module SimpleForm
     module StateIcon
       def state_icon(wrapper_options = nil)
         @state_icon ||= begin
-          if object.present? && object.validated?
+          if object.present? && object.was_validated?
             if has_errors?
               template.icon(:times)
             else
