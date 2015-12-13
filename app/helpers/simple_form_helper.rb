@@ -41,24 +41,20 @@ module SimpleFormHelper
 
   def default_actions(options={}, &block)
     capture_haml do
-      haml_tag 'div', class: 'panel-footer text-right' do
+      haml_tag 'div', class: 'panel-footer' do
         haml_tag 'fieldset', class: 'form-actions' do
-          haml_tag 'div', class: 'btn-group' do
+          haml_tag 'button', class: "btn btn-success #{options[:class]}" do
+            haml_tag 'span', class: icon_class(options[:icon] || 'check')
+            haml_concat options[:submit] || "actions.submit".t
+          end
 
-            if request.referrer && !options[:no_cancel]
-              haml_tag 'a', href: request.referrer, class: "btn btn-danger #{options[:class]}" do
-                haml_tag 'span', class: icon_class(options[:cancel_icon] || 'times')
-                haml_concat options[:cancel] || 'actions.cancel'.t
-              end
+          haml_concat capture_haml(&block) if block_given?
+
+          if request.referrer && !options[:no_cancel]
+            haml_tag 'a', href: request.referrer, class: "btn btn-danger #{options[:class]}" do
+              haml_tag 'span', class: icon_class(options[:cancel_icon] || 'times')
+              haml_concat options[:cancel] || 'actions.cancel'.t
             end
-
-            haml_concat capture_haml(&block) if block_given?
-
-            haml_tag 'button', class: "btn btn-success #{options[:class]}" do
-              haml_tag 'span', class: icon_class(options[:icon] || 'check')
-              haml_concat options[:submit] || "actions.submit".t
-            end
-
           end
         end
       end
