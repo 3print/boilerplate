@@ -7,3 +7,6 @@ widgets.define 'navigation_highlight', (nav) ->
     if active?
       active.classList.add 'active'
       nav.classList.add 'has-active'
+
+      if (parent = active.parentNode.parentNode).nodeName is 'LI'
+        parent.classList.add 'active'
