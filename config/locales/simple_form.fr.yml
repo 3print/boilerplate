@@ -21,6 +21,7 @@ fr:
       enum: 'Choisissez une option'
       text: 'Saisissez votre texte'
       markdown: 'Saisissez votre texte'
+      password: '••••••••'
       tel: 'par ex: 06 00 00 00 00'
 
 

@@ -1,0 +1,9 @@
+fr:
+  pwdcalc:
+    too_short: "Le mot de passe doit contenir au moins %{minimum} caractères."
+    weak: "faible"
+    fair: "moyen"
+    good: "bon"
+    strong: "fort"
+    very_strong: "parfait!"
+    dictionary_word: "Le mot de passe est trop évident."

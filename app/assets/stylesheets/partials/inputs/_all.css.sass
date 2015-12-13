@@ -3,6 +3,7 @@
 @import "partials/inputs/file"
 @import "partials/inputs/markdown"
 @import "partials/inputs/settings"
+@import "pwdcalc"
 
 =sharp_corner_inputs
   .input-group-addon
@@ -55,6 +56,30 @@
 
 .controls
   position: relative
+
+.password-strength-meter
+  margin: 0
+  position: absolute
+  display: inline-block
+  top: 8px
+  right: 70px
+
+  .has-error &, .has-error &
+    right: 90px
+
+.pwdcalc-score
+  top: 11px
+  height: 13px
+  right: 10px
+
+  b
+    +transition(width 0.2s, background 0.3s)
+
+  .has-error &, .has-error &
+    right: 32px
+
+.pwdcalc-hint
+  display: none
 
 input, textarea
   width: 100%

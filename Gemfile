@@ -14,6 +14,7 @@ gem 'devise-i18n'
 gem 'devise_masquerade'
 gem 'pundit'
 gem 'createsend'
+gem 'pwdcalc'
 
 # Database
 gem 'pg'
