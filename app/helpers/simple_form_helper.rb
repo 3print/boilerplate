@@ -86,7 +86,7 @@ module SimpleFormHelper
       elsif partial_exist?(field_partial)
         res << render(partial: field_partial, locals: { model: model, col: col, form: form_builder }).to_s
       else
-        res << form_builder.input(col, placeholder: placeholder_for(model, col, form_builder), label: "#{model.class.name.underscore}.#{col}".tmf)
+        res << form_builder.input(col, label: "#{model.class.name.underscore}.#{col}".tmf)
       end
     end
 
@@ -98,23 +98,11 @@ module SimpleFormHelper
       if val
         res << form_builder.hidden_field(model.class.reflections[col].foreign_key, value: val.id)
       else
-        res << form_builder.association(col, placeholder: placeholder_for(model, col, form_builder), label: "#{model.class.name.underscore}.#{col}".tmf)
+        res << form_builder.association(col, label: "#{model.class.name.underscore}.#{col}".tmf)
       end
     end
 
     res.html_safe
-  end
-
-  def placeholder_for(model, name, f)
-    type = f.send(:default_input_type, name, model.class.columns_hash[name], {})
-
-    s = I18n.t("simple_form.placeholders.#{model.class.name.underscore}.#{name}")
-
-    if s =~ /translation missing/
-      s = I18n.t("simple_form.placeholders.#{type}")
-    end
-
-    s
   end
 
   def association_columns(object, *by_associations)
