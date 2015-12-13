@@ -11,7 +11,7 @@
 #  text         :text
 #  created_at   :datetime
 #  updated_at   :datetime
-#  enum         :string(255)
+#  enum         :integer
 #  approved_at  :datetime
 #  validated_at :datetime
 #
