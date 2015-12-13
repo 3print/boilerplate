@@ -66,7 +66,7 @@ helper. Once pills have been displayed, they are removed from the pills pool, an
 
 You can also use the `toggle_pill` helper, which will create pills used to toggle a given attribute on a model. This is intended to be used with the `attr_toggle` and `toggle_action` in the Model and the Controller. This helper is akin to the `toggle_actions` helper which generates simple buttons with the same purpose.
 
-See [`app/views/admin/bp_tests/_instances_header_pills_before.html.haml`](../app/views/admin/bp_tests/_instances_header_pills_before.html.haml) and [`app/views/admin/bp_tests/_list_item_actions_after.html.haml`](../app/views/admin/bp_tests/_list_item_actions_after.html.haml) for concrete examples of pills usage.
+See [`app/views/admin/bp_tests/_instances_header_before_pills.html.haml`](../app/views/admin/bp_tests/_instances_header_before_pills.html.haml) and [`app/views/admin/bp_tests/_list_item_after_actions.html.haml`](../app/views/admin/bp_tests/_list_item_after_actions.html.haml) for concrete examples of pills usage.
 
 #### Breadcrumb
 
