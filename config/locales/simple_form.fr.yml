@@ -22,6 +22,7 @@ fr:
       text: 'Saisissez votre texte'
       markdown: 'Saisissez votre texte'
       password: '••••••••'
+      pwdcalc_simple: '••••••••'
       tel: 'par ex: 06 00 00 00 00'
 
 
