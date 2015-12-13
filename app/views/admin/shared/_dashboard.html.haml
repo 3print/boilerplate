@@ -62,7 +62,7 @@
 
           = models_list scope, options
 
-          - if can?(:create, klass) && (new_url = url_for([:new, admin, klass.name.underscore.downcase].compact) rescue nil)
+          - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.name.underscore.downcase].compact) rescue nil)
             .panel-footer
               = link_to new_url, class: 'btn btn-success' do
                 = icon_for(:create)
@@ -71,7 +71,7 @@
       - else
         = widget_box title, class: "panel-default #{size == 1 && 'short-actions'}", before_title: collection_counter(klass.where(nil)) do
           = collection scope, resource_class: klass, no_pagination: true
-          - if can?(:create, klass) && (new_url = url_for([:new, admin, klass.name.underscore.downcase].compact) rescue nil)
+          - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.name.underscore.downcase].compact) rescue nil)
             .panel-footer
               = link_to new_url, class: 'btn btn-success' do
                 = icon_for(:create)
