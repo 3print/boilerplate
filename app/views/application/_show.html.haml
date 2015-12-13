@@ -1,14 +1,14 @@
 - columns = default_columns_for_object(resource)
 
 = widget_box 'labels.informations'.t, :info, content_class: 'nopadding' do
-  = render_partial_for_user 'before_show_content'
+  = render_partial_for_user 'show_before_content'
   %ul.list-group.nomargin
     - columns.each do |col|
       %li.list-group-item= show_field(col)
 
-    = render_partial_for_user 'extra_show_fields'
+    = render_partial_for_user 'show_extra_fields'
 
-  = render_partial_for_user 'after_show_content'
+  = render_partial_for_user 'show_after_content'
 
 - content_for :scripts do
   = javascript_include_tag 'highlight.pack'
