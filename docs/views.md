@@ -76,3 +76,8 @@ The `breadcrumb` helper will produce two types of entries depending on the amoun
 
 - If only one argument is passed, the resulting breadcrumb entry won't be rendered as a link, the provided argument will be used as label.
 - If two arguments are passed, the resulting breadcrumb entry will be rendered as a link. The first argument will be used as label and the second will be used to create the link's url. It can be a string or an array as supported by the `polymorphic_url` helper from Rails.
+
+#### Icons
+
+Several helpers are available to ease the work with icons in UI. By default the helper is configured to work with [FontAwesome](http://fontawesome.io/) but it can be easily modified to support pretty every icon font out-there.
+These helpers are located in the [`app/helpers/icon_helper` file](../app/helpers/icon_helper.rb).
