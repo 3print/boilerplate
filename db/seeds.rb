@@ -11,6 +11,7 @@ seed_files.each do |seed_file|
     begin
       model = model_class.new(seed)
       model.save!
+      p "model #{model} created successfully"
     rescue => e
       if model.present?
         p model
