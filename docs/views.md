@@ -50,14 +50,14 @@ The actions for each model are rendered by the `_list_item_actions` partial that
 
 When rendering the view for a model the partial will use the `default_columns_for_object` function to define which field display in the list. This method will take every column and association of the model minus the ones listed in `SKIPPED_COLUMNS` array defined in the `ModelHelper` file.
 
-Then, for each columns the partial will call the `show_field` helper. This helper will try to render a model's field using the following strategy:
+Then, for each column the partial will call the `show_field` helper. This helper will try to render a model's field using the following strategy:
 
 1. If the `:as` option was set when calling the `show_field` method, the type specified in the option will be used to find a partial named `_show_<type>_field`.
 2. If a partial exist with a name such as `_show_<model_name>_<column>` it will be used to render the field.
 3. If the column has a display type specified using the `column_display_type` method, a partial named `_show_<type>_field` will be used to render this field.
 4. If the field is bound to an ActiveRecord column, the method will retrieve its type and use the `_show_<type>_field` partial to render the field
-5. If no type information exists for the field or if a partial cannot be found in the steps above and the field's value is an ActiveRecord model the `show_active_record_field` partial will be used
-6. If all the steps above failed, the `show_default_field` partial will be used.
+5. If no type information exists for the field or if a partial cannot be found in the steps above and the field's value is an ActiveRecord model the `_show_active_record_field` partial will be used
+6. If all the steps above failed, the `_show_default_field` partial will be used.
 
 #### Pills
 
@@ -79,5 +79,20 @@ The `breadcrumb` helper will produce two types of entries depending on the amoun
 
 #### Icons
 
-Several helpers are available to ease the work with icons in UI. By default the helper is configured to work with [FontAwesome](http://fontawesome.io/) but it can be easily modified to support pretty every icon font out-there.
+Several helpers are available to ease the work with icons in UI. By default the helper is configured to work with [FontAwesome](http://fontawesome.io/) but it can be easily modified to support pretty much every icon font out-there.
 These helpers are located in the [`app/helpers/icon_helper` file](../app/helpers/icon_helper.rb).
+
+Find below a quick description of these helpers:
+
+- `icon_class`: given a symbol or a string, it returns the class name of the corresponding icon, ie. `icon_class :user` returns `'fa fa-user'`.
+- `icon`: given a symbol or a string, it returns the HTML markup of the icon, ie. `icon :user` returns `<i class="fa fa-user"></i>`.
+- `icon_class_for`: this helper works using the `Iconic` module and returns the class name of the icon associated with the passed-in key.
+- `icon_for`: this helper works using the `Iconic` module and returns the HTML markup of the icon associated with the passed-in key.
+- `text_and_icon`: given a label string and an icon it returns the label wrapped in a `span` followed by the specified icon markup.
+- `icon_and_text`: given a label string and an icon it returns the label wrapped in a `span` preceded by the specified icon markup.
+
+##### Iconic
+
+The `Iconic` module acts as an icon store within a project. You can use it to associate an icon to any kind of object. For instance, using `Iconic.set_icon User, :user` will register the `user` icon to the `User` model class so that calling `icon User` returns `<i class="fa fa-user"></i>`.
+
+It is used in all the default views so that you only need to change the association between an action or a model and an icon in a single place and have it taking effect everywhere.
