@@ -17,5 +17,13 @@ module Iconic
     def get_icon(resource)
       @icons[resource] || @default_icon rescue nil
     end
+
+    def []= (resource, icon)
+      set_icon resource, icon
+    end
+
+    def [] (resource)
+      get_icon resource
+    end
   end
 end
