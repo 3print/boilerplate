@@ -1,4 +1,4 @@
-class Iconic
+module Iconic
   class << self
     def config
       yield self if block_given?

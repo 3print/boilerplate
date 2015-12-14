@@ -1,4 +1,4 @@
-class TypographicCleaner
+module TypographicCleaner
   class << self
     def clean (string, options={})
       ignored = []
