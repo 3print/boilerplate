@@ -1,4 +1,4 @@
-= nav_link_to admin_root_path, 'nav.admin.dashboard'.t, :home, icon_name_for(:dashboard)
-= nav_link_to admin_root_path, 'nav.admin.root'.t, :home, icon_name_for(:main_nav) do
-  = nav_link_to admin_users_path, 'nav.admin.users'.t, :users, icon_name_for(User)
-= nav_link_to admin_bp_tests_path, 'nav.admin.bp_tests'.t, :bp_tests, icon_name_for(BpTest) # BOILERPLATE_ONLY
+= nav_link_to admin_root_path, 'nav.admin.dashboard'.t, :home, icon_class_for(:dashboard)
+= nav_link_to admin_root_path, 'nav.admin.root'.t, :home, icon_class_for(:main_nav) do
+  = nav_link_to admin_users_path, 'nav.admin.users'.t, :users, icon_class_for(User)
+= nav_link_to admin_bp_tests_path, 'nav.admin.bp_tests'.t, :bp_tests, icon_class_for(BpTest) # BOILERPLATE_ONLY

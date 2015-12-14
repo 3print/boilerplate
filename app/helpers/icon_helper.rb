@@ -32,10 +32,10 @@ module IconHelper
   end
 
   def icon_for(o)
-    icon(icon_name_for(o))
+    icon(icon_class_for(o))
   end
 
-  def icon_name_for(o)
+  def icon_class_for(o)
     Iconic.get_icon(o)
   end
 

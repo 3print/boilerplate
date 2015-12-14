@@ -37,7 +37,7 @@ module ResourceHelper
         if a.is_a?(Hash)
           a.map do |k,v|
             if can? k, item
-              label = icon_and_text("actions.#{k}".t, icon_name_for(k))
+              label = icon_and_text("actions.#{k}".t, icon_class_for(k))
 
               if v.is_a?(Hash)
                 link_to label, resolve_url(k, item), {class: "btn btn-#{classname_for_action(k)}"}.merge(v)
@@ -50,7 +50,7 @@ module ResourceHelper
           end
         else
           if can? a, item
-            label = icon_and_text("actions.#{a}".t, icon_name_for(a))
+            label = icon_and_text("actions.#{a}".t, icon_class_for(a))
             link_to label, resolve_url(a, item), class: "btn btn-#{classname_for_action(a)}"
           end
         end
