@@ -35,6 +35,8 @@ The `collection` helper is called with the collection to render and an option Ha
 
 ##### Partials
 
+The `collection` helper will always use partials for the current collection's class first and will fallback to default ones if needed.
+
 The `_list` partial in itself only wraps the collection in a table and invokes the `_list_header` and then render the `_list_row` partial for each element in the collection.
 
 The list header will then render the table header row. By default, the helper creates a column for the id, the caption and the actions for the current model.
@@ -45,6 +47,24 @@ The list rows partial will render the same columns as the header, and uses the s
 The caption for each model can be extended using the `_list_item_(before|after)_details` partials.
 
 The actions for each model are rendered by the `_list_item_actions` partial that also can be extended using the `_list_item_(before|after)_actions` partials.
+
+#### Models List
+
+The `models_list` helper is similar to `collection` in that it will generates a table with a collection as input. The major difference lies in that the `models_list` doesn't works with partials and is most useful when you want to display a list of models but without having all the extra features provided by the `collection` helper.
+
+For instance, if in the `show` view of a model, you want to display models in a `has_many` association. Using the `collection` helper it will render a table with all the custom columns and actions defined by the partials for the associated model. Using `models_list` you'll be able to have a better control over the render of the list in this specific cast, at the cost of more verbosity.
+
+##### Options
+
+- `columns`: By default the helper will generate a table with two columns for the id of the model and a link to its admin page. By setting this option you can override this behavior. The array must contains objects responding to the `to_proc`, `to_s` and `to_sym` methods. The list helper will generate the column name based on these information. The `Proc` object itself will receive the item and should return the markup to use as the cell's content.
+
+  For instance, the default configuration of the `columns` option is defined as follow: `[:id, resource_label_proc]`
+
+  Many helpers are provided to help generating procs and can be found in the [`app/helpers/resource_proc_helper.rb` file](../app/helpers/resource_proc_helper.rb).
+
+- `per`, `limit`: To restrict the amount of items to display in the list. It defaults to `10` if not provided.
+- `no_pagination`: If there's more models in the collection than specified in the `per` or `limit` option the helper will generate a pagination for the list. This option, when set to `true`, will prevent the helper from generating the pagination.
+- `footer`: A string of HTML to append as a footer for the generated table. 
 
 #### Model Fields
 
