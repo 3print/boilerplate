@@ -64,7 +64,7 @@ For instance, if in the `show` view of a model, you want to display models in a 
 
 - `per`, `limit`: To restrict the amount of items to display in the list. It defaults to `10` if not provided.
 - `no_pagination`: If there's more models in the collection than specified in the `per` or `limit` option the helper will generate a pagination for the list. This option, when set to `true`, will prevent the helper from generating the pagination.
-- `footer`: A string of HTML to append as a footer for the generated table. 
+- `footer`: A string of HTML to append as a footer for the generated table.
 
 #### Model Fields
 
@@ -96,6 +96,12 @@ The `breadcrumb` helper will produce two types of entries depending on the amoun
 
 - If only one argument is passed, the resulting breadcrumb entry won't be rendered as a link, the provided argument will be used as label.
 - If two arguments are passed, the resulting breadcrumb entry will be rendered as a link. The first argument will be used as label and the second will be used to create the link's url. It can be a string or an array as supported by the `polymorphic_url` helper from Rails.
+
+#### Navigation
+
+The `nav_link_to` helper is used to generate the navigation bar visible in the admin header.
+
+See how it's used in the [`app/views/admin/shared/_nav.html.haml` file](../app/views/admin/shared/_nav.html.haml)
 
 #### Icons
 
