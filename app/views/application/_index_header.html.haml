@@ -8,7 +8,7 @@
       = icon_for(:create)
       %span.text= 'actions.create'.t
 
-= contextual_partial 'collection_header_before_pills', locals: {resource: resource}
+= contextual_partial 'collection_header_after_pills', locals: {resource: resource}
 
 - breadcrumb resource_class.t if resource_class
 
@@ -18,4 +18,4 @@
   = breadcrumbs
 
 - content_for :page_title do
-  = resource_class ? resource_class.t : 'EasyPLV  '
+  = resource_class ? resource_class.t : 'Boilerplate'
