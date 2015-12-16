@@ -1,4 +1,4 @@
-module SimpleFormHelper  
+module SimpleFormHelper
   def initialize(*args)
     super *args
 
@@ -64,6 +64,8 @@ module SimpleFormHelper
         res << render(partial: admin_field_partial, locals: { model: model, col: col, form: form_builder }).to_s
       elsif partial_exist?(field_partial)
         res << render(partial: field_partial, locals: { model: model, col: col, form: form_builder }).to_s
+      elsif col_type.present?
+        res << form_builder.input(col, as: col_type, label: "#{model.class.name.underscore}.#{col}".tmf)
       else
         res << form_builder.input(col, label: "#{model.class.name.underscore}.#{col}".tmf)
       end
