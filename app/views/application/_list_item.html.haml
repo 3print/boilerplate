@@ -1,9 +1,7 @@
 - if item.id.present?
   = contextual_partial 'list_item_before_details', locals: {item: item}
-  .item{class: item.class.name.underscore}
-    %span.name= link_to resource_label_for(item), controller.resource_path_for(item, :show)
-
-    = contextual_partial 'list_item_after_details', locals: {item: item}
+  = contextual_partial 'list_item_label', locals: {item: item}
+  = contextual_partial 'list_item_after_details', locals: {item: item}
 - else
   .item{class: item.class.name.underscore}
     %span.name= resource_label_for(item)
