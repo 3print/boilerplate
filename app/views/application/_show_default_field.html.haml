@@ -1,0 +1,2 @@
+%strong= "models.fields.#{controller.resource_name.singularize}.#{column}".tc
+= value.respond_to?(:to_sentence) ? value.select(&:present?).to_sentence : value
