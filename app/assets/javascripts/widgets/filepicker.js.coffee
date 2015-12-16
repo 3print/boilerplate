@@ -54,7 +54,7 @@ widgets.define 'filepicker', (element, options) ->
         signed_data['success_action_redirect'] = redirect_url if is_ie
 
         $.ajax
-          url: '/admin/signed_urls'
+          url: '/signed_urls'
           type: 'GET'
           dataType: 'json'
 
@@ -94,37 +94,42 @@ widgets.define 'filepicker', (element, options) ->
 
         # Update the real input in the other form
         hidden.val(url)
-
         preview.find('img').remove()
 
-        if preview.find('.label').length is 0
-          preview.find('.placeholder').remove()
-          preview.append("""
-          <div class="label label-default"></div>
-          <div class="meta">
-            <div class="dimensions"></div>
-            <div class="size"></div>
-          </div>
+        if /\.(png|jpg|jpeg|gif)/.test(url)
+          if preview.find('.label').length is 0
+            preview.find('.placeholder').remove()
+            preview.append("""
+            <div class="label label-default"></div>
+            <div class="meta">
+              <div class="dimensions"></div>
+              <div class="size"></div>
+            </div>
+            """)
+
+          label = preview.find('.label')
+          dimensions = preview.find('.dimensions')
+          size = preview.find('.size')
+
+          img = $('<img>')
+          img[0].onload = ->
+            dimensions.html("""
+              <span class="number">#{img[0].width}</span>x<span class="number">#{img[0].height}</span>px
+            """)
+            img.addClass('loaded')
+
+          img.attr('src', url)
+          img.prependTo(preview)
+
+          label.text(unescape(url).split('/').pop()).attr('title', url)
+          size.html("""
+            <span class="number">#{Math.round(image_size / 1024 * 100) / 100}</span>ko
           """)
-
-        label = preview.find('.label')
-        dimensions = preview.find('.dimensions')
-        size = preview.find('.size')
-
-        img = $('<img>')
-        img[0].onload = ->
-          dimensions.html("""
-            <span class="number">#{img[0].width}</span>x<span class="number">#{img[0].height}</span>px
-          """)
-          img.addClass('loaded')
-
-        img.attr('src', url)
-        img.prependTo(preview)
-
-        label.text(unescape(url).split('/').pop()).attr('title', url)
-        size.html("""
-          <span class="number">#{Math.round(image_size / 1024 * 100) / 100}</span>ko
-        """)
+        else
+          preview.html("""
+            <i class='fa fa-file-pdf-o'></i>
+            #{unescape(url).split('/').pop()}
+          """).attr('title', url)
 
       done: (event, data) ->
         preview.find('.progress').fadeOut 300, ->
