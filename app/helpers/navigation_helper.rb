@@ -1,12 +1,11 @@
 module NavigationHelper
   def nav_link_to(url, label, controller, ico=nil, options={}, &block)
 
-    resource_class = controller == :home ? nil : controller.to_s.singularize.camelize.constantize
+    resource_class = controller == :home ? nil : controller.to_s.singularize.camelize.constantize rescue nil
 
     ico, options = [nil, ico] if ico.is_a?(Hash)
 
     li_class = controller.to_s
-    TPrint.debug options
 
     if block_given?
       li_class += ' dropdown'
@@ -17,6 +16,7 @@ module NavigationHelper
         concat(link_to(url, opts) do
           concat(icon(ico)) if ico.present?
           concat(content_tag(:span, label))
+          concat(get_badge(options[:badge])) if options[:badge].present?
           concat(icon('chevron-down'))
         end)
 
@@ -32,8 +32,17 @@ module NavigationHelper
         concat(link_to(url, opts) do
           concat(icon(ico)) if ico.present?
           concat(content_tag(:span, label))
+          concat(get_badge(options[:badge])) if options[:badge].present?
         end)
       end
+    end
+  end
+
+  def get_badge(count)
+    cls = if count > 0
+      content_tag(:span, count, class: "badge #{cls}")
+    else
+      ''
     end
   end
 end
