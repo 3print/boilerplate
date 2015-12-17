@@ -19,7 +19,7 @@
         - if current_user.admin?
           = f.input :role
 
-        = render_partial_for_user 'extra_form_fields', locals: {form: f}
+        = render_partial_for_user 'form_extra_fields', locals: {form: f}
 
   = default_actions
 
