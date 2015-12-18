@@ -10,7 +10,7 @@ class DateTimeInput < SimpleForm::Inputs::DateTimeInput
     input_html_options[:placeholder] = 'simple_form.placeholders.datetime'.t
 
     s = "<div class='input-group'>"
-    s << "<span class='input-group-addon'><i class='fa fa-calendar'></i></span>"
+    s << "<label class='input-group-addon' for='#{object_name}_#{attribute_name}'><i class='fa fa-calendar'></i></label>"
     s << @builder.text_field(attribute_name, input_html_options)
     s << "</div>"
     s

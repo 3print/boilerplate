@@ -3,7 +3,7 @@
 class PwdcalcSimpleInput < SimpleForm::Inputs::Base
   include Pwdcalc::PasswordStrength
 
-  def input(wrapper_options)
+  def input(wrapper_options = nil)
     input_html_options[:placeholder] = placeholder_text
     @builder.password_field(attribute_name, input_html_options) <<
     password_strength_score <<
