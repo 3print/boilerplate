@@ -24,6 +24,7 @@
 
 class User < ActiveRecord::Base
   extend CarrierWave::Meta::ActiveRecord
+  extend ImageGravity
   include CommonExtensions
 
   enum role: [:user, :admin]
