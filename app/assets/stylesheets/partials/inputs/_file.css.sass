@@ -16,41 +16,72 @@
     @extend .form-control
     height: auto
     position: relative
+    overflow: hidden
 
     label
       display: block
       +absolute(0,0,0,0)
 
+  select
+    position: absolute
+
+  .select2-container
+    position: relative
+    z-index: 10
+    width: 100% !important
+
   .progress
     height: 4px
+    border-bottom: 1px solid $bootstrap_border_color
+    border-radius: 0
     +absolute(0,0,initial,0)
+
+    .progress-bar
+      border-radius: 0
 
   .preview
     min-height: 21px
-    overflow: hidden
     img
       margin: 0
 
       &.loaded
-        max-width: 80px
-        max-height: 80px
+        max-width: 220px
+        max-height: 220px
 
     .label
       display: inline-block
       margin-top: 4px
-      left: 0
       max-width: 100%
       overflow: hidden
       text-overflow: ellipsis
+      border-radius: 0
+      border-bottom-right-radius: 3px
+      background: $color_grey_lighter
+      color: $color_grey_darker
+      border-right: 1px solid $bootstrap_border_color
+      border-bottom: 1px solid $bootstrap_border_color
+      +absolute(-1px,0)
 
     .meta
       padding: 3px
       top: 0
       right: 0
 
-      .dimensions, .size
+      .dimensions
         float: left
-        width: 50%
+
+      .size
+        float: right
+
+  .crop-settings
+    clear: both
+    padding-top: 6px
+    margin: 0 -13px -7px
+
+    .control-label
+      padding: 0 6px
+      font-size: 0.8em
+      +relative
 
 .well.gallery .file .controls
   height: 140px

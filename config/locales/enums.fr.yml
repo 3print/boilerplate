@@ -1,6 +1,18 @@
 
 fr:
   enums:
+    file:
+      gravity:
+        north: Haut
+        south: Bas
+        east: Droite
+        west: Gauche
+        north_west: Haut Gauche
+        north_east: Haut Droite
+        south_west: Bas Gauche
+        south_east: Bas Droite
+        center: Centre
+
     user:
       role:
         user: Utilisateur
@@ -14,6 +26,5 @@ fr:
         string: Texte
         markdown: MarkDown
         collection: Collection de valeur
-        job: Fiche Métier
         date: Date
         date_range: Période

@@ -141,7 +141,15 @@ widgets.define 'filepicker', (element, options) ->
 
     $input.on 'change', ->
       value = $input.val()
-      $value.toggleClass('placeholder', value is '')
-      $value.text(value or 'placeholder')
+      if preview.length
+        preview.before("""
+        <div class='preview'>#{value}</div>
+        """)
+        preview.remove()
+        preview = $element.find('.preview').first()
+
+      else
+        $value.toggleClass('placeholder', value is '')
+        $value.text(value or 'placeholder')
 
   i++

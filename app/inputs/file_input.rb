@@ -1,7 +1,12 @@
 class FileInput < SimpleForm::Inputs::FileInput
+  include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::FormTagHelper
+  include ActionView::Helpers::FormOptionsHelper
+
   def input(wrapper_options = nil)
     use_aws = CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog || (Rails.env.development? && !ENV['NO_AWS'])
     return super unless use_aws
+
     buffer = ''
     opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
     if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog
@@ -10,6 +15,14 @@ class FileInput < SimpleForm::Inputs::FileInput
       buffer << super
     end
     buffer << preview
+
+    if object.respond_to?(:"#{attribute_name}_gravity")
+      buffer << '<div class="crop-settings">'
+      buffer << @builder.label('simple_form.labels.crop_settings'.t)
+      buffer << select_tag("#{object_name}[#{attribute_name}_gravity]", options_for_select([['','']] + %w(north south east west north_west north_east south_west south_east center).map {|s| ["enums.file.gravity.#{s}".t, "#{attribute_name}_#{s}"] }, object.send(:"#{attribute_name}_gravity")), placeholder: 'simple_form.placeholders.crop_settings'.t)
+      buffer << '</div>'
+    end
+
     buffer.html_safe
   end
 
@@ -59,8 +72,8 @@ class FileInput < SimpleForm::Inputs::FileInput
   end
 
   def get_version image
-    if @options[:version] && image.respond_to?(@options[:version])
-      image.send(@options[:version])
+    if options[:version] && image.respond_to?(options[:version])
+      image.send(options[:version])
     elsif image.respond_to?(:thumb)
       image.thumb
     else

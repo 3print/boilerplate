@@ -29,8 +29,8 @@ class User < ActiveRecord::Base
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
+  gravity_enum :avatar
   mount_uploader :avatar, AvatarUploader
-
   serialize :avatar_meta, OpenStruct
 
   carrierwave_meta_composed :avatar_meta, :avatar, image_version: %i(width height md5sum)
