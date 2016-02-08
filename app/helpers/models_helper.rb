@@ -20,7 +20,7 @@ SKIPPED_COLUMNS = [
 
 module ModelsHelper
   def skipped_columns
-    SKIPPED_COLUMNS
+    ::SKIPPED_COLUMNS
   end
 
   def default_columns_for_object(model)
@@ -63,7 +63,7 @@ module ModelsHelper
       type = options[:as]
       type_partial = "show_#{type}_field"
       if partial_exist?(type_partial)
-        return render partial: type_partial, locals: { value: out, type: type, column: col }
+        return render partial: type_partial, locals: { value: out, type: type, column: col, options: options }
       end
     end
 
@@ -76,13 +76,13 @@ module ModelsHelper
     type_partial = "show_#{type}_field"
 
     if partial_exist?(field_partial)
-      render partial: field_partial, locals: { value: out, type: type, column: col }
+      render partial: field_partial, locals: { value: out, type: type, column: col, options: options }
     elsif partial_exist?(type_partial)
-      render partial: type_partial, locals: { value: out, type: type, column: col }
+      render partial: type_partial, locals: { value: out, type: type, column: col, options: options }
     elsif out.is_a?(ActiveRecord::Base)
-      render partial: 'show_active_record_field', locals: { value: out, type: type, column: col }
+      render partial: 'show_active_record_field', locals: { value: out, type: type, column: col, options: options }
     else
-      render partial: 'show_default_field', locals: { value: out, type: type, column: col }
+      render partial: 'show_default_field', locals: { value: out, type: type, column: col, options: options }
     end
   end
 
@@ -196,5 +196,4 @@ module ModelsHelper
       res.html_safe
     end
   end
-
 end
