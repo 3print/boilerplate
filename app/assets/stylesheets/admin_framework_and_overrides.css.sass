@@ -180,4 +180,35 @@ table
   text-align: left
 
 .table-footer
-  background: whitesmoke
+  background: $bootstrap_background_color
+
+.table
+  width: 100%
+  box-sizing: border-box
+  table-layout: fixed
+
+  tbody
+    box-sizing: border-box
+
+    tr
+      box-sizing: border-box
+
+      td
+        box-sizing: border-box
+
+        ul.list-group
+          margin: 8px -4px -4px
+
+          li.list-group-item
+            border-radius: 0
+
+      th
+        background: $bootstrap_background_color
+
+  .index &
+    table-layout: auto
+
+    td.actions
+      .btn-default, .btn-danger
+        .text
+          display: none
