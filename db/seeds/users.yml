@@ -3,3 +3,4 @@
   email: admin@boilerplate.com
   password: adminboilerplate
   password_confirmation: adminboilerplate
+  role: 'admin'
