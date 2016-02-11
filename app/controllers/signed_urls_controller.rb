@@ -1,4 +1,4 @@
-class Admin::SignedUrlsController < Admin::ApplicationController
+class SignedUrlsController < ApplicationController
   skip_load_and_authorize_resource
 
   def index

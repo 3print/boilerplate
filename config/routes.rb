@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get '/result', to: 'static#s3_results', as: :s3_results
 
+  resources :signed_urls, only: :index
   resources :bp_tests # BOILERPLATE_ONLY
   namespace :admin do
     root to: 'home#index'
@@ -19,7 +20,6 @@ Rails.application.routes.draw do
       end                     # BOILERPLATE_ONLY
     end                       # BOILERPLATE_ONLY
 
-    resources :signed_urls, only: :index
   end
 
   get "/404", to: "errors#routing"
