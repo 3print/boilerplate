@@ -4,8 +4,11 @@ seed_pattern = File.join(root_path, 'seeds', "*.yml")
 seed_files = Dir[seed_pattern]
 
 def as_query(seed)
-  seed.delete(:password)
-  seed.delete(:password_confirmation)
+  query = seed.dup
+  query.delete('role')
+  query.delete('password')
+  query.delete('password_confirmation')
+  query.symbolize_keys
 end
 
 seed_files.each do |seed_file|
@@ -13,8 +16,9 @@ seed_files.each do |seed_file|
   model_class = File.basename(seed_file, '.yml').singularize.camelize.constantize
 
   seeds.each do |seed|
+    query = as_query(seed)
     begin
-      unless model = model_class.where(as_query(seed)).first
+      unless model = model_class.where(query).first
         model = model_class.new(seed)
         model.save!
         p "model #{model} created successfully"
