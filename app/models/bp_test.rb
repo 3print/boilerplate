@@ -17,6 +17,9 @@
 #
 
 class BpTest < ActiveRecord::Base
+  include Concerns::CommonExtensions
+  include Concerns::HasSeo
+
   mount_uploader :image, ImageUploader
   mount_uploader :pdf, PdfUploader
 
