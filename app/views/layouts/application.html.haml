@@ -21,11 +21,11 @@
   end
 
   if description.blank?
-    description = content_for?(:description) ? yield(:description) : 'app.name'.t
+    description = content_for?(:description) ? yield(:description) : 'app_name'.t
   end
 
   if title.blank?
-    title = content_for?(:title) ? yield(:title) : 'app.name'.t
+    title = content_for?(:title) ? yield(:title) : 'app_name'.t
   end
 
 !!!
