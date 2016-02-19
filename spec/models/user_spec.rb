@@ -34,8 +34,8 @@ describe User do
     it 'validates the password and password_confirmation' do
       subject.valid?
 
-      subject.errors.messages[:password].should be_present
-      subject.errors.messages[:password_confirmation].should be_present
+      expect(subject.errors.messages[:password]).to be_present
+      expect(subject.errors.messages[:password_confirmation]).to be_present
     end
   end
 
