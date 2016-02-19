@@ -1,22 +1,22 @@
 
 class UserPolicy < AdminPolicy
   def show?
-    user.admin? || user == record
+    only_admin || user == record
   end
 
   def edit?
-    user.super_admin? || (user.admin? && !record.super_admin?) || user == record
+    only_super_admin || (only_admin && !record.super_admin?) || user == record
   end
 
   def update?
-    user.super_admin? || (user.admin? && !record.super_admin?) || user == record
+    only_super_admin || (only_admin && !record.super_admin?) || user == record
   end
 
   def destroy?
-    user.super_admin? || (user.admin? && !record.super_admin?)
+    (only_super_admin || (only_admin && !record.super_admin?)) && user != record
   end
 
   def masquerade?
-    user.super_admin? && user != record
+    only_super_admin && user != record
   end
 end

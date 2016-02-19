@@ -15,7 +15,7 @@ class AdminPolicy
   end
 
   def index?
-    user.admin?
+    only_admin
   end
 
   def show?
@@ -23,7 +23,7 @@ class AdminPolicy
   end
 
   def create?
-    user.admin?
+    only_admin
   end
 
   def new?
@@ -31,7 +31,7 @@ class AdminPolicy
   end
 
   def update?
-    user.admin?
+    only_admin
   end
 
   def edit?
@@ -39,7 +39,35 @@ class AdminPolicy
   end
 
   def destroy?
-    user.admin?
+    only_admin
+  end
+
+  def handle?
+    only_admin
+  end
+
+  def unhandle?
+    only_admin
+  end
+
+  def publish?
+    only_admin
+  end
+
+  def unpublish?
+    only_admin
+  end
+
+  def save_sequence?
+    only_admin
+  end
+
+  def only_admin
+    user && user.admin?
+  end
+
+  def only_super_admin
+    user && user.super_admin?
   end
 
   def scope
