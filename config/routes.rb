@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     resources :users
     resources :seo_meta
     resources :bp_tests  do   # BOILERPLATE_ONLY
+      collection do           # BOILERPLATE_ONLY
+        patch :save_sequence  # BOILERPLATE_ONLY
+      end                     # BOILERPLATE_ONLY
       member do               # BOILERPLATE_ONLY
         put :approve          # BOILERPLATE_ONLY
         put :revocate         # BOILERPLATE_ONLY

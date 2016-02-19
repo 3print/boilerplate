@@ -1,4 +1,9 @@
 class Admin::BpTestsController < Admin::ApplicationController
+  include OrderableExtensions
+
+  load_resource
+  sort_resource by: 'sequence ASC'
+
   toggle_actions :approve, off: :revocate
   toggle_actions :validate
 

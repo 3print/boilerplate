@@ -14,6 +14,7 @@
 #  enum         :integer
 #  approved_at  :datetime
 #  validated_at :datetime
+#  sequence     :integer
 #
 
 describe BpTest, type: :model do

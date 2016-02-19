@@ -1,0 +1,9 @@
+- if item.id.present?
+  = contextual_partial 'list_item_before_details', locals: {item: item}
+  = contextual_partial 'list_item_label', locals: {item: item}
+  = contextual_partial 'list_item_after_details', locals: {item: item}
+  - if resource_class.respond_to? :update_items_sequences
+    %input{type: :hidden, name: "#{controller.resource_name}[#{item.id}][sequence]", value: item.sequence}
+- else
+  .item{class: item.class.name.underscore}
+    %span.name= resource_label_for(item)

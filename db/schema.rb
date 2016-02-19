@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219124720) do
+ActiveRecord::Schema.define(version: 20160219141800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160219124720) do
     t.integer  "enum"
     t.datetime "approved_at"
     t.datetime "validated_at"
+    t.integer  "sequence"
   end
 
   create_table "seo_meta", force: true do |t|
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20160219124720) do
     t.integer  "role"
     t.string   "avatar"
     t.text     "avatar_meta"
+    t.integer  "avatar_gravity"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
