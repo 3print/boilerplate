@@ -82,7 +82,7 @@ class FileInput < SimpleForm::Inputs::FileInput
   end
 
   def image_extensions
-    %w(.png .gif .jpg .jpeg)
+    %w(.png .gif .jpg .jpeg .PNG .GIF .JPG .JPEG)
   end
 
   def clear_url_query(ext)
@@ -90,8 +90,8 @@ class FileInput < SimpleForm::Inputs::FileInput
   end
 
   def field_label res
-    return '' if not res.respond_to?(:width) and not res.respond_to?(:height)
     s = "<div class='label label-default' title='#{res}'>#{clear_url_query res.to_s.split('/').last}</div>"
+    return s if not res.respond_to?(:width) and not res.respond_to?(:height)
     s += "<div class='meta'>"
     s += "<div class='dimensions'><span class='number'>#{res.width}</span>x<span class='number'>#{res.height}</span>px</div>"
     s += "<div class='size'><span class='number'>#{res.file_size / 1024}</span>ko</div>"

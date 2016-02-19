@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     root to: 'home#index'
 
     resources :users
+    resources :seo_meta
     resources :bp_tests  do   # BOILERPLATE_ONLY
       member do               # BOILERPLATE_ONLY
         put :approve          # BOILERPLATE_ONLY

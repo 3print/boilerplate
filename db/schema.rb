@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213154908) do
+ActiveRecord::Schema.define(version: 20160219124720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,19 @@ ActiveRecord::Schema.define(version: 20151213154908) do
     t.datetime "approved_at"
     t.datetime "validated_at"
   end
+
+  create_table "seo_meta", force: true do |t|
+    t.integer  "meta_owner_id"
+    t.string   "meta_owner_type"
+    t.string   "title"
+    t.text     "description"
+    t.string   "static_action"
+    t.boolean  "static_mode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "seo_meta", ["meta_owner_id", "meta_owner_type"], name: "index_seo_meta_on_meta_owner_id_and_meta_owner_type", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

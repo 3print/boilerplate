@@ -1,3 +1,33 @@
+:ruby
+  description = nil
+  title = nil
+
+  if resource.present?
+    if resource.respond_to?(:seo_meta) && meta = resource.seo_meta
+      description = meta.description
+      title = meta.title
+    end
+
+    if resource.class.respond_to?(:seo_meta) && meta = resource.class.seo_meta
+      description = meta.description if description.blank?
+      title = meta.title if title.blank?
+    end
+  elsif meta = SeoMeta.for_resource_index(params[:controller].classify).first
+    description = meta.description
+    title = meta.title
+  elsif meta = SeoMeta.for_static_action(params[:action]).first
+    description = meta.description
+    title = meta.title
+  end
+
+  if description.blank?
+    description = content_for?(:description) ? yield(:description) : 'app.name'.t
+  end
+
+  if title.blank?
+    title = content_for?(:title) ? yield(:title) : 'app.name'.t
+  end
+
 !!!
 = cc_html lang: :fr, class: 'no-js' do
   %head
@@ -5,9 +35,8 @@
     %meta{charset: "utf-8"}/
     %meta{name: "apple-mobile-web-app-capable", content: "yes"}/
 
-    %title= content_for?(:title) ? yield(:title) : 'app_name'.t
-
-    %meta{name: "description", content: "#{content_for?(:description) ? yield(:description) : 'app_name'.t}"}/
+    %title= title
+    %meta{name: "description", content: "#{description}"}/
     = yield :meta
 
     %link{href: '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', media: 'screen', rel: 'stylesheet'}
