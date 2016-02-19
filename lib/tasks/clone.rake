@@ -4,15 +4,16 @@ task :clone, [:name] do |t, args|
   rel_path = "../#{name}"
 
   to_be_removed = [
-    "lib/tasks/clone.rake",
-    "app/models/bp_*",
     "app/controllers/**/bp_*",
-    "app/views/bp_*",
+    "app/models/bp_*",
     "app/views/admin/bp_*",
-    "spec/models/bp_*",
-    "db/migrate/*_bp_*",
-    "spec/factories/bp_*",
+    "app/views/bp_*",
     "bp-gemfile.rb",
+    "db/migrate/*_bp_*",
+    "lib/tasks/clone.rake",
+    "spec/controllers/bp_*",
+    "spec/factories/bp_*",
+    "spec/models/bp_*",
   ]
 
   TPrint.log "Cloning into #{name}"
