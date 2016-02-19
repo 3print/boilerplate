@@ -24,8 +24,7 @@
 
 class User < ActiveRecord::Base
   extend CarrierWave::Meta::ActiveRecord
-  extend ImageGravity
-  include CommonExtensions
+  extend Concerns::ImageGravity
 
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?

@@ -1,4 +1,4 @@
-module Displayable
+module Concerns::Displayable
   extend ActiveSupport::Concern
 
   included do

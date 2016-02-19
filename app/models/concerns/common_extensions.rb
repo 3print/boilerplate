@@ -1,8 +1,11 @@
-module CommonExtensions
+module Concerns::CommonExtensions
   extend ActiveSupport::Concern
 
   included do
-    include DashboardExtensions
-    include PunditExtensions
+    extend Concerns::ToggleAttributes
+    include Concerns::DashboardExtensions
+    include Concerns::PunditExtensions
+    include Concerns::Displayable
+    include Concerns::ValidationState
   end
 end

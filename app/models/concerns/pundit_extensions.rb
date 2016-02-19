@@ -1,4 +1,4 @@
-module PunditExtensions
+module Concerns::PunditExtensions
   extend ActiveSupport::Concern
 
   included do

@@ -1,4 +1,4 @@
-module ToggleAttributes
+module  Concerns::ToggleAttributes
   extend ActiveSupport::Concern
 
   def attr_toggle(name, options={})

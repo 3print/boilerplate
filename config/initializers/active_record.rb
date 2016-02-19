@@ -1,7 +1,5 @@
 module ActiveRecord
   class Base
-    extend ToggleAttributes
-    include Displayable
-    include ValidationState
+    include Concerns::CommonExtensions
   end
 end

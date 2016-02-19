@@ -17,8 +17,6 @@
 #
 
 class BpTest < ActiveRecord::Base
-  include CommonExtensions
-
   mount_uploader :image, ImageUploader
   mount_uploader :pdf, PdfUploader
 
