@@ -1,11 +1,19 @@
 module NavigationHelper
-  def nav_link_to(url, label, controller, ico=nil, options={}, &block)
+  def nav_link_to(url, label=nil, controller_name=nil, ico=nil, options={}, &block)
 
-    resource_class = controller == :home ? nil : controller.to_s.singularize.camelize.constantize rescue nil
+    if url.is_a?(Class)
+      cls = url
+      url = controller.controller_namespace + [cls]
+      label = cls.t
+      controller_name = cls.name.pluralize.underscore
+      ico = icon_class_for(cls)
+    end
+
+    resource_class = controller_name == :home ? nil : controller_name.to_s.singularize.camelize.constantize rescue nil
 
     ico, options = [nil, ico] if ico.is_a?(Hash)
 
-    li_class = controller.to_s
+    li_class = controller_name.to_s
 
     if block_given?
       li_class += ' dropdown'
