@@ -12,6 +12,8 @@ fr:
     labels:
       <<: *fields
 
+      crop_settings: 'Partie à converser lors du recadrage :'
+
     placeholders:
       file: 'Choisissez un fichier'
       string: 'Saisissez votre texte ici'
@@ -26,6 +28,10 @@ fr:
       tel: 'par ex: 06 00 00 00 00'
       integer: 'Saisissez une valeur'
       type: 'Choisissez une option'
+      select: 'Choisissez une option'
+      crop_settings: 'Choisissez une option'
+      float: '0.000'
+      url: http://nom-de-domaine.fr
 
     hints:
       user:

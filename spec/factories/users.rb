@@ -20,6 +20,7 @@
 #  role                   :integer
 #  avatar                 :string(255)
 #  avatar_meta            :text
+#  avatar_gravity         :integer
 #
 
 FactoryGirl.define do

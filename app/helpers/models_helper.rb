@@ -1,6 +1,6 @@
 SKIPPED_COLUMNS = [
   :created_at, :updated_at, :created_on, :updated_on,
-  :lock_version, :version,
+  :lock_version, :version, :sequence,
 
   # Devise
   :encrypted_password, :reset_password_token, :reset_password_sent_at,
@@ -9,7 +9,8 @@ SKIPPED_COLUMNS = [
   :remember_created_at, :approved_at,
 
   # CarrierWave Meta
-  :avatar_meta, :image_meta,
+  :avatar_meta, :avatar_gravity,
+  :image_meta, :image_gravity,
 
   # Misc
   :avatar_tmp, :image_tmp,
