@@ -18,7 +18,7 @@ This project serves a base for our various projects. Its main goal is to gather 
   ```bash
     rake clone[my-new-project]
   ```
-* Enjoy!
+* Be sure to visit the Admin section ( `/admin` ), default credentials are: admin@boilerplate.com / adminboilerplate
 
 For proper use, you'll need a AWS S3 bucket to work with. Create your bucket as usual, and then don't forget to add a complaining CORS configuration, for instance:
 
