@@ -41,6 +41,7 @@ widgets.define 'filepicker', (element, options) ->
       redirect: redirect_url if is_ie
       redirectParamName: 'success_action_redirect' if is_ie
       forceIframeTransport: is_ie
+      dropZone: $element
 
       # This is really important as s3 gives us back the url of the file in a XML document
       dataType: 'text'
@@ -96,7 +97,7 @@ widgets.define 'filepicker', (element, options) ->
         hidden.val(url)
         preview.find('img').remove()
 
-        if /\.(png|jpg|jpeg|gif)/.test(url)
+        if /\.(png|jpg|jpeg|gif)/i.test(url)
           if preview.find('.label').length is 0
             preview.find('.placeholder').remove()
             preview.append("""
