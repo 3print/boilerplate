@@ -147,3 +147,6 @@ SimpleForm.setup do |config|
   # Default class for inputs
   config.input_class = 'form-control'
 end
+
+SettingsInput.types << :user # BOILERPLATE ONLY
+SettingsInput.types << :bp_test # BOILERPLATE ONLY

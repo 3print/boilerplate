@@ -1,4 +1,19 @@
 class SettingsInput < SimpleForm::Inputs::TextInput
+  TYPES = [
+    :integer,
+    :float,
+    :string,
+    :boolean,
+    :markdown,
+    :collection,
+    :date,
+    :date_range
+  ]
+
+  def self.types
+    TYPES
+  end
+
   def input(wrapper_options = nil)
     class_name = @builder.object.class.name.singularize.underscore
     res = "<table class='settings_editor table table-bordered table-stripped' data-row-blueprint='#{light_escape(get_field_row '', '')}' data-model='#{class_name}' data-attribute-name='#{attribute_name}'>"
@@ -36,17 +51,7 @@ class SettingsInput < SimpleForm::Inputs::TextInput
       initial_type = value
     end
 
-    types = [
-      :integer,
-      :float,
-      :string,
-      :boolean,
-      :markdown,
-      :collection,
-      :job,
-      :date,
-      :date_range
-    ]
+    types = self.class.types
     placeholder = 'simple_form.placeholders.type'.t
 
     row = '<tr>'
