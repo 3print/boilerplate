@@ -2,7 +2,7 @@
   .avatar= image_tag user.avatar.thumb
 
 - if can? :edit, user
-  = link_to user.name, [:admin, user]
+  = link_to user.name, [controller.controller_namespace, user].flatten
 - else
   = user.name
 

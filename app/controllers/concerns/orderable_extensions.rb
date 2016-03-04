@@ -9,7 +9,7 @@ module OrderableExtensions
 
       resource_class.update_items_sequences(sequences)
 
-      redirect_to [:admin, resource_class]
+      redirect_to [controller.controller_namespace, resource_class].flatten
     rescue => e
       render 'index', status: 422
     end
