@@ -15,12 +15,33 @@
           __Gras__
           **Gras**
           ~~Raturé~~
-          [Lien](http://www.groupebigardrecrute.fr/)
+          [Lien](http://www.google.fr/)
           > Citation
 
       .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
       .col-md-6.preview
-        = markdown(content)
+        .text-content= markdown(content)
+
+    %h3 Alignements
+
+    .row.section
+      - content = capture_haml do
+        :plain
+          -->>
+          Texte à droite
+          -->>
+
+          <<--
+          Texte à gauche
+          <<--
+
+          -><-
+          Text centré
+          -><-
+
+      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
+      .col-md-6.preview
+        .text-content= markdown(content)
 
     %h3 Titraille
 
@@ -35,17 +56,41 @@
           ###### Titre 6
 
       .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
-      .col-md-6.preview= markdown(content)
+      .col-md-6.preview
+        .text-content= markdown(content)
 
     %h3 Images
 
     .row.section
       - content = capture_haml do
         :plain
-          ![Texte image non disponible](http://www.bigard.fr/sites/all/themes/bigard/images/marqueBigard1.jpg "Légende au survol")
+          ![Texte image non disponible](https://source.unsplash.com/random/348x100 "Légende au survol")
       .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
       .col-md-6.preview
-        = markdown(content)
+        .text-content= markdown(content)
+
+    %h3 Icônes
+
+    Seules les icônes de la section <a href='http://fontawesome.io/icons/#web-application'>web application</a> de FontAwesome sont disponibles dans le sélecteur, mais toutes les icônes peuvent être utilisées.
+
+    .row.section
+      - content = capture_haml do
+        :plain
+          %(globe)
+
+      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
+      .col-md-6.preview
+        .text-content= markdown(content)
+
+    %h3 Boutons
+
+    .row.section
+      - content = capture_haml do
+        :plain
+          (Texte du bouton=>http://www.google.fr/)
+      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
+      .col-md-6.preview
+        .text-content= markdown(content)
 
     %h3 Listes
 
@@ -62,7 +107,7 @@
 
       .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
       .col-md-6.preview
-        = markdown(content)
+        .text-content= markdown(content)
 
     %h3 Table
 
@@ -76,7 +121,7 @@
 
       .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
       .col-md-6.preview
-        = markdown(content)
+        .text-content= markdown(content)
 
     %h3 Lettrines
 
@@ -93,7 +138,7 @@
 
       .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
       .col-md-6.preview
-        = markdown(content)
+        .text-content= markdown(content)
 
     %h3 Encarts
 
@@ -114,4 +159,4 @@
 
       .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
       .col-md-6.preview
-        = markdown(content)
+        .text-content= markdown(content)

@@ -694,7 +694,7 @@ Markdown.dialects.Gruber = {
     },
 
     blockquote: function blockquote( block, next ) {
-      if ( !block.match( /^>/m ) )
+      if ( !block.match( /^>(?!>)/m ) )
         return undefined;
 
       var jsonml = [];
@@ -973,23 +973,27 @@ Markdown.dialects.Gruber.inline = {
       return [ 1, "[" ];
     },
 
-
-    "<": function autoLink( text ) {
-      var m;
-
-      if ( ( m = text.match( /^<(?:((https?|ftp|mailto):[^>]+)|(.*?@.*?\.[a-zA-Z]+))>/ ) ) != null ) {
-        if ( m[3] ) {
-          return [ m[0].length, [ "link", { href: "mailto:" + m[3] }, m[3] ] ];
-
-        }
-        else if ( m[2] == "mailto" ) {
-          return [ m[0].length, [ "link", { href: m[1] }, m[1].substr("mailto:".length ) ] ];
-        }
-        else
-          return [ m[0].length, [ "link", { href: m[1] }, m[1] ] ];
+    "%(": function icon (text) {
+      var m
+      if ( ( m = text.match( /^%\(([^)]+)\)/ ) ) != null ) {
+        return [ m[0].length, [ "icon", { class: 'fa fa-' + m[1] }, '' ] ];
       }
+      return [ 2, "%(" ];
+    },
 
-      return [ 1, "<" ];
+    "(": function button (text) {
+      var m
+      if ( ( m = text.match( /^\(([^=]+)=>([^)]+)\)/ ) ) != null ) {
+
+        var label = Markdown.DialectHelpers.inline_until_end.call( this, m[1] )
+
+        console.log(m[1], label)
+
+        var res = [ m[0].length, [ "button", { class: 'btn btn-primary', href: m[2].replace(/^\s+|\s+$/g, '') }].concat( label[1] ) ]
+        console.log(res)
+        return res;
+      }
+      return [ 2, "%(" ];
     },
 
     "`": function inlineCode( text ) {
@@ -1084,6 +1088,62 @@ Markdown.dialects.Gruber.inline = {
         // TODO: No matching end code found - warn!
         return [ 3, "^" ];
       }
+    },
+
+    "<<--": function leftText( text ) {
+      var orig = String(text);
+      // Inline content is possible inside wells
+      var res = Markdown.DialectHelpers.inline_until_char.call( this, text.substr(4), '<<--' );
+
+      if ( !res ) return [ 4, '<<--' ];
+
+      var consumed = 4 + res[ 0 ],
+          children = res[ 1 ];
+
+      return [ consumed, ["text-left", {class: 'text-left'}].concat(children) ]
+    },
+
+    "-->>": function rightText( text ) {
+      var orig = String(text);
+      // Inline content is possible inside wells
+      var res = Markdown.DialectHelpers.inline_until_char.call( this, text.substr(4), '-->>' );
+
+      if ( !res ) return [ 4, '-->>' ];
+
+      var consumed = 4 + res[ 0 ],
+          children = res[ 1 ];
+
+      return [ consumed, ["text-right", {class: 'text-right'}].concat(children) ]
+    },
+    "-><-": function centerText( text ) {
+      var orig = String(text);
+      // Inline content is possible inside wells
+      var res = Markdown.DialectHelpers.inline_until_char.call( this, text.substr(4), '-><-' );
+
+      if ( !res ) return [ 4, '-><-' ];
+
+      var consumed = 4 + res[ 0 ],
+          children = res[ 1 ];
+
+      return [ consumed, ["text-center", {class: 'text-center'}].concat(children) ]
+    },
+
+    "<": function autoLink( text ) {
+      var m;
+
+      if ( ( m = text.match( /^<(?:((https?|ftp|mailto):[^>]+)|(.*?@.*?\.[a-zA-Z]+))>/ ) ) != null ) {
+        if ( m[3] ) {
+          return [ m[0].length, [ "link", { href: "mailto:" + m[3] }, m[3] ] ];
+
+        }
+        else if ( m[2] == "mailto" ) {
+          return [ m[0].length, [ "link", { href: m[1] }, m[1].substr("mailto:".length ) ] ];
+        }
+        else
+          return [ m[0].length, [ "link", { href: m[1] }, m[1] ] ];
+      }
+
+      return [ 1, "<" ];
     },
 
     "\n": function lineBreak( text ) {
@@ -1207,6 +1267,23 @@ Markdown.DialectHelpers.inline_until_char = function( text, want ) {
     if ( consumed >= text.length ) {
       // No closing char found. Abort.
       return null;
+    }
+
+    var res = this.dialect.inline.__oneElement__.call(this, text.substr( consumed ) );
+    consumed += res[ 0 ];
+    // Add any returned nodes.
+    nodes.push.apply( nodes, res.slice( 1 ) );
+  }
+}
+
+Markdown.DialectHelpers.inline_until_end = function( text) {
+  var consumed = 0,
+      nodes = [];
+
+  while ( true ) {
+    if ( consumed >= text.length ) {
+      // No closing char found. Abort.
+      return [ consumed, nodes ];
     }
 
     var res = this.dialect.inline.__oneElement__.call(this, text.substr( consumed ) );
@@ -1599,6 +1676,12 @@ function convert_tree_to_html( tree, references, options ) {
     case "listitem":
       jsonml[ 0 ] = "li";
       break;
+    case "icon":
+      jsonml[ 0 ] = "i";
+      break;
+    case "button":
+      jsonml[ 0 ] = "a";
+      break;
     case "para":
       jsonml[ 0 ] = "p";
       break;
@@ -1693,6 +1776,9 @@ function convert_tree_to_html( tree, references, options ) {
       jsonml[0] = 'td';
       break;
     case "well":
+    case "text-left":
+    case "text-right":
+    case "text-center":
       jsonml[0] = 'div';
       break;
     case "lettrine":

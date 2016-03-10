@@ -1,4 +1,18 @@
 <%
+
+class StaticView < ActionView::Base
+  include IconHelper
+end
+
+def render_html (tpl)
+  dir = Rails.root.join("app", "views")
+  view = StaticView.new(dir, :user => @user)
+  view.extend(ApplicationHelper)
+  view.render(partial: tpl, layout: nil)
+end
+
+font_awesome_selector = render_html('admin/shared/fontawesome').gsub('"', '\"').gsub("\n", '')
+
 use_aws = Rails.env.production? || Rails.env.staging? || ENV['FORCE_AWS']
 
 ignored = ["'cmdCode'"]
@@ -6,6 +20,23 @@ ignored << "'cmdImage'" if use_aws
 %>
 
 id = 0
+
+wrap = (wrapper) -> (e) ->
+  # Give ![] surround the selection and prepend the image link
+  chunk = undefined
+  cursor = undefined
+  selected = e.getSelection()
+  content = e.getContent()
+  if selected.length == 0
+    # Give extra word
+    chunk = e.__localize('enter text here')
+  else
+    chunk = selected.text
+
+  e.replaceSelection wrapper + '\n' + chunk + '\n' + wrapper
+  cursor = selected.start + 1 + wrapper.length
+  # Set the cursor
+  e.setSelection cursor, cursor + chunk.length
 
 insertImage = (link, e) ->
   # Give ![] surround the selection and prepend the image link
@@ -27,6 +58,58 @@ insertImage = (link, e) ->
   e.setNextTab e.__localize('enter image title here')
   # Set the cursor
   e.setSelection cursor, cursor + chunk.length
+
+insertIcon = (icon, e) ->
+  # Give ![] surround the selection and prepend the image link
+  cursor = undefined
+  selected = e.getSelection()
+  content = e.getContent()
+
+  # transform selection and set the cursor into chunked text
+  e.replaceSelection "%(#{icon}) "
+  cursor = selected.start + icon.mength + 4
+  # Set the next tab
+  e.setNextTab ''
+  # Set the cursor
+  e.setSelection cursor, cursor
+
+iconChoice = (editor, e) ->
+  markup = "<%= font_awesome_selector %>"
+
+  $modal = $(markup)
+  $(document.body).append($modal)
+
+  $modal.find('.btn').on 'click', ->
+    $modal.remove()
+
+  $modal.find('.icon').on 'click', ->
+    $li = $(this)
+
+    insertIcon($li.data('value'), e)
+    $modal.remove()
+
+insertButton = (e) ->
+  # Give [] surround the selection and prepend the link
+  chunk = undefined
+  cursor = undefined
+  selected = e.getSelection()
+  content = e.getContent()
+  link = undefined
+  if selected.length == 0
+    # Give extra word
+    chunk = e.__localize('enter link description here')
+  else
+    chunk = selected.text
+  link = prompt(e.__localize('Insert Hyperlink'), 'http://')
+  urlRegex = new RegExp('^((http|https)://|(mailto:)|(//))[a-z0-9]', 'i')
+  if link != null and link != '' and link != 'http://' and urlRegex.test(link)
+    sanitizedLink = $('<div>' + link + '</div>').text()
+    # transform selection and set the cursor into chunked text
+    e.replaceSelection '(' + chunk + '=>' + sanitizedLink + ')'
+    cursor = selected.start + 1
+    # Set the cursor
+    e.setSelection cursor, cursor + chunk.length
+  return
 
 uploadFile = (editor, e) ->
   uploader  = $('.direct-upload').first().clone()
@@ -111,6 +194,14 @@ widgets.define 'markdown', (el) ->
   $md_editor = null
   $(el).markdown({
     hiddenButtons: [<%= ignored.join(', ') %>]
+    reorderButtonGroups: [
+      'groupFont'
+      'groupParagraph'
+      'groupLink'
+      'groupMisc'
+      'groupHelp'
+      'groupUtil'
+    ]
     additionalButtons: [
       {
         name: "groupLink"
@@ -125,6 +216,104 @@ widgets.define 'markdown', (el) ->
               uploadFile($md_editor, e)
           }
           <% end %>
+          {
+            name: "cmdIcon"
+            toggle: false
+            title: "Icône"
+            icon: "fa fa-magic"
+            callback: (e) ->
+              iconChoice($md_editor, e)
+          }
+          {
+            name: "cmdButton"
+            toggle: false
+            title: "Boutons"
+            icon: "fa fa-hand-pointer-o"
+
+            callback: insertButton
+          }
+        ]
+      }
+      {
+        name: "groupParagraph"
+        data: [
+          {
+            name: "cmdTextRight"
+            toggle: false
+            title: "Aligner à droite"
+            icon: "fa fa-align-right"
+            callback: wrap('-->>')
+          }
+          {
+            name: "cmdTextCenter"
+            toggle: false
+            title: "Centré"
+            icon: "fa fa-align-center"
+            callback: wrap('-><-')
+          }
+          {
+            name: "cmdTextLeft"
+            toggle: false
+            title: "Aligner à gauche"
+            icon: "fa fa-align-left"
+            callback: wrap('<<--')
+          }
+        ]
+      }
+      {
+        name: "groupFont"
+        data: [
+          {
+            name: "cmdLettrine"
+            toggle: false
+            title: "Lettrine"
+            icon: "fa fa-text-height"
+            callback: (e) ->
+              selected = e.getSelection()
+
+              e.replaceSelection("^^^#{selected.text}^^^")
+              e.setSelection(selected.start + 3,selected.start + 3 + selected.length)
+          }
+        ]
+      }
+      {
+        name: "groupMisc"
+        data: [
+          {
+            name: "cmdWell"
+            toggle: false
+            title: "Encart fond gris"
+            icon: "fa fa-square"
+            callback: (e) ->
+              selected = e.getSelection()
+
+              e.replaceSelection("%%\n#{selected.text}\n%%")
+              e.setSelection(selected.start + 3,selected.start + 3 + selected.length)
+          }
+          {
+            name: "cmdWellNarrow"
+            toggle: false
+            title: "Encart centré"
+            icon: "fa fa-square-o"
+            callback: (e) ->
+              selected = e.getSelection()
+
+              e.replaceSelection("%%%\n#{selected.text}\n%%%")
+              e.setSelection(selected.start + 4,selected.start + 4 + selected.length)
+          }
+        ]
+      }
+      {
+        name: 'groupHelp'
+        data: [
+          {
+            name: 'cmdHelp'
+            toggle: false
+            title: "Afficher l'aide Markdown"
+            icon: "fa fa-question-circle"
+            callback: (e) ->
+              document.querySelector('.markdown-help')?.classList.toggle('visible')
+          }
         ]
       }
     ]

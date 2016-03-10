@@ -21,3 +21,62 @@ textarea.markdown, .md-preview
 
 .controls .md-editor.md-fullscreen-mode .md-preview
   font-size: 14px !important
+
+
+.markdown-help, .font-awesome-selector
+  padding: 20px
+  background: white
+  display: none
+  z-index: 100
+  +box-shadow(0 2px 5px rgba(0,0,0,0.3))
+  +fixed(20%, 20%, 20%, 20%)
+
+  &.visible
+    display: block
+
+  > .btn
+    +absolute(10px, initial, initial, 10px)
+    z-index: 2
+
+  .wrapper
+    +absolute(20px,20px,20px,20px)
+    overflow-y: auto
+
+  .section
+    border: 1px solid darken($color_grey_lighter, 10%)
+    margin: 0
+    margin-bottom: 20px
+
+    +flex-display
+    +flex-direction(row)
+    +flex-justify(stretch)
+
+    .code
+      padding: 20px
+      white-space: pre-wrap
+      font-family: monospace
+      border-right: 1px solid darken($color_grey_lighter, 10%)
+      background: $color_grey_lighter
+
+.font-awesome-selector
+  .wrapper
+    .icon
+      float: left
+      width: 25%
+      padding: 1%
+      cursor: pointer
+
+      &:hover
+        background: $color-grey-light
+
+    .text
+      vertical-align: middle
+      font-size: 0.8em
+      margin-left: 0.6em
+
+    i
+      font-size: 1.6em
+      width: 1em
+      display: inline-block
+      text-align: center
+      vertical-align: middle
