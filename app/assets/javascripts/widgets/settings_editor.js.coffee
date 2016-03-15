@@ -1,6 +1,6 @@
 strip = (s) -> s.replace /^\s+|\s+$/g, ''
 
-class SettingsEditor
+class window.SettingsEditor
   @handlers = [
     {
       type: 'integer'
