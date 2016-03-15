@@ -41,3 +41,11 @@ fr:
         text: Text                         # BOILERPLATE_ONLY
         enum: Enum                         # BOILERPLATE_ONLY
         validated_at: Date de validation   # BOILERPLATE_ONLY
+
+      seo_meta:
+        title: Titre de la page
+        description: Description
+        meta_owner_id: Id du modèle cible (laisser vide pour l'index)
+        meta_owner_type: Nom du modèle cible
+        static_mode: Pour une page statique
+        static_action: Page

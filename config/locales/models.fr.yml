@@ -2,6 +2,7 @@ fr:
   collections: &collections
     users: Utilisateurs
     bp_tests: Tests # BOILERPLATE_ONLY
+    seo_meta: SEO
 
   models: &models
     <<: *collections
