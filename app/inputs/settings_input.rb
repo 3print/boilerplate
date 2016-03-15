@@ -43,13 +43,6 @@ class SettingsInput < SimpleForm::Inputs::TextInput
 
   def get_field_row(field, value)
     class_name = @builder.object.class.name.singularize.underscore
-    value_is_collection = !!(value =~ /,/)
-
-    if value_is_collection
-      initial_type = 'collection'
-    else
-      initial_type = value
-    end
 
     types = self.class.types
     placeholder = 'simple_form.placeholders.type'.t
@@ -57,17 +50,19 @@ class SettingsInput < SimpleForm::Inputs::TextInput
     row = '<tr>'
 
     row += '<td>'
-    row += "<input type=\"hidden\" name=\"#{class_name}[#{attribute_name}][#{field}]\" value=\"#{value}\"></input>"
+    row += "<input type=\"hidden\" name=\"#{class_name}[#{attribute_name}][#{field}]\""
+    row += " value='#{value}'" if field.present?
+    row += "></input>"
     row += "<input type=\"text\" value=\"#{field}\" class=\"form-control\"></input>"
     row += '</td>'
-    row += "<td><select data-original-value=\"#{value}\" data-original-type=\"#{initial_type}\" style=\"width: 100%\" placeholder=\"#{placeholder}\">"
+    row += "<td><select style=\"width: 100%\" placeholder=\"#{placeholder}\">"
 
     ([''] + types).each do |type|
-      selected = type.to_s == initial_type.to_s
-
-      row += "<option value=\"#{type}\" #{selected ? 'selected' : ''}>#{type == '' ? '' : "enums.settings.types.#{type}".t.gsub("'", '&#39;')}</option>"
+      row += "<option value=\"#{type}\">#{type == '' ? '' : "enums.settings.types.#{type}".t.gsub("'", '&#39;')}</option>"
     end
+
     row += '</select>'
+    row += '<div class="additional"></div>'
 
     row += '</td>'
 

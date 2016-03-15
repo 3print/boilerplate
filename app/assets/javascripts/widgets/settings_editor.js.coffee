@@ -1,16 +1,92 @@
 strip = (s) -> s.replace /^\s+|\s+$/g, ''
 
 class SettingsEditor
+  @handlers = [
+    {
+      type: 'integer'
+      save: (hidden) -> hidden.value = 'integer'
+      match: (v) -> v is 'integer' or v.type is 'integer'
+      fake_value: -> Math.round(Math.random() * 100)
+    }
+    {
+      type: 'float'
+      save: (hidden) -> hidden.value = 'float'
+      match: (v) -> v is 'float' or v.type is 'float'
+      fake_value: -> Math.random() * 10
+    }
+    {
+      type: 'string'
+      save: (hidden) -> hidden.value = 'string'
+      match: (v) -> v is 'string' or v.type is 'string'
+      fake_value: -> 'preview string'
+    }
+    {
+      type: 'boolean'
+      save: (hidden) -> hidden.value = 'boolean'
+      match: (v) -> v is 'boolean' or v.type is 'boolean'
+      fake_value: -> Math.random() > 0.5
+    }
+    {
+      type: 'markdown'
+      save: (hidden) -> hidden.value = 'markdown'
+      match: (v) -> v is 'markdown' or v.type is 'markdown'
+      fake_value: -> 'preview string'
+    }
+    {
+      type: 'date'
+      save: (hidden) -> hidden.value = 'date'
+      match: (v) -> v is 'date' or v.type is 'date'
+      fake_value: -> new Date()
+    }
+    {
+      type: 'collection'
+      match: (v) ->
+        (typeof v is 'string' and v.indexOf(',') >= 0) or v.type is 'collection'
+      fake_value: -> ['foo','bar','baz']
+      save: (hidden) ->
+        hidden.value = JSON.stringify({
+          type: 'collection'
+          values: hidden.collection_input.val().split(',').map(strip)
+        })
+
+      additional_fields: (value, hidden) ->
+        normalize_value = (v) -> v.values ? v.split(',')
+        collection_update = => @save(hidden)
+        collection_input = $ """
+          <label>#{'settings_input.collection.values'.t()}</label>
+          <input type="text"
+                 class="form-control"
+                 data-type="collection">
+          </input>
+        """
+
+        hidden.collection_input = collection_input
+
+        collection_input.on 'change', collection_update
+        collection_input.val normalize_value(value)
+
+        collection_input
+    }
+  ]
+
+  @handlers_by_type: -> o = {}; o[h.type] = h for h in @handlers; return o
+
+  @handler_for_type: (type) -> @handlers_by_type()[type]
+
+  @handler_for_value: (value) ->
+    res = @handlers.filter (h) -> h.match?(value)
+    res[0]
+
   constructor: (@table) ->
     @add_button = @table.querySelector('.add')
     @row_blueprint = @light_unescape @table.dataset.rowBlueprint
     @form = document.querySelector('form')
-    @domBuilder = document.createElement('div')
 
     Array::forEach.call @table.querySelectorAll('tr'), (row) =>
       hidden = row.querySelector('input[type=hidden]')
-      select = row.querySelector('select')
-      @construct_additional_field($(select), $(hidden))
+      return unless hidden?
+
+      @initialize_type(row, hidden)
       @register_row_events row
 
     @register_events()
@@ -38,21 +114,15 @@ class SettingsEditor
     form_fields
 
   get_value_for_type: (type) ->
-    switch type
-      when 'boolean' then Math.random() > 0.5
-      when 'integer' then Math.round(Math.random() * 100)
-      when 'float' then Math.random() * 10
-      when 'string' then 'preview string'
-      else
-        a = type.split(',')
-        i = Math.floor(Math.random() * a.length)
-        a[i]
+    @constructor.handler_for_type(type).fake_value?() ? ''
 
   append_row: (e) =>
     e.preventDefault()
 
     row = $(@row_blueprint)[0]
-    @domBuilder.innerHTML = ''
+    hidden = row.querySelector('input[type=hidden]')
+
+    @initialize_type(row, hidden)
     @register_row_events(row)
 
     last_row = @table.querySelector('tbody tr:last-child')
@@ -60,28 +130,26 @@ class SettingsEditor
 
     $(row).trigger('nested:fieldAdded')
 
-  collection_update: (hidden) -> ->
-    hidden.value = $(@).val().split(',').map strip
+  initialize_type: (row, hidden, value) ->
+    additional = row.querySelector('.additional')
+    additional.innerHTML = ''
 
-  construct_additional_field: ($select, $hidden) ->
-    $additional = $select.parent().find('.additional')
-    $additional.next().remove()
-    $additional.remove()
+    original_value = value ? hidden.value
 
-    original_type = $select.data('original-type')
-    original_value = $select.data('original-value')
+    original_value = JSON.parse(original_value) if original_value.match(/^\{|^\[/)
 
-    switch $select.val()
-      when 'collection'
-        collection_input = $ '<input type="text" class="form-control additional" data-type="collection"></input>'
+    original_type = @constructor.handler_for_value(original_value)
 
-        collection_input.on 'change', @collection_update($hidden)
+    if original_type?
+      unless value?
+        $select = $(row.querySelector('select'))
+        $select.val(original_type.type).trigger('change')
 
-        $select.parent().append collection_input
+      fields = original_type.additional_fields?(original_value, hidden)
+      if fields?
+        $(additional).append(fields)
 
-        collection_input.val original_value if original_value? and original_type is 'collection'
-      else
-        $hidden.val($select.val())
+      original_type.save(hidden)
 
   register_row_events: (row) ->
     $row = $(row)
@@ -100,7 +168,7 @@ class SettingsEditor
         $row.addClass 'has-error'
 
     $select.on 'change', =>
-      @construct_additional_field($select, $hidden)
+      @initialize_type(row, $hidden[0], $select.val())
 
     $remove.on 'click', (e) ->
       e.preventDefault()
