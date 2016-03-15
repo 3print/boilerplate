@@ -1,0 +1,37 @@
+:ruby
+  col = (Concerns::HasSeo.instance_variable_get("@_consumers") || []).select {|cls| cls.seo_meta.nil? }.map {|cls| [cls.t, cls.name] } + [["Page d'accueil", 'Home']]
+  static_actions = %w().map {|a| ["static.#{a}".t,a] }
+
+= simple_nested_form_for resource, url: controller.controller_namespace + [resource] do |f|
+  %fieldset.inputs.panel-body
+    = f.input :title, input_html: {data: {limit: 65}}
+    = f.input :description, input_html: {data: {limit: 156}}
+
+    = f.input :static_mode
+
+    .slave.false
+      - if resource.persisted?
+        = f.input :meta_owner_type, collection: col, readonly: true
+      - else
+        = f.input :meta_owner_type, collection: col
+
+    .slave.true
+      = f.input :static_action, collection: static_actions
+
+  = default_actions
+
+= render 'direct_download'
+
+:sass
+  .slave
+    display: none
+
+  .seo_meta_meta_owner_type .select2-container,
+  .seo_meta_static_action .select2-container,
+    width: 100% !important
+
+  .seo_meta_static_mode[data-value='true'] ~ .slave.true
+    display: block
+
+  .seo_meta_static_mode[data-value='false'] ~ .slave.false
+    display: block
