@@ -1,4 +1,9 @@
 strip = (s) -> s.replace /^\s+|\s+$/g, ''
+light_unescape = (str) ->
+  str
+  .replace(/&lt;/g, '<')
+  .replace(/&gt;/g, '>')
+  .replace(/\\"/g, '"')
 
 class window.SettingsEditor
   @handlers = [
@@ -79,7 +84,7 @@ class window.SettingsEditor
 
   constructor: (@table) ->
     @add_button = @table.querySelector('.add')
-    @row_blueprint = @light_unescape @table.dataset.rowBlueprint
+    @row_blueprint = light_unescape @table.dataset.rowBlueprint
     @form = document.querySelector('form')
 
     Array::forEach.call @table.querySelectorAll('tr'), (row) =>
@@ -184,12 +189,6 @@ class window.SettingsEditor
         return false
       else
         return true
-
-  light_unescape: (str) ->
-    str
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/\\"/g, '"')
 
 widgets.define 'settings_editor', (el) ->
   $(el).data 'editor', new SettingsEditor(el)
