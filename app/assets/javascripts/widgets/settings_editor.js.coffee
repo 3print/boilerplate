@@ -1,4 +1,6 @@
 strip = (s) -> s.replace /^\s+|\s+$/g, ''
+is_json = (s) -> s.match /^\{|^\[/
+to_array = (v) -> String(v).split(',').map(strip)
 light_unescape = (str) ->
   str
   .replace(/&lt;/g, '<')
@@ -51,11 +53,11 @@ class window.SettingsEditor
       save: (hidden) ->
         hidden.value = JSON.stringify({
           type: 'collection'
-          values: hidden.collection_input.val().split(',').map(strip)
+          values: to_array hidden.collection_input.val()
         })
 
       additional_fields: (value, hidden) ->
-        normalize_value = (v) -> v.values ? v.split(',')
+        normalize_value = (v) -> v.values ? to_array v
         collection_update = => @save(hidden)
         collection_input = $ """
           <label>#{'settings_input.collection.values'.t()}</label>
@@ -68,8 +70,7 @@ class window.SettingsEditor
         hidden.collection_input = collection_input
 
         collection_input.on 'change', collection_update
-        collection_input.val normalize_value(value)
-
+        collection_input.val normalize_value(value) unless value is 'collection'
         collection_input
     }
   ]
@@ -77,6 +78,9 @@ class window.SettingsEditor
   @handlers_by_type: -> o = {}; o[h.type] = h for h in @handlers; return o
 
   @handler_for_type: (type) -> @handlers_by_type()[type]
+
+  @handler_for_type_or_value: (type) ->
+    @handler_for_type(type) ? @handler_for_value(type)
 
   @handler_for_value: (value) ->
     res = @handlers.filter (h) -> h.match?(value)
@@ -140,10 +144,11 @@ class window.SettingsEditor
     additional.innerHTML = ''
 
     original_value = value ? hidden.value
+    original_value = JSON.parse(original_value) if is_json original_value
 
-    original_value = JSON.parse(original_value) if original_value.match(/^\{|^\[/)
+    original_type = @constructor.handler_for_type_or_value(original_value)
 
-    original_type = @constructor.handler_for_value(original_value)
+    console.log value, original_type
 
     if original_type?
       unless value?
@@ -151,10 +156,10 @@ class window.SettingsEditor
         $select.val(original_type.type).trigger('change')
 
       fields = original_type.additional_fields?(original_value, hidden)
-      if fields?
-        $(additional).append(fields)
 
-      original_type.save(hidden)
+      $(additional).append(fields) if fields?
+
+      original_type.save(hidden) if value?
 
   register_row_events: (row) ->
     $row = $(row)
@@ -180,6 +185,7 @@ class window.SettingsEditor
       $row.remove()
 
   validate: (value) -> /^[a-zA-Z_][a-zA-Z0-9_]*$/.test value
+
   register_events: ->
     $(@add_button).on 'click', @append_row
     $(@form).on 'submit', (e) =>
