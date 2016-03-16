@@ -1,5 +1,6 @@
 strip = (s) -> s.replace /^\s+|\s+$/g, ''
 is_json = (s) -> s.match /^\{|^\[/
+no_empty_string = (s) -> if strip(s) is '' then undefined else s
 to_array = (v) -> String(v).split(',').map(strip)
 light_unescape = (str) ->
   str
@@ -11,9 +12,60 @@ class window.SettingsEditor
   @handlers = [
     {
       type: 'integer'
-      save: (hidden) -> hidden.value = 'integer'
       match: (v) -> v is 'integer' or v.type is 'integer'
       fake_value: -> Math.round(Math.random() * 100)
+      save: (hidden) ->
+        min = no_empty_string hidden.min_input.val()
+        max = no_empty_string hidden.max_input.val()
+
+        if min? or max?
+          data = type: 'integer'
+          data.min = min if min?
+          data.max = max if max?
+          hidden.value = JSON.stringify(data)
+        else
+          hidden.value = 'integer'
+
+      additional_fields: (value, hidden) ->
+        update = => @save(hidden)
+        additional_fields = $ """
+          <div class="row">
+            <div class="col-sm-6">
+              <label>#{'settings_input.integer.min.label'.t()}</label>
+              <input
+                type="number"
+                class="form-control"
+                step="1"
+                placeholder="#{'settings_input.integer.min.placeholder'.t()}"
+                data-name="min">
+              </input>
+            </div>
+            <div class="col-sm-6">
+              <label>#{'settings_input.integer.max.label'.t()}</label>
+              <input
+                type="number"
+                class="form-control"
+                step="1"
+                placeholder="#{'settings_input.integer.max.placeholder'.t()}"
+                data-name="max">
+              </input>
+            </div>
+          </div>
+        """
+
+        min_input = additional_fields.find('[data-name="min"]')
+        max_input = additional_fields.find('[data-name="max"]')
+
+        hidden.min_input = min_input
+        hidden.max_input = max_input
+
+        min_input.on 'change', update
+        max_input.on 'change', update
+
+        min_input.val value.min if value.min?
+        max_input.val value.max if value.max?
+
+        additional_fields
     }
     {
       type: 'float'
