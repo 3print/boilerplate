@@ -7,7 +7,7 @@ class SettingsInput < SimpleForm::Inputs::TextInput
     :markdown,
     :collection,
     :date,
-    :date_range
+    :image
   ]
 
   def self.types

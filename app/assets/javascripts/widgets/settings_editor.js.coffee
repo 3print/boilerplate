@@ -46,6 +46,12 @@ class window.SettingsEditor
       fake_value: -> new Date()
     }
     {
+      type: 'image'
+      save: (hidden) -> hidden.value = 'image'
+      match: (v) -> v is 'image' or v.type is 'image'
+      fake_value: -> ''
+    }
+    {
       type: 'collection'
       match: (v) ->
         (typeof v is 'string' and v.indexOf(',') >= 0) or v.type is 'collection'
