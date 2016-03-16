@@ -66,10 +66,11 @@ class window.SettingsEditor
         normalize_value = (v) -> v.values ? to_array v
         collection_update = => @save(hidden)
         collection_input = $ """
-          <label>#{'settings_input.collection.values'.t()}</label>
+          <label>#{'settings_input.collection.values.label'.t()}</label>
           <input type="text"
                  class="form-control"
-                 data-type="collection">
+                 data-type="collection"
+                 placeholder="#{'settings_input.collection.values.placeholder'.t()}">
           </input>
         """
 

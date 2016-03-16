@@ -2,8 +2,12 @@ window.locales =
   en:
     settings_input:
       collection:
-        values: 'Possible values (comma separated list)'
+        values:
+          label: 'Possible values (comma separated list)'
+          placeholder: 'item 1, item 2, item 3'
   fr:
     settings_input:
       collection:
-        values: 'Valeurs possible (liste séparée par des virgules)'
+        values:
+          label: 'Valeurs possible (liste séparée par des virgules)'
+          placeholder: 'item 1, item 2, item 3'
