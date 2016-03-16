@@ -148,8 +148,6 @@ class window.SettingsEditor
 
     original_type = @constructor.handler_for_type_or_value(original_value)
 
-    console.log value, original_type
-
     if original_type?
       unless value?
         $select = $(row.querySelector('select'))
