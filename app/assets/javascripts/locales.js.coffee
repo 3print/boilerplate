@@ -1,5 +1,8 @@
 window.locales =
   en:
+    widgets:
+      coordinates:
+        error: "Can't retrieve GPS coordinates for the provided address"
     settings_input:
       collection:
         values:
@@ -15,6 +18,9 @@ window.locales =
           label: 'Maximum value'
           placeholder: '100'
   fr:
+    widgets:
+      coordinates:
+        error: "Impossible de récupérer les coordonnées GPS de l'adresse indiquée."
     settings_input:
       collection:
         values:
