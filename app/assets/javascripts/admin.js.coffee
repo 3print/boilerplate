@@ -52,6 +52,7 @@ widgets 'order_table', '.sortable', on: DEFAULT_EVENTS, unless: is_mobile_or_in_
 
 widgets 'settings_editor', '.settings_editor', on: DEFAULT_EVENTS
 widgets 'settings_form', '[data-settings]', on: DEFAULT_EVENTS
+widgets 'settings_image_uploader', '[data-settings] .file', on: DEFAULT_EVENTS, unless: is_in_template
 
 widgets 'boolean', '.boolean', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'color_button', '.color-icon-wrapper[data-url]', on: DEFAULT_EVENTS, unless: is_in_template

@@ -36,5 +36,19 @@
   %input.form-control.timepicker{type: :text, value:'{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
 
 .tpl#image
-  %label{for:'{{= id}}'} {{= label}}
-  %input.form-control{type: :text, value:'{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
+
+  .file
+    %label{for: '{{= id }}'} {{= label}}
+
+    .controls
+      %input.form-control{style: "display: inline;", type: :text, value: '{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
+      .preview
+        .progress
+          .progress-bar.progress-bar-success
+
+
+      %button.btn.btn-danger.btn-xs= icon :times
+
+      %label{for: '{{= id }}'}
+
+= render partial: 'direct_download'
