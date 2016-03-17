@@ -1,11 +1,10 @@
-%fieldset.inputs.panel-body
-  %legend SEO
+%legend SEO
 
-  = form.simple_fields_for :seo_meta, form.object.seo_meta || SeoMeta.new do |ff|
-    .row
-      .col-sm-6
-        = ff.input :title, input_html: {data: {limit: 65}}
-        - if ff.object.persisted?
-          = ff.input :id, as: :hidden
+= form.simple_fields_for :seo_meta, form.object.seo_meta || SeoMeta.new do |ff|
+  .row
+    .col-sm-6
+      = ff.input :title, input_html: {data: {limit: 65}}
+      - if ff.object.persisted?
+        = ff.input :id, as: :hidden
 
-      .col-sm-6= ff.input :description, input_html: {data: {limit: 156}}
+    .col-sm-6= ff.input :description, input_html: {data: {limit: 156}}
