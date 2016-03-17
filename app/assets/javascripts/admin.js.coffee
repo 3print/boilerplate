@@ -45,6 +45,7 @@ widgets 'popover', '[data-toggle=popover]', on: DEFAULT_EVENTS
 widgets 'propagate_input_value', 'input, select', on: DEFAULT_EVENTS
 widgets 'select2', 'select, .select2', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'settings_editor', '.settings_editor', on: DEFAULT_EVENTS
+widgets 'field_limit', '[data-limit]', on: DEFAULT_EVENTS
 
 I18n.attachToWindow()
 
