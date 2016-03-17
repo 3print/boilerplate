@@ -7,6 +7,8 @@ class SettingsInput < SimpleForm::Inputs::TextInput
     :markdown,
     :collection,
     :date,
+    :datetime,
+    :time,
     :image
   ]
 

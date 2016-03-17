@@ -25,7 +25,15 @@
 
 .tpl#date
   %label{for:'{{= id}}'} {{= label}}
-  %input.form-control{type: :datetime, value:'{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
+  %input.form-control.datepicker{type: :text, value:'{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
+
+.tpl#datetime
+  %label{for:'{{= id}}'} {{= label}}
+  %input.form-control.datetimepicker{type: :text, value:'{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
+
+.tpl#time
+  %label{for:'{{= id}}'} {{= label}}
+  %input.form-control.timepicker{type: :text, value:'{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
 
 .tpl#image
   %label{for:'{{= id}}'} {{= label}}
