@@ -1,10 +1,10 @@
 .tpl#integer
   %label{for:'{{= id}}'} {{= label}}
-  %input.form-control{type: :number, value:'{{= value != undefined ? value : settingParameters[\'default\'] || 1}}', id:'{{= id}}', step: '{{= settingParameters.step || 1}}', min: '{{= settingParameters.min || \'\'}}', max: '{{= settingParameters.max || \'\'}}', data: {name: '{{= setting }}'}}
+  %input.form-control{type: :number, value:'{{= value != undefined ? value : settingParameters[\'default\'] || \'\'}}', id:'{{= id}}', step: '{{= settingParameters.step || 1}}', min: '{{= settingParameters.min || \'\'}}', max: '{{= settingParameters.max || \'\'}}', data: {name: '{{= setting }}'}}
 
 .tpl#float
   %label{for:'{{= id}}'} {{= label}}
-  %input.form-control{type: :number, value:'{{= value != undefined ? value : settingParameters[\'default\'] || 1}}', id:'{{= id}}', step: '{{= settingParameters.step || 1}}', min: '{{= settingParameters.min || \'\'}}', max: '{{= settingParameters.max || \'\'}}', data: {name: '{{= setting }}'}}
+  %input.form-control{type: :number, value:'{{= value != undefined ? value : settingParameters[\'default\'] || \'\'}}', id:'{{= id}}', step: '{{= settingParameters.step || 1}}', min: '{{= settingParameters.min || \'\'}}', max: '{{= settingParameters.max || \'\'}}', data: {name: '{{= setting }}'}}
 
 .tpl#string
   %label{for:'{{= id}}'} {{= label}}
