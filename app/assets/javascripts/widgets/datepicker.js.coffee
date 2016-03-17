@@ -18,8 +18,22 @@ widgets.define 'datetimepicker', (el) ->
 
   try
     $el.datetimepicker
-      format: 'YYYY-MM-DD HH:mm'
+      format: 'YYYY-MM-DD HH:mm Z'
       displayFormat: 'DD/MM/YYYY HH:mm'
+      locale: 'fr'
+      # inline: true
+      calendarWeeks: true
+      sideBySide: true
+  catch e
+    console.error(e)
+
+widgets.define 'timepicker', (el) ->
+  $el = $(el)
+
+  try
+    $el.datetimepicker
+      format: 'HH:mm Z'
+      displayFormat: 'HH:mm'
       locale: 'fr'
       # inline: true
       calendarWeeks: true
@@ -29,19 +43,23 @@ widgets.define 'datetimepicker', (el) ->
 
 widgets.define 'datepicker_mobile', (el) ->
   $el = $(el)
+
+  type = switch true
+    when $el.hasClass('datetimepicker') then 'datetime'
+    when $el.hasClass('datepicker') then 'date'
+    when $el.hasClass('timepicker') then 'time'
+
   if $el.val() isnt ''
-    v = $el.val().replace(' ', 'T') + 'Z'
-    value = new Date().toISOString()
+    value = new Date($el.val()).toISOString()
   else
     value = ''
-  $handler = $("""
-    <input type='datetime-local'
-           value='#{value}'
-           class='overlay'
-           placeholder='#{$el.attr('placeholder')}'>
-    </input>
-  """)
-  $el.after($handler)
 
-  $handler.on 'change', ->
-    $el.val $handler.val().replace('T', ' ')
+  $handler = $("""
+    <input type='#{type}' value='#{value}' class='form-control'></input>
+  """)
+
+  $handler.attr('name', $el.attr('name')) if $el.attr('name')
+  $handler.attr('placeholder', $el.attr('placeholder')) if $el.attr('placeholder')
+
+  $el.after($handler)
+  $el.remove()

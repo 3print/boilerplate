@@ -33,9 +33,10 @@ widgets 'boolean', '.boolean', on: DEFAULT_EVENTS
 widgets 'collapse_toggle', '.open-settings', on: DEFAULT_EVENTS
 widgets 'collapse', '.collapse', on: DEFAULT_EVENTS
 widgets 'color_button', '.color-icon-wrapper[data-url]', on: DEFAULT_EVENTS
-widgets 'datepicker_mobile', '.datepicker', on: DEFAULT_EVENTS, if: is_mobile
-widgets 'datepicker', '.datepicker', on: DEFAULT_EVENTS, unless: is_mobile
-widgets 'datetimepicker', '.datetimepicker', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'datepicker_mobile', '.datepicker, .datetimepicker, .timepicker', on: DEFAULT_EVENTS, if: is_mobile
+widgets 'datepicker', '.datepicker', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
+widgets 'datetimepicker', '.datetimepicker', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
+widgets 'timepicker', '.timepicker', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'drag_source', '[data-transferable]', on: DEFAULT_EVENTS
 widgets 'drop_target', '[data-drop]', on: DEFAULT_EVENTS
 widgets 'filepicker', '.form-group.file', on: DEFAULT_EVENTS
