@@ -46,6 +46,8 @@
         .progress
           .progress-bar.progress-bar-success
 
+        {{= value ? '<img class="loaded" src="' + value + '">' : '' }}
+
 
       %button.btn.btn-danger.btn-xs= icon :times
 
