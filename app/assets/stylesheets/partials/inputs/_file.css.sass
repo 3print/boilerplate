@@ -21,11 +21,12 @@
     label
       display: block
       z-index: 2
+      margin: 0
       +absolute(0,0,0,0)
 
     .btn-danger
       z-index: 3
-      +absolute(7px,initial,initial,4px)
+      +absolute(8px,initial,initial,4px)
 
   select
     position: absolute
@@ -43,9 +44,11 @@
 
     .progress-bar
       border-radius: 0
+      +transition(none)
 
   .preview
-    min-height: 21px
+    min-height: 18px
+    margin-top: 4px
     img
       margin: 0
 

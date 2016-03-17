@@ -8,6 +8,8 @@ class SettingsImageUploader
     @active_area = @editor.find('.controls label')
     @preview = @editor.find('.preview')
     @input = @editor.find('input')
+    @progress = @editor.find('.progress')
+    @progress_bar = @progress.find('.progress-bar')
 
     @clear() if @input.val() is ''
 
@@ -25,7 +27,6 @@ class SettingsImageUploader
     uploader  = $('.direct-upload').first().clone()
     uploader.insertAfter($('.direct-upload').first())
     redirect_url = document.location.protocol + '//' + document.location.host + '/result.html'
-    progress = @editor.find('.progress')
 
     $file_field = uploader.find('input[type="file"]')
     $file_field.attr('id', "settings-image-uploader-#{id}")
@@ -72,15 +73,17 @@ class SettingsImageUploader
         prevUpload.abort() if prevUpload
         prevUpload = data.submit()
 
-      send: (e, data) ->
-        progress.find('.progress-bar').css('width', '5%')
-        progress.fadeIn(100)
+      send: (e, data) =>
+        @progress_bar.addClass('progress-bar-striped').addClass('active').width('100%')
 
-      progress: (e, data) ->
+      progress: (e, data) =>
+        if @progress_bar.hasClass('progress-bar-striped')
+          @progress_bar.removeClass('progress-bar-striped').removeClass('active')
+
         # This is what makes everything really cool, thanks to that callback
         # you can now update the progress bar based on the upload progress
-        percent = 5 + Math.round((e.loaded / e.total) * 95)
-        progress.find('.progress-bar').css('width', percent + '%')
+        percent = Math.round((e.loaded / e.total) * 100)
+        @progress_bar.width(percent + '%')
 
       fail: (e, data) ->
         console.log(e, data)
@@ -94,8 +97,8 @@ class SettingsImageUploader
           url = $(data).find('Location').text()
           @insertImage(url)
 
-      done: (event, data) ->
-        progress.fadeOut 300, -> progress.find('.progress-bar').css('width', 0)
+      done: (event, data) =>
+        @progress_bar.removeClass('progress-bar-striped').removeClass('active').css('width', 0)
 
     $file_field.trigger 'click'
 
