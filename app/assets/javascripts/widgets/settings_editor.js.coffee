@@ -7,7 +7,7 @@ widgets.define 'settings_editor', (el) ->
 
 widgets.define 'settings_form', (el) ->
   $el = $(el)
-  $el.data 'form', form = new SettingsForm($el.data('settings'), $el.data('values'))
+  $el.data 'form', form = new SettingsForm($el)
   $el.append form.render()
 
   setTimeout (-> $el.trigger('nested:fieldAdded')), 100

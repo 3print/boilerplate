@@ -1,5 +1,9 @@
 {is_json} = SettingsEditor.Utils
 
+next_id = 0
+
+get_next_id = -> next_id++
+
 class window.SettingsForm
   @tpl: (str, data) ->
     @tpl_cache ?= {}
@@ -40,7 +44,10 @@ class window.SettingsForm
     # Provide some basic currying to the user
     if data then fn(data) else fn
 
-  constructor: (@settings, @values={}) ->
+  constructor: (@source) ->
+    @settings = @source.data('settings')
+    @values = @source.data('values') ? {}
+    @id = @source.data('id') ? get_next_id()
 
   render: ->
     html = ''
