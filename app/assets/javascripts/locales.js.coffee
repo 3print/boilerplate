@@ -18,23 +18,38 @@ window.locales =
           placeholder: 'item 1, item 2, item 3'
 
       integer:
+        default:
+          label: 'Default Value'
+          placeholder: 1
+
         min:
           label: 'Minimum value'
-          placeholder: '0'
+          placeholder: 0
 
         max:
           label: 'Maximum value'
-          placeholder: '100'
+          placeholder: 100
+
+        step:
+          label: 'Step'
+          placeholder: 1
 
       float:
+        default:
+          label: 'Default Value'
+          placeholder: 1
+
         min:
           label: 'Minimum value'
-          placeholder: '0'
+          placeholder: 0
 
         max:
           label: 'Maximum value'
-          placeholder: '100'
+          placeholder: 100
 
+        step:
+          label: 'Step'
+          placeholder: 0.1
 
   #    ######## ########
   #    ##       ##     ##
@@ -54,19 +69,35 @@ window.locales =
           placeholder: 'item 1, item 2, item 3'
 
       integer:
+        default:
+          label: 'Valeur par défaut'
+          placeholder: 1
+
         min:
           label: 'Valeur minimum'
-          placeholder: '0'
+          placeholder: 0
 
         max:
           label: 'Valeur maximum'
-          placeholder: '100'
+          placeholder: 100
+
+        step:
+          label: 'Pas'
+          placeholder: 1
 
       float:
+        default:
+          label: 'Valeur par défaut'
+          placeholder: 1
+
         min:
           label: 'Valeur minimum'
-          placeholder: '0'
+          placeholder: 0
 
         max:
           label: 'Valeur maximum'
-          placeholder: '100'
+          placeholder: 100
+
+        step:
+          label: 'Pas'
+          placeholder: 0.1

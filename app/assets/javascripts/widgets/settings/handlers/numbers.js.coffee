@@ -1,5 +1,7 @@
 {no_empty_string} = SettingsEditor.Utils
 
+fields = ['default', 'min', 'max', 'step']
+
 get_handler = (name) ->
   type: name
 
@@ -8,55 +10,44 @@ get_handler = (name) ->
   fake_value: -> Math.round(Math.random() * 100)
 
   save: (hidden) ->
-    min = no_empty_string hidden.min_input.val()
-    max = no_empty_string hidden.max_input.val()
+    values = fields.map (key) -> no_empty_string hidden["#{key}_input"].val()
 
-    if min? or max?
+    if values.some((v) -> v?)
       data = type: name
-      data.min = min if min?
-      data.max = max if max?
+
+      fields.forEach (key, i) ->
+        value = values[i]
+        data[key] = value if value?
+
       hidden.value = JSON.stringify(data)
     else
       hidden.value = name
 
   additional_fields: (value, hidden) ->
     update = => @save(hidden)
-    additional_fields = $ """
-      <div class="row">
-        <div class="col-sm-6">
-          <label>#{"settings_input.#{name}.min.label".t()}</label>
+    html = '<div class="row">'
+    fields.forEach (key) ->
+      html += """
+        <div class="col-sm-3">
+          <label>#{"settings_input.#{name}.#{key}.label".t()}</label>
           <input
             type="number"
             class="form-control"
             #{if name is 'integer' then 'step="1"' else ''}
-            placeholder="#{"settings_input.#{name}.min.placeholder".t()}"
-            data-name="min">
+            placeholder="#{"settings_input.#{name}.#{key}.placeholder".t()}"
+            data-name="#{key}">
           </input>
         </div>
-        <div class="col-sm-6">
-          <label>#{"settings_input.#{name}.max.label".t()}</label>
-          <input
-            type="number"
-            class="form-control"
-            #{if name is 'integer' then 'step="1"' else ''}
-            placeholder="#{"settings_input.#{name}.max.placeholder".t()}"
-            data-name="max">
-          </input>
-        </div>
-      </div>
-    """
+      """
+    html += '</div>'
 
-    min_input = additional_fields.find('[data-name="min"]')
-    max_input = additional_fields.find('[data-name="max"]')
+    additional_fields = $(html)
 
-    hidden.min_input = min_input
-    hidden.max_input = max_input
-
-    min_input.on 'change', update
-    max_input.on 'change', update
-
-    min_input.val value.min if value.min?
-    max_input.val value.max if value.max?
+    fields.forEach (key) ->
+      input = additional_fields.find("[data-name=\"#{key}\"]")
+      hidden["#{key}_input"] = input
+      input.on 'change', update
+      input.val value[key] if value[key]?
 
     additional_fields
 
