@@ -1,0 +1,5 @@
+%li.list-group-item
+  .settings-form{data: { settings: resource.json.to_json }}
+
+- content_for :scripts do
+  = render partial: 'shared/setting_field_templates'

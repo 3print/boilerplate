@@ -23,6 +23,8 @@
 DEFAULT_EVENTS = 'load nested:fieldAdded'
 
 is_mobile = -> $(window).width() < 992
+is_in_template = (el) -> $(el).parents('.tpl').length > 0
+is_mobile_or_in_template = (el) -> is_mobile() or is_in_template(el)
 
 widgets 'auto_resize', 'textarea', on: DEFAULT_EVENTS
 widgets 'blueprint_button', 'button[data-blueprint]', on: DEFAULT_EVENTS
@@ -42,9 +44,10 @@ widgets 'navigation_highlight', '.navbar-nav', on: DEFAULT_EVENTS
 widgets 'order_list', '.sortable-list', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'order_table', '.sortable', on: DEFAULT_EVENTS, unless: is_mobile
 widgets 'popover', '[data-toggle=popover]', on: DEFAULT_EVENTS
-widgets 'propagate_input_value', 'input, select', on: DEFAULT_EVENTS
-widgets 'select2', 'select, .select2', on: DEFAULT_EVENTS, unless: is_mobile
+widgets 'propagate_input_value', 'input, select', on: DEFAULT_EVENTS, unless: is_in_template
+widgets 'select2', 'select, .select2', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'settings_editor', '.settings_editor', on: DEFAULT_EVENTS
+widgets 'settings_form', '[data-settings]', on: DEFAULT_EVENTS
 widgets 'field_limit', '[data-limit]', on: DEFAULT_EVENTS
 
 I18n.attachToWindow()

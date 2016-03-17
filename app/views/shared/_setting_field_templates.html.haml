@@ -1,0 +1,32 @@
+.tpl#integer
+  %label{for:'{{= id}}'} {{= label}}
+  %input.form-control{type: :number, value:'{{= value != undefined ? value : settingParameters[\'default\'] || 1}}', id:'{{= id}}', step: '{{= settingParameters.step || 1}}', min: '{{= settingParameters.min || \'\'}}', max: '{{= settingParameters.max || \'\'}}', data: {name: '{{= setting }}'}}
+
+.tpl#float
+  %label{for:'{{= id}}'} {{= label}}
+  %input.form-control{type: :number, value:'{{= value != undefined ? value : settingParameters[\'default\'] || 1}}', id:'{{= id}}', step: '{{= settingParameters.step || 1}}', min: '{{= settingParameters.min || \'\'}}', max: '{{= settingParameters.max || \'\'}}', data: {name: '{{= setting }}'}}
+
+.tpl#string
+  %label{for:'{{= id}}'} {{= label}}
+  %input.form-control{type: :text, value:'{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
+
+.tpl#boolean
+  %input.form-control{type: :text, value:'{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
+  %label{for:'{{= id}}'} {{= label}}
+
+.tpl#markdown
+  %textarea.form-control{id:'{{= id}}', data: {name: '{{= setting }}', editor: 'markdown', iconlibrary: 'fa', language: 'fr', resize: 'vertical'}}
+    {{= value}}
+
+.tpl#collection
+  %label{for:'{{= id}}'} {{= label}}
+  %select.form-control{id:'{{= id}}', style: 'width: 100%', placeholder: 'simple_form.placeholders.select'.t, data: {name: '{{= setting }}'}}
+    {{= settingParameters.values.map(function(v){ return "<option>"+v+"</option>" }).join('') }}
+
+.tpl#date
+  %label{for:'{{= id}}'} {{= label}}
+  %input.form-control{type: :datetime, value:'{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
+
+.tpl#image
+  %label{for:'{{= id}}'} {{= label}}
+  %input.form-control{type: :text, value:'{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
