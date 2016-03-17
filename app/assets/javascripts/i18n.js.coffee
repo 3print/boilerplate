@@ -39,7 +39,7 @@ class window.I18n
                          .replace(/(^|\s)(\w)/g, (m,sp,s) ->
                             "#{sp}#{s.toUpperCase()}")
 
-    lang.replace /\#\{([^\}]+)\}/g, (token, key) ->
+    String(lang).replace /\#\{([^\}]+)\}/g, (token, key) ->
       return token unless tokens[key]?
       tokens[key]
 
