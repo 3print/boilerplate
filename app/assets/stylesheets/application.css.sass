@@ -1,15 +1,16 @@
-@import "compass"
-@import "bootstrap-markdown"
+@import compass
+@import bootstrap-markdown
 
-@import "partials/common"
-
-@import "framework_and_overrides"
-@import "select_and_overrides"
-
-@import "partials/inputs/all"
-
-@import "partials/admin/welcome"
-@import "partials/admin/mobile"
+@import partials/common
+@import partials/variables
+@import partials/fonts
+@import partials/responsive
+@import partials/mixins
+@import partials/panel
+@import partials/front/buttons
+@import partials/inputs/all
+@import partials/admin/welcome
+@import partials/admin/mobile
 
 .direct-upload-section
   visibility: hidden
@@ -20,4 +21,4 @@ html, body
   height: 100%
   margin: 0
   overflow-x: hidden
-  background-color: $color_grey_lighter
+  background-color: $color-grey-lighter

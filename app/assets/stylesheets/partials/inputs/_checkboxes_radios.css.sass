@@ -20,7 +20,7 @@ input[type=checkbox] + label
   &:before
     width: 20px
     height: 20px
-    background: $color_grey_light
+    background: $color-grey-light
     +border-radius(4px)
     +transition(all 0.3s)
     +box-shadow(inset 0 1px 3px rgba(0,0,0,0.2))
@@ -36,18 +36,18 @@ input[type=checkbox] + label
 
 input[type=checkbox]:checked + label, .checked label
   &:before
-    background: $color_green
+    background: $color-green
 
   &:after
     text-indent: 0px
 
 input[type=checkbox][readonly] + label
   &:before
-    background: $color_grey_lighter
+    background: $color-grey-lighter
 
 input[type=checkbox][readonly]:checked + label, .checked [readonly] + label
   &:before
-    background: $color_blue
+    background: $color-blue
 
 
 input[type=radio] + label

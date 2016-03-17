@@ -69,13 +69,13 @@
   +absolute(initial,0,0,0)
 
   .slider-dot
-    background: darken($color_grey, 10%)
+    background: darken($color-grey, 10%)
     border-radius: 50%
     vertical-align: top
     +box-inline(8px)
 
     &.active
-      background: $color_grey_darker
+      background: $color-grey-darker
 
 .slider-content
   position: relative
@@ -130,11 +130,11 @@
 
   &.no-controls
     padding: 0
-    border-bottom: 1px solid $color_grey_lighter
+    border-bottom: 1px solid $color-grey-lighter
     margin-bottom: 20px
 
   .slider-next, .slider-previous
-    background: $color_grey_lighter
+    background: $color-grey-lighter
     width: 30px
     font-size: 40px
     line-height: 1em
@@ -146,7 +146,7 @@
     +transition(background-color 0.2s)
 
     &:hover
-      background: $color_grey_light
+      background: $color-grey-light
 
     &::before
       top: 50%
@@ -173,7 +173,7 @@
 
 .slider.slider-thumbnails
   margin-top: 10px
-  border-top: 1px solid $color_grey_lighter
+  border-top: 1px solid $color-grey-lighter
 
   .slider-content
     padding: 0 20px
@@ -209,7 +209,7 @@
     line-height: 90px
     text-align: center
     font-size: 40px
-    color: $color_red
+    color: $color-red
     content: '\f16a'
     +box
     +absolute(0,0,0,0)

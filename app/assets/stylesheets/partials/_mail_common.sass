@@ -1,8 +1,8 @@
-@import "variables.css.sass"
-@import "mixins/boxes.css.sass"
-@import "mixins/pseudo_elements.css.sass"
-@import "mixins/feat_detection.css.sass"
-@import "mixins/text.css.sass"
+@import variables
+@import mixins/boxes
+@import mixins/pseudo_elements
+@import mixins/feat_detection
+@import mixins/text
 
 $font-title: Oswald, Helvetica, sans-serif
 $font-interface: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, "Open Sans", Arial, "Lucida Grande", sans-serif, sans
@@ -27,7 +27,7 @@ $font-interface: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue"
   +no_padding
 
 =border_bottom()
-  border-bottom: 1px solid $color_grey_lighter
+  border-bottom: 1px solid $color-grey-lighter
 
 =section()
   +padding
@@ -58,7 +58,7 @@ $font-interface: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue"
   display: block
 
 =body()
-  background: $color_grey_lighter
+  background: $color-grey-lighter
   +reset_box
   +align_center
 
@@ -66,7 +66,7 @@ $font-interface: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue"
   font-size: 20px
   font-weight: normal
   text-transform: uppercase
-  color: $color_grey_dark
+  color: $color-grey-dark
 
 =title_large()
   font-size: 30px
@@ -75,7 +75,7 @@ $font-interface: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue"
 =link()
   text-decoration: none
   cursor: pointer
-  color: $color_blue
+  color: $color-blue
 
 =list()
   +no_margin
@@ -101,7 +101,7 @@ $font-interface: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue"
   line-height: 24px
 
 =footer()
-  background: $color_grey_darker
+  background: $color-grey-darker
 
 =section_space()
   margin-top: $double-padding
@@ -116,7 +116,7 @@ $font-interface: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue"
   margin-top: -5px
 
 =button()
-  background: $color_grey_darker
+  background: $color-grey-darker
   color: white
   text-transform: uppercase
   padding: 6px 10px 8px

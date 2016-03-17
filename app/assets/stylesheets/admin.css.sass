@@ -1,15 +1,12 @@
 
-@import "compass"
-@import "bootstrap-markdown"
+@import compass
+@import bootstrap-markdown
 
-@import "partials/common"
-@import "admin_framework_and_overrides"
-@import "select_and_overrides"
-
-@import "partials/inputs/all"
-
-@import "partials/admin/welcome"
-@import "partials/admin/mobile"
+@import partials/common
+@import partials/admin/framework_and_overrides
+@import partials/inputs/all
+@import partials/admin/welcome
+@import partials/admin/mobile
 
 .direct-upload-section
   visibility: hidden
@@ -27,7 +24,7 @@
 .admin-page-show, .markdown-help .preview
   padding: 15px
 
-  @import "application"
+  @import application
 
   .text-content
     +content_styles

@@ -1,10 +1,8 @@
-
-@import "partials/variables"
-@import "partials/responsive"
-@import "partials/mixins"
-@import "partials/sortable_table"
-
-@import "partials/panel"
+@import partials/variables
+@import partials/responsive
+@import partials/mixins
+@import partials/sortable_table
+@import partials/panel
 
 // make all images responsive by default
 img
@@ -33,7 +31,7 @@ img
     padding: 0
 
   .badge
-    background: $color_red
+    background: $color-red
     margin-right: 4px
     margin-top: -4px
 
@@ -47,7 +45,7 @@ img
 
   & > li.active > a
     padding-bottom: 20px
-    border-bottom: 4px solid $color_red
+    border-bottom: 4px solid $color-red
 
   +for-desktop
     .dropdown-menu
@@ -56,7 +54,7 @@ img
         a
           padding: 16px 40px 16px 52px
           i
-            color: $color_blue_dark
+            color: $color-blue-dark
             font-size: 2em
             text-align: center
             +box(28px)
@@ -71,7 +69,7 @@ img
       padding: 10px 24px !important
     li.active a
       padding-bottom: 10px !important
-      background: $color_red !important
+      background: $color-red !important
       color: white !important
 
     li.dropdown
