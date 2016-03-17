@@ -1,4 +1,12 @@
 window.locales =
+
+  #    ######## ##    ##
+  #    ##       ###   ##
+  #    ##       ####  ##
+  #    ######   ## ## ##
+  #    ##       ##  ####
+  #    ##       ##   ###
+  #    ######## ##    ##
   en:
     widgets:
       coordinates:
@@ -17,6 +25,24 @@ window.locales =
         max:
           label: 'Maximum value'
           placeholder: '100'
+
+      float:
+        min:
+          label: 'Minimum value'
+          placeholder: '0'
+
+        max:
+          label: 'Maximum value'
+          placeholder: '100'
+
+
+  #    ######## ########
+  #    ##       ##     ##
+  #    ##       ##     ##
+  #    ######   ########
+  #    ##       ##   ##
+  #    ##       ##    ##
+  #    ##       ##     ##
   fr:
     widgets:
       coordinates:
@@ -28,6 +54,15 @@ window.locales =
           placeholder: 'item 1, item 2, item 3'
 
       integer:
+        min:
+          label: 'Valeur minimum'
+          placeholder: '0'
+
+        max:
+          label: 'Valeur maximum'
+          placeholder: '100'
+
+      float:
         min:
           label: 'Valeur minimum'
           placeholder: '0'

@@ -9,131 +9,15 @@ light_unescape = (str) ->
   .replace(/\\"/g, '"')
 
 class window.SettingsEditor
-  @handlers = [
-    {
-      type: 'integer'
-      match: (v) -> v is 'integer' or v.type is 'integer'
-      fake_value: -> Math.round(Math.random() * 100)
-      save: (hidden) ->
-        min = no_empty_string hidden.min_input.val()
-        max = no_empty_string hidden.max_input.val()
+  @Utils: {
+    strip
+    is_json
+    no_empty_string
+    to_array
+    light_unescape
+  }
 
-        if min? or max?
-          data = type: 'integer'
-          data.min = min if min?
-          data.max = max if max?
-          hidden.value = JSON.stringify(data)
-        else
-          hidden.value = 'integer'
-
-      additional_fields: (value, hidden) ->
-        update = => @save(hidden)
-        additional_fields = $ """
-          <div class="row">
-            <div class="col-sm-6">
-              <label>#{'settings_input.integer.min.label'.t()}</label>
-              <input
-                type="number"
-                class="form-control"
-                step="1"
-                placeholder="#{'settings_input.integer.min.placeholder'.t()}"
-                data-name="min">
-              </input>
-            </div>
-            <div class="col-sm-6">
-              <label>#{'settings_input.integer.max.label'.t()}</label>
-              <input
-                type="number"
-                class="form-control"
-                step="1"
-                placeholder="#{'settings_input.integer.max.placeholder'.t()}"
-                data-name="max">
-              </input>
-            </div>
-          </div>
-        """
-
-        min_input = additional_fields.find('[data-name="min"]')
-        max_input = additional_fields.find('[data-name="max"]')
-
-        hidden.min_input = min_input
-        hidden.max_input = max_input
-
-        min_input.on 'change', update
-        max_input.on 'change', update
-
-        min_input.val value.min if value.min?
-        max_input.val value.max if value.max?
-
-        additional_fields
-    }
-    {
-      type: 'float'
-      save: (hidden) -> hidden.value = 'float'
-      match: (v) -> v is 'float' or v.type is 'float'
-      fake_value: -> Math.random() * 10
-    }
-    {
-      type: 'string'
-      save: (hidden) -> hidden.value = 'string'
-      match: (v) -> v is 'string' or v.type is 'string'
-      fake_value: -> 'preview string'
-    }
-    {
-      type: 'boolean'
-      save: (hidden) -> hidden.value = 'boolean'
-      match: (v) -> v is 'boolean' or v.type is 'boolean'
-      fake_value: -> Math.random() > 0.5
-    }
-    {
-      type: 'markdown'
-      save: (hidden) -> hidden.value = 'markdown'
-      match: (v) -> v is 'markdown' or v.type is 'markdown'
-      fake_value: -> 'preview string'
-    }
-    {
-      type: 'date'
-      save: (hidden) -> hidden.value = 'date'
-      match: (v) -> v is 'date' or v.type is 'date'
-      fake_value: -> new Date()
-    }
-    {
-      type: 'image'
-      save: (hidden) -> hidden.value = 'image'
-      match: (v) -> v is 'image' or v.type is 'image'
-      fake_value: -> ''
-    }
-    {
-      type: 'collection'
-      match: (v) ->
-        (typeof v is 'string' and v.indexOf(',') >= 0) or v.type is 'collection'
-      fake_value: -> ['foo','bar','baz']
-      save: (hidden) ->
-        hidden.value = JSON.stringify({
-          type: 'collection'
-          values: to_array hidden.collection_input.val()
-        })
-
-      additional_fields: (value, hidden) ->
-        normalize_value = (v) -> v.values ? to_array v
-        collection_update = => @save(hidden)
-        additional_fields = $ """
-          <label>#{'settings_input.collection.values.label'.t()}</label>
-          <input type="text"
-                 class="form-control"
-                 data-type="collection"
-                 placeholder="#{'settings_input.collection.values.placeholder'.t()}">
-          </input>
-        """
-
-        collection_input = additional_fields.filter('input')
-        hidden.collection_input = collection_input
-
-        collection_input.on 'change', collection_update
-        collection_input.val normalize_value(value) unless value is 'collection'
-        additional_fields
-    }
-  ]
+  @handlers = []
 
   @handlers_by_type: -> o = {}; o[h.type] = h for h in @handlers; return o
 
