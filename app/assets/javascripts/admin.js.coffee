@@ -26,30 +26,37 @@ is_mobile = -> $(window).width() < 992
 is_in_template = (el) -> $(el).parents('.tpl').length > 0
 is_mobile_or_in_template = (el) -> is_mobile() or is_in_template(el)
 
-widgets 'auto_resize', 'textarea', on: DEFAULT_EVENTS
-widgets 'blueprint_button', 'button[data-blueprint]', on: DEFAULT_EVENTS
-widgets 'blueprint_remove_button', 'button[data-remove]', on: DEFAULT_EVENTS
-widgets 'boolean', '.boolean', on: DEFAULT_EVENTS
-widgets 'collapse_toggle', '.open-settings', on: DEFAULT_EVENTS
-widgets 'collapse', '.collapse', on: DEFAULT_EVENTS
-widgets 'color_button', '.color-icon-wrapper[data-url]', on: DEFAULT_EVENTS
-widgets 'datepicker_mobile', '.datepicker, .datetimepicker, .timepicker', on: DEFAULT_EVENTS, if: is_mobile
+widgets 'navigation_highlight', '.navbar-nav', on: DEFAULT_EVENTS
+
+widgets 'popover', '[data-toggle=popover]', on: DEFAULT_EVENTS, unless: is_in_template
+
+widgets 'auto_resize', 'textarea', on: DEFAULT_EVENTS, unless: is_in_template
+widgets 'collapse_toggle', '.open-settings', on: DEFAULT_EVENTS, unless: is_in_template
+widgets 'collapse', '.collapse', on: DEFAULT_EVENTS, unless: is_in_template
+
+widgets 'blueprint_button', 'button[data-blueprint]', on: DEFAULT_EVENTS, unless: is_in_template
+widgets 'blueprint_remove_button', 'button[data-remove]', on: DEFAULT_EVENTS, unless: is_in_template
+
+widgets 'drag_source', '[data-transferable]', on: DEFAULT_EVENTS, unless: is_in_template
+widgets 'drop_target', '[data-drop]', on: DEFAULT_EVENTS, unless: is_in_template
+
+widgets 'order_list', '.sortable-list', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
+widgets 'order_table', '.sortable', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
+
+widgets 'settings_editor', '.settings_editor', on: DEFAULT_EVENTS
+widgets 'settings_form', '[data-settings]', on: DEFAULT_EVENTS
+
+widgets 'boolean', '.boolean', on: DEFAULT_EVENTS, unless: is_in_template
+widgets 'color_button', '.color-icon-wrapper[data-url]', on: DEFAULT_EVENTS, unless: is_in_template
+widgets 'datepicker_mobile', '.datepicker, .datetimepicker, .timepicker', on: DEFAULT_EVENTS, if: is_mobile, unless: is_in_template
 widgets 'datepicker', '.datepicker', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'datetimepicker', '.datetimepicker', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'timepicker', '.timepicker', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
-widgets 'drag_source', '[data-transferable]', on: DEFAULT_EVENTS
-widgets 'drop_target', '[data-drop]', on: DEFAULT_EVENTS
-widgets 'filepicker', '.form-group.file', on: DEFAULT_EVENTS
-widgets 'markdown', '[data-editor="markdown"]', on: DEFAULT_EVENTS, unless: is_mobile
-widgets 'navigation_highlight', '.navbar-nav', on: DEFAULT_EVENTS
-widgets 'order_list', '.sortable-list', on: DEFAULT_EVENTS, unless: is_mobile
-widgets 'order_table', '.sortable', on: DEFAULT_EVENTS, unless: is_mobile
-widgets 'popover', '[data-toggle=popover]', on: DEFAULT_EVENTS
+widgets 'filepicker', '.form-group.file', on: DEFAULT_EVENTS, unless: is_in_template
+widgets 'markdown', '[data-editor="markdown"]', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'propagate_input_value', 'input, select', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'select2', 'select, .select2', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
-widgets 'settings_editor', '.settings_editor', on: DEFAULT_EVENTS
-widgets 'settings_form', '[data-settings]', on: DEFAULT_EVENTS
-widgets 'field_limit', '[data-limit]', on: DEFAULT_EVENTS
+widgets 'field_limit', '[data-limit]', on: DEFAULT_EVENTS, unless: is_in_template
 
 I18n.attachToWindow()
 
