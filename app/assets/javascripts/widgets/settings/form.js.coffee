@@ -2,11 +2,11 @@
 
 class window.SettingsForm
   @tpl: (str, data) ->
-    @tplCache ?= {}
+    @tpl_cache ?= {}
     # Figure out if we're getting a template, or if we need to
     # load the template - and be sure to cache the result.
     fn = if !/\W/.test(str)
-      @tplCache[str] ?= @tpl(document.getElementById(str).innerHTML)
+      @tpl_cache[str] ?= @tpl(document.getElementById(str).innerHTML)
     else
       try
         new Function(
@@ -50,19 +50,19 @@ class window.SettingsForm
 
       label = "blocks.settings.#{setting}".t()
       id = "#{setting}-#{@id}"
-      settingParameters = {}
+      setting_parameters = {}
 
       type = JSON.parse(type) if is_json type
 
       if type? and typeof type is 'object'
-        settingParameters = type
+        setting_parameters = type
         {type} = type
 
-      html += @getField(type, {
+      html += @get_field(type, {
         id
         label
         setting
-        settingParameters
+        setting_parameters
         value: @values[setting]
       })
 
@@ -70,4 +70,4 @@ class window.SettingsForm
 
     html
 
-  getField: (type, options) -> @constructor.tpl(type, options)
+  get_field: (type, options) -> @constructor.tpl(type, options)
