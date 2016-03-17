@@ -20,6 +20,13 @@
 #= require i18n
 #= require_tree ./widgets
 
+window.DATE_FORMAT = 'YYYY-MM-DD'
+window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY'
+window.DATETIME_FORMAT = 'YYYY-MM-DD HH:mm Z'
+window.DATETIME_DISPLAY_FORMAT = 'DD/MM/YYYY HH:mm'
+window.TIME_FORMAT = 'HH:mm Z'
+window.TIME_DISPLAY_FORMAT = 'HH:mm'
+
 DEFAULT_EVENTS = 'load nested:fieldAdded'
 
 is_mobile = -> $(window).width() < 992

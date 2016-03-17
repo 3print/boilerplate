@@ -4,8 +4,8 @@ widgets.define 'datepicker', (el) ->
 
   try
     $el.datetimepicker
-      format: 'YYYY-MM-DD'
-      displayFormat: 'DD/MM/YYYY'
+      format: DATE_FORMAT
+      displayFormat: DATE_DISPLAY_FORMAT
       locale: 'fr'
       # inline: true
       calendarWeeks: true
@@ -18,8 +18,8 @@ widgets.define 'datetimepicker', (el) ->
 
   try
     $el.datetimepicker
-      format: 'YYYY-MM-DD HH:mm Z'
-      displayFormat: 'DD/MM/YYYY HH:mm'
+      format: DATETIME_FORMAT
+      displayFormat: DATETIME_DISPLAY_FORMAT
       locale: 'fr'
       # inline: true
       calendarWeeks: true
@@ -32,8 +32,8 @@ widgets.define 'timepicker', (el) ->
 
   try
     $el.datetimepicker
-      format: 'HH:mm Z'
-      displayFormat: 'HH:mm'
+      format: TIME_FORMAT
+      displayFormat: TIME_DISPLAY_FORMAT
       locale: 'fr'
       # inline: true
       calendarWeeks: true
