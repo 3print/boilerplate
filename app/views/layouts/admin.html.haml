@@ -53,6 +53,12 @@
               %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'admin_app_name'.t
               = yield :content_header
 
+            - if content_for?(:pills)
+              = yield :pills
+
+            - if content_for?(:breadcrumb)
+              = yield :breadcrumb
+
             = yield :before_content
 
             = yield

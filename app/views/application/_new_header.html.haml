@@ -2,9 +2,10 @@
 - breadcrumb resource_class.t, controller.resource_path(:index)
 - breadcrumb 'admin.actions.create'.t
 
-- content_for :content_header do
+- content_for :pills do
   = pills
-- content_for :before_content do
+
+- content_for :breadcrumb do
   = breadcrumbs
 
 - content_for :page_title do
