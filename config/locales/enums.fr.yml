@@ -27,4 +27,6 @@ fr:
         markdown: MarkDown
         collection: Collection de valeur
         date: Date
+        datetime: Horaire et Date
+        time: Horaire
         image: Image
