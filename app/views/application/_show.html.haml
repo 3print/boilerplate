@@ -4,7 +4,8 @@
   = render_partial_for_user 'show_before_fields'
   %ul.list-group.nomargin
     - columns.each do |col|
-      %li.list-group-item= show_field(col)
+      - if can? :view, resource, col
+        %li.list-group-item= show_field(col)
 
     = render_partial_for_user 'show_extra_fields'
 

@@ -62,6 +62,18 @@ class AdminPolicy
     only_admin
   end
 
+  # Attributes
+
+  def view? (attribute)
+    true
+  end
+
+  def modify? (attribute)
+    only_admin?
+  end
+
+protected
+
   def only_admin
     user && user.admin?
   end
