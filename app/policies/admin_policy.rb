@@ -62,6 +62,23 @@ class AdminPolicy
     only_admin
   end
 
+  def scope
+    Pundit.policy_scope!(user, record.class)
+  end
+
+  class Scope
+    attr_reader :user, :scope
+
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve
+      scope.all
+    end
+  end
+
   # Attributes
 
   def view? (attribute)
@@ -80,22 +97,5 @@ protected
 
   def only_super_admin
     user && user.super_admin?
-  end
-
-  def scope
-    Pundit.policy_scope!(user, record.class)
-  end
-
-  class Scope
-    attr_reader :user, :scope
-
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
-
-    def resolve
-      scope.all
-    end
   end
 end
