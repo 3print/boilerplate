@@ -2,7 +2,7 @@
   %fieldset.inputs.panel-body
     = inputs_for resource, f
   %fieldset.inputs.panel-body
-    = render_partial_for_user 'form_extra_fields', locals: {form: f}
+    = render_partial_for_user 'form_extra_fields', locals: local_assigns.merge(form: f)
 
   = default_actions
 

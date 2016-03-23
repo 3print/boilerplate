@@ -1,7 +1,7 @@
 - edit_url ||= controller.resource_path_for(item, :edit)
 - destroy_url ||= controller.resource_path_for(item, :destroy)
 
-= contextual_partial 'list_item_before_actions', locals: {item: item}
+= contextual_partial 'list_item_before_actions', locals: local_assigns
 
 - if can? :edit, item
   = link_to edit_url, class: 'btn btn-default' do
@@ -13,4 +13,4 @@
     = icon_for(:destroy)
     %span.text= 'admin.actions.destroy'.t
 
-= contextual_partial 'list_item_after_actions', locals: {item: item}
+= contextual_partial 'list_item_after_actions', locals: local_assigns
