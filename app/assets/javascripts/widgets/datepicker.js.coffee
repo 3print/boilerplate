@@ -2,6 +2,9 @@
 widgets.define 'datepicker', (el) ->
   $el = $(el)
 
+  if (date = moment($el.val(), DATE_DISPLAY_FORMAT)).isValid()
+    $el.val(date.format(DATE_FORMAT))
+
   try
     $el.datetimepicker
       format: DATE_FORMAT
@@ -16,6 +19,9 @@ widgets.define 'datepicker', (el) ->
 widgets.define 'datetimepicker', (el) ->
   $el = $(el)
 
+  if (date = moment($el.val(), DATETIME_DISPLAY_FORMAT)).isValid()
+    $el.val(date.format(DATETIME_FORMAT))
+
   try
     $el.datetimepicker
       format: DATETIME_FORMAT
@@ -29,6 +35,9 @@ widgets.define 'datetimepicker', (el) ->
 
 widgets.define 'timepicker', (el) ->
   $el = $(el)
+
+  if (date = moment($el.val(), TIME_DISPLAY_FORMAT)).isValid()
+    $el.val(date.format(TIME_FORMAT))
 
   try
     $el.datetimepicker
