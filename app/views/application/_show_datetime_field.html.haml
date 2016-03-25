@@ -1,5 +1,6 @@
-%strong= "#{controller.resource_name.singularize}.#{column}".tmfc
-- if value.present?
-  = value.l
-- else
-  Non définie
+- if can? :view, resource, column
+  %strong= "#{controller.resource_name.singularize}.#{column}".tmfc
+  - if value.present?
+    = value.l
+  - else
+    Non définie

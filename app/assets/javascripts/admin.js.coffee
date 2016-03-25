@@ -81,7 +81,6 @@ NestedFormEvents::insertFields = (content, assoc, link) ->
 
 $ ->
   FastClick.attach(document.body)
-  I18n.attachToWindow()
 
   $('[data-toggle="collapse"]').on 'click', (e) ->
     e.preventDefault()

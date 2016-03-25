@@ -1,8 +1,8 @@
+- if can? :view, resource, column
+  %strong= "#{controller.resource_name.singularize}.#{column}".tmf
+  - if value.present?
+    %pre
+      %code.json= JSON.pretty_generate(value)
 
-%strong= "#{controller.resource_name.singularize}.#{column}".tmf
-- if value.present?
-  %pre
-    %code.json= JSON.pretty_generate(value)
-
-- else
-  Aucun paramètres
+  - else
+    Aucun paramètres

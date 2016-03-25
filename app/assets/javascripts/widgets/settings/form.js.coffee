@@ -59,7 +59,7 @@ class window.SettingsForm
       id = "#{setting}-#{@id}"
       setting_parameters = {}
 
-      type = JSON.parse(type) if is_json type
+      type = JSON.parse(type) if typeof type is 'string' and is_json(type)
 
       if type? and typeof type is 'object'
         setting_parameters = type

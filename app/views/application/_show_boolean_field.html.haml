@@ -1,2 +1,3 @@
-%input{type: :checkbox, readonly: true, checked: value}
-%label= "#{controller.resource_name.singularize}.#{column}".tmf
+- if can? :view, resource, column
+  %input{type: :checkbox, readonly: true, checked: value}
+  %label= "#{controller.resource_name.singularize}.#{column}".tmf

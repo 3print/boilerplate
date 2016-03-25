@@ -62,14 +62,6 @@ class AdminPolicy
     only_admin
   end
 
-  def only_admin
-    user && user.admin?
-  end
-
-  def only_super_admin
-    user && user.super_admin?
-  end
-
   def scope
     Pundit.policy_scope!(user, record.class)
   end
@@ -85,5 +77,25 @@ class AdminPolicy
     def resolve
       scope.all
     end
+  end
+
+  # Attributes
+
+  def view? (attribute)
+    true
+  end
+
+  def modify? (attribute)
+    only_admin?
+  end
+
+protected
+
+  def only_admin
+    user && user.admin?
+  end
+
+  def only_super_admin
+    user && user.super_admin?
   end
 end
