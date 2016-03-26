@@ -29,10 +29,11 @@ get_handler = (name) ->
     fields.forEach (key) ->
       html += """
         <div class="col-sm-3">
-          <label>#{"settings_input.#{name}.#{key}.label".t()}</label>
+          <label for="#{hidden.id}_#{key}">#{"settings_input.#{name}.#{key}.label".t()}</label>
           <input
             type="number"
             class="form-control"
+            id="#{hidden.id}_#{key}"
             #{if name is 'integer' then 'step="1"' else ''}
             placeholder="#{"settings_input.#{name}.#{key}.placeholder".t()}"
             data-name="#{key}">
