@@ -51,6 +51,14 @@ window.locales =
           label: 'Step'
           placeholder: 0.1
 
+      string:
+        limit:
+          label: 'Size Limit'
+          placeholder: 'no limit'
+
+        textarea:
+          label: 'Multiline text'
+
   #    ######## ########
   #    ##       ##     ##
   #    ##       ##     ##
@@ -101,3 +109,11 @@ window.locales =
         step:
           label: 'Pas'
           placeholder: 0.1
+
+      string:
+        limit:
+          label: 'Limite de taille'
+          placeholder: 'aucune limite'
+
+        textarea:
+          label: 'Texte multiligne'

@@ -7,8 +7,12 @@
   %input.form-control{type: :number, value:'{{= value != undefined ? value : setting_parameters[\'default\'] || \'\'}}', id:'{{= id }}', step: '{{= setting_parameters.step || 1}}', min: '{{= setting_parameters.min || \'\'}}', max: '{{= setting_parameters.max || \'\'}}', data: {name: '{{= setting }}'}}
 
 .tpl#string
-  %label{for:'{{= id}}'} {{= label}}
-  %input.form-control{type: :text, value:'{{= value}}', id:'{{= id}}', data: {name: '{{= setting }}'}}
+  %label{for:'{{= id }}'} {{= label }}
+  {{= (setting_parameters.textarea ? }}
+  %textarea.form-control{type: :text, id:'{{= id }}', data: {name: '{{= setting }}', limit: '{{= setting_parameters.limit || \'\' }}'}} {{= value || '' }}
+  {{= : }}
+  %input.form-control{type: :text, value:'{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}', limit: '{{= setting_parameters.limit || \'\' }}'}}
+  {{= ) }}
 
 .tpl#boolean
   %input.form-control{type: :checkbox, value:'{{= value }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
