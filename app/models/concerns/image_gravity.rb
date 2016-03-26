@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module ImageGravity
+module Concerns::ImageGravity
   extend ActiveSupport::Concern
 
   def gravity_enum(*attrs)
