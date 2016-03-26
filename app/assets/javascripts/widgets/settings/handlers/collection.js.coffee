@@ -15,9 +15,10 @@ SettingsEditor.handlers.push
     normalize_value = (v) -> v.values ? to_array v
     collection_update = => @save(hidden)
     additional_fields = $ """
-      <label>#{'settings_input.collection.values.label'.t()}</label>
+      <label for="#{hidden.id}_collection">#{'settings_input.collection.values.label'.t()}</label>
       <input type="text"
              class="form-control"
+             id="#{hidden.id}_collection"
              data-type="collection"
              placeholder="#{'settings_input.collection.values.placeholder'.t()}">
       </input>
