@@ -16,7 +16,20 @@ map_parts = (s) ->
   else
     "'#{s.replace(/'/g, "\\'")}'"
 
-convert = (str) -> split(str.replace(/\s+/g, ' ')).map(map_parts).join(', ')
+expr_reducer = (acc, s) ->
+  if acc.length > 0 and acc[acc.length - 1].match(/(\?|:)\s*$/)
+    acc[acc.length - 1] += s
+  else if s.match(/^\s*:\s*$/)
+    acc[acc.length - 1] += s
+  else unless s.match(/^\s*'|\?\s*$/)
+    acc.push "(#{s})"
+  else
+    acc.push(s)
+
+  acc
+
+convert = (str) ->
+  split(str.replace(/\s+/g, ' ')).map(map_parts).reduce(expr_reducer, []).join(' + ')
 
 class window.SettingsForm
   @tpl: (str, data) ->
@@ -27,7 +40,7 @@ class window.SettingsForm
       @tpl_cache[str] ?= @tpl(document.getElementById(str).innerHTML)
     else
       try
-        body = "with(obj){ return [#{ convert(str) }].join(\'\') }"
+        body = "with(obj){ return #{convert(str)} }"
         new Function('obj', body)
       catch e
         console.error str
