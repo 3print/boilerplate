@@ -4,42 +4,34 @@ next_id = 0
 
 get_next_id = -> next_id++
 
+flat_reducer = (acc, v) -> acc.concat if Array.isArray(v) then flatten(v) else v
+
+flatten = (a) -> a.reduce(flat_reducer, [])
+
+split = (s) -> flatten(s.split('{{').map((s) -> s.split('}}')))
+
+map_parts = (s) ->
+  if m = /^\s*=/.exec(s)
+    s.slice(m[0].length)
+  else
+    "'#{s.replace(/'/g, "\\'")}'"
+
+convert = (str) -> split(str.replace(/\s+/g, ' ')).map(map_parts).join(', ')
+
 class window.SettingsForm
   @tpl: (str, data) ->
     @tpl_cache ?= {}
     # Figure out if we're getting a template, or if we need to
     # load the template - and be sure to cache the result.
-    fn = if !/\W/.test(str)
+    fn = if /^[-_a-zA-Z]+$/.test(str)
       @tpl_cache[str] ?= @tpl(document.getElementById(str).innerHTML)
     else
       try
-        new Function(
-          'obj',
-          """
-            var p=[]
-            var print = function(){
-              p.push.apply(p,arguments)
-            }
-            with(obj){
-              p.push(\'#{
-                str.replace(/[\r\t\n]/g, ' ')
-                .split('{{')
-                .join('\t')
-                .replace(/((^|\}\})[^\t]*)'/g, '$1\n')
-                .replace(/\t=(.*?)\}\}/g, '\',$1,\'')
-                .split('\t')
-                .join('\');')
-                .split('}}')
-                .join('p.push(\'')
-                .split('\n')
-                .join('\\\'')
-              }\')
-            }
-            return p.join(\'\')
-          """
-        )
+        body = "with(obj){ return [#{ convert(str) }].join(\'\') }"
+        new Function('obj', body)
       catch e
         console.error str
+        console.error body
         throw e
     # Provide some basic currying to the user
     if data then fn(data) else fn
