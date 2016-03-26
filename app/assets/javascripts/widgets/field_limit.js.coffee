@@ -1,5 +1,8 @@
 widgets.define 'field_limit', (el) ->
   limit = Number(el.getAttribute('data-limit'))
+
+  return if not limit? or limit is 0
+
   result = document.createElement('div')
   result.textContent = "Caractères restant : #{limit - el.value.length}"
 
