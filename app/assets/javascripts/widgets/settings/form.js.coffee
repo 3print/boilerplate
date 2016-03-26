@@ -19,7 +19,7 @@ map_parts = (s) ->
 expr_reducer = (acc, s) ->
   if acc.length > 0 and acc[acc.length - 1].match(/(\?|:)\s*$/)
     acc[acc.length - 1] += s
-  else if s.match(/^\s*:\s*$/)
+  else if s.match(/^\s*(:|\))\s*$/)
     acc[acc.length - 1] += s
   else unless s.match(/^\s*'|\?\s*$/)
     acc.push "(#{s})"
