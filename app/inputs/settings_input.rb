@@ -49,10 +49,12 @@ class SettingsInput < SimpleForm::Inputs::TextInput
     types = self.class.types
     placeholder = 'simple_form.placeholders.type'.t
 
+    id = [class_name, attribute_name, field].join('_').underscore
+
     row = '<tr>'
 
     row += '<td>'
-    row += "<input type=\"hidden\" name=\"#{class_name}[#{attribute_name}][#{field}]\""
+    row += "<input type=\"hidden\" name=\"#{class_name}[#{attribute_name}][#{field}]\" id=\"#{id}\""
     row += " value='#{value}'" if field.present?
     row += "></input>"
     row += "<input type=\"text\" value=\"#{field}\" class=\"form-control\"></input>"

@@ -35,7 +35,10 @@ class window.SettingsEditor
     @row_blueprint = light_unescape @table.dataset.rowBlueprint
     @form = document.querySelector('form')
 
-    Array::forEach.call @table.querySelectorAll('tr'), (row) =>
+    rows = @table.querySelectorAll('tr')
+    @num_rows = rows.length
+
+    Array::forEach.call rows, (row) =>
       hidden = row.querySelector('input[type=hidden]')
       return unless hidden?
 
@@ -74,6 +77,7 @@ class window.SettingsEditor
 
     row = $(@row_blueprint)[0]
     hidden = row.querySelector('input[type=hidden]')
+    hidden.id += @num_rows++
 
     @initialize_type(row, hidden)
     @register_row_events(row)
