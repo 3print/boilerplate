@@ -62,7 +62,7 @@ widgets 'datetimepicker', '.datetimepicker', on: DEFAULT_EVENTS, unless: is_mobi
 widgets 'timepicker', '.timepicker', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'filepicker', '.form-group.file', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'markdown', '[data-editor="markdown"]', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
-widgets 'propagate_input_value', 'input, select', on: DEFAULT_EVENTS, unless: is_in_template
+widgets 'propagate_input_value', 'input:not(.select2-offscreen):not(.select2-input), select', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'select2', 'select, .select2', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'field_limit', '[data-limit]', on: DEFAULT_EVENTS, unless: is_in_template
 
