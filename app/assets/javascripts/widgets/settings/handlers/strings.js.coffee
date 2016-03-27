@@ -20,6 +20,7 @@ SettingsEditor.handlers.push
 
   additional_fields: (value, hidden) ->
     update = => @save(hidden)
+
     html = """
     <div class="row">
       <div class="col-sm-6">
@@ -27,7 +28,8 @@ SettingsEditor.handlers.push
           type="checkbox"
           class="form-control"
           id="#{hidden.id}_textarea"
-          data-name="textarea">
+          data-name="textarea"
+          #{if value.textarea then 'checked' else ''}>
         </input>
         <label for="#{hidden.id}_textarea">#{"settings_input.string.textarea.label".t()}</label>
       </div>
