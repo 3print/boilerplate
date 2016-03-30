@@ -1,25 +1,36 @@
-root_path = File.dirname(__FILE__)
-seed_pattern = File.join(root_path, 'seeds', "*.yml")
+def seeds_paths
+  root_path = File.dirname(__FILE__)
+  seed_pattern = File.join(root_path, 'seeds', "*.yml")
+  Dir[seed_pattern]
+end
 
-seed_files = Dir[seed_pattern]
+def all_seeds
+  seeds_paths.map do |f|
+    settings = YAML.load_file(f).with_indifferent_access
+    if settings.is_a?(Array)
+      settings = {
+        seeds: settings,
+        ignore_in_query: []
+      }
+    end
 
-def as_query(seed, ignores=[])
+    settings[:file] = f
+    settings[:class] = File.basename(f, '.yml').classify.constantize
+    settings
+
+  end.sort {|a,b| (a[:priority] || 0) - (b[:priority] || 0) }
+end
+
+def as_query(seed, ignores)
   query = seed.dup
   ignores.each { |i| query.delete(i) }
   query.symbolize_keys
 end
 
-seed_files.each do |seed_file|
-  seeds_settings = YAML.load_file(seed_file).with_indifferent_access
-  model_class = File.basename(seed_file, '.yml').singularize.camelize.constantize
-
-  if seeds_settings.is_a?(Array)
-    seeds = seeds_settings
-    ignores = []
-  else
-    seeds = seeds_settings[:seeds]
-    ignores = seeds_settings[:ignore_in_query]
-  end
+all_seeds.each do |seeds_settings|
+  model_class = seeds_settings[:class]
+  seeds = seeds_settings[:seeds]
+  ignores = seeds_settings[:ignore_in_query] || []
 
   seeds.each do |seed|
     query = as_query(seed, ignores)
