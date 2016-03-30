@@ -55,7 +55,7 @@ class SettingsInput < SimpleForm::Inputs::TextInput
 
     row += '<td>'
     row += "<input type=\"hidden\" name=\"#{class_name}[#{attribute_name}][#{field}]\" id=\"#{id}\""
-    row += " value='#{value}'" if field.present?
+    row += " value='#{value.to_json}'" if field.present?
     row += "></input>"
     row += "<input type=\"text\" value=\"#{field}\" class=\"form-control\"></input>"
     row += '</td>'

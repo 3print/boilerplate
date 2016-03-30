@@ -1,5 +1,6 @@
 #= require widgets/settings/editor
 #= require widgets/settings/form
+#= require widgets/settings/json_form
 #= require_tree ./settings/handlers
 
 widgets.define 'settings_editor', (el) ->
