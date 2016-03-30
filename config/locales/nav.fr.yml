@@ -8,6 +8,7 @@ fr:
 
   nav:
     root: *root
+    account: Compte
     <<: *models
 
     admin:

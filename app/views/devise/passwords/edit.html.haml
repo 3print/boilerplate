@@ -1,0 +1,25 @@
+- content_for :page_title do
+  = 'devise.passwords.new_password.title'.t
+
+- content_for :breadcrumb do
+  - breadcrumb 'nav.account'.t, new_user_session_path
+  - breadcrumb 'devise.passwords.new_password.title'.t
+  - breadcrumbs do
+    = 'labels.breadcrumb'.tc
+
+.row.sign-in
+  .col-md-12
+    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+      %h3= 'devise.passwords.new_password.title'.t
+      - unless resource.errors.empty?
+        .alert.alert-danger= 'devise.passwords.forgotten_password.error'.t
+
+      = f.hidden_field :reset_password_token
+      .form-group.password
+        = f.label :password, 'devise.passwords.new_password.new_password'.t
+        = f.password_field :password, autofocus: true, autocomplete: 'off', class: 'form-control password'
+        = "simple_form.hints.user.password".t
+      .form-group
+        = f.label :password_confirmation, 'devise.passwords.new_password.new_password_confirmation'.t
+        = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
+      = f.submit 'devise.passwords.new_password.submit'.t, :class => 'button right btn btn-primary'

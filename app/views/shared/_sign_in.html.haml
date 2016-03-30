@@ -8,6 +8,7 @@
       = f.input :remember_me, as: :boolean
 
       = f.submit 'actions.connect'.t, class: 'btn btn-red btn-block'
+      = link_to 'actions.recover_password'.t, new_password_path(resource)
 
   .col-md-6
     = simple_form_for(sign_up_model, url: registration_path(resource_name), html: { role: 'form'}) do |f|

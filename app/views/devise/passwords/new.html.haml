@@ -1,0 +1,23 @@
+- content_for :page_title do
+  = 'devise.passwords.forgotten_password.title'.t
+
+- content_for :breadcrumb do
+  - breadcrumb 'nav.account'.t, new_user_session_path
+  - breadcrumb 'devise.passwords.forgotten_password.title'.t
+  - breadcrumbs do
+    = 'labels.breadcrumb'.tc
+
+.row.sign-in
+  .col-md-12
+    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f|
+      %h3
+        = 'devise.passwords.forgotten_password.title'.t
+      %p= 'devise.passwords.forgotten_password.instructions'.t
+      - unless resource.errors.empty?
+        .alert.alert-danger= 'devise.passwords.forgotten_password.error'.t
+
+      .form-group
+        = f.label :email
+        = f.email_field :email, :autofocus => true, class: 'form-control'
+
+      = f.submit 'actions.reset_password'.t, :class => 'button right btn btn-primary'
