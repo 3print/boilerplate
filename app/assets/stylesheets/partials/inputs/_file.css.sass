@@ -20,13 +20,7 @@
 
     label
       display: block
-      z-index: 2
-      margin: 0
       +absolute(0,0,0,0)
-
-    .btn-danger
-      z-index: 3
-      +absolute(8px,initial,initial,4px)
 
   select
     position: absolute
@@ -38,17 +32,15 @@
 
   .progress
     height: 4px
-    border-bottom: 1px solid $bootstrap_border_color
+    border-bottom: 1px solid $bootstrap-border-color
     border-radius: 0
     +absolute(0,0,initial,0)
 
     .progress-bar
       border-radius: 0
-      +transition(none)
 
   .preview
-    min-height: 18px
-    margin-top: 4px
+    min-height: 21px
     img
       margin: 0
 
@@ -66,8 +58,8 @@
       border-bottom-right-radius: 3px
       background: $color-grey-lighter
       color: $color-grey-darker
-      border-right: 1px solid $bootstrap_border_color
-      border-bottom: 1px solid $bootstrap_border_color
+      border-right: 1px solid $bootstrap-border-color
+      border-bottom: 1px solid $bootstrap-border-color
       +absolute(-1px,0)
 
     .meta
