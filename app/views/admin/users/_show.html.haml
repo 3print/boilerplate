@@ -1,12 +1,7 @@
 
 .row
   .col-md-4
-    - if resource.avatar.present?
-      .avatar.medium
-        = image_tag resource.avatar.medium
-    - else
-      .avatar.medium.default
-        = icon :user
+    = show_avatar resource.avatar, :medium
 
   .col-md-8
     .panel.panel-default

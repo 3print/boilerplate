@@ -1,0 +1,14 @@
+
+.avatar
+  overflow: hidden
+  position: relative
+  +border-radius(50%)
+
+  svg
+    +absolute(10%,10%,10%,10%)
+    fill: currentColor
+    color: $light-background-text-subtle
+
+  &.default
+    background: $light-background-highlight
+    text-align: center
