@@ -2,11 +2,12 @@
 ActiveRecord::Enum.module_eval do
   def enum(definitions)
     klass = self
+    enum_prefix = definitions.delete(:_prefix)
+    enum_suffix = definitions.delete(:_suffix)
+
     definitions.each do |name, values|
       # statuses = { }
       enum_values = ActiveSupport::HashWithIndifferentAccess.new
-      enum_prefix = definitions.delete(:_prefix)
-      enum_suffix = definitions.delete(:_suffix)
       name        = name.to_sym
 
       # def self.statuses statuses end
@@ -38,16 +39,22 @@ ActiveRecord::Enum.module_eval do
         define_method("#{name}_before_type_cast") { enum_values.key self[name] }
 
         pairs = values.respond_to?(:each_pair) ? values.each_pair : values.each_with_index
+
         pairs.each do |value, i|
           if enum_prefix == true
             prefix = "#{name}_"
           elsif enum_prefix
             prefix = "#{enum_prefix}_"
+          else
+            prefix = ''
           end
+
           if enum_suffix == true
             suffix = "_#{name}"
           elsif enum_suffix
             suffix = "_#{enum_suffix}"
+          else
+            suffix = ''
           end
 
           value_method_name = "#{prefix}#{value}#{suffix}"
@@ -55,7 +62,7 @@ ActiveRecord::Enum.module_eval do
 
           # def active?() status == 0 end
           klass.send(:detect_enum_conflict!, name, "#{value_method_name}?")
-          define_method("#{value_method_name}?") { self[name] == value.to_s }
+          define_method("#{value_method_name}?") { self[name] == i }
 
           # def active!() update! status: :active end
           klass.send(:detect_enum_conflict!, name, "#{value_method_name}!")
@@ -63,7 +70,7 @@ ActiveRecord::Enum.module_eval do
 
           # scope :active, -> { where status: 0 }
           klass.send(:detect_enum_conflict!, name, value_method_name, true)
-          klass.scope value_method_name, -> { klass.where name => value }
+          klass.scope value_method_name, -> { klass.where name => i }
         end
       end
       defined_enums[name.to_s] = enum_values
