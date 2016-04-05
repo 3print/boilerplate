@@ -1,10 +1,3 @@
-=vendor-prefix($name, $arguments...)
-  -webkit-#{$name}: #{$arguments}
-  -moz-#{$name}: #{$arguments}
-  -ms-#{$name}: #{$arguments}
-  -o-#{$name}: #{$arguments}
-  #{$name}: #{$arguments}
-
 =bounds($top: initial, $left: initial, $bottom: initial, $right: initial)
   top: $top
   left: $left
@@ -32,6 +25,3 @@
   display: inline-block
   width: $width
   height: $height
-
-=box-sizing($sizing: border-box)
-  +vendor-prefix(box-sizing, $sizing)
