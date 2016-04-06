@@ -41,6 +41,21 @@
 #     are defined, only `use_in_query` will be used.
 #   - `ignore_unknown_attributes`: When `true` the seed hash will be reaped of
 #     all the fields that doesn't match a column or an association name.
+#
+# A seed can reference another model for a `belongs_to` association, but since
+# we don't know the model id in the seed we'll have to use another method to
+# find the record.
+#
+# The form is `find: Class#query` where `query` is a list of tuple of the field
+# to match.
+#
+# For instance:
+#
+# ```yaml
+# - name: 'Foo'
+#   parent:
+#     find: ModelClass#field_a=value_a,field_b=value_b
+# ```
 
 
 def association_columns(object, *by_associations)
@@ -91,14 +106,25 @@ def all_seeds
   end.sort {|a,b| (a[:priority] || 0) - (b[:priority] || 0) }
 end
 
-def as_query(seed, ignores, uses)
+def as_query(model_class, seed, ignores, uses)
+  belongs_to_associations = association_columns(model_class, :belongs_to)
   query = seed.dup
+
   if uses.present?
-    query = Hash[seed.select {|k,v| uses.include?(k) }]
+    query = Hash[query.select {|k,v| uses.include?(k) }]
   else
     ignores.each { |i| query.delete(i) }
   end
-  query.symbolize_keys
+
+  Hash[query.map do |k,v|
+    if belongs_to_associations.include?(k)
+      ["#{k}_id", v.try(:id)]
+    elsif model_class.defined_enums.has_key?(k)
+      [k, model_class.send(k.to_s.pluralize)[v]]
+    else
+      [k, v]
+    end
+  end].symbolize_keys
 end
 
 def cleanup_attributes(model_class, attrs)
@@ -110,9 +136,14 @@ def process_attributes(attrs)
   Hash[attrs.map do |k,v|
     if v.is_a?(Hash) && v.has_key?(:find)
       m,t = v['find'].split('#')
-      a,vv = t.split('=')
+      l = t.split(',')
+      q = {}
+      l.each do |ll|
+        a,vv = ll.split('=')
+        q[a] = vv
+      end
 
-      v = m.constantize.where({a => vv}).first
+      v = m.constantize.where(q).first
     end
 
     [k,v]
@@ -133,7 +164,7 @@ all_seeds.each do |seeds_settings|
     end
     seed = process_attributes(seed)
 
-    query = as_query(seed, ignores, uses)
+    query = as_query(model_class, seed, ignores, uses)
     begin
       unless model = model_class.where(query).first
         model = model_class.new(seed)
@@ -145,7 +176,12 @@ all_seeds.each do |seeds_settings|
     rescue => e
       if model.present?
         p model
-        p model.errors.messages.map {|k,v| "#{k}: #{v.to_sentence}" }.join('\n')
+        if model.errors.any?
+          p model.errors.messages.map {|k,v| "#{k}: #{v.to_sentence}" }.join('\n')
+        else
+          p e
+        end
+
       else
         raise e
       end
