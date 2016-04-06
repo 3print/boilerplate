@@ -5,17 +5,7 @@ module Concerns::ImageGravity
 
   def gravity_enum(*attrs)
     attrs.each do |key|
-      enum :"#{key}_gravity" => [
-        "#{key}_north",
-        "#{key}_south",
-        "#{key}_east",
-        "#{key}_west",
-        "#{key}_north_west",
-        "#{key}_north_east",
-        "#{key}_south_west",
-        "#{key}_south_east",
-        "#{key}_center",
-      ]
+      enum "#{key}_gravity" => %w(north south east west north_west north_east south_west south_east center), _prefix: true
       after_save do
         gravity_changed_key = :"#{key}_gravity_changed?"
         changed_key = :"#{key}_changed?"
