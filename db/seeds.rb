@@ -74,6 +74,18 @@ def association_columns(object, *by_associations)
   end
 end
 
+def polymorphic_association_columns(object)
+  if object.respond_to?(:reflections)
+    object.reflections.collect do |name, association_reflection|
+      if association_reflection.options[:polymorphic]
+        name.to_s
+      end
+    end.compact
+  else
+    []
+  end
+end
+
 def content_columns(object)
   return [] unless object.respond_to?(:content_columns)
   object.content_columns.collect { |c| c.name }.compact
@@ -108,6 +120,7 @@ end
 
 def as_query(model_class, seed, ignores, uses)
   belongs_to_associations = association_columns(model_class, :belongs_to)
+  polymorphic_belongs_to_associations = polymorphic_association_columns(model_class)
   query = seed.dup
 
   if uses.present?
@@ -119,6 +132,11 @@ def as_query(model_class, seed, ignores, uses)
   Hash[query.map do |k,v|
     if belongs_to_associations.include?(k)
       ["#{k}_id", v.try(:id)]
+    elsif polymorphic_belongs_to_associations.include?(k)
+      [
+        ["#{k}_id", v.try(:id)],
+        ["#{k}_type", v.try(:class).try(:name)]
+      ]
     elsif model_class.defined_enums.has_key?(k)
       [k, model_class.send(k.to_s.pluralize)[v]]
     else
@@ -128,8 +146,9 @@ def as_query(model_class, seed, ignores, uses)
 end
 
 def cleanup_attributes(model_class, attrs)
-  columns = all_columns(model_class)
-  Hash[attrs.select { |k,v| columns.include?(k) }].with_indifferent_access
+  instance = model_class.new
+
+  Hash[attrs.select { |k,v| instance.respond_to?(:"#{k}=") }].with_indifferent_access
 end
 
 def process_attributes(attrs)
@@ -167,8 +186,10 @@ all_seeds.each do |seeds_settings|
     query = as_query(model_class, seed, ignores, uses)
     begin
       unless model = model_class.where(query).first
-        model = model_class.new(seed)
-        model.save!
+        ActiveRecord::Base.transaction do
+          model = model_class.new(seed)
+          model.save!
+        end
         print "model #{model} created successfully\n"
       else
         print "model #{model} already existed\n"
