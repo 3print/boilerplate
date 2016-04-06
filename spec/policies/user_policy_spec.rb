@@ -7,10 +7,10 @@ describe UserPolicy do
 
   permissions :index? do
     it "denies access if not an admin" do
-      expect(UserPolicy).not_to permit(current_user)
+      expect(subject).not_to permit(current_user)
     end
     it "allows access for an admin" do
-      expect(UserPolicy).to permit(admin)
+      expect(subject).to permit(admin)
     end
   end
 
