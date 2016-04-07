@@ -18,6 +18,10 @@ module ResourceExtensions
       nil
     end
 
+    def self.resource_scope
+      resource_class
+    end
+
     def self.load_resource(options={})
       before_filter options do
         resource
@@ -84,6 +88,10 @@ module ResourceExtensions
     self.class.resource_class
   end
 
+  def resource_scope
+    resource_class
+  end
+
   def resource_params
     params[resource_name.singularize]
   end
@@ -93,7 +101,7 @@ module ResourceExtensions
 
     authorize = opts.delete(:authorize)
     action = params[:action]
-    class_scope = policy_scope(resource_class)
+    class_scope = policy_scope(resource_scope)
     return if class_scope.nil?
 
     case action
@@ -112,7 +120,7 @@ module ResourceExtensions
       if params[:id].present?
         key = :"@#{resource_name.singularize}"
         unless results = instance_variable_get(key)
-          q = resource_class.where(find_by_key => params[:id])
+          q = resource_scope.where(find_by_key => params[:id])
           instance_variable_set(key, results = q.first)
         end
       else
