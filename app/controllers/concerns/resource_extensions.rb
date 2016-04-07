@@ -18,10 +18,6 @@ module ResourceExtensions
       nil
     end
 
-    def self.resource_scope
-      resource_class
-    end
-
     def self.load_resource(options={})
       before_filter options do
         resource
