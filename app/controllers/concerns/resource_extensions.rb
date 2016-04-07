@@ -48,12 +48,21 @@ module ResourceExtensions
       end
     end
 
-    def self.scope_resource(scope, options={})
+    def self.scope_resource(scope=nil, options={}, &blk)
+      scope, options = [nil, options] if scope.is_a?(Hash)
+
       options[:only] = :index if options.empty?
 
       before_filter options do
         key = :"@#{resource_name}"
-        instance_variable_set(key, instance_variable_get(key).send(scope))
+        resource
+        if block_given?
+          scope = instance_variable_get(key)
+          scope = instance_exec scope, &blk
+          instance_variable_set key, scope
+        else
+          instance_variable_set(key, instance_variable_get(key).send(scope))
+        end
       end
     end
 
