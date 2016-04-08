@@ -105,3 +105,19 @@
 .has-success.file
   .controls
     border-color: $color-green
+
+.file.settings_image_uploader-handled
+  label
+    z-index: 1
+
+  .progress-bar
+    +transition(none)
+
+  button
+    z-index: 2
+    position: absolute
+    top: 8px
+    right: 4px
+
+  img[src=""], img[src="undefined"]
+    display: none

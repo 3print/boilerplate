@@ -15,7 +15,7 @@
   {{= ) }}
 
 .tpl#boolean
-  %input.form-control{type: :checkbox, value:'{{= value }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
+  %input.form-control{type: :checkbox, value:'{{= value || false }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
   %label{for:'{{= id }}'} {{= label }}
 
 .tpl#markdown
@@ -29,23 +29,22 @@
 
 .tpl#date
   %label{for:'{{= id }}'} {{= label }}
-  %input.form-control.datepicker{type: :text, value:'{{= value }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
+  %input.form-control.datepicker{type: :text, value:'{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
 
 .tpl#datetime
   %label{for:'{{= id }}'} {{= label }}
-  %input.form-control.datetimepicker{type: :text, value:'{{= value }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
+  %input.form-control.datetimepicker{type: :text, value:'{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
 
 .tpl#time
   %label{for:'{{= id }}'} {{= label }}
-  %input.form-control.timepicker{type: :text, value:'{{= value }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
+  %input.form-control.timepicker{type: :text, value:'{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
 
 .tpl#image
-
   .file
     %label{for: '{{= id }}'} {{= label }}
 
     .controls
-      %input.form-control{style: "display: inline;", type: :text, value: '{{= value }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
+      %input.form-control{style: "display: inline;", type: :text, value: '{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
       .preview
         .progress
           .progress-bar.progress-bar-success
