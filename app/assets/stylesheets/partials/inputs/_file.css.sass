@@ -76,12 +76,19 @@
   .crop-settings
     clear: both
     padding-top: 6px
-    margin: 0 -13px -7px
+    position: absolute
+    bottom: -1px
+    left: -1px
+    right: -1px
 
     .control-label
       padding: 0 6px
       font-size: 0.8em
       +relative
+
+  .with-crop-settings + .preview
+    padding-bottom: 70px
+
 
 .well.gallery .file .controls
   height: 140px

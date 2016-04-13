@@ -7,7 +7,18 @@ class FileInput < SimpleForm::Inputs::FileInput
     use_aws = CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog || (Rails.env.development? && !ENV['NO_AWS'])
     return super unless use_aws
 
+    has_gravity = object.respond_to?(:"#{attribute_name}_gravity")
+
     buffer = ''
+
+    if has_gravity
+      input_html_classes << "with-crop-settings"
+      buffer << '<div class="crop-settings">'
+      buffer << @builder.label('simple_form.labels.crop_settings'.t)
+      buffer << select_tag("#{object_name}[#{attribute_name}_gravity]", options_for_select([['','']] + %w(north south east west north_west north_east south_west south_east center).map {|s| ["enums.file.gravity.#{s}".t, s] }, object.send(:"#{attribute_name}_gravity")), placeholder: 'simple_form.placeholders.crop_settings'.t)
+      buffer << '</div>'
+    end
+
     opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
     if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog
       buffer << @builder.hidden_field(:"remote_#{attribute_name}_url", opts)
@@ -16,12 +27,6 @@ class FileInput < SimpleForm::Inputs::FileInput
     end
     buffer << preview
 
-    if object.respond_to?(:"#{attribute_name}_gravity")
-      buffer << '<div class="crop-settings">'
-      buffer << @builder.label('simple_form.labels.crop_settings'.t)
-      buffer << select_tag("#{object_name}[#{attribute_name}_gravity]", options_for_select([['','']] + %w(north south east west north_west north_east south_west south_east center).map {|s| ["enums.file.gravity.#{s}".t, s] }, object.send(:"#{attribute_name}_gravity")), placeholder: 'simple_form.placeholders.crop_settings'.t)
-      buffer << '</div>'
-    end
 
     buffer.html_safe
   end
