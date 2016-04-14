@@ -1,6 +1,5 @@
 #= require widgets/settings/editor
 #= require widgets/settings/form
-#= require widgets/settings/json_form
 #= require_tree ./settings/handlers
 
 widgets.define 'settings_editor', (el) ->
@@ -9,6 +8,19 @@ widgets.define 'settings_editor', (el) ->
 widgets.define 'settings_form', (el) ->
   $el = $(el)
   $el.data 'form', form = new SettingsForm($el)
-  $el.append form.render()
+  $form = $(form.render())
+
+  $form.find('[required="no"]').each ->
+    $input = $(this)
+    $input.parents('.has-feedback').removeClass('has-feedback')
+    $input.removeAttr('required')
+    true
+
+  $form.find('[multiple="no"]').each ->
+    $input = $(this)
+    $input.removeAttr('multiple')
+    true
+
+  $el.append($form)
 
   setTimeout (-> $el.trigger('nested:fieldAdded')), 100

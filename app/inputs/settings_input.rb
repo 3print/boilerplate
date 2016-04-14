@@ -9,7 +9,8 @@ class SettingsInput < SimpleForm::Inputs::TextInput
     :date,
     :datetime,
     :time,
-    :image
+    :image,
+    :resource
   ]
 
   def self.types
@@ -55,17 +56,17 @@ class SettingsInput < SimpleForm::Inputs::TextInput
 
     row += '<td>'
     row += "<input type=\"hidden\" name=\"#{class_name}[#{attribute_name}][#{field}]\" id=\"#{id}\""
-    row += " value='#{value.to_json}'" if field.present?
+    row += " value='#{value.is_a?(Hash) ? value.to_json : value}'" if field.present?
     row += "></input>"
-    row += "<input type=\"text\" value=\"#{field}\" class=\"form-control\"></input>"
+    row += "<div class=\"form-group has-feedback\"><div class=\"controls\"><input type=\"text\" value=\"#{field}\" class=\"form-control\" required></input></div></div>"
     row += '</td>'
-    row += "<td><select style=\"width: 100%\" placeholder=\"#{placeholder}\">"
+    row += "<td><div class=\"form-group has-feedback\"><div class=\"controls\"><select style=\"width: 100%\" placeholder=\"#{placeholder}\" required>"
 
     ([''] + types).each do |type|
       row += "<option value=\"#{type}\">#{type == '' ? '' : "enums.settings.types.#{type}".t.gsub("'", '&#39;')}</option>"
     end
 
-    row += '</select>'
+    row += '</select></div></div>'
     row += '<div class="additional"></div>'
 
     row += '</td>'

@@ -1,4 +1,4 @@
-{no_empty_string} = SettingsEditor.Utils
+{additional_field, required_field, collect_setting_data, format_setting_data} = SettingsEditor.Utils
 
 fields = ['default', 'min', 'max', 'step']
 
@@ -10,21 +10,12 @@ get_handler = (name) ->
   fake_value: -> Math.round(Math.random() * 100)
 
   save: (hidden) ->
-    values = fields.map (key) -> no_empty_string hidden["#{key}_input"].val()
-
-    if values.some((v) -> v?)
-      data = type: name
-
-      fields.forEach (key, i) ->
-        value = values[i]
-        data[key] = value if value?
-
-      hidden.value = JSON.stringify(data)
-    else
-      hidden.value = name
+    data = collect_setting_data(name, hidden, 'required', fields...)
+    hidden.value = format_setting_data(data)
 
   additional_fields: (value, hidden) ->
-    update = => @save(hidden)
+    on_update = => @save(hidden)
+
     html = '<div class="row">'
     fields.forEach (key) ->
       html += """
@@ -41,14 +32,13 @@ get_handler = (name) ->
         </div>
       """
     html += '</div>'
+    html += required_field(hidden)
 
     additional_fields = $(html)
 
+    additional_field 'required', value, hidden, additional_fields, on_update
     fields.forEach (key) ->
-      input = additional_fields.find("[data-name=\"#{key}\"]")
-      hidden["#{key}_input"] = input
-      input.on 'change', update
-      input.val value[key] if value[key]?
+      additional_field key, value, hidden, additional_fields, on_update
 
     additional_fields
 

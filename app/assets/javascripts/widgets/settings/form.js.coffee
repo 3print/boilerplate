@@ -28,8 +28,15 @@ expr_reducer = (acc, s) ->
 
   acc
 
+sanitize = (str) ->
+  str
+  .replace(/\s+/g, ' ')
+  .replace(/&gt;/g, '>')
+  .replace(/&lt;/g, '<')
+  .replace(/&amp;/g, '&')
+
 convert = (str) ->
-  split(str.replace(/\s+/g, ' ')).map(map_parts).reduce(expr_reducer, []).join(' + ')
+  split(sanitize(str)).map(map_parts).reduce(expr_reducer, []).join(' + ')
 
 class window.SettingsForm
   @tpl: (str, data) ->
@@ -60,7 +67,7 @@ class window.SettingsForm
     for setting, type of @settings
       html += "<div class='field'>"
 
-      label = "blocks.settings.#{setting}".t()
+      label = "settings_form.#{setting}".t()
       id = "#{setting}-#{@id}"
       setting_parameters = {}
 

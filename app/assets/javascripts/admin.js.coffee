@@ -65,6 +65,8 @@ widgets 'markdown', '[data-editor="markdown"]', on: DEFAULT_EVENTS, unless: is_m
 widgets 'propagate_input_value', 'input:not(.select2-offscreen):not(.select2-input), select', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'select2', 'select, .select2', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'field_limit', '[data-limit]', on: DEFAULT_EVENTS, unless: is_in_template
+widgets 'live_validation', '[required]', on: DEFAULT_EVENTS, unless: is_in_template
+widgets 'form_validation', 'form', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'json_form', 'form', on: DEFAULT_EVENTS, unless: is_in_template
 
 I18n.attachToWindow()

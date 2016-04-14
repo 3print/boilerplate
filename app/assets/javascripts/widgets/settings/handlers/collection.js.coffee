@@ -1,4 +1,4 @@
-{to_array} = SettingsEditor.Utils
+{to_array, additional_field, required_field, collect_setting_data} = SettingsEditor.Utils
 
 SettingsEditor.handlers.push
   type: 'collection'
@@ -6,27 +6,49 @@ SettingsEditor.handlers.push
     (typeof v is 'string' and v.indexOf(',') >= 0) or v.type is 'collection'
   fake_value: -> ['foo','bar','baz']
   save: (hidden) ->
-    hidden.value = JSON.stringify({
-      type: 'collection'
-      values: to_array hidden.collection_input.val()
-    })
+    data = collect_setting_data('collection', hidden, 'required', 'multiple')
+    data.values = to_array hidden.values_input.val()
+    hidden.value = JSON.stringify(data)
 
   additional_fields: (value, hidden) ->
-    normalize_value = (v) -> v.values ? to_array v
-    collection_update = => @save(hidden)
-    additional_fields = $ """
-      <label for="#{hidden.id}_collection">#{'settings_input.collection.values.label'.t()}</label>
-      <input type="text"
-             class="form-control"
-             id="#{hidden.id}_collection"
-             data-type="collection"
-             placeholder="#{'settings_input.collection.values.placeholder'.t()}">
-      </input>
+    on_update = => @save(hidden)
+
+    value = if value.values? then value else values: to_array value
+    fields = $ """
+      <div class="form-group">
+        <label for="#{hidden.id}_collection_values">#{'settings_input.collection.values.label'.t()}</label>
+        <div class="controls">
+          <input type="text"
+                 class="form-control"
+                 id="#{hidden.id}_collection_values"
+                 data-name="values"
+                 placeholder="#{'settings_input.collection.values.placeholder'.t()}"
+                 required>
+          </input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          #{required_field(hidden)}
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="controls">
+              <input
+                type="checkbox"
+                class="form-control"
+                id="#{hidden.id}_multiple"
+                data-name="multiple">
+              </input>
+              <label for="#{hidden.id}_multiple">#{"settings_input.collection.multiple.label".t()}</label>
+            </div>
+          </div>
+        </div>
+      </div>
     """
 
-    collection_input = additional_fields.filter('input')
-    hidden.collection_input = collection_input
+    additional_field 'values', value, hidden, fields, on_update
+    additional_field 'required', value, hidden, fields, on_update
+    additional_field 'multiple', value, hidden, fields, on_update
 
-    collection_input.on 'change', collection_update
-    collection_input.val normalize_value(value) unless value is 'collection'
-    additional_fields
+    fields

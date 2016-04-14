@@ -7,6 +7,54 @@ light_unescape = (str) ->
   .replace(/&lt;/g, '<')
   .replace(/&gt;/g, '>')
   .replace(/\\"/g, '"')
+is_boolean_field = (field) ->
+  type = field.attr('type')
+  type is 'checkbox' or type is 'radio'
+
+additional_field = (name, value, hidden, fields, on_update) ->
+  field = fields.find("[data-name='#{name}']")
+  hidden["#{name}_input"] = field
+
+  field.on 'change', on_update
+
+  if is_boolean_field(field)
+    field.attr 'checked', 'checked' if value[name]
+  else
+    field.val value[name]
+
+required_field = (hidden) ->
+  """
+  <div class="form-group">
+    <div class="controls">
+      <input
+        type="checkbox"
+        class="form-control"
+        id="#{hidden.id}_required"
+        data-name="required">
+      </input>
+      <label for="#{hidden.id}_required">#{"settings_input.required.label".t()}</label>
+    </div>
+  </div>
+  """
+
+collect_setting_data = (type, hidden, fields...) ->
+  data = {type}
+
+  for field in fields
+    input = hidden["#{field}_input"]
+    if is_boolean_field(input)
+      data[field] = true if input.is(':checked')
+    else
+      value = no_empty_string(input.val())
+      data[field] = value if value?
+
+  data
+
+format_setting_data = (data) ->
+  if Object.keys(data).length is 1
+    data.type
+  else
+    JSON.stringify(data)
 
 class window.SettingsEditor
   @Utils: {
@@ -15,6 +63,10 @@ class window.SettingsEditor
     no_empty_string
     to_array
     light_unescape
+    additional_field
+    required_field
+    collect_setting_data
+    format_setting_data
   }
 
   @handlers = []
@@ -107,6 +159,10 @@ class window.SettingsEditor
 
       original_type.save(hidden) if value?
 
+    setTimeout ->
+      $(row).trigger('nested:fieldAdded')
+    , 100
+
   register_row_events: (row) ->
     $row = $(row)
     $hidden = $row.find('input[type=hidden]').first()
@@ -116,15 +172,12 @@ class window.SettingsEditor
 
     return unless $hidden.length > 0
 
-    $input.on 'change input', =>
-      $row.removeClass 'has-error'
-      if @validate $input.val()
-        $hidden.attr('name', "#{$(@table).data 'model'}[#{@table.getAttribute('data-attribute-name')}][#{$input.val()}]")
-      else
-        $row.addClass 'has-error'
-
     $select.on 'change', =>
       @initialize_type(row, $hidden[0], $select.val())
+
+    $input.on 'change input', =>
+      if @validate $input.val()
+        $hidden.attr('name', "#{$(@table).data 'model'}[#{@table.getAttribute('data-attribute-name')}][#{$input.val()}]")
 
     $remove.on 'click', (e) ->
       e.preventDefault()
@@ -134,10 +187,3 @@ class window.SettingsEditor
 
   register_events: ->
     $(@add_button).on 'click', @append_row
-    $(@form).on 'submit', (e) =>
-      if $(@table).find('.has-error').length > 0
-        e.preventDefault()
-        e.stopImmediatePropagation()
-        return false
-      else
-        return true

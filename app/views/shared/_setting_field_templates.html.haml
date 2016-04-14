@@ -1,50 +1,68 @@
 .tpl#integer
-  %label{for:'{{= id }}'} {{= label }}
-  %input.form-control{type: :number, value:'{{= value != undefined ? value : setting_parameters[\'default\'] || \'\'}}', id:'{{= id }}', step: '{{= setting_parameters.step || 1}}', min: '{{= setting_parameters.min || \'\'}}', max: '{{= setting_parameters.max || \'\'}}', data: {name: '{{= setting }}'}}
+  .form-group.has-feedback
+    %label{for:'{{= id }}'} {{= label }}
+    .controls
+      %input.form-control{type: :number, required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', value:'{{= value != undefined ? value : setting_parameters[\'default\'] || \'\'}}', id:'{{= id }}', step: '{{= setting_parameters.step || 1}}', min: '{{= setting_parameters.min || \'\'}}', max: '{{= setting_parameters.max || \'\'}}', data: {name: '{{= setting }}'}}
 
 .tpl#float
-  %label{for:'{{= id }}'} {{= label }}
-  %input.form-control{type: :number, value:'{{= value != undefined ? value : setting_parameters[\'default\'] || \'\'}}', id:'{{= id }}', step: '{{= setting_parameters.step || 1}}', min: '{{= setting_parameters.min || \'\'}}', max: '{{= setting_parameters.max || \'\'}}', data: {name: '{{= setting }}'}}
+  .form-group.has-feedback
+    %label{for:'{{= id }}'} {{= label }}
+    .controls
+      %input.form-control{type: :number, required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', value:'{{= value != undefined ? value : setting_parameters[\'default\'] || \'\'}}', id:'{{= id }}', step: '{{= setting_parameters.step || 1}}', min: '{{= setting_parameters.min || \'\'}}', max: '{{= setting_parameters.max || \'\'}}', data: {name: '{{= setting }}'}}
 
 .tpl#string
-  %label{for:'{{= id }}'} {{= label }}
-  {{= (setting_parameters.textarea ? }}
-  %textarea.form-control{type: :text, id:'{{= id }}', data: {name: '{{= setting }}', limit: '{{= setting_parameters.limit || \'\' }}'}} {{= value || '' }}
-  {{= : }}
-  %input.form-control{type: :text, value:'{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}', limit: '{{= setting_parameters.limit || \'\' }}'}}
-  {{= ) }}
+  .form-group.has-feedback
+    %label{for:'{{= id }}'} {{= label }}
+    .controls
+      {{= (setting_parameters.textarea ? }}
+      %textarea.form-control{type: :text, required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', id:'{{= id }}', data: {name: '{{= setting }}', limit: '{{= setting_parameters.limit || \'\' }}'}} {{= value || '' }}
+      {{= : }}
+      %input.form-control{type: :text, required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', value:'{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}', limit: '{{= setting_parameters.limit || \'\' }}'}}
+      {{= ) }}
 
 .tpl#boolean
-  %input.form-control{type: :checkbox, value:'{{= value || false }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
-  %label{for:'{{= id }}'} {{= label }}
+  .form-group.has-feedback
+    .controls
+      %input.form-control{type: :checkbox, value:'{{= value }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
+      %label{for:'{{= id }}'} {{= label }}
 
 .tpl#markdown
-  %textarea.form-control{id:'{{= id }}', data: {name: '{{= setting }}', editor: 'markdown', iconlibrary: 'fa', language: 'fr', resize: 'vertical'}}
-    {{= value || '' }}
+  .form-group.has-feedback
+    .controls
+      %textarea.form-control{id:'{{= id }}', required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', data: {name: '{{= setting }}', editor: 'markdown', iconlibrary: 'fa', language: 'fr', resize: 'vertical'}}
+        {{= value || '' }}
 
 .tpl#collection
-  %label{for:'{{= id }}'} {{= label }}
-  %select.form-control{id:'{{= id }}', style: 'width: 100%', placeholder: 'simple_form.placeholders.select'.t, data: {name: '{{= setting }}'}}
-    {{= setting_parameters.values.map(function(v){ return "<option>"+v+"</option>" }).join('') }}
+  .form-group.has-feedback
+    %label{for:'{{= id }}'} {{= label }}
+    .controls
+      %select.form-control{id:'{{= id }}', required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', multiple:'{{= setting_parameters.multiple ? \'multiple\' : \'no\'}}', style: 'width: 100%', placeholder: 'simple_form.placeholders.select'.t, data: {name: '{{= setting }}'}}
+        {{= setting_parameters.values.map(function(v){ return "<option>"+v+"</option>" }).join('') }}
 
 .tpl#date
-  %label{for:'{{= id }}'} {{= label }}
-  %input.form-control.datepicker{type: :text, value:'{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
+  .form-group.has-feedback
+    %label{for:'{{= id }}'} {{= label }}
+    .controls
+      %input.form-control.datepicker{type: :text, required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', value:'{{= value }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
 
 .tpl#datetime
-  %label{for:'{{= id }}'} {{= label }}
-  %input.form-control.datetimepicker{type: :text, value:'{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
+  .form-group.has-feedback
+    %label{for:'{{= id }}'} {{= label }}
+    .controls
+      %input.form-control.datetimepicker{type: :text, required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', value:'{{= value }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
 
 .tpl#time
-  %label{for:'{{= id }}'} {{= label }}
-  %input.form-control.timepicker{type: :text, value:'{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
+  .form-group.has-feedback
+    %label{for:'{{= id }}'} {{= label }}
+    .controls
+      %input.form-control.timepicker{type: :text, required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', value:'{{= value }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
 
 .tpl#image
-  .file
+  .file.form-group.has-feedback
     %label{for: '{{= id }}'} {{= label }}
 
     .controls
-      %input.form-control{style: "display: inline;", type: :text, value: '{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
+      %input.form-control{style: "display: inline;", type: :text, required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', value: '{{= value || \'\' }}', id:'{{= id }}', data: {name: '{{= setting }}'}}
       .preview
         .progress
           .progress-bar.progress-bar-success
@@ -55,6 +73,36 @@
       %button.btn.btn-danger.btn-xs= icon :times
 
       %label{for: '{{= id }}'}
+
+.tpl#resource
+  .resource-selector
+    %input.form-control{type: :hidden, value:'{{= value}}', data: {name: '{{= setting }}'}}
+
+    .form-group.has-feedback
+      %label{for:'{{= id}}'} {{= label}}
+
+      %select{id: '{{= id}}', style: 'width: 100%', required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', placeholder: 'simple_form.placeholders.select'.t}
+    -#     = options_for_select([['', '']] +  Page.custom_resources.keys.map {|c| [c.t, c.name]})
+    -#
+    -# - Page.custom_resources.each_pair do |cls, routes|
+    -#   :ruby
+    -#     collection = [['','']]
+    -#     routes.each do |action|
+    -#       action = action.to_s
+    -#
+    -#       case action
+    -#       when 'instance'
+    -#         cls.all.each do |m|
+    -#           collection << [m.to_s, m.id]
+    -#         end
+    -#       else
+    -#         collection << ["routes.#{action}".t, action]
+    -#       end
+    -#     end
+    -#
+    -#   .form-group.has-feedback.slave{class: cls.name.downcase, data: {master: '[name*="target_model"]'}}
+    -#     = select_tag '', options_for_select(collection, resource.target_model), style: 'width: 100%', input_html: {required:'{{= setting_parameters.required ? \'required\' : \'no\'}}'}
+
 
 = render 'shared/setting_field_templates_extra'
 

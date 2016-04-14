@@ -1,5 +1,6 @@
 class Admin::BpTestsController < Admin::ApplicationController
   include OrderableExtensions
+  include JsonExtensions
 
   load_resource
   sort_resource by: 'sequence ASC'
@@ -8,6 +9,12 @@ class Admin::BpTestsController < Admin::ApplicationController
   toggle_actions :validate
 
   def resource_params
-    params.require(:bp_test).permit!
+    bp_params = params.require(:bp_test).permit!
+
+    if bp_params[:json].present?
+      bp_params[:json] = arrayify(bp_params[:json])
+    end
+
+    bp_params
   end
 end

@@ -1,21 +1,18 @@
 .form-group.settings
   .table
     margin-bottom: 0
+    table-layout: auto
+
+  .form-group
+    margin-bottom: 0
+
+  .row, .form-group
+    & + .form-group, & + .additional, & + .row
+      margin-top: 12px
 
   .additional
-    margin-top: 8px
-
     &:empty
       display: none
-
-    .row
-      margin: 0 -4px
-
-      [class*="col-"]
-        padding: 0 4px
-
-    .form-control
-      padding-right: 12px
 
   &.has-error
     .table
