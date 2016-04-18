@@ -26,13 +26,13 @@ validate = (input) ->
   $form_group.find('.form-control-feedback, .alert').remove()
 
   if type?
-    res = (widgets.VALIDATORS[type] ? validation_presence)(value)
+    res = (widgets.VALIDATORS[type] ? validate_presence)(value)
   else
     res = validate_presence(value)
 
   if res?
     $form_group.addClass('has-error')
-    $form_group.append("<div class='alert alert-danger'>#{res}</div>")
+    $controls.append("<div class='alert alert-danger'>#{res}</div>")
     $controls.append('<div class="form-control-feedback"><i class="fa fa-times"></i></div>')
     return true
   else

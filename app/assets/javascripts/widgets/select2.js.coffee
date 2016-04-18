@@ -29,6 +29,7 @@ widgets.define 'select2', (el) ->
           id: $op.attr('value')
           text: $op.text()
 
+
   if $el.hasClass('sortable')
     sortable = true
     $el.removeClass('sortable')
@@ -45,7 +46,14 @@ widgets.define 'select2', (el) ->
 
   $el.select2(options)
   if sortable
-    $el.select2("container").find("ul.select2-choices").attr('data-exclude', '.select2-search-field, :not(li)').addClass('sortable-list').on 'sortable:changed', ->
+    $el
+    .select2("container")
+    .find("ul.select2-choices")
+    .attr('data-exclude', '.select2-search-field, :not(li)')
+    .attr('data-lock-x', 'false')
+    .attr('data-order-field', $el.data('order-field'))
+    .addClass('sortable-list')
+    .on 'sortable:changed', ->
       $el.select2("onSortStart")
       $el.select2("onSortEnd")
 

@@ -11,6 +11,11 @@ window.locales =
     widgets:
       coordinates:
         error: "Can't retrieve GPS coordinates for the provided address"
+
+    validation:
+        blank: "This field cannot be blank"
+        invalid_email: 'Please fill a valid email address'
+
     settings_input:
       required:
         label: 'Mandatory field'

@@ -2,6 +2,8 @@ widgets.define 'order_list', (el, options={}) ->
   $list = $(el)
   $rows = $list.children('li')
 
+  lock_x = $list.data('lock-x') ? true
+
   bounds = null
 
   grip = $list.data('grip')
@@ -32,13 +34,18 @@ widgets.define 'order_list', (el, options={}) ->
     $list.addClass('dragging')
 
     bounds = {
-      min: $list.offset().top
-      max: $list.offset().top + $list.height()
+      minX: $list.offset().left
+      maxX: $list.offset().left + $list.width()
+      minY: $list.offset().top
+      maxY: $list.offset().top + $list.height()
     }
+
     original_pos = $el.offset()
     last_placeholder_index = original_index = $el.index()
     dragging = true
-    drag_offset = {x: original_pos.left - e.pageX, y: original_pos.top - e.pageY}
+    drag_offset =
+      x: original_pos.left - e.pageX
+      y: original_pos.top - e.pageY
 
     $parent = $el.parent()
     $placeholder = $("<li class='dnd-placeholder list-group-item'>&nbsp;</li>")
@@ -51,10 +58,14 @@ widgets.define 'order_list', (el, options={}) ->
     $('body').append($dragged)
 
   drag = (e) ->
-    offset = if scroll_container? then scroll_container.scrollTop() else 0
-    y = Math.min(bounds.max - $dragged.height() - offset, Math.max(bounds.min - offset, e.pageY + drag_offset.y))
+    offsetY = if scroll_container? then scroll_container.scrollTop() else 0
+    offsetX = if scroll_container? then scroll_container.scrollLeft() else 0
+
+    y = Math.min(bounds.maxY - $dragged.height() - offsetY, Math.max(bounds.minY - offsetY, e.pageY + drag_offset.y))
+    x = Math.min(bounds.maxX - $dragged.width() - offsetX, Math.max(bounds.minX - offsetX, e.pageX + drag_offset.x))
+
     $dragged.css {
-      left: original_pos.left
+      left: if lock_x then original_pos.left else x
       top: y
     }
 
