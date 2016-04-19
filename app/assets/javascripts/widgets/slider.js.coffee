@@ -50,17 +50,26 @@
 widgets.define 'slider', (el) ->
   slideTimeout = null
   $slider = $(el)
-  return if $slider.data('no-mobile') and $(window).width() < 768
+  return if $slider.data('no-mobile') and !window.is_mobile()
   $wrapper = $slider.find('.slider-items')
   itemsMargin = $slider.data('margin') or 0
   autorun = $slider.data('auto-run') ? $slider.data('autorun')
-  withLoader = $slider.data('loader')?
+  withLoader = $slider.find('.slider-loader').length > 0
   noActiveItem = $slider.data('no-active-item')
   handler = window[$slider.data('onchange')]
   timeoutDuration = $slider.data('timeout') or 3000
-  forceFullWidth = $slider.data('force-full-width')
+  forceFullWidth = $slider.attr('data-force-full-width')?
   fixWidth = $slider.data('fix-width')
   noVerticalAlign = $slider.data('no-vertical-align')
+  autofill = $slider.data('autofill')
+
+  checkForControls = ()->
+    if !forceFullWidth && childrenWidth <= $slider.find('.slider-wrapper').width()
+      $slider.addClass('no-controls')
+      $slider.find('.slider-control').addClass('disabled')
+    else
+      $slider.removeClass('no-controls')
+      $slider.find('.slider-control').removeClass('disabled')
 
   if $slider.data('thumbnail-selector')
     $thumbs = $("#{$slider.data('thumbnail-selector')} a[data-index]")
@@ -69,6 +78,14 @@ widgets.define 'slider', (el) ->
 
   if $slider.find('.slider-item').length <= 1
     $slider.addClass('no-controls')
+    $slider.find('.slider-control').addClass('disabled')
+  else
+    $(window).resize checkForControls
+    if $(window).width() <= 1024
+      $slider.swipe {
+        swipeLeft: (event, direction, distance, duration, fingerCount) -> event.stopImmediatePropagation(); next()
+        swipeRight: (event, direction, distance, duration, fingerCount) -> event.stopImmediatePropagation(); prev()
+      }
 
   $slider.find('.slider-item:not(:visible)').remove()
 
@@ -85,15 +102,21 @@ widgets.define 'slider', (el) ->
     $wrapper.children().each ->
       $(this).width($(this).width())
 
-  if forceFullWidth
-    $wrapper.children().each ->
-      $(this).width($slider.find('.slider-wrapper').width())
-  else
-    childrenWidth = 0
-    $wrapper.children().each -> childrenWidth += $(this).width()
+  if $slider.find('.slider-item').length > 1
+    if forceFullWidth
+      $wrapper.children().each ->
+        $(this).width($slider.find('.slider-wrapper').width())
+    else
+      childrenWidth = 0
+      $wrapper.children().each ->
+        childrenWidth += this.clientWidth
 
-    if childrenWidth < $slider.find('.slider-wrapper').width()
-      $slider.addClass('no-controls')
+    checkForControls()
+
+  $wrapper.children().each ->
+    width = $(this).find('img, .visual').width()
+    $(this).find(".content").width width
+
 
   if withLoader
     $slider.find('.slider-loader').fadeOut()
@@ -165,12 +188,6 @@ widgets.define 'slider', (el) ->
     prev ->
       $prev.css 'pointer-events', 'all'
 
-  if $(window).width() < 992
-    $slider.swipe {
-      swipeLeft: (event, direction, distance, duration, fingerCount) -> next()
-      swipeRight: (event, direction, distance, duration, fingerCount) -> prev()
-    }
-
   $startItem = $slider.find('.slider-item:first-child')
 
   unless noActiveItem
@@ -179,8 +196,8 @@ widgets.define 'slider', (el) ->
 
   handler($startItem) if handler?
 
-  if autorun and $slider.find('.slider-item').length > 1
-    slideTimeout = setTimeout ->
-      next()
-    , parseInt(timeoutDuration)
-
+  if autorun
+    if (autorun == "full" && $wrapper.children().length > 0 && $wrapper.children().last().position().left >= $wrapper.width()) || (autorun != "full" && $slider.find('.slider-item').length > 1)
+      slideTimeout = setTimeout ->
+        next()
+      , parseInt(timeoutDuration)

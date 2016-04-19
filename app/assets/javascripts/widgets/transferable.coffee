@@ -35,11 +35,11 @@ widgets.define 'drag_source', (el) ->
     $dragged.css(position: 'absolute', width: $el.width()).addClass('dragged')
     $('body').append($dragged)
 
+    $placeholder = $("<li class='dnd-placeholder'></li>")
     $potential_targets = $(targetSelector)
     $potential_targets.on 'mouseover', ->
       $target = $(this)
       $target.addClass('drop')
-      $placeholder = $("<li class='dnd-placeholder'></li>")
       $target.append($placeholder)
 
       $target.on 'mousemove', (e) ->
@@ -54,22 +54,24 @@ widgets.define 'drag_source', (el) ->
             $(el).after($placeholder)
 
       $target.on 'mouseout', ->
-        $placeholder.remove()
-        $target.removeClass('drop')
-        $target.off 'mousemove mouseout'
-        last_placeholder_index = null
-        $target = null
+        $placeholder.detach()
+        if $target?
+          $target.removeClass('drop')
+          $target.off 'mousemove mouseout'
+          last_placeholder_index = null
+          $target = null
 
   stop_drag = (e) ->
     if $target?
       target_index = $placeholder.index()
       target_parent = $placeholder.parent()
-      target_slot = target_parent.parents('.slot').data('slot')
+
+      target_slot = target_parent.parents('.slot').attr('data-slot')
       $dragged.removeClass('dragged').attr('style', '')
 
       if transferable.indexOf('block:') is 0
         block_id = parseInt(transferable.slice(6))
-        original_slot = $dragged.data('slot')
+        original_slot = $dragged.attr('data-slot')
 
         layout_editor.moveBlockFromSlotById(original_slot, block_id, target_slot, target_index)
       else
@@ -77,11 +79,11 @@ widgets.define 'drag_source', (el) ->
         layout_editor.addBlockToSlotAt(target_slot, block, target_index)
         $dragged.remove()
 
-      $placeholder.remove()
+      $placeholder.detach()
       $target.removeClass('drop')
 
     else
-      $placeholder?.remove()
+      $placeholder.detach()
       if keep_source
         $dragged.remove()
       else if original_parent.length > 0
