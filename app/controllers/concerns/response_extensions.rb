@@ -13,13 +13,17 @@ module ResponseExtensions
   end
 
   def success_message_for_create
-    msg = 'messages.success.create'.t(model: resource_class.tp)
-    msg += render_to_string partial: 'shared/messages', locals: {url_index: resource_path(:index), url_new: resource_path(:new)}
-    flash[:notice] = msg
+    if request.format.html?
+      msg = 'messages.success.create'.t(model: resource_class.tp)
+      msg += render_to_string partial: 'shared/messages', locals: {url_index: resource_path(:index), url_new: resource_path(:new)}
+      flash[:notice] = msg
+    end
   end
 
   def success_message_for_update
-    flash[:notice] = 'messages.success.update'.t(model: resource_class.tp)
+    if request.format.html?
+      flash[:notice] = 'messages.success.update'.t(model: resource_class.tp)
+    end
   end
 
 end
