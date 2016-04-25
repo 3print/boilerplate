@@ -35,15 +35,33 @@ module TraficExtensions
   end
 
   def success_response
-    respond_with resource, location: resource_location
+    respond_to do |format|
+      format.html do
+        respond_with resource, location: resource_location
+      end
+      format.json do
+        render json: {status: "ok", id: resource.id}
+      end
+    end
   end
 
   def destroy_response
-    respond_with resource, location: resource_path(:index)
+    respond_to do |format|
+      format.html do
+        respond_with resource, location: resource_path(:index)
+      end
+      format.json do
+        render json: {status: "ok"}
+      end
+    end
+  end
+
+  def build_resource
+    resource.assign_attributes resource_params
   end
 
   def save_resource
-    resource.assign_attributes resource_params
+    build_resource
 
     args = [:save]
     args << action_name unless ::Rails.version.to_f >= 4.0
