@@ -56,11 +56,11 @@
 # Some special values can be used for a field to process the attribute content
 # in some way:
 #
-# - `find` - A seed can reference another model for a `belongs_to` association,
+# - `_find` - A seed can reference another model for a `belongs_to` association,
 #   but since we don't know the model id in the seed we'll have to use another
 #   method to find the record.
 #
-#   The form is `find: Class#query` where `query` is a list of tuple of the
+#   The form is `_find: Class#query` where `query` is a list of tuple of the
 #   field to match.
 #
 #   For instance:
@@ -68,12 +68,20 @@
 #   ```yaml
 #   - name: 'Foo'
 #     parent:
-#       find: ModelClass#field_a=value_a,field_b=value_b
+#       _find: ModelClass#field_a=value_a,field_b=value_b
 #   ```
-# - `asset` - Allow to populate an uploader using a file located in the assets
+# - `_asset` - Allow to populate an uploader using a file located in the assets
 #   directory of the project.
 #
-#   The form is `asset: relative/path/to/asset`.
+#   The form is `_asset: relative/path/to/asset`.
+# - `_eval` - Allow to run a ruby expression and use the returned value for the
+#   given attribute.
+#
+#   ```yaml
+#   - name: 'Foo'
+#     parent:
+#       _eval: ModelClass.first
+#   ```
 
 class Seeder
   def initialize(paths)
@@ -90,14 +98,19 @@ class Seeder
       print "\n------------ #{model_class} ------------\n"
 
       seeds.each do |seed|
+        env = seed.delete(:env)
+
+        next if env.present? && !env.include?(Rails.env)
+
         if seeds_settings[:ignore_unknown_attributes]
           seed = cleanup_attributes(model_class, seed)
         end
+
         seed = process_attributes(seed)
 
         query = as_query(model_class, seed, ignores, uses)
         begin
-          unless model = model_class.where(query).first
+          unless model = find_existing_seed(model_class, query)
             ActiveRecord::Base.transaction do
               model = model_class.new(seed)
               yield model if block_given?
@@ -124,6 +137,14 @@ class Seeder
     end
   end
 
+  def find_existing_seed(model_class, query)
+    filter_resources(model_class).where(query).first
+  end
+
+  def filter_resources(model_class)
+    model_class
+  end
+
   def all_seeds
     @seeds ||= @paths.map do |f|
       settings = YAML.load_file(f)
@@ -135,11 +156,12 @@ class Seeder
         }
       end
 
+      env = settings[:env]
       settings[:file] = f
       settings[:class] = File.basename(f, '.yml').classify.constantize
-      settings
+      env.present? && !env.include?(Rails.env) ? nil : settings
 
-    end.sort {|a,b| (a[:priority] || 0) - (b[:priority] || 0) }
+    end.compact.sort {|a,b| (a[:priority] || 0) - (b[:priority] || 0) }
   end
 
   def as_query(model_class, seed, ignores, uses)
@@ -178,23 +200,33 @@ class Seeder
   def process_attributes(attrs)
     Hash[attrs.map do |k,v|
       if v.is_a?(Hash)
-        if v.has_key?(:find)
-          m,t = v['find'].split('#')
-          l = t.split(',')
-          q = {}
-          l.each do |ll|
-            a,vv = ll.split('=')
-            q[a] = vv
-          end
-
-          v = m.constantize.where(q).first
-        elsif v.has_key?(:asset)
-          v = File.open(resolve_img_path v['asset'])
-        end
+        v = process_attribute_value(v)
+      elsif v.is_a?(Array)
+        v = v.map {|vv| vv.is_a?(Hash) ? process_attribute_value(vv) : vv }
       end
 
       [k,v]
     end]
+  end
+
+  def process_attribute_value(v)
+    if v.has_key?(:_find)
+      m,t = v[:_find].split('#')
+      l = t.split(',')
+      q = {}
+      l.each do |ll|
+        a,vv = ll.split('=')
+        q[a] = vv
+      end
+
+      v = filter_resources(m.constantize).where(q).first
+    elsif v.has_key?(:_asset)
+      v = File.open(resolve_img_path v[:_asset])
+    elsif v.has_key?(:_eval)
+      v = eval(v[:_eval])
+    else
+      process_attributes(v)
+    end
   end
 
   def association_columns(object, *by_associations)

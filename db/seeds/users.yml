@@ -1,11 +1,9 @@
-ignore_in_query:
-  - role
-  - password
-  - password_confirmation
+use_in_query:
+- email
 seeds:
-  - first_name: Admin
-    last_name: BoilerPlate
-    email: admin@boilerplate.com
-    password: adminboilerplate
-    password_confirmation: adminboilerplate
-    role: 'admin'
+- first_name: Admin
+  last_name: BoilerPlate
+  email: admin@boilerplate.com
+  password: adminboilerplate
+  password_confirmation: adminboilerplate
+  role: 'admin'
