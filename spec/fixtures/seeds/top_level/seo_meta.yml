@@ -1,0 +1,8 @@
+- title: title
+  description: description
+  static_mode: true
+  static_action: foo
+- title: title
+  description: description
+  meta_owner_type: Home
+  meta_owner_id: index

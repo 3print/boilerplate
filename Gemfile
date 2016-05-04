@@ -7,6 +7,7 @@ gem 'unicorn-rails'
 gem 'settingslogic'
 gem 'sendgrid'
 gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'colorize'
 
 # Auth
 gem 'devise'

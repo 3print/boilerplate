@@ -1,0 +1,14 @@
+ignore_in_query:
+- password
+- password_confirmation
+seeds:
+- first_name: John
+  last_name: Doe
+  email: john@doe.com
+  password: fooooooooooo
+  password_confirmation: fooooooooooo
+- first_name: Jane
+  last_name: Doe
+  email: jane@doe.com
+  password: baaaaaaaaaar
+  password_confirmation: baaaaaaaaaar

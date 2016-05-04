@@ -93,9 +93,9 @@ class Seeder
       model_class = seeds_settings[:class]
       seeds = seeds_settings[:seeds]
       ignores = seeds_settings[:ignore_in_query] || []
-      uses = seeds_settings[:use_in_query] || []
+      uses = seeds_settings[:find_by] || seeds_settings[:use_in_query] || []
 
-      print "\n------------ #{model_class} ------------\n"
+      print "\n#{model_class}\n"
 
       seeds.each do |seed|
         env = seed.delete(:env)
@@ -116,15 +116,23 @@ class Seeder
               yield model if block_given?
               model.save!
             end
-            print "model #{model} created successfully\n"
+            print [
+              ' ',
+              '+'.green,
+              "#{resource_label_for model} created successfully\n".light_black
+            ].join(' ')
           else
-            print "model #{model} already existed\n"
+            print [
+              ' ',
+              '✕'.red,
+              "#{resource_label_for model} already existed\n".light_black
+            ].join(' ')
           end
         rescue => e
           if model.present?
             p model
             if model.errors.any?
-              p model.errors.messages.map {|k,v| "#{k}: #{v.to_sentence}" }.join('\n')
+              p model.errors.messages.map {|k,v| "#{k}: #{v.to_sentence}" }.join('\n').red
             else
               p e
             end
@@ -147,18 +155,28 @@ class Seeder
 
   def all_seeds
     @seeds ||= @paths.map do |f|
+      model_class = File.basename(f, '.yml').classify.constantize
       settings = YAML.load_file(f)
-      settings = settings.with_indifferent_access if settings.is_a?(Hash)
-      if settings.is_a?(Array)
+
+      case
+      when settings.is_a?(Hash)
+        settings = settings.with_indifferent_access
+      when settings.is_a?(Array)
         settings = {
           seeds: settings,
           ignore_in_query: []
         }
+      else
+        raise "invalid seeds type for #{model_class}"
+      end
+
+      if settings[:seeds].blank?
+        raise "empty seeds for #{model_class}"
       end
 
       env = settings[:env]
       settings[:file] = f
-      settings[:class] = File.basename(f, '.yml').classify.constantize
+      settings[:class] = model_class
       env.present? && !env.include?(Rails.env) ? nil : settings
 
     end.compact.sort {|a,b| (a[:priority] || 0) - (b[:priority] || 0) }
@@ -268,5 +286,14 @@ class Seeder
 
   def resolve_img_path(img)
     File.expand_path("app/assets/#{img}", Rails.root).to_s
+  end
+
+  def resource_label_for(resource)
+    label = nil
+    %w(title caption name localized_name).each do |k|
+      label ||= resource.try(k)
+    end
+    label = resource.to_s if label.nil?
+    label
   end
 end
