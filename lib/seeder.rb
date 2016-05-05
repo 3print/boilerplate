@@ -119,24 +119,39 @@ class Seeder
             print [
               ' ',
               '+'.green,
-              "#{resource_label_for model} created successfully\n".light_black
+              resource_label_for(model),
+              "created successfully\n".light_black
             ].join(' ')
           else
             print [
               ' ',
-              '✕'.red,
-              "#{resource_label_for model} already existed\n".light_black
+              '○'.yellow,
+              resource_label_for(model),
+              "already existed\n".light_black
             ].join(' ')
           end
         rescue => e
           if model.present?
-            p model
+            msg = [
+              [
+                ' ',
+                '✕'.red,
+                resource_label_for(model),
+                "didn't validate".light_black
+              ].join(' ')
+            ]
+
             if model.errors.any?
-              p model.errors.messages.map {|k,v| "#{k}: #{v.to_sentence}" }.join('\n').red
+              msg << "\n    "
+              msg << model.errors.messages.map do |k,v|
+                ["#{k}:".red, v.first.to_s.light_black].join(' ')
+              end.join("\n    ")
             else
-              p e
+              msg << "\n    "
+              msg << e.backtrace.join("\n    ")
             end
 
+            print msg.join('') + "\n"
           else
             raise e
           end
