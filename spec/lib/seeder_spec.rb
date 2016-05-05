@@ -38,5 +38,11 @@ describe Seeder, focus: true do
         expect { Seeder.new(seeds_files('ignore_in_query')).load }.to change { User.count }.by 2
       end
     end
+
+    context 'that defines both find_by and ignore_in_query' do
+      it 'queries model using only the find by attributes' do
+        expect { Seeder.new(seeds_files('both_find_by_and_ignore')).load }.to change { User.count }.by 1
+      end
+    end
   end
 end
