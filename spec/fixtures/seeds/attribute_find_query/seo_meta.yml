@@ -1,0 +1,7 @@
+find_by:
+- title
+seeds: 
+- title: title
+  description: description
+  meta_owner:
+    _find: User#email=foo@foo.com

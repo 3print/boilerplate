@@ -45,4 +45,17 @@ describe Seeder, focus: true do
       end
     end
   end
+
+  describe 'custom attribute expressions' do
+    describe '_find:' do
+      let(:user) { create :user, email: 'foo@foo.com'}
+      it 'performs a queries using the specified argument' do
+        user
+
+        expect { Seeder.new(seeds_files('attribute_find_query')).load }.to change { SeoMeta.count }.by 1
+
+        expect(SeoMeta.first.meta_owner).to eq(user)
+      end
+    end
+  end
 end
