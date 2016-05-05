@@ -44,6 +44,14 @@ describe Seeder, focus: true do
         expect { Seeder.new(seeds_files('both_find_by_and_ignore')).load }.to change { User.count }.by 1
       end
     end
+
+    context 'that defines a priority option' do
+      it 'loads the seeds using the provided priority' do
+        expect { Seeder.new(seeds_files('priority')).load }.to change { SeoMeta.count }.by 1
+
+        expect(SeoMeta.first.meta_owner).to eq(User.first)
+      end
+    end
   end
 
   describe 'custom attribute expressions' do

@@ -1,0 +1,8 @@
+find_by:
+- title
+priority: 1
+seeds:
+- title: title
+  description: description
+  meta_owner:
+    _find: User#first_name=John,last_name=Doe
