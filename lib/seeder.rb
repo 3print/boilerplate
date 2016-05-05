@@ -95,7 +95,7 @@ class Seeder
       ignores = seeds_settings[:ignore_in_query] || []
       uses = seeds_settings[:find_by] || seeds_settings[:use_in_query] || []
 
-      print "\n#{model_class}\n"
+      output "\n#{model_class}\n"
 
       seeds.each do |seed|
         env = seed.delete(:env)
@@ -116,14 +116,14 @@ class Seeder
               yield model if block_given?
               model.save!
             end
-            print [
+            output [
               ' ',
               '+'.green,
               resource_label_for(model),
               "created successfully\n".light_black
             ].join(' ')
           else
-            print [
+            output [
               ' ',
               '○'.yellow,
               resource_label_for(model),
@@ -151,13 +151,17 @@ class Seeder
               msg << e.backtrace.join("\n    ")
             end
 
-            print msg.join('') + "\n"
+            output msg.join('') + "\n"
           else
             raise e
           end
         end
       end
     end
+  end
+
+  def output(msg)
+    print msg unless Rails.env.test?
   end
 
   def find_existing_seed(model_class, query)
