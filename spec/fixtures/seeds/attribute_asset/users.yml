@@ -1,0 +1,10 @@
+find_by:
+- email
+seeds:
+- first_name: John
+  last_name: Doe
+  email: john@doe.com
+  password: fooooooooooo
+  password_confirmation: fooooooooooo
+  avatar:
+    _asset: files/sumo.png

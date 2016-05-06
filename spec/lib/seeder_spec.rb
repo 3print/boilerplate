@@ -60,7 +60,30 @@ describe Seeder, focus: true do
       it 'performs a queries using the specified argument' do
         user
 
-        expect { Seeder.new(seeds_files('attribute_find_query')).load }.to change { SeoMeta.count }.by 1
+        expect { Seeder.new(seeds_files('attribute_find')).load }.to change { SeoMeta.count }.by 1
+
+        expect(SeoMeta.first.meta_owner).to eq(user)
+      end
+    end
+
+    describe '_asset:' do
+      it 'performs a queries using the specified argument' do
+        seeder = Seeder.new(seeds_files('attribute_asset'), {
+          asset_path: File.join(Rails.root, 'spec', 'fixtures')
+        })
+
+        expect { seeder.load }.to change { User.count }.by 1
+
+        expect(User.first.avatar).to be_present
+      end
+    end
+
+    describe '_eval:' do
+      let(:user) { create :user, email: 'foo@foo.com'}
+      it 'performs a queries using the specified argument' do
+        user
+
+        expect { Seeder.new(seeds_files('attribute_eval')).load }.to change { SeoMeta.count }.by 1
 
         expect(SeoMeta.first.meta_owner).to eq(user)
       end
