@@ -84,8 +84,15 @@
 #   ```
 
 class Seeder
-  def initialize(paths)
-    @paths = paths
+  attr_accessor :paths
+  attr_accessor :seeds
+  attr_accessor :options
+
+  def initialize(paths, options={})
+    self.paths = paths
+    self.options = options.reverse_merge({
+      asset_path: File.join(Rails.root, 'app', 'assets'),
+    })
   end
 
   def load
@@ -173,7 +180,7 @@ class Seeder
   end
 
   def all_seeds
-    @seeds ||= @paths.map do |f|
+    self.seeds ||= paths.map do |f|
       model_class = File.basename(f, '.yml').classify.constantize
       settings = YAML.load_file(f)
 
@@ -304,7 +311,7 @@ class Seeder
   end
 
   def resolve_img_path(img)
-    File.expand_path("app/assets/#{img}", Rails.root).to_s
+    File.expand_path(img, options[:asset_path]).to_s
   end
 
   def resource_label_for(resource)
