@@ -5,7 +5,7 @@ def seeds_files(dir)
   Dir[File.join(config.fixture_path, 'seeds', dir, "*.yml")]
 end
 
-describe Seeder, focus: true do
+describe Seeder do
   it 'raises an error on an empty seeds file' do
     expect { Seeder.new(seeds_files('empty')).load }.to raise_error("invalid seeds type for User")
   end
