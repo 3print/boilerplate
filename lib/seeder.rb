@@ -84,15 +84,8 @@
 #   ```
 
 class Seeder
-  attr_accessor :paths
-  attr_accessor :seeds
-  attr_accessor :options
-
-  def initialize(paths, options={})
-    self.paths = paths
-    self.options = options.reverse_merge({
-      asset_path: File.join(Rails.root, 'app', 'assets'),
-    })
+  def initialize(paths)
+    @paths = paths
   end
 
   def load
@@ -123,52 +116,19 @@ class Seeder
               yield model if block_given?
               model.save!
             end
-            output [
-              ' ',
-              '+'.green,
-              resource_label_for(model),
-              "created successfully\n".light_black
-            ].join(' ')
+            output created(model)
           else
-            output [
-              ' ',
-              '○'.yellow,
-              resource_label_for(model),
-              "already existed\n".light_black
-            ].join(' ')
+            output existing(model)
           end
         rescue => e
           if model.present?
-            msg = [
-              [
-                ' ',
-                '✕'.red,
-                resource_label_for(model),
-                "didn't validate".light_black
-              ].join(' ')
-            ]
-
-            if model.errors.any?
-              msg << "\n    "
-              msg << model.errors.messages.map do |k,v|
-                ["#{k}:".red, v.first.to_s.light_black].join(' ')
-              end.join("\n    ")
-            else
-              msg << "\n    "
-              msg << e.backtrace.join("\n    ")
-            end
-
-            output msg.join('') + "\n"
+            output failed(model, e)
           else
             raise e
           end
         end
       end
     end
-  end
-
-  def output(msg)
-    print msg unless Rails.env.test?
   end
 
   def find_existing_seed(model_class, query)
@@ -180,7 +140,7 @@ class Seeder
   end
 
   def all_seeds
-    self.seeds ||= paths.map do |f|
+    @seeds ||= @paths.map do |f|
       model_class = File.basename(f, '.yml').classify.constantize
       settings = YAML.load_file(f)
 
@@ -311,15 +271,80 @@ class Seeder
   end
 
   def resolve_img_path(img)
-    File.expand_path(img, options[:asset_path]).to_s
+    File.expand_path("app/assets/#{img}", Rails.root).to_s
   end
 
   def resource_label_for(resource)
+    self.class.resource_label_for(resource)
+  end
+
+  def output(msg)
+    self.class.output(msg)
+  end
+
+  def created(model)
+    self.class.created(model)
+  end
+
+  def existing(model)
+    self.class.existing(model)
+  end
+
+  def failed(model, e)
+    self.class.failed(model, e)
+  end
+
+  def self.resource_label_for(resource)
     label = nil
     %w(title caption name localized_name).each do |k|
       label ||= resource.try(k)
     end
     label = resource.to_s if label.nil?
     label
+  end
+
+  def self.output(msg)
+    print msg unless Rails.env.test?
+  end
+
+  def self.created(model)
+    [
+      ' ',
+      '+'.green,
+      resource_label_for(model).green,
+      "created successfully\n".light_black
+    ].join(' ')
+  end
+
+  def self.existing(model)
+    [
+      ' ',
+      '○'.yellow,
+      resource_label_for(model),
+      "already existed\n".light_black
+    ].join(' ')
+  end
+
+  def self.failed(model, e=nil)
+    msg = [
+      [
+        ' ',
+        '✕'.red,
+        resource_label_for(model),
+        "didn't validate".light_black
+      ].join(' ')
+    ]
+
+    if model.errors.any?
+      msg << "\n    "
+      msg << model.errors.messages.map do |k,v|
+        ["#{k}:".red, v.first.to_s.light_black].join(' ')
+      end.join("\n    ")
+    else
+      msg << "\n    "
+      msg << e.backtrace.join("\n    ")
+    end
+
+    msg.join('') + "\n"
   end
 end
