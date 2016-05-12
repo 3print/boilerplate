@@ -2,16 +2,15 @@ module Concerns::PunditExtensions
   extend ActiveSupport::Concern
 
   included do
-    def self.set_shared_policy policy
-      class_variable_set '@@shared_policy', policy
-    end
+    def self.set_shared_policy(policy, &blk)
+      *namespaces, class_name = self.name.split('::')
+      namespace = namespaces.empty? ? Object : namespaces.join('::').constantize
 
-    def self.shared_policy
-      class_variable_get '@@shared_policy' rescue nil
-    end
-  end
+      policy_class_name = "#{class_name}Policy"
+      policy_class = Class.new(policy)
 
-  def shared_policy
-    self.class.shared_policy
+      namespace.const_set(policy_class_name, policy_class)
+      policy_class.class_eval(&blk) if block_given?
+    end
   end
 end

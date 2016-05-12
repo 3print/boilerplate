@@ -36,7 +36,6 @@ module ResourceExtensions
       @skip_load_and_authorize_resource = true
     end
 
-
     def self.sort_resource(options={})
       sort = options.delete(:by)
 
@@ -66,6 +65,16 @@ module ResourceExtensions
       end
     end
 
+    def self.paginate_resource(options={})
+      options[:only] = :index if options.empty?
+
+      before_filter options do
+        key = :"@#{resource_name}"
+        resource
+        instance_variable_set(key, instance_variable_get(key).page(params[:page] || 1))
+      end
+    end
+
     def self.find_by_key(key)
       self.class_variable_set :@@find_by_key, key
     end
@@ -84,6 +93,10 @@ module ResourceExtensions
     self.class.resource_class
   end
 
+  def set_resource val
+    @resource = val
+  end
+
   def resource_scope
     resource_class
   end
@@ -93,6 +106,7 @@ module ResourceExtensions
   end
 
   def resource opts={}
+    return @resource if @resource.present?
     return nil if resource_class.nil?
 
     authorize = opts.delete(:authorize)
@@ -176,7 +190,8 @@ module ResourceExtensions
     begin
       polymorphic_url(resource_path(action))
     rescue => e
-      p e
+      TPrint.debug e
+      TPrint.debug e.backtrace
       route_exist = false
     end
     route_exist
