@@ -19,6 +19,7 @@
 #= require locales
 #= require i18n
 #= require_tree ./widgets
+#= require_tree ./templates
 
 window.DATE_FORMAT = 'YYYY-MM-DD'
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY'

@@ -1,0 +1,11 @@
+<div class='form-group has-feedback'>
+  <div class='controls'>
+    <input type='checkbox'
+           id='<%= @id %>'
+           <%= 'checked' if @value %>
+           data-name='<%= @setting %>'
+           class='form-control'>
+    </input>
+    <label for='<%= @id %>'><%= @label %></label>
+  </div>
+</div>

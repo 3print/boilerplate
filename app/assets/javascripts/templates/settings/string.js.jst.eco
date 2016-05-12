@@ -1,0 +1,22 @@
+<div class='form-group has-feedback'>
+  <label for='<%= @id %>'><%= @label %></label>
+
+  <div class='controls'>
+    <% if @setting_parameters.textarea: %>
+      <textarea id='<%= @id %>'
+                data-name='<%= @setting %>'
+                <%= "data-limit='#{@setting_parameters.limit}'" if @setting_parameters.limit? %>
+                <%= 'required' if @setting_parameters.required %>
+                class='form-control'><%= @value ? @setting_parameters.default ? "" %></textarea>
+    <% else: %>
+      <input type='text'
+             id='<%= @id %>'
+             value='<%= @value ? @setting_parameters.default ? "" %>'
+             data-name='<%= @setting %>'
+             <%= "data-limit='#{@setting_parameters.limit}'" if @setting_parameters.limit? %>
+             <%= 'required' if @setting_parameters.required %>
+             class='form-control'>
+      </input>
+    <% end %>
+  </div>
+</div>

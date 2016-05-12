@@ -1,0 +1,14 @@
+<div class='form-group has-feedback'>
+  <label for='<%= @id %>'><%= @label %></label>
+
+  <div class='controls'>
+    <textarea id='<%= @id %>'
+              data-name='<%= @setting %>'
+              data-iconlibrary='fa'
+              data-editor='markdown'
+              data-language='fr'
+              data-resize='vertical'
+              <%= 'required' if @setting_parameters.required %>
+              class='form-control'><%= @value ? @setting_parameters.default ? "" %></textarea>
+  </div>
+</div>

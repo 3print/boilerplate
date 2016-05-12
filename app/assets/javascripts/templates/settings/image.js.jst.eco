@@ -1,0 +1,24 @@
+<div class="file form-group">
+  <label for="<%= @id %>"><%= @label %></label>
+
+  <div class="controls">
+    <input id="<%= @id %>"
+           data-name="<%= @setting %>"
+           type="text"
+           class="form-control"></input>
+
+    <div class="preview">
+      <div class="progress">
+        <div class="progress-bar progress-bar-success"></div>
+      </div>
+
+      <% if @value?: %>
+        <img class="loaded" src="<%= @value %>">
+      <% end %>
+    </div>
+
+    <button class="btn btn-danger btn-xs">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+</div>

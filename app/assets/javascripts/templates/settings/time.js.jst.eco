@@ -1,0 +1,18 @@
+<div class='form-group has-feedback'>
+  <label for='<%= @id %>'><%= @label %></label>
+
+  <div class='controls'>
+    <div class='input-group'>
+      <label class='input-group-addon' for='<%= @id %>'>
+        <i class='fa fa-clock-o'></i>
+      </label>
+      <input type='text'
+             id='<%= @id %>'
+             value='<%= @value ? @setting_parameters.default ? "" %>'
+             data-name='<%= @setting %>'
+             <%= 'required' if @setting_parameters.required %>
+             class='form-control timepicker'>
+      </input>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class='form-group has-feedback'>
+  <label for='<%= @id %>'><%= @label %></label>
+
+  <div class='controls'>
+    <input type='number'
+           id='<%= @id %>'
+           value='<%= @value ? @setting_parameters.default ? "" %>'
+           step='<%= @setting_parameters.step ? 1 %>'
+           data-name='<%= @setting %>'
+           <%= "min='#{@setting_parameters.min}'" if @setting_parameters.min? %>
+           <%= "max='#{@setting_parameters.max}'" if @setting_parameters.max? %>
+           <%= 'required' if @setting_parameters.required %>
+           class='form-control'>
+    </input>
+  </div>
+</div>

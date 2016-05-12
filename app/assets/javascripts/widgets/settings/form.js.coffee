@@ -89,4 +89,6 @@ class window.SettingsForm
 
     html
 
-  get_field: (type, options) -> @constructor.tpl(type, options)
+  get_field: (type, options) ->
+    tpl = JST["templates/settings/#{type}"] ? @constructor.tpl(type)
+    tpl(options)
