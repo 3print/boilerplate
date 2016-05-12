@@ -40,8 +40,8 @@
     border: none
 
     .select2-single
-      +border-top-left-radius(0)
-      +border-bottom-left-radius(0)
+      border-top-left-radius: 0
+      border-bottom-left-radius: 0
       border-left: none
 
     .select2-search-choice-close
@@ -157,8 +157,8 @@
   .select2-single
     text-align: right
 
-    +border-top-right-radius(0)
-    +border-bottom-right-radius(0)
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
 
     span
       padding-right: 10px
@@ -167,3 +167,48 @@
   display: block
   background: none
   +box-shadow(none)
+
+.select2-choices.dragging
+  .select2-search-choice img
+    pointer-events: none
+
+  &.dragged
+    width: auto !important
+    padding: 0 !important
+    display: inline-block !important
+    pointer-events: none !important
+
+    .select2-search-choice
+      padding: 3px 5px 3px 18px
+      margin: 3px 0 3px 5px
+      position: relative
+      line-height: 13px
+      color: #333
+      cursor: default
+      border: 1px solid #aaaaaa
+      border-radius: 3px
+      list-style: none
+      display: inline-block
+      +box-shadow(0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05))
+      -webkit-background-clip: padding-box
+      -moz-background-clip: padding
+      background-clip: padding-box
+      -webkit-touch-callout: none
+      -webkit-user-select: none
+      -khtml-user-select: none
+      -moz-user-select: none
+      -ms-user-select: none
+      user-select: none
+      background-color: #e4e4e4
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0 )
+      background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eeeeee))
+      background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%)
+      background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%)
+      background-image: -o-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%)
+      background-image: -ms-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%)
+      background-image: linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%)
+
+.select2-choices .dnd-placeholder.list-group-item
+  padding: 0
+  min-width: 130px
+  max-height: 90px
