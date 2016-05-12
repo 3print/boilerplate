@@ -21,7 +21,11 @@ class FileInput < SimpleForm::Inputs::FileInput
 
     opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
     if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog
-      buffer << @builder.hidden_field(:"remote_#{attribute_name}_url", opts)
+      if object.respond_to?(:"#{attribute_name}_tmp")
+        buffer << @builder.hidden_field(:"#{attribute_name}_tmp", opts)
+      else
+        buffer << @builder.hidden_field(:"remote_#{attribute_name}_url", opts)
+      end
     else
       buffer << super
     end
