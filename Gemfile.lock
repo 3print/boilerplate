@@ -115,6 +115,11 @@ GEM
       devise (>= 2.1.0)
       railties (>= 3.0)
     diff-lcs (1.2.5)
+    eco (1.0.0)
+      coffee-script
+      eco-source
+      execjs
+    eco-source (1.1.0.rc.1)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -527,6 +532,7 @@ DEPENDENCIES
   devise
   devise-i18n
   devise_masquerade
+  eco
   enum_help
   exception_notification
   factory_girl_rails
