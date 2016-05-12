@@ -19,6 +19,14 @@ class FileInput < SimpleForm::Inputs::FileInput
       buffer << '</div>'
     end
 
+    def input_html_options
+      super.merge(required: required?)
+    end
+
+    def required?
+      required_by_validators? && object.send(attribute_name).blank?
+    end
+
     opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
     if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog
       if object.respond_to?(:"#{attribute_name}_tmp")
