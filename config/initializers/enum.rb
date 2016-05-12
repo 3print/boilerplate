@@ -37,12 +37,12 @@ ActiveRecord::Enum.module_eval do
           klass.send(:detect_enum_conflict!, name, "#{name}=")
           define_method("#{name}=") do |value|
             if value.all? { |v| enum_values.has_key?(v) || v.blank? }
-              self[name] = value.map { |v| enum_values[v] }
+              self[name] = value.map { |v| enum_values[v] }.uniq.compact
             elsif value.all? { |v| enum_values.has_value?(v) }
               # Assigning a value directly is not a end-user feature, hence it's not documented.
               # This is used internally to make building objects from the generated scopes work
               # as expected, i.e. +Conversation.archived.build.archived?+ should be true.
-              self[name] = value
+              self[name] = value.uniq.compact
             else
               raise ArgumentError, "'#{value}' is not a valid #{name}"
             end
