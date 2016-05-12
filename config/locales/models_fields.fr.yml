@@ -34,13 +34,14 @@ fr:
         role: Role
         remember_me: Se souvenir de moi
 
-      bp_test:                             # BOILERPLATE_ONLY
-        int: Entier                        # BOILERPLATE_ONLY
-        json: Configuration                # BOILERPLATE_ONLY
-        markdown: Markdown                 # BOILERPLATE_ONLY
-        text: Text                         # BOILERPLATE_ONLY
-        enum: Enum                         # BOILERPLATE_ONLY
-        validated_at: Date de validation   # BOILERPLATE_ONLY
+      bp_test:                               # BOILERPLATE_ONLY
+        int: Entier                          # BOILERPLATE_ONLY
+        json: Configuration                  # BOILERPLATE_ONLY
+        markdown: Markdown                   # BOILERPLATE_ONLY
+        text: Text                           # BOILERPLATE_ONLY
+        enum: Enumération                    # BOILERPLATE_ONLY
+        multiple_enum: Enumération Multiple  # BOILERPLATE_ONLY
+        validated_at: Date de validation     # BOILERPLATE_ONLY
 
       seo_meta:
         title: Titre de la page

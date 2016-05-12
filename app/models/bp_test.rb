@@ -2,19 +2,20 @@
 #
 # Table name: bp_tests
 #
-#  id           :integer          not null, primary key
-#  image        :string(255)
-#  pdf          :string(255)
-#  int          :integer
-#  json         :json
-#  markdown     :text
-#  text         :text
-#  created_at   :datetime
-#  updated_at   :datetime
-#  enum         :integer
-#  approved_at  :datetime
-#  validated_at :datetime
-#  sequence     :integer
+#  id            :integer          not null, primary key
+#  image         :string(255)
+#  pdf           :string(255)
+#  int           :integer
+#  json          :json
+#  markdown      :text
+#  text          :text
+#  created_at    :datetime
+#  updated_at    :datetime
+#  enum          :integer
+#  approved_at   :datetime
+#  validated_at  :datetime
+#  sequence      :integer
+#  multiple_enum :integer          default([]), is an Array
 #
 
 class BpTest < ActiveRecord::Base
@@ -25,7 +26,8 @@ class BpTest < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   mount_uploader :pdf, PdfUploader
 
-  enum enum: %i(foo bar baz)
+  enum enum: %i(foo bar baz), _prefix: true
+  enum multiple_enum: %i(foo bar baz), _prefix: true, _multiple: true
 
   markdown_attr :markdown
 
