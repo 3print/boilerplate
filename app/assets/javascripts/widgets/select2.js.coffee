@@ -43,6 +43,7 @@ widgets.define 'select2', (el) ->
   options.data = data if data?
   options.formatResult = window[$el.data('format-result')]
   options.formatSelection = window[$el.data('format-selection')]
+  options.formatResultCssClass = window[$el.data('format-result-css-class')]
 
   $el.select2(options)
   if sortable

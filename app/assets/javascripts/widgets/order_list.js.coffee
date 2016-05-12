@@ -5,17 +5,17 @@ widgets.define 'order_list', (el, options={}) ->
   lock_x = $list.data('lock-x') ? true
 
   bounds = null
+  blacklist = ['.dnd-placeholder']
+  blacklist.push el.getAttribute('data-exclude') if el.hasAttribute('data-exclude')
 
   grip = $list.data('grip')
   order_callback = options.order_callback or window[$list.data('order-callback')] or ->
-    $rows.each ->
+    $list.children('li').filter(-> !$(this).is(blacklist.join(','))).each ->
       $row = $(this)
       $field = $row.find($list.data('order-field')).first()
       $field.val($row.index() + 1)
   scroll_container = $(options.scroll_container) if options.scroll_container
 
-  blacklist = ['.dnd-placeholder']
-  blacklist.push el.getAttribute('data-exclude') if el.hasAttribute('data-exclude')
 
   start = null
   drag_offset = null
@@ -111,7 +111,9 @@ widgets.define 'order_list', (el, options={}) ->
 
     $row = $row.parents('li') unless $row.is('li')
 
-    return if $(e.target).is('a') or $(e.target).is('input')
+    $t = $(e.target)
+
+    return if $t.is('a') or $t.is('input') or $t.is('.locked')
     e.preventDefault()
 
     start = {x: e.pageX, y: e.pageY}
