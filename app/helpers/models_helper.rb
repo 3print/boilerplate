@@ -98,9 +98,12 @@ module ModelsHelper
   end
 
   def collection_counter(collection)
+    return content_tag(:div, count, class: 'label label-info tip-left pull-right') if collection.size == 0
+
+    model_class = collection.is_a?(Array) ? collection.first.try(:class) : collection.klass
     count = collection.size
-    content_tag(:div, class: 'label label-info tip-left pull-right', title: 'tips.models_count'.t(count: count, singular: "models.#{collection.klass.name.underscore}".t.downcase, plural: "models.#{collection.klass.name.pluralize.underscore}".t.downcase)) do
-        concat(count)
+    content_tag(:div, class: 'label label-info tip-left pull-right', title: 'tips.models_count'.t(count: count, singular: "models.#{model_class.name.underscore}".t.downcase, plural: "models.#{model_class.name.pluralize.underscore}".t.downcase)) do
+        oncat(count)
     end
   end
 
