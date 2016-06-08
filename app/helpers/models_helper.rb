@@ -98,7 +98,7 @@ module ModelsHelper
   end
 
   def collection_counter(collection)
-    return content_tag(:div, count, class: 'label label-info tip-left pull-right') if collection.size == 0
+    return content_tag(:div, 0, class: 'label label-info tip-left pull-right') if collection.size == 0
 
     model_class = collection.is_a?(Array) ? collection.first.try(:class) : collection.klass
     count = collection.size
