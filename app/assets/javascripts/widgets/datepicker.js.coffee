@@ -6,6 +6,10 @@ widgets.define 'datepicker', (el) ->
     $el.val(date.format(DATE_FORMAT))
 
   try
+    $el.on 'change', ->
+      if (date = moment($el.val(), DATE_DISPLAY_FORMAT)).isValid()
+        $el.val(date.format(DATE_FORMAT))
+
     $el.datetimepicker
       format: DATE_FORMAT
       displayFormat: DATE_DISPLAY_FORMAT
@@ -23,6 +27,10 @@ widgets.define 'datetimepicker', (el) ->
     $el.val(date.format(DATETIME_FORMAT))
 
   try
+    $el.on 'change', ->
+      if (date = moment($el.val(), DATETIME_DISPLAY_FORMAT)).isValid()
+        $el.val(date.format(DATETIME_FORMAT))
+
     $el.datetimepicker
       format: DATETIME_FORMAT
       displayFormat: DATETIME_DISPLAY_FORMAT
@@ -40,6 +48,10 @@ widgets.define 'timepicker', (el) ->
     $el.val(date.format(TIME_FORMAT))
 
   try
+    $el.on 'change', ->
+      if (date = moment($el.val(), TIME_DISPLAY_FORMAT)).isValid()
+        $el.val(date.format(TIME_FORMAT))
+
     $el.datetimepicker
       format: TIME_FORMAT
       displayFormat: TIME_DISPLAY_FORMAT
