@@ -60,6 +60,7 @@ task :clone, [:name] do |t, args|
       FileUtils.cp_r dir, rel_path
     end
   end
+  FileUtils.cp '.gitignore', rel_path
 
   to_be_removed.each_with_index do |tgt, i|
     Dir["#{rel_path}/#{tgt}"].each do |f|

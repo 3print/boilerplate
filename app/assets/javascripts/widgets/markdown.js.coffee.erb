@@ -1,13 +1,10 @@
 <%
 
-class StaticView < ActionView::Base
-  include IconHelper
-end
-
 def render_html (tpl)
   dir = Rails.root.join("app", "views")
-  view = StaticView.new(dir, :user => @user)
+  view = ActionView::Base.new(dir, :user => @user)
   view.extend(ApplicationHelper)
+  view.extend(IconHelper)
   view.render(partial: tpl, layout: nil)
 end
 
