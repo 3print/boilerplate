@@ -986,14 +986,10 @@ Markdown.dialects.Gruber.inline = {
       if ( ( m = text.match( /^\(([^=]+)=>([^)]+)\)/ ) ) != null ) {
 
         var label = Markdown.DialectHelpers.inline_until_end.call( this, m[1] )
-
-        console.log(m[1], label)
-
         var res = [ m[0].length, [ "button", { class: 'btn btn-primary', href: m[2].replace(/^\s+|\s+$/g, '') }].concat( label[1] ) ]
-        console.log(res)
         return res;
       }
-      return [ 2, "%(" ];
+      return [ 1, "(" ];
     },
 
     "`": function inlineCode( text ) {
@@ -1018,6 +1014,32 @@ Markdown.dialects.Gruber.inline = {
         // TODO: No matching end code found - warn!
         return [ 2, "~~" ];
       }
+    },
+
+    "%RB%": function rightBlock( text ) {
+      var orig = String(text);
+      // Inline content is possible inside wells
+      var res = Markdown.DialectHelpers.inline_until_char.call( this, text.substr(3), '%%%' );
+
+      if ( !res ) return [ 4, '%RB%' ];
+
+      var consumed = 4 + res[ 0 ],
+          children = res[ 1 ];
+
+      return [ consumed, ["block", {class: 'block right-block'}].concat(children) ]
+    },
+
+    "%LB%": function leftBlock( text ) {
+      var orig = String(text);
+      // Inline content is possible inside wells
+      var res = Markdown.DialectHelpers.inline_until_char.call( this, text.substr(3), '%%%' );
+
+      if ( !res ) return [ 4, '%LB%' ];
+
+      var consumed = 4 + res[ 0 ],
+          children = res[ 1 ];
+
+      return [ consumed, ["block", {class: 'block left-block'}].concat(children) ]
     },
 
     "%%%": function narrowWell( text ) {
@@ -1146,9 +1168,9 @@ Markdown.dialects.Gruber.inline = {
       return [ 1, "<" ];
     },
 
-    "\n": function lineBreak( text ) {
-      return [ 1, [ "linebreak" ] ];
-    }
+    // "\n": function lineBreak( text ) {
+    //   return [ 1, [ "linebreak" ] ];
+    // }
 };
 
 // Meta Helper/generator method for em and strong handling
@@ -1597,10 +1619,11 @@ expose.renderJsonML = function( jsonml, options ) {
 
 function escapeHTML( text ) {
   return text.replace( /&/g, "&amp;" )
+             .replace(/>\s+</g, '><')
             //  .replace( /</g, "&lt;" )
             //  .replace( />/g, "&gt;" )
-             .replace( /"/g, "&quot;" )
-             .replace( /'/g, "&#39;" );
+            //  .replace( /"/g, "&quot;" )
+            //  .replace( /'/g, "&#39;" );
 }
 
 function render_tree( jsonml ) {
