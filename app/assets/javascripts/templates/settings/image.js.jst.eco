@@ -4,7 +4,8 @@
   <div class="controls">
     <input id="<%= @id %>"
            data-name="<%= @setting %>"
-           type="text"
+           type="hidden"
+           value="<%= @value %>"
            class="form-control"></input>
 
     <div class="preview">
