@@ -13,7 +13,7 @@ widgets.define 'datepicker', (el) ->
     $el.datetimepicker
       format: DATE_FORMAT
       displayFormat: DATE_DISPLAY_FORMAT
-      locale: 'fr'
+      locale: $('html').attr('lang') or 'en'
       # inline: true
       calendarWeeks: true
       sideBySide: true
@@ -34,7 +34,7 @@ widgets.define 'datetimepicker', (el) ->
     $el.datetimepicker
       format: DATETIME_FORMAT
       displayFormat: DATETIME_DISPLAY_FORMAT
-      locale: 'fr'
+      locale: $('html').attr('lang') or 'en'
       # inline: true
       calendarWeeks: true
       sideBySide: true
@@ -55,7 +55,7 @@ widgets.define 'timepicker', (el) ->
     $el.datetimepicker
       format: TIME_FORMAT
       displayFormat: TIME_DISPLAY_FORMAT
-      locale: 'fr'
+      locale: $('html').attr('lang') or 'en'
       # inline: true
       calendarWeeks: true
       sideBySide: true
