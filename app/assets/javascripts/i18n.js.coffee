@@ -1,7 +1,8 @@
 # Public
 class window.I18n
   @attachToWindow: ->
-    instance = new I18n locales, $('html').attr('lang') or 'en'
+    instance = new I18n locales, $('html').attr('lang')
+    @locale  = instance.defaultLanguage
     window.t = instance.getHelper()
 
     String::t = -> window.t(this)

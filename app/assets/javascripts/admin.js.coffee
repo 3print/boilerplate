@@ -83,8 +83,6 @@ NestedFormEvents::insertFields = (content, assoc, link) ->
     old_insertFields.call(this, content, assoc, link)
 
 $ ->
-  window.LOCALE = $('html').attr('lang') or 'en'
-  
   FastClick.attach(document.body)
 
   $('[data-toggle="collapse"]').on 'click', (e) ->
