@@ -7,7 +7,6 @@
 #= require utils/jquery.fileupload
 #= require bootstrap
 #= require moment.min
-#= require datepicker
 #= require datetimepicker
 #= require fastclick
 #= require widgets
