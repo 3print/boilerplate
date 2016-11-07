@@ -20,6 +20,7 @@
       end
 
       scope = opts[:order].present? ? scope.order(opts[:order]) : scope.order('created_at DESC')
+      scope_counter = collection_counter(scope)
       scope = opts[:limit].present? ? scope.limit(opts[:limit]) : scope.limit(5)
 
     %div{class: "col-md-#{size*6}"}
@@ -54,11 +55,10 @@
 
         .panel.panel-default{class: size == 1 && 'short-actions'}
           .panel-heading
-            = collection_counter(scope)
+            = scope_counter
             = icon_for(klass)
             %h5.panel-title
-              = link_to url do
-                = title_content
+              = link_to title_content, url
 
           = models_list scope, options
 
