@@ -7,13 +7,13 @@ class HTMLWithWell < Redcarpet::Render::HTML
     .gsub(/<p>%%(.+)%%<\/p>/m) { |m|
       "<div class='well'>#{m[5..-7]}</div>"
     }
-    .gsub(/<p>--&gt;&gt;(.+)--&gt;&gt;<\/p>/m) { |m|
+    .gsub(/<p>--&gt;&gt;(.+?)--&gt;&gt;<\/p>/m) { |m|
       "<div class='text-right'>#{m[13..-15]}</div>"
     }
-    .gsub(/<p>&lt;&lt;--(.+)&lt;&lt;--<\/p>/m) { |m|
+    .gsub(/<p>&lt;&lt;--(.+?)&lt;&lt;--<\/p>/m) { |m|
       "<div class='text-left'>#{m[13..-15]}</div>"
     }
-    .gsub(/<p>-&gt;&lt;-(.+)-&gt;&lt;-<\/p>/m) { |m|
+    .gsub(/<p>-&gt;&lt;-(.+?)-&gt;&lt;-<\/p>/m) { |m|
       "<div class='text-center'>#{m[13..-15]}</div>"
     }
     .gsub(/\^\^\^\^(.+)\^\^\^\^/) { |m|
