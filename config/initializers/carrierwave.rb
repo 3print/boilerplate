@@ -33,4 +33,19 @@ module PublicUploader
       base.fog_public   true
     end
   end
+
+  def filename
+    if original_filename
+      # hash = Digest::MD5.hexdigest(File.dirname(current_path))
+      base = file.try(:basename) # Local Storage
+      unless base.present?
+        base = file.try(:filename) #Fog
+        base = base.split('.')[0..-2].join('.')
+      end
+      name = base.split('_').last.gsub(/\.$/, '')
+
+      # ["#{name}-#{hash}", file.extension].compact.select(&:present?).join('.')
+      [name, file.extension].compact.select(&:present?).join('.')
+    end
+  end
 end
