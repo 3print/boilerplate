@@ -36,6 +36,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def robots
+    render text: ""
+  end
+
   def is_admin?
     false
   end

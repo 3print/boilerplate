@@ -58,7 +58,7 @@ module SimpleForm
 
         css << (options[:wrapper_error_class] || @defaults[:error_class]) if input.has_errors?
 
-        css << (options[:wrapper_success_class] || @defaults[:success_class]) if input.object.present? && input.object.was_validated? && !input.has_errors? && input.required_by_validators?
+        css << (options[:wrapper_success_class] || @defaults[:success_class]) if input.object.present? && input.object.was_validated? && !input.has_errors? && input.has_validators?
 
         css << (options[:wrapper_hint_class] || @defaults[:hint_class]) if input.has_hint?
         css.compact

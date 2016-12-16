@@ -1,4 +1,26 @@
 module I18n
+  class << self
+    def translate_with_fallback key, options={}, original=nil
+      begin
+        self.translate_without_fallback(key, {raise: true}.update(options))
+      rescue => e
+        split = key.to_s.split('.')
+        if split.size <= 2
+          translate_without_fallback original || key, options
+        else
+          v = split.pop
+          v2 = split.pop
+          split.pop if v2 == "default"
+          split << "default" << v
+          new_key = split.join('.')
+          translate_with_fallback new_key, options, original || key
+        end
+      end
+    end
+    alias_method_chain :translate, :fallback
+    alias_method :t, :translate
+  end
+
   def self.tc(key, params={})
     self.t('label_with_colon', label: key.t(params)).html_safe
   end

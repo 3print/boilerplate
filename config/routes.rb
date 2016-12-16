@@ -31,4 +31,6 @@ Rails.application.routes.draw do
   put "/404", to: "errors#routing"
   patch "/404", to: "errors#routing"
   delete "/404", to: "errors#routing"
+
+  get 'robots.txt' => 'application#robots'
 end
