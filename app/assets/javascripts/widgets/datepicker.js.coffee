@@ -1,5 +1,6 @@
 
 widgets.define 'datepicker', (el) ->
+  console.log window.I18N.locale
   $el = $(el)
 
   if (date = moment($el.val(), DATE_DISPLAY_FORMAT)).isValid()
@@ -13,7 +14,7 @@ widgets.define 'datepicker', (el) ->
     $el.datetimepicker
       format: DATE_FORMAT
       displayFormat: DATE_DISPLAY_FORMAT
-      locale: window.I18N.locale
+      locale: window.I18n.locale
       # inline: true
       calendarWeeks: true
       sideBySide: true
@@ -34,7 +35,7 @@ widgets.define 'datetimepicker', (el) ->
     $el.datetimepicker
       format: DATETIME_FORMAT
       displayFormat: DATETIME_DISPLAY_FORMAT
-      locale: window.I18N.locale
+      locale: window.I18n.locale
       # inline: true
       calendarWeeks: true
       sideBySide: true
