@@ -12,7 +12,28 @@ fr:
   reverse_masquerade: 'Quitter le mode mascarade'
 
   errors:
-    toggle: "Impossible de réaliser l'action demandée"
+    toggle: Impossible de réaliser l'action demandée
+    messages:
+      accepted: doit être accepté(e)
+      blank: doit être rempli(e)
+      present: doit être vide
+      confirmation: ne concorde pas avec %{attribute}
+      empty: doit être rempli(e)
+      equal_to: doit être égal à %{count}
+      even: doit être pair
+      exclusion: n'est pas disponible
+      greater_than: doit être supérieur à %{count}
+      greater_than_or_equal_to: doit être supérieur ou égal à %{count}
+      inclusion: n'est pas inclus(e) dans la liste
+      invalid: n'est pas valide
+      less_than: doit être inférieur à %{count}
+      less_than_or_equal_to: doit être inférieur ou égal à %{count}
+      model_invalid: "Validation échouée: %{errors}"
+      not_a_number: n'est pas un nombre
+      not_an_integer: doit être un nombre entier
+      odd: doit être impair
+      required: doit exister
+      taken: n'est pas disponible
     not_found:
       title: "Erreur 404"
       content: "La page demandée n'existe pas"
