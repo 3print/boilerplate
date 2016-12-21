@@ -1,6 +1,5 @@
 
 widgets.define 'datepicker', (el) ->
-  console.log window.I18N.locale
   $el = $(el)
 
   if (date = moment($el.val(), DATE_DISPLAY_FORMAT)).isValid()
