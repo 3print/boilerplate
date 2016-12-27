@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
     !encrypted_password.present?
   end
 
-  def self.send_reset_password_instructions attributes={}, congress=nil
+  def self.send_reset_password_instructions attributes={}
     recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
     recoverable.send_reset_password_instructions if recoverable.persisted?
     recoverable
