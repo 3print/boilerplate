@@ -1,3 +1,2 @@
-- if can? :view, resource, column
-  %strong= "models.fields.#{controller.resource_name.singularize}.#{column}".tc
-  = link_to phone_number(value), "tel:#{value}"
+%strong= "#{controller.resource_name.singularize}.#{column}".tmfc
+= link_to phone_number(value), "tel:#{value}"
