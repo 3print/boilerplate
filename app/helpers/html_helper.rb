@@ -6,7 +6,7 @@ module HtmlHelper
       "<!--[if IE 7]> <html#{attrs} class='lt-ie9 lt-ie8 #{cls}'> <![endif]-->",
       "<!--[if IE 8]> <html#{attrs} class='lt-ie9 #{cls}'> <![endif]-->",
       "<!--[if IE 9]> <html#{attrs} class='ie9 #{cls}'> <![endif]-->",
-      "<!--[if gt IE 9]><!--> <html#{attrs} class='#{cls}'> <!--<![endif]-->",
+      "<html#{attrs} class='#{cls}'>",
       capture_haml(&blk).strip.html_safe,
       "</html>"
     ].join("\n").html_safe
