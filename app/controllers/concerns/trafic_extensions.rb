@@ -5,7 +5,10 @@ module TraficExtensions
 
 
   def index
-    respond_with resource
+    respond_to do |format|
+      format.html
+      format.json { render json: resource }
+    end
   end
 
   included do
@@ -15,7 +18,10 @@ module TraficExtensions
 
   [:new, :show, :edit].each do |name|
     define_method name do
-      respond_with resource
+      respond_to do |format|
+        format.html
+        format.json { render json: resource }
+      end
     end
   end
 
@@ -36,23 +42,15 @@ module TraficExtensions
 
   def success_response
     respond_to do |format|
-      format.html do
-        respond_with resource, location: resource_location
-      end
-      format.json do
-        render json: {status: "ok", id: resource.id}
-      end
+      format.html
+      format.json { render json: {id: resource.id} }
     end
   end
 
   def destroy_response
     respond_to do |format|
-      format.html do
-        respond_with resource, location: resource_path(:index)
-      end
-      format.json do
-        render json: {status: "ok"}
-      end
+      format.html
+      format.json { render json: {status: :ok} }
     end
   end
 
@@ -90,7 +88,7 @@ module TraficExtensions
   def render_404
     respond_to do |format|
       format.html { render 'shared/404', status: :not_found }
-      format.json { render json: { status: :not_found }, status: 404 }
+      format.json { render json: { status: :not_found } }
     end
   end
 end

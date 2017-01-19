@@ -24,7 +24,6 @@
 #
 
 class User < ActiveRecord::Base
-  extend CarrierWave::Meta::ActiveRecord
   extend Concerns::ImageGravity
   include Concerns::CommonExtensions
 
@@ -33,9 +32,6 @@ class User < ActiveRecord::Base
 
   gravity_enum :avatar
   mount_uploader :avatar, AvatarUploader
-  serialize :avatar_meta, OpenStruct
-
-  carrierwave_meta_composed :avatar_meta, :avatar, image_version: %i(width height md5sum)
 
   scope :admins, -> { where 'users.role = 1' }
 
