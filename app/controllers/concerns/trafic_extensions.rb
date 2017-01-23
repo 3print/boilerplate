@@ -7,7 +7,7 @@ module TraficExtensions
   def index
     respond_to do |format|
       format.html
-      format.json { render json: resource }
+      format.json
     end
   end
 
@@ -42,14 +42,14 @@ module TraficExtensions
 
   def success_response
     respond_to do |format|
-      format.html
+      format.html { redirect_to resource_location }
       format.json { render json: {id: resource.id} }
     end
   end
 
   def destroy_response
     respond_to do |format|
-      format.html
+      format.html { redirect_to resource_path(:index) }
       format.json { render json: {status: :ok} }
     end
   end
