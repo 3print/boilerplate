@@ -4,7 +4,7 @@ class FileInput < SimpleForm::Inputs::FileInput
   include ActionView::Helpers::FormOptionsHelper
 
   def input(wrapper_options = nil)
-    use_aws = CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog || (Rails.env.development? && !ENV['NO_AWS'])
+    use_aws = CarrierWave::Uploader::Base.storage == CarrierWave::Storage::AWS || (Rails.env.development? && !ENV['NO_AWS'])
     return super unless use_aws
 
     has_gravity = object.respond_to?(:"#{attribute_name}_gravity")
@@ -28,7 +28,7 @@ class FileInput < SimpleForm::Inputs::FileInput
     end
 
     opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
-    if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog
+    if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::AWS
       if object.respond_to?(:"#{attribute_name}_tmp")
         buffer << @builder.hidden_field(:"#{attribute_name}_tmp", opts)
       else
@@ -111,7 +111,7 @@ class FileInput < SimpleForm::Inputs::FileInput
     return s if not res.respond_to?(:width) and not res.respond_to?(:height)
     s += "<div class='meta'>"
     s += "<div class='dimensions'><span class='number'>#{res.width}</span>x<span class='number'>#{res.height}</span>px</div>"
-    s += "<div class='size'><span class='number'>#{res.file_size / 1024}</span>ko</div>"
+    s += "<div class='size'><span class='number'>#{res.file.size / 1024}</span>ko</div>"
     s += "</div>"
 
     s.html_safe
