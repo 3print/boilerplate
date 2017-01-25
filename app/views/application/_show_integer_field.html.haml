@@ -1,6 +1,8 @@
-- if can? :view, resource, column
-  %strong= "#{controller.resource_name.singularize}.#{column}".tmfc
-  - if controller.resource_class.respond_to?(column.to_s.pluralize)
+%strong= "#{controller.resource_name.singularize}.#{column}".tmfc
+- if controller.resource_class.respond_to?(column.to_s.pluralize)
+  - if value.present?
     = "enums.#{controller.resource_name.singularize}.#{column}.#{value}".t
   - else
-    = value
+    = 'errors.value.undefined'.t
+- else
+  = value

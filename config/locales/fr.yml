@@ -37,6 +37,8 @@ fr:
     not_found:
       title: "Erreur 404"
       content: "La page demandée n'existe pas"
+    value:
+      undefined: Non définie
 
   roles:
     admin: Admin
