@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include DeviseExtensions
   include CustomsExtensions
   include ToggleExtensions
+  include NotificationExtensions
   include Pundit
 
   respond_to :html
