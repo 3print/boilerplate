@@ -6,14 +6,14 @@ module I18n
       rescue => e
         split = key.to_s.split('.')
         if split.size <= 2
-          translate_without_fallback key || original, options
+          translate_without_fallback original || key, options
         else
           v = split.pop
           v2 = split.pop
           split.pop if v2 == "default"
           split << "default" << v
           new_key = split.join('.')
-          translate_with_fallback new_key, options, key || original
+          translate_with_fallback new_key, options, original || key
         end
       end
     end
