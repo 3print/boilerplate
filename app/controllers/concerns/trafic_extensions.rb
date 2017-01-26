@@ -89,7 +89,7 @@ module TraficExtensions
 
   def render_404
     respond_to do |format|
-      format.html { render 'shared/404', status: :not_found }
+      format.html { render 'shared/404', layout: 'error', status: :not_found }
       format.json { render json: { status: :not_found }, status: 404 }
     end
   end

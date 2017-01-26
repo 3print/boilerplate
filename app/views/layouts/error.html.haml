@@ -1,0 +1,70 @@
+:ruby
+  description = content_for?(:description) ? yield(:description) : 'app_name'.t
+  title = content_for?(:title) ? yield(:title) : 'app_name'.t
+
+!!!
+= cc_html lang: :fr, class: 'no-js' do
+  %head
+    %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=no", name: "viewport"}/
+    %meta{charset: "utf-8"}/
+    %meta{name: "apple-mobile-web-app-capable", content: "yes"}/
+
+    %title= title
+    %meta{name: "description", content: "#{description}"}/
+    = yield :meta
+
+    %link{href: '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', media: 'screen', rel: 'stylesheet'}
+
+    %meta{name: "apple-mobile-web-app-capable", content: "yes"}/
+    %meta{name: "mobile-web-app-capable", content: "yes"}/
+    %meta{name: "apple-mobile-web-app-status-bar-style", content: "black"}/
+
+    %link{ rel: "apple-touch-icon", href:"/images/apple-touch-icon.png"}/
+
+    = favicon_link_tag 'favicon.ico'
+    = stylesheet_link_tag 'application', media: 'all'
+    %link{href: "https://fonts.googleapis.com/css?family=Raleway:400,300,600", rel: "stylesheet", type: "text/css"}/
+    = yield :styles
+    = javascript_include_tag 'critical'
+    = csrf_meta_tags
+
+  - body_class = "#{yield :extra_body_class} #{controller_name} #{action_name}".strip
+  %body{class: body_class}
+    %nav.navbar{role: :navigation}
+
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
+            %span.sr-only Toggle navigation
+            %i.fa.fa-navicon
+          %a.navbar-brand{href: "/"}
+            = icon :flag
+            %span.text= 'app_name'.t
+
+    .scroll-wrapper
+      .inner-scroll-wrapper
+        - if content_for?(:content_header)
+          - content_header_class = yield :content_header_class
+          - content_header_style = yield :content_header_style
+          .content-header{class: content_header_class, style: content_header_style}
+            .container-fluid= yield :content_header
+
+        - content_class = yield :extra_content_class
+        #content{class: content_class}
+          .container-fluid
+            #content-header
+              = yield :content_header
+
+            = yield
+
+
+    <!--[if IE 8]>
+    = javascript_include_tag 'shame'
+    <![endif]-->
+
+    <!--[if IE 9]>
+    = javascript_include_tag 'shame'
+    <![endif]-->
+
+    = javascript_include_tag "application"
+    = yield :scripts
