@@ -1,12 +1,13 @@
 module Concerns::LightSearch
   extend ActiveSupport::Concern
 
-  def light_search_by(*columns)
+  def light_search_by(*columns, &block)
     scope :with_text, -> (q) {
       if q.present?
         sql = columns.map {|c| "(#{translated c} ILIKE ?)" }.join(' OR ')
         args = [sql] + columns.map {|c| "%#{translate q}%" }
-        where(*args)
+        base_scope = block_given? ? block.() : all
+        base_scope.where(*args)
       else
         all
       end
@@ -18,7 +19,8 @@ module Concerns::LightSearch
   end
 
   def translated(field)
-    "lower(translate(#{self.name.pluralize.underscore}.#{field},'#{TRANSLATION.keys.join}', '#{TRANSLATION.values.join}'))"
+    table_name = field.to_s.split('.').size > 1 ? nil : self.name.pluralize.underscore
+    "lower(translate(#{[table_name, field].compact.join('.')},'#{TRANSLATION.keys.join}', '#{TRANSLATION.values.join}'))"
   end
 
   TRANSLATION = {
@@ -36,5 +38,4 @@ module Concerns::LightSearch
     '.' => '',
     ':' => '',
   }
-
 end
