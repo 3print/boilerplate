@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.3.3'
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 5.0'
 gem 'spring',        group: :development
 gem 'unicorn'
 gem 'unicorn-rails'
@@ -61,7 +61,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller', platforms: [:mri_20, :mri_21, :mri_22, :mri_23, :rbx]
   gem 'html2haml'
-  gem 'quiet_assets'
   gem 'rails_layout'
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
