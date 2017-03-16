@@ -64,7 +64,7 @@
     .row.section
       - content = capture_haml do
         :plain
-          ![Texte image non disponible](https://source.unsplash.com/random/348x100 "Légende au survol")
+          ![Texte image non disponible](https://placehold.it/348x100?text=PICTURE "Légende au survol")
       .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
       .col-md-6.preview
         .text-content= markdown(content)
