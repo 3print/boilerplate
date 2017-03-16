@@ -142,7 +142,7 @@ module ResourceExtensions
     end
     authorize results, :"#{action}?" if authorize && results
     raise ActiveRecord::RecordNotFound if results.nil?
-    results
+    @resource = results
   end
   alias_method :load_resource, :resource
 
