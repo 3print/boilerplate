@@ -17,6 +17,6 @@ module CustomsExtensions
   end
 
   def unauthorized
-    redirect_to new_user_session_path
+    redirect_to new_user_session_path(redirect: request.url)
   end
 end

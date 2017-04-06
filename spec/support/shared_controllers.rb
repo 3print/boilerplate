@@ -34,3 +34,9 @@ shared_examples 'render' do |tpl, as_user|
     it { should render_template(partial: tpl) }
   end
 end
+
+shared_examples 'be redirected' do |as_user|
+  when_logged_in as_user do
+    it { should respond_by :redirect }
+  end
+end

@@ -6,6 +6,7 @@
       = f.input :email, :autofocus => true
       = f.input :password
       = f.input :remember_me, as: :boolean
+      = hidden_field_tag :redirect, params[:redirect]
 
       = f.submit 'actions.connect'.t, class: 'btn btn-red btn-block'
       = link_to 'actions.recover_password'.t, new_password_path(resource)
@@ -19,6 +20,7 @@
       = f.input :email
       = f.input :password, as: :pwdcalc_simple
       = f.input :password_confirmation
+      = hidden_field_tag :redirect, params[:redirect]
 
       = f.submit 'actions.sign_up'.t, class: 'btn btn-grey btn-block'
 
