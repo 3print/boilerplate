@@ -1,10 +1,11 @@
-module  Concerns::ToggleAttributes
+module Concerns::ToggleAttributes
   extend ActiveSupport::Concern
 
   def attr_toggle(name, options={})
     options[:prefix] ||= 'un'
 
     past_tense = name.to_s.verb.conjugate tense: :past, aspect: :perfective
+    off_past_tense = options[:off] || "#{options[:prefix]}#{past_tense}"
     off = options.delete(:off) || "#{options[:prefix]}#{name}"
 
     bool_attribute = :"#{past_tense}?"
@@ -28,5 +29,8 @@ module  Concerns::ToggleAttributes
     define_method bool_attribute do
       send(target_attribute).present?
     end
+
+    scope :"#{past_tense}", ->() { where("#{table_name}.#{target_attribute} IS NOT NULL") }
+    scope :"#{off_past_tense}", ->() { where("#{table_name}.#{target_attribute} IS NULL") }
   end
 end
