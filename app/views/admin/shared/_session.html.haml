@@ -1,4 +1,4 @@
-%span.welcome.pull-right
+%span.welcome
   .pull-right{class: 'dropdown-toggle', data: { toggle: 'dropdown' }}
     = show_avatar current_user.avatar, :thumb
 
@@ -38,3 +38,4 @@
       - else
         .label.label-info= "roles.#{current_user.role}".t
       = icon('chevron-down')
+      = icon('chevron-up')

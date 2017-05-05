@@ -1,18 +1,20 @@
 .welcome
   text-align: left
-  margin-top: 6px
+  margin-top: 3px
 
-  .avatar
-    margin-left: 0
+  .dropdown-menu
+    right: 0
+    left: auto
 
-  .details .fa-chevron-down
-    float: right
-    margin-top: 3px
+  .details
+    .fa-chevron-down, .fa-chevron-up
+      float: right
+      margin-top: 3px
 
   .session
     margin-left: 1em
     margin-right: 70px
-    padding: 8px 0
+    padding: 10px 0
     > .text
       font-size: 16px
       color: $color-grey
@@ -25,15 +27,22 @@
         line-height: 0.8em
         margin-top: -0.2em
 
-  .pull-right > *
-    vertical-align: middle
-
   .avatar
-    margin-left: 10px
+    margin: 3px 3px 0
     +box-inline
 
-  +upto-tablet
-    float: none !important
+  +for-desktop
+    float: right
+    position: relative
+    display: inline-block
 
-    .avatar
-      margin-right: 20px
+  .fa-chevron-up
+    display: none
+  .fa-chevron-down
+    display: block
+
+  &.open
+    .fa-chevron-down
+      display: none
+    .fa-chevron-up
+      display: block
