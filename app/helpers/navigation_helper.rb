@@ -5,7 +5,7 @@ module NavigationHelper
       cls = url
       url = controller.controller_namespace + [cls]
       label = cls.t
-      controller_name = cls.name.pluralize.underscore
+      controller_name = cls.table_name
       ico = icon_class_for(cls)
     end
 

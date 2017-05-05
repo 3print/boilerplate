@@ -1,33 +1,29 @@
-SKIPPED_COLUMNS = [
-  :created_at, :updated_at, :created_on, :updated_on,
-  :lock_version, :version, :sequence,
-
-  # Devise
-  :encrypted_password, :reset_password_token, :reset_password_sent_at,
-  :last_sign_in_at, :last_sign_in_ip,
-  :current_sign_in_at, :current_sign_in_ip,
-  :remember_created_at, :approved_at,
-
-  # CarrierWave Meta
-  :avatar_meta, :avatar_gravity,
-  :image_meta, :image_gravity,
-
-  # Misc
-  :avatar_tmp, :image_tmp,
-
-  # Syncables
-  :uuid
-]
-
 module ModelsHelper
-  def skipped_columns
-    ::SKIPPED_COLUMNS
-  end
+  SKIPPED_COLUMNS = [
+    :created_at, :updated_at, :created_on, :updated_on,
+    :lock_version, :version, :sequence, :permalink,
+
+    # Devise
+    :encrypted_password, :reset_password_token, :reset_password_sent_at,
+    :last_sign_in_at, :last_sign_in_ip,
+    :current_sign_in_at, :current_sign_in_ip,
+    :remember_created_at, :approved_at,
+
+    # CarrierWave Meta
+    :avatar_meta, :avatar_gravity,
+    :image_meta, :image_gravity,
+
+    # Misc
+    :avatar_tmp, :image_tmp,
+
+    # Syncables
+    :uuid
+  ].freeze
 
   def default_columns_for_object(model)
     cols = association_columns(model, :belongs_to)
     cols += content_columns(model)
-    cols -= skipped_columns
+    cols -= ::SKIPPED_COLUMNS
     cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
     cols += model.class::EXTRA_COLUMNS.map(&:intern) if model.class::EXTRA_COLUMNS.present? rescue false
 
@@ -106,7 +102,7 @@ module ModelsHelper
 
     model_class = collection.is_a?(Array) ? collection.first.try(:class) : collection.klass
     count = collection.size
-    content_tag(:div, class: 'label label-info tip-left pull-right', title: 'tips.models_count'.t(count: count, singular: "models.#{model_class.name.underscore}".t.downcase, plural: "models.#{model_class.name.pluralize.underscore}".t.downcase)) do
+    content_tag(:div, class: 'label label-info tip-left pull-right', title: 'tips.models_count'.t(count: count, singular: "models.#{model_class.table_name.singularize}".t.downcase, plural: "models.#{model_class.table_name}".t.downcase)) do
         concat(count)
     end
   end
@@ -116,7 +112,7 @@ module ModelsHelper
 
     col_class = collection.respond_to?(:klass) ? collection.klass : collection.first.class
 
-    resource_name = col_class.name.underscore.pluralize
+    resource_name = col_class.table_name
     page_param = :"#{resource_name}_page"
 
     per = options[:per] || options[:limit] || 10

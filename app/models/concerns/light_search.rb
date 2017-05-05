@@ -19,7 +19,7 @@ module Concerns::LightSearch
   end
 
   def translated(field)
-    table_name = field.to_s.split('.').size > 1 ? nil : self.name.pluralize.underscore
+    table_name = field.to_s.split('.').size > 1 ? nil : self.table_name
     "lower(translate(#{[table_name, field].compact.join('.')},'#{TRANSLATION.keys.join}', '#{TRANSLATION.values.join}'))"
   end
 

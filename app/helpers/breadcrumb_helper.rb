@@ -7,7 +7,7 @@ module BreadcrumbHelper
     if namespace.any? {|c| c != :admin }
       namespace.reject {|c| c == :admin }.each do |scope|
         if scope.is_a?(ActiveRecord::Base)
-          klass = scope.class.name.pluralize.underscore.to_sym
+          klass = scope.class.table_name.to_sym
           breadcrumb "models.#{klass}".t, a + [klass]
         end
         a = a + [scope]
