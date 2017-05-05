@@ -58,32 +58,36 @@ module ModelsHelper
   end
 
   def show_field(col, options={})
-    out = resource.send(col)
+    res = options[:resource] || resource
+    resource_name = res.class.table_name
+    out = res.send(col)
 
     if options[:as].present?
       type = options[:as]
       type_partial = "show_#{type}_field"
       if partial_exist?(type_partial)
-        return render partial: type_partial, locals: { value: out, type: type, column: col, options: options }
+        return render partial: type_partial, locals: { value: out, type: type, column: col, resource: res, resource_name: resource_name, options: options }
       end
     end
 
-    column = controller.resource_class.columns_hash[col.to_s]
-    type = controller.resource_class.get_column_display_type(col)
+    column = resource_class.columns_hash[col.to_s]
+    type = resource_class.get_column_display_type(col)
     type ||= column.present? ? column.type : :association
     type = :image if out.present? and out.is_a?(CarrierWave::Uploader::Base)
 
-    field_partial = "show_#{controller.resource_name}_#{col}"
+    field_partial = "show_#{resource_name}_#{col}"
     type_partial = "show_#{type}_field"
 
+    locals = { value: out, type: type, column: col, resource: res, resource_name: resource_name, options: options }
+
     if partial_exist?(field_partial)
-      render partial: field_partial, locals: { value: out, type: type, column: col, options: options }
+      render partial: field_partial, locals: locals
     elsif partial_exist?(type_partial)
-      render partial: type_partial, locals: { value: out, type: type, column: col, options: options }
+      render partial: type_partial, locals: locals
     elsif out.is_a?(ActiveRecord::Base)
-      render partial: 'show_active_record_field', locals: { value: out, type: type, column: col, options: options }
+      render partial: 'show_active_record_field', locals: locals
     else
-      render partial: 'show_default_field', locals: { value: out, type: type, column: col, options: options }
+      render partial: 'show_default_field', locals: locals
     end
   end
 
