@@ -3,7 +3,7 @@
   .col-md-6
     = simple_form_for(sign_in_model, url: session_path(:user), html: { role: 'form'}) do |f|
       %h3= 'actions.sign_in'.t
-      = f.input :email, :autofocus => true
+      = f.input :email, autofocus: true
       = f.input :password
       = f.input :remember_me, as: :boolean
       = hidden_field_tag :redirect, params[:redirect]
