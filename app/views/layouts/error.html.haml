@@ -28,7 +28,7 @@
     = javascript_include_tag 'critical'
     = csrf_meta_tags
 
-  - body_class = "#{yield :extra_body_class} #{controller_name} #{action_name}".strip
+  - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
     %nav.navbar{role: :navigation}
 

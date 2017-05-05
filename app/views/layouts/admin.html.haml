@@ -24,8 +24,7 @@
     <!--[if IE 9]>
     = stylesheet_link_tag 'shame', media: 'all'
     <![endif]-->
-
-  - body_class = "#{yield :extra_body_class} #{controller_name} #{action_name}".strip
+  - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
     %nav.navbar.navbar-default{role: :navigation}
 
