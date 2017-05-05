@@ -14,6 +14,7 @@
 #= require nested_form
 #= require bootstrap-markdown
 #= require bootstrap-markdown.fr
+#= require highlight.pack
 #= require utils/markdown
 #= require locales
 #= require i18n
@@ -70,6 +71,7 @@ widgets 'form_validation', 'form', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'json_form', 'form', on: DEFAULT_EVENTS, unless: is_in_template
 
 I18n.attachToWindow()
+hljs.initHighlightingOnLoad()
 
 old_insertFields = NestedFormEvents::insertFields
 NestedFormEvents::insertFields = (content, assoc, link) ->

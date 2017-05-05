@@ -10,9 +10,3 @@
     = render_partial_for_user 'show_extra_fields'
 
   = render_partial_for_user 'show_after_fields'
-
-- content_for :scripts do
-  = javascript_include_tag 'highlight.pack'
-  = stylesheet_link_tag 'hljs'
-  :coffeescript
-    hljs.initHighlightingOnLoad()
