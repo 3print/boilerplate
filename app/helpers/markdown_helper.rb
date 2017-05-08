@@ -45,19 +45,9 @@ class HTMLWithWell < Redcarpet::Render::HTML
 end
 
 module MarkdownHelper
-  def clean(text)
-    begin
-      Timeout::timeout(2) do
-        TypographicCleaner.clean(text)
-      end
-    rescue Timeout::Error
-      text
-    end
-  end
-
   def markdown(text)
     renderer = HTMLWithWell.new(hard_wrap: true)
     m = Redcarpet::Markdown.new(renderer, strikethrough: true, tables: true)
-    m.render(clean(text) || '').html_safe
+    m.render(text).html_safe
   end
 end
