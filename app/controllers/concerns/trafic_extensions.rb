@@ -62,14 +62,12 @@ module TraficExtensions
     build_resource
 
     args = [:save]
-    args << action_name unless ::Rails.version.to_f >= 4.0
 
     resource.save!
   end
 
   def destroy_resource
     args = [:destroy]
-    args << action_name unless ::Rails.version.to_f >= 4.0
 
     if resource.respond_to? :destroy!
       resource.destroy!
