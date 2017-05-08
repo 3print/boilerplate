@@ -6,7 +6,7 @@ class Admin::ApplicationController < ApplicationController
 
   layout 'admin'
 
-  before_filter :reject_unauthorized_user!
+  before_action :reject_unauthorized_user!
 
   load_and_authorize_resource
 

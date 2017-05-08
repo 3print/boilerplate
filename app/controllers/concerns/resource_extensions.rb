@@ -19,13 +19,13 @@ module ResourceExtensions
     end
 
     def self.load_resource(options={})
-      before_filter options do
+      before_action options do
         resource
       end
     end
 
     def self.load_and_authorize_resource(options={})
-      before_filter options do
+      before_action options do
         unless self.class.instance_variable_get "@skip_load_and_authorize_resource"
           resource authorize: true
         end
@@ -41,7 +41,7 @@ module ResourceExtensions
 
       options[:only] = :index if options.empty?
 
-      before_filter options do
+      before_action options do
         key = :"@#{resource_name}"
         instance_variable_set(key, instance_variable_get(key).order(sort))
       end
@@ -52,7 +52,7 @@ module ResourceExtensions
 
       options[:only] = :index if options.empty?
 
-      before_filter options do
+      before_action options do
         key = :"@#{resource_name}"
         resource
         if block_given?
@@ -68,7 +68,7 @@ module ResourceExtensions
     def self.paginate_resource(options={})
       options[:only] = :index if options.empty?
 
-      before_filter options do
+      before_action options do
         key = :"@#{resource_name}"
         resource
         instance_variable_set(key, instance_variable_get(key).page(params[:page] || 1))
