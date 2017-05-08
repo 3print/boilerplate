@@ -59,7 +59,7 @@ gem 'tprint-debug', git: 'https://github.com/3print/tprint-debug'
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', platforms: [:mri_20, :mri_21, :mri_22, :mri_23, :rbx]
+  gem 'binding_of_caller', platforms: [:mri_22, :mri_23, :rbx]
   gem 'html2haml'
   gem 'rails_layout'
   gem 'rb-fchange', :require=>false

@@ -9,8 +9,8 @@ SKIPPED_COLUMNS = [
   :remember_created_at, :approved_at,
 
   # CarrierWave Meta
-  :avatar_meta, :avatar_gravity,
-  :image_meta, :image_gravity,
+  :avatar_gravity,
+  :image_gravity,
 
   # Misc
   :avatar_tmp, :image_tmp,
@@ -73,7 +73,7 @@ module ModelsHelper
     column = resource_class.columns_hash[col.to_s]
     type = resource_class.get_column_display_type(col)
     type ||= column.present? ? column.type : :association
-    type = :image if out.present? and out.is_a?(CarrierWave::Uploader::Base)
+    type = :image if out.is_a?(CarrierWave::Uploader::Base)
 
     field_partial = "show_#{resource_name}_#{col}"
     type_partial = "show_#{type}_field"

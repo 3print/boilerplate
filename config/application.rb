@@ -7,6 +7,8 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Boilerplate
+  ActiveSupport.halt_callback_chains_on_return_false = false
+
   class Application < Rails::Application
     config.generators do |g|
       g.test_framework :rspec,
@@ -35,10 +37,13 @@ module Boilerplate
     config.i18n.default_locale = :fr
 
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.eager_load_paths << "#{config.root}/lib"
+    config.autoload_paths << "#{config.root}/lib"
 
     config.active_record.raise_in_transactional_callbacks = true
     config.exceptions_app = self.routes
+
+    config.active_job.queue_adapter = :delayed_job
   end
 end
 
