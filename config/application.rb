@@ -37,6 +37,7 @@ module Boilerplate
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.autoload_paths += %W(#{config.root}/lib)
 
+    config.active_record.raise_in_transactional_callbacks = true
     config.exceptions_app = self.routes
   end
 end

@@ -1,10 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
   include PublicUploader
   include CarrierWave::RMagick
-  include CarrierWave::Meta
   include Sprockets::Rails::Helper
-
-  process store_meta: [{md5sum: true}]
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}/"

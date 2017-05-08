@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   include NotificationExtensions
   include Pundit
 
-  respond_to :html
-
   protect_from_forgery with: :exception
 
   rescue_from Pundit::NotAuthorizedError, with: :access_denied

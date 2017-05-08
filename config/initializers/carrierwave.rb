@@ -5,32 +5,33 @@ CarrierWave.configure do |config|
   config.asset_host = ENV['ASSET_HOST'] || "http://0.0.0.0:3000"
 
   if Rails.env.production? || Rails.env.staging? || ENV['FORCE_AWS']
-    config.storage = :fog
+    config.storage = :aws
+    config.aws_bucket = ENV['AWS_BUCKET']
+    config.aws_acl    = 'public-read'
 
-    config.fog_credentials = {
-      provider:               'AWS',
-      region:                 'eu-west-1',
-      aws_access_key_id:      ENV['AWS_ACCESS_KEY_ID'] || ENV['AWS_ACCESS_KEY'],
-      aws_secret_access_key:  ENV['AWS_SECRET_ACCESS_KEY'],
-      path_style:             true
+    config.asset_host = "https://#{ ENV['ASSET_HOST'] }"
+
+    config.aws_credentials = {
+      access_key_id:      ENV['AWS_ACCESS_KEY_ID'] || ENV['AWS_ACCESS_KEY'],
+      secret_access_key:  ENV['AWS_SECRET_ACCESS_KEY'],
+      region:             ENV['AWS_REGION'] || 'eu-west-1',
     }
 
-    config.fog_directory  = ENV['AWS_BUCKET']
-    config.asset_host     = "https://#{ ENV['ASSET_HOST'] }"
-    config.fog_public     = true
+    config.aws_attributes = {
+      expires: 1.years.from_now.httpdate,
+      cache_control: "max-age=#{ 1.year }"
+    }
 
-    config.fog_attributes = { 'Cache-Control' => "max-age=#{ 1.year }" }
-    config.fog_authenticated_url_expiration = 10.years
+    config.aws_authenticated_url_expiration = 1.week
+
   end
 end
 
 module PublicUploader
   def self.included base
 
-    # if Rails.env.production?
     if base.storage.name == base.storage_engines[:fog]
-      base.asset_host   "https://#{ ENV['ASSET_HOST'] }"
-      base.fog_public   true
+      base.asset_host "https://#{ ENV['ASSET_HOST'] }"
     end
   end
 
