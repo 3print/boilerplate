@@ -7,9 +7,9 @@
     .panel.panel-default
       .panel-heading
         - if resource.admin?
-          .pull-right.label.label-warning= "roles.#{resource.role}".t
+          .pull-right.label.label-warning= "enums.user.role.#{resource.role}".t
         - else
-          .pull-right.label.label-info= "roles.#{resource.role}".t
+          .pull-right.label.label-info= "enums.user.role.#{resource.role}".t
 
         %h5.panel-title
           = icon :info

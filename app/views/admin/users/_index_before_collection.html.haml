@@ -1,0 +1,23 @@
+= form_tag admin_users_path, method: :get, class: 'panel-body no-padding user_filter' do
+  .row
+    .col-md-6
+      .form-group
+        = label_tag(:q, 'labels.search'.t, class: 'control-label')
+        .controls
+          = text_field_tag(:q, params[:q], class: 'form-control')
+
+    .col-md-6
+      .form-group
+        = label_tag(:r, 'user.role'.tmf, class: 'control-label')
+        .controls
+          - options = "<option></option>" + options_for_select(User.roles.map{|r| ["enums.user.role.#{r[0]}".t, r[0]]}, params[:r])
+          = select_tag(:r, options.html_safe, placeholder: 'Rôle', style: 'width: 100%')
+
+  .row
+    .col-md-6.pull-right
+      .btn-group.pull-right
+        = link_to admin_users_path, class: 'btn btn-default' do
+          = 'actions.reset'.t
+
+        %button.btn.btn-success{type: :submit}
+          = 'actions.validate'.t
