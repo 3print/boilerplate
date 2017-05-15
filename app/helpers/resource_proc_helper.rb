@@ -101,7 +101,7 @@ module ResourceProcHelper
 
   def resource_user_card_proc
     resource_field_proc :user_card do |item|
-      render partial: 'shared/user_card', locals: {user: item}
+      render partial: 'users/card', locals: {user: item}
     end
   end
 end
