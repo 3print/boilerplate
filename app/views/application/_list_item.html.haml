@@ -3,5 +3,5 @@
   = contextual_partial 'list_item_label', locals: local_assigns
   = contextual_partial 'list_item_after_details', locals: local_assigns
 - else
-  .item{class: item.class.name.underscore}
+  .item{class: item.class.namespaced_name}
     %span.name= resource_label_for(item)

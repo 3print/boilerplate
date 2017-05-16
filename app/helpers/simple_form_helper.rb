@@ -49,7 +49,7 @@ module SimpleFormHelper
   def inputs_for(model, form_builder)
     cols = []
     cols += content_columns(model)
-    cols -= skipped_columns
+    cols -= ModelsHelper::SKIPPED_COLUMNS
     cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
     cols += model.class::EXTRA_COLUMNS.map(&:intern) if model.class::EXTRA_COLUMNS.present? rescue false
 
@@ -65,21 +65,21 @@ module SimpleFormHelper
       elsif partial_exist?(field_partial)
         res << render(partial: field_partial, locals: { model: model, col: col, form: form_builder }).to_s
       elsif col_type.present?
-        res << form_builder.input(col, as: col_type, label: "#{model.class.name.underscore}.#{col}".tmf)
+        res << form_builder.input(col, as: col_type, label: "#{model.class.namespaced_name}.#{col}".tmf)
       else
-        res << form_builder.input(col, label: "#{model.class.name.underscore}.#{col}".tmf)
+        res << form_builder.input(col, label: "#{model.class.namespaced_name}.#{col}".tmf)
       end
     end
 
     cols = association_columns(model, :belongs_to)
-    cols -= SKIPPED_COLUMNS
+    cols -= ModelsHelper::SKIPPED_COLUMNS
     cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
     cols.each do |col|
       val = instance_variable_get("@#{col}") rescue nil
       if val
         res << form_builder.hidden_field(model.class.reflections[col].foreign_key, value: val.id)
       else
-        res << form_builder.association(col, label: "#{model.class.name.underscore}.#{col}".tmf)
+        res << form_builder.association(col, label: "#{model.class.namespaced_name}.#{col}".tmf)
       end
     end
 

@@ -1,7 +1,4 @@
-require 'active_support/concern'
-
 module Concerns::Orderable
-  extend ActiveSupport::Concern
 
   def update_items_sequences(sequences)
     values = sequences.map do |k,v|

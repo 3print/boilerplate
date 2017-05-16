@@ -1,12 +1,12 @@
 module PartialsHelper
   def contextual_partial name, options={}
     resource_class = options[:resource_class] || self.collection_class
-    prefixes = options[:prefixes] || controller.class.name.split('::')[0..-2].map(&:downcase)
-    partial = options[:partial] || "#{resource_class.name.tableize}/#{name}"
+    prefixes = options[:prefixes] || controller.class.name.split('::')[0..-2].map(&:underscore)
+    partial = options[:partial] || "#{resource_class.table_name}/#{name}"
     filename_parts = partial.split "/"
     filename = [filename_parts[0..-2], "_#{filename_parts.last}.html.haml"].join("/")
-    if lookup_context.exists? "_#{filename_parts.last}", (prefixes + filename_parts[0..-2]).join('/')
-      html = render({partial: (prefixes + [partial]).join('/')}.update(options))
+    if lookup_context.exists? "_#{filename_parts.last}", (prefixes + filename_parts[0..-2]).uniq.join('/')
+      html = render({partial: (prefixes + filename_parts).uniq.join('/')}.update(options))
     elsif prefixes.include?("admin") && lookup_context.exists?("_#{filename_parts.last}", "admin/application")
       html = render({partial: "admin/application/#{name}"}.update(options))
     else

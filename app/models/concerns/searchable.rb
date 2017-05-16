@@ -1,5 +1,4 @@
 module Concerns::Searchable
-  extend ActiveSupport::Concern
 
   def self.extended(base)
     base.class_eval do
