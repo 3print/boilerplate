@@ -49,7 +49,7 @@ module SimpleFormHelper
   def inputs_for(model, form_builder)
     cols = []
     cols += content_columns(model)
-    cols -= ::SKIPPED_COLUMNS
+    cols -= ModelsHelper::SKIPPED_COLUMNS
     cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
     cols += model.class::EXTRA_COLUMNS.map(&:intern) if model.class::EXTRA_COLUMNS.present? rescue false
 
@@ -72,7 +72,7 @@ module SimpleFormHelper
     end
 
     cols = association_columns(model, :belongs_to)
-    cols -= SKIPPED_COLUMNS
+    cols -= ModelsHelper::SKIPPED_COLUMNS
     cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
     cols.each do |col|
       val = instance_variable_get("@#{col}") rescue nil

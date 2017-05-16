@@ -23,7 +23,7 @@ module ModelsHelper
   def default_columns_for_object(model)
     cols = association_columns(model, :belongs_to)
     cols += content_columns(model)
-    cols -= ::SKIPPED_COLUMNS
+    cols -= ModelsHelper::SKIPPED_COLUMNS
     cols -= model.class::SKIPPED_COLUMNS.map(&:intern) if model.class::SKIPPED_COLUMNS.present? rescue false
     cols += model.class::EXTRA_COLUMNS.map(&:intern) if model.class::EXTRA_COLUMNS.present? rescue false
 
