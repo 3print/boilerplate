@@ -40,11 +40,26 @@ SimpleForm.setup do |config|
     end
   end
 
+  config.wrappers :boolean, tag: 'div', class: 'form-group has-feedback', error_class: 'has-error', success_class: 'has-success' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.wrapper tag: 'div', class: 'controls' do |ba|
+      ba.use :input
+      ba.use :label
+      ba.use :state_icon, wrap_with: { tag: 'span', class: 'form-control-feedback' }
+      ba.use :error, wrap_with: { tag: 'span', class: 'alert alert-danger' }
+      ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    end
+  end
+
   # Wrappers for forms and inputs using the Twitter Bootstrap toolkit.
   # Check the Bootstrap docs (http://twitter.github.com/bootstrap)
   # to learn about the different styles for forms and inputs,
   # buttons and other elements.
   config.default_wrapper = :bootstrap
+  config.wrapper_mappings = {
+   boolean: :boolean
+  }
 end
 
 module SimpleForm
