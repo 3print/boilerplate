@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require jquery.widget
 #= require jquery.YAPSM.min
 #= require jquery.pwdcalc
 #= require jquery.iframe-transport
@@ -18,7 +17,22 @@
 #= require utils/markdown
 #= require locales
 #= require i18n
-#= require_tree ./widgets
+
+#= require ./widgets/navigation_highlight
+#= require ./widgets/auto_resize
+#= require ./widgets/collapse
+#= require ./widgets/order_table
+#= require ./widgets/json_form
+#= require ./widgets/datepicker
+#= require ./widgets/filepicker
+#= require ./widgets/settings_editor
+#= require ./widgets/settings_image_uploader
+#= require ./widgets/markdown
+#= require ./widgets/validation
+#= require ./widgets/propagate_input_value
+#= require ./widgets/select2
+#= require ./widgets/field_limit
+
 #= require_tree ./templates
 
 window.DATE_FORMAT = 'YYYY-MM-DD'
@@ -36,30 +50,17 @@ is_mobile_or_in_template = (el) -> is_mobile() or is_in_template(el)
 
 widgets 'navigation_highlight', '.navbar-nav', on: DEFAULT_EVENTS
 
-widgets 'popover', '[data-toggle=popover]', on: DEFAULT_EVENTS, unless: is_in_template
-
 widgets 'auto_resize', 'textarea', on: DEFAULT_EVENTS, unless: is_in_template
-widgets 'collapse_toggle', '.open-settings', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'collapse', '.collapse', on: DEFAULT_EVENTS, unless: is_in_template
 
-widgets 'blueprint_button', 'button[data-blueprint]', on: DEFAULT_EVENTS, unless: is_in_template
-widgets 'blueprint_remove_button', 'button[data-remove]', on: DEFAULT_EVENTS, unless: is_in_template
-
-widgets 'drag_source', '[data-transferable]', on: DEFAULT_EVENTS, unless: is_in_template
-widgets 'drop_target', '[data-drop]', on: DEFAULT_EVENTS, unless: is_in_template
-
-widgets 'order_list', '.sortable-list', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'order_table', '.sortable', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 
 widgets 'settings_editor', '.settings_editor', on: DEFAULT_EVENTS
 widgets 'settings_form', '[data-settings]', on: DEFAULT_EVENTS
 widgets 'settings_image_uploader', '[data-settings] .file', on: DEFAULT_EVENTS, unless: is_in_template
 
-widgets 'color_button', '.color-icon-wrapper[data-url]', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'datepicker_mobile', '.datepicker, .datetimepicker, .timepicker', on: DEFAULT_EVENTS, if: is_mobile, unless: is_in_template
-widgets 'datepicker', '.datepicker', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'datetimepicker', '.datetimepicker', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
-widgets 'timepicker', '.timepicker', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'filepicker', '.form-group.file', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'markdown', '[data-editor="markdown"]', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
 widgets 'propagate_input_value', 'input:not(.select2-offscreen):not(.select2-input), select', on: DEFAULT_EVENTS, unless: is_in_template

@@ -44,6 +44,3 @@ widgets.define 'json_form', (form) ->
           build_fields(value, input_name, $input)
 
           $input.remove()
-
-    # console.log JSON.stringify($form.serializeArray(), null, 2)
-    # return false
