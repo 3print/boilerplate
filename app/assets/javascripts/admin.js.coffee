@@ -90,6 +90,3 @@ $ ->
   $('[data-toggle="collapse"]').on 'click', (e) ->
     e.preventDefault()
     $($(this).attr('data-target')).toggleClass('in')
-
-  $('.markdown-help .btn').click (e) ->
-    $('.markdown-help').removeClass('visible')
