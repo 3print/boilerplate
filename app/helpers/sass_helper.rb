@@ -4,7 +4,7 @@ module SassHelper
   require 'tempfile'
 
   def inline_css(path)
-    source = File.read("#{Rails.root}/app/assets/stylesheets/#{path}.css.sass")
+    source = File.read("#{Rails.root}/app/assets/stylesheets/#{path}.sass")
     "<style>#{SassUtils.compile(source)}</style>"
   end
 
