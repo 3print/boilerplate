@@ -4,14 +4,15 @@ require 'sass/importer'
 class SassUtils
   def self.compile (source)
     view_context = ActionView::Base.new
+    assets = ActionView::Base::ASSET_PUBLIC_DIRECTORIES.values.map {|v| "app/assets/#{v}"}
     engine = Sass::Engine.new(source, {
       syntax: :sass,
-      load_paths: view_context.assets.paths + [Compass::Frameworks['compass'].stylesheets_directory],
+      load_paths: assets + [Compass::Frameworks['compass'].stylesheets_directory],
       style: :expanded,
       filesystem_importer: SassImporter,
       sprockets:  {
         context:     view_context,
-        environment: view_context.assets
+        environment: assets
       }
     })
     engine.render
