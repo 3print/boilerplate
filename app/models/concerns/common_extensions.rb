@@ -7,5 +7,6 @@ module Concerns::CommonExtensions
     include Concerns::PunditExtensions
     include Concerns::Displayable
     include Concerns::ValidationState
+    include Concerns::NamespaceExtensions
   end
 end

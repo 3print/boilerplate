@@ -65,9 +65,9 @@ module SimpleFormHelper
       elsif partial_exist?(field_partial)
         res << render(partial: field_partial, locals: { model: model, col: col, form: form_builder }).to_s
       elsif col_type.present?
-        res << form_builder.input(col, as: col_type, label: "#{model.class.table_name.singularize}.#{col}".tmf)
+        res << form_builder.input(col, as: col_type, label: "#{model.class.namespaced_name}.#{col}".tmf)
       else
-        res << form_builder.input(col, label: "#{model.class.table_name.singularize}.#{col}".tmf)
+        res << form_builder.input(col, label: "#{model.class.namespaced_name}.#{col}".tmf)
       end
     end
 
@@ -79,7 +79,7 @@ module SimpleFormHelper
       if val
         res << form_builder.hidden_field(model.class.reflections[col].foreign_key, value: val.id)
       else
-        res << form_builder.association(col, label: "#{model.class.table_name.singularize}.#{col}".tmf)
+        res << form_builder.association(col, label: "#{model.class.namespaced_name}.#{col}".tmf)
       end
     end
 
