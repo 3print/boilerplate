@@ -428,7 +428,6 @@ GEM
     unicorn-rails (2.2.1)
       rack
       unicorn
-    uuidtools (2.1.5)
     verbs (2.1.4)
       activesupport (>= 2.3.4)
       i18n
@@ -508,7 +507,6 @@ DEPENDENCIES
   uglifier
   unicorn
   unicorn-rails
-  uuidtools
   verbs
 
 RUBY VERSION

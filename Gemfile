@@ -37,10 +37,8 @@ gem 'compass-rails'
 gem 'eco'
 
 # Models
-gem 'annotate'
 gem 'kaminari'
 gem 'verbs'
-gem 'uuidtools'
 
 # Uploaders
 gem 'rmagick', require: false
@@ -78,6 +76,7 @@ group :development do
   gem 'listen'#, '1.3.0'
   gem 'spork'#, '1.0.0rc3'
 
+  gem 'annotate'
 end
 group :development, :test do
   gem 'factory_girl_rails'
