@@ -93,7 +93,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    colorize (0.8.1)
     compass (1.0.3)
       chunky_png (~> 1.2)
       compass-core (~> 1.0.2)
@@ -451,7 +450,6 @@ DEPENDENCIES
   carrierwave
   carrierwave-aws
   coffee-rails
-  colorize
   compass-rails
   createsend
   database_cleaner
