@@ -28,13 +28,13 @@ gem 'enum_help'
 gem 'redcarpet'
 
 # Assets
-gem 'sass-rails'#, '~> 4.0.3'
+gem 'sassc-rails'
 gem 'uglifier'#, '>= 1.3.0'
 gem 'coffee-rails'#, '~> 4.0.0'
 gem 'jquery-rails'
 gem 'jbuilder'#, '~> 2.0'
 gem 'bootstrap-sass'
-gem 'compass-rails'
+gem 'bourbon'
 gem 'eco'
 
 # Models
