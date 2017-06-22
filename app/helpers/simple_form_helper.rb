@@ -1,21 +1,4 @@
 module SimpleFormHelper
-  def initialize(*args)
-    super *args
-
-    SimpleForm::FormBuilder.send(:include, form_user_mixin)
-  end
-
-  def form_user_mixin
-    user = current_user
-    # ability = current_ability
-
-    form_user_mixin = Module.new
-    form_user_mixin.send(:define_method, :current_user) { user }
-    # form_user_mixin.send(:define_method, :current_ability) { ability }
-
-    form_user_mixin
-  end
-
   # Form Actions Helper
 
   def default_actions(options={}, &block)

@@ -1,0 +1,32 @@
+!!!5
+%html
+  %head
+    %meta{charset: 'utf-8'}
+    %meta{"http-equiv": "Content-Type", content: "text/html; charset=utf-8" }
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1"}
+  %body{style: styles(:body)}
+    != inline_css('mail')
+    .container{style: styles(:font_interface, :body, padding_bottom: '60px', width: '100%')}
+      %table.contenttable{ table_attrs.merge(style: styles(:centered_box, :align_left, background_white, font_size: '14px', width: "640px")) }
+        %tr
+          %td{style: styles(:border_bottom)}
+            %table{ inner_table_attrs }
+              - unless content_for?(:header)
+                %tr
+                  %td
+                    = link_to root_url do
+                      %img{src: image_url('logo.png'), height: '100px'}
+              - else
+                = yield :header
+        %tr
+          %td
+            %table.content{ inner_table_attrs.merge(style: styles(:align_left)) }
+              %tr
+                %td{style: styles(padding: '10px')}= yield
+        - if content_for?(:footer)
+          %tr
+            %td
+              %table{ inner_table_attrs.merge(style: styles(:align_left)) }
+                %tr
+                  %td{ style: styles(:footer) }
+                    = yield :footer

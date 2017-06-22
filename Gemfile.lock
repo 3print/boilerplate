@@ -95,7 +95,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    colorize (0.8.1)
     concurrent-ruby (1.0.5)
     createsend (4.1.1)
       hashie (~> 3.0)
@@ -420,7 +419,6 @@ GEM
     unicorn-rails (2.2.1)
       rack
       unicorn
-    uuidtools (2.1.5)
     verbs (2.1.4)
       activesupport (>= 2.3.4)
       i18n
@@ -443,7 +441,6 @@ DEPENDENCIES
   carrierwave
   carrierwave-aws
   coffee-rails
-  colorize
   createsend
   database_cleaner
   delayed_job
@@ -501,11 +498,10 @@ DEPENDENCIES
   uglifier
   unicorn
   unicorn-rails
-  uuidtools
   verbs
 
 RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.13.7
+   1.15.1

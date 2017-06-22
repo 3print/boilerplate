@@ -1,5 +1,8 @@
 
 .row.sign-in
+  - if alert.present?
+    .col-md-12
+      .alert.alert-danger= alert
   .col-md-6
     = simple_form_for(sign_in_model, url: session_path(:user), html: { role: 'form'}) do |f|
       %h3= 'actions.sign_in'.t

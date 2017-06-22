@@ -69,19 +69,15 @@ module ModelsHelper
     column = resource_class.columns_hash[col.to_s]
     type = resource_class.get_column_display_type(col)
     type ||= column.present? ? column.type : :association
-    type = :image if out.present? and out.is_a?(CarrierWave::Uploader::Base)
+    type = :image if out.is_a?(CarrierWave::Uploader::Base)
+    type = :active_record if out.is_a?(ActiveRecord::Base)
 
-    field_partial = "show_#{resource_name}_#{col}"
     type_partial = "show_#{type}_field"
 
     locals = { value: out, type: type, column: col, resource: res, resource_name: resource_name, options: options }
 
-    if partial_exist?(field_partial)
-      render partial: field_partial, locals: locals
-    elsif partial_exist?(type_partial)
+    if partial_exist?(type_partial)
       render partial: type_partial, locals: locals
-    elsif out.is_a?(ActiveRecord::Base)
-      render partial: 'show_active_record_field', locals: locals
     else
       render partial: 'show_default_field', locals: locals
     end

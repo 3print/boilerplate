@@ -4,7 +4,6 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'shoulda-matchers'
 require 'faker'
-require 'uuidtools'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -106,7 +105,7 @@ RSpec.configure do |config|
         def fetch(*args)
           res = old_fetch(*args)
           unless args.include? "internet.domain_suffix"
-            res += "-#{UUIDTools::UUID.timestamp_create.to_s[0..50]}" if res.is_a?(String)
+            res += "-#{SecureRandom.uuid}" if res.is_a?(String)
           end
           res
         end

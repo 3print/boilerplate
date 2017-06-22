@@ -21,14 +21,21 @@ fr:
       unconfirmed: "Vous devez valider votre compte pour continuer."
     mailer:
       confirmation_instructions:
-      subject: "Instructions de confirmation"
+        action: Confirmer mon courriel
+        greeting: Bienvenue %{recipient}!
+        instruction: 'Vous pouvez confirmer votre courriel grâce au lien ci-dessous:'
+        subject: Instructions de confirmation
+      password_change:
+        greeting: Bonjour %{recipient}!
+        message: Nous vous contactons pour vous notifier que votre mot de passe a été modifié.
+        subject: Mot de passe modifié.
       reset_password_instructions:
-      subject: "Instructions pour changer le mot de passe"
-      unlock_instructions:
-      subject: "Instructions pour déverrouiller le compte"
-      omniauth_callbacks:
-      failure: "Nous n'avons pas pu vous authentifier via %{kind} : '%{reason}'."
-      success: 'Authentifié avec succès via %{kind}.'
+        action: Changer mon mot de passe
+        greeting: Bonjour %{recipient}!
+        instruction: 'Quelqu''un a demandé un lien pour changer votre mot de passe, le voici :'
+        instruction_2: Si vous n'avez pas émis cette demande, merci d'ignorer ce courriel.
+        instruction_3: Votre mot de passe ne changera pas tant que vous n'aurez pas cliqué sur ce lien et renseigné un nouveau mot de passe.
+        subject: Instructions pour changer le mot de passe
     passwords:
       no_token: "Vous ne pouvez accéder à cette page sans passer par un e-mail de réinitialisation de mot de passe. Si vous êtes passé par un e-mail de ce type, assurez-vous d'utiliser l'URL complète."
       send_instructions: 'Vous allez recevoir les instructions de réinitialisation du mot de passe dans quelques instants'
@@ -37,7 +44,7 @@ fr:
       updated_not_active: 'Votre mot de passe a été changé avec succès.'
       forgotten_password:
         title: Mot de passe oublié
-        instructions: Nous allons vouz renvoyer des instructions pour changer votre mot de passe.
+        instructions: Nous allons vous renvoyer des instructions pour changer votre mot de passe.
         error: Cet email est introuvable.
       new_password:
         title: Changement de mot de passe

@@ -9,7 +9,7 @@ class PasswordsController < Devise::PasswordsController
       redirect_to after_sending_reset_password_instructions_path_for(resource_name)
     else
       respond_to do |format|
-        format.html
+        format.html { render 'devise/passwords/new', resource: resource }
         format.json { render json: resource, status: 'ok'}
       end
     end
