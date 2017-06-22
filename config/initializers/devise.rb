@@ -13,7 +13,6 @@ Devise.setup do |config|
   config.mailer_sender = 'no-reply@' + (Rails.application.secrets.domain_name || "example.com")
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
   config.mailer = 'DeviseMailer'
 
   # ==> ORM configuration

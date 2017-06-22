@@ -9,7 +9,7 @@
 
 .row.sign-in
   .col-md-12
-    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f|
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, role: 'form'}) do |f|
       %h3
         = 'devise.passwords.forgotten_password.title'.t
       %p= 'devise.passwords.forgotten_password.instructions'.t
@@ -18,6 +18,6 @@
 
       .form-group
         = f.label :email
-        = f.email_field :email, :autofocus => true, class: 'form-control'
+        = f.email_field :email, autofocus: true, class: 'form-control'
 
-      = f.submit 'actions.reset_password'.t, :class => 'button right btn btn-primary'
+      = f.submit 'actions.reset_password'.t, class: 'button right btn btn-primary'
