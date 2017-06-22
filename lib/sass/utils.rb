@@ -5,7 +5,7 @@ class SassUtils
   def self.compile (source)
     engine = Sass::Engine.new(source, {
       syntax: :sass,
-      load_paths: Rails.application.assets.paths + [Compass::Frameworks['compass'].stylesheets_directory],
+      load_paths: Rails.application.assets.paths,
       style: :expanded,
       filesystem_importer: SassImporter,
       sprockets:  {
