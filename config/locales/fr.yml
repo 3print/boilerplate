@@ -34,6 +34,7 @@ fr:
       odd: doit être impair
       required: doit exister
       taken: n'est pas disponible
+      extension_whitelist_error: "Le type de fichier %{extension} n'est pas pris en charge pour ce champ, types autorisés: %{allowed_types}"
     not_found:
       title: "Erreur 404"
       content: "La page demandée n'existe pas"

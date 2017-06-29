@@ -23,10 +23,9 @@
 #  avatar_gravity         :integer
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   extend Concerns::LightSearch
   extend Concerns::ImageGravity
-  include Concerns::CommonExtensions
 
   enum role: %w(user admin)
   after_initialize :set_default_role, :if => :new_record?

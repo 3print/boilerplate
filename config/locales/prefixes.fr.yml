@@ -2,3 +2,4 @@ fr:
   prefix:
     models:
       user: "L'%{label}"
+      bp_test: "Le %{label}" # BOILERPLATE_ONLY

@@ -13,8 +13,7 @@
 #  updated_at      :datetime
 #
 
-class SeoMeta < ActiveRecord::Base
-  include Concerns::CommonExtensions
+class SeoMeta < ApplicationRecord
 
   set_shared_policy PublicModelPolicy
 
