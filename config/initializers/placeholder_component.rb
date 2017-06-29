@@ -9,7 +9,7 @@ module SimpleForm
       end
 
       def placeholder_for(model, name)
-        placeholder = I18n.t("simple_form.placeholders.#{model.class.name.underscore}.#{name}", default: nil)
+        placeholder = I18n.t("simple_form.placeholders.#{model.class.namespaced_name}.#{name}", default: nil)
 
         if placeholder =~ /translation missing/
           placeholder = I18n.t("simple_form.placeholders.#{input_type}")

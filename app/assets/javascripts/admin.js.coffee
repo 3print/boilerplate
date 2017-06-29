@@ -55,7 +55,6 @@ widgets 'settings_editor', '.settings_editor', on: DEFAULT_EVENTS
 widgets 'settings_form', '[data-settings]', on: DEFAULT_EVENTS
 widgets 'settings_image_uploader', '[data-settings] .file', on: DEFAULT_EVENTS, unless: is_in_template
 
-widgets 'boolean', '.boolean', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'color_button', '.color-icon-wrapper[data-url]', on: DEFAULT_EVENTS, unless: is_in_template
 widgets 'datepicker_mobile', '.datepicker, .datetimepicker, .timepicker', on: DEFAULT_EVENTS, if: is_mobile, unless: is_in_template
 widgets 'datepicker', '.datepicker', on: DEFAULT_EVENTS, unless: is_mobile_or_in_template
@@ -90,6 +89,3 @@ $ ->
   $('[data-toggle="collapse"]').on 'click', (e) ->
     e.preventDefault()
     $($(this).attr('data-target')).toggleClass('in')
-
-  $('.markdown-help .btn').click (e) ->
-    $('.markdown-help').removeClass('visible')

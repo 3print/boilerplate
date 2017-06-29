@@ -1,5 +1,3 @@
-require 'active_support/concern'
-
 module Concerns::ImageGravity
   extend ActiveSupport::Concern
 

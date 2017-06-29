@@ -11,15 +11,6 @@ class ImageUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
 
-  def filename
-    if original_filename
-      # hash = Digest::MD5.hexdigest(File.dirname(current_path))
-      name = file.basename.split('_').last.gsub(/\.$/, '')
-      # ["#{name}-#{hash}", file.extension].compact.select(&:present?).join('.')
-      [name, file.extension].compact.select(&:present?).join('.')
-    end
-  end
-
   version :thumb do
     process resize_to_fit: [60, 60]
   end

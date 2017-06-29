@@ -24,7 +24,7 @@ fr:
         integer: Nombre entier
         boolean: Interrupteur vrai/faux
         string: Texte
-        markdown: MarkDown
+        markdown: Markdown
         collection: Collection de valeur
         date: Date
         datetime: Horaire et Date

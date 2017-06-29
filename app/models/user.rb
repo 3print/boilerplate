@@ -24,13 +24,16 @@
 #
 
 class User < ApplicationRecord
+  extend Concerns::LightSearch
   extend Concerns::ImageGravity
 
-  enum role: [:user, :admin]
+  enum role: %w(user admin)
   after_initialize :set_default_role, :if => :new_record?
 
   gravity_enum :avatar
   mount_uploader :avatar, AvatarUploader
+
+  light_search_by :name, :email
 
   scope :admins, -> { where 'users.role = 1' }
 

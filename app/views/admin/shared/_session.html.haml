@@ -34,8 +34,8 @@
 
     .details
       - if current_user.admin?
-        .label.label-warning= "roles.#{current_user.role}".t
+        .label.label-warning= "enums.user.role.#{current_user.role}".t
       - else
-        .label.label-info= "roles.#{current_user.role}".t
+        .label.label-info= "enums.user.role.#{current_user.role}".t
       = icon('chevron-down')
       = icon('chevron-up')

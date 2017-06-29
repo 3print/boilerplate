@@ -34,10 +34,15 @@ widgets.define 'select2', (el) ->
     sortable = true
     $el.removeClass('sortable')
 
+  searchResults = 5
+  if $el.data('searchable') == false
+    searchResults = 'Infinity'
+
   options = {
     width: width
     allowClear: true
     multiple: $el.data('multiple')
+    minimumResultsForSearch: searchResults
   }
 
   options.data = data if data?

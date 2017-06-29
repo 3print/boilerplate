@@ -5,5 +5,5 @@
   - if resource_class.respond_to? :update_items_sequences
     %input{type: :hidden, name: "#{controller.resource_name}[#{item.id}][sequence]", value: item.sequence}
 - else
-  .item{class: item.class.name.underscore}
+  .item{class: item.class.namespaced_name}
     %span.name= resource_label_for(item)

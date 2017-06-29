@@ -5,10 +5,12 @@ def render_html (tpl)
   view = ActionView::Base.new(dir, :user => @user)
   view.extend(ApplicationHelper)
   view.extend(IconHelper)
+  view.extend(MarkdownHelper)
   view.render(partial: tpl, layout: nil)
 end
 
 font_awesome_selector = render_html('admin/shared/fontawesome').gsub('"', '\"').gsub("\n", '')
+help_selector = render_html('shared/markdown_help').gsub('"', '\"').gsub("\n", '')
 
 use_aws = Rails.env.production? || Rails.env.staging? || ENV['FORCE_AWS']
 
@@ -64,7 +66,7 @@ insertIcon = (icon, e) ->
 
   # transform selection and set the cursor into chunked text
   e.replaceSelection "%(#{icon}) "
-  cursor = selected.start + icon.mength + 4
+  cursor = selected.start + icon.length + 4
   # Set the next tab
   e.setNextTab ''
   # Set the cursor
@@ -83,6 +85,15 @@ iconChoice = (editor, e) ->
     $li = $(this)
 
     insertIcon($li.data('value'), e)
+    $modal.remove()
+
+toggleHelp = (editor, e) ->
+  markup = "<%= help_selector %>"
+
+  $modal = $(markup)
+  $(document.body).append($modal)
+
+  $modal.find('.btn').on 'click', ->
     $modal.remove()
 
 insertButton = (e) ->
@@ -119,6 +130,8 @@ uploadFile = (editor, e) ->
 
   is_ie = $('html').hasClass('ie9') or $('html').hasClass('lt-ie9')
 
+
+
   $(uploader).fileupload
     url:          uploader.attr('action')
     type:         'POST'
@@ -141,7 +154,7 @@ uploadFile = (editor, e) ->
       signed_data['success_action_redirect'] = redirect_url if is_ie
 
       $.ajax
-        url:      '/admin/signed_urls'
+        url:      '/signed_urls'
         type:     'GET'
         dataType: 'json'
         async:    false
@@ -309,7 +322,7 @@ widgets.define 'markdown', (el) ->
             title: "Afficher l'aide Markdown"
             icon: "fa fa-question-circle"
             callback: (e) ->
-              document.querySelector('.markdown-help')?.classList.toggle('visible')
+              toggleHelp($md_editor, e)
           }
         ]
       }

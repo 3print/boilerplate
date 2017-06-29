@@ -19,14 +19,14 @@ module ToggleHelper
     if is_on
       title = options.delete(:on_title)
       if can?(off, resource)
-        send method, controller.resource_path_for(resource, off), method: :put, class: 'btn btn-warning', title: title, data: {confirm: "confirmations.#{resource.class.name.underscore}.#{off}".t} do
+        send method, controller.resource_path_for(resource, off), method: :put, class: 'btn btn-warning', title: title, data: {confirm: "confirmations.#{resource.class.namespaced_name}.#{off}".t} do
           block.call(is_on)
         end
       end
     else
       title = options.delete(:off_title)
       if can?(name, resource)
-        send method, controller.resource_path_for(resource,name), method: :put, class: 'btn btn-success', title: title, data: {confirm: "confirmations.#{resource.class.name.underscore}.#{name}".t} do
+        send method, controller.resource_path_for(resource,name), method: :put, class: 'btn btn-success', title: title, data: {confirm: "confirmations.#{resource.class.namespaced_name}.#{name}".t} do
           block.call(is_on)
         end
       end

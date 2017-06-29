@@ -41,10 +41,6 @@ fr:
     value:
       undefined: Non définie
 
-  roles:
-    admin: Admin
-    user: Utilisateur
-
   labels:
     informations: informations
     more_informations: plus d'informations
@@ -53,6 +49,7 @@ fr:
     not_approved: En attente
     latest_news: Dernière actualités
     published_at: "Article publié le %{date}"
+    search: Rechercher
     waiting_publication: "En attente de publication"
     video_published_at: "Vidéo publié le %{date}"
     video_waiting_publication: "Vidéo en attente de publication"
