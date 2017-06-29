@@ -53,7 +53,7 @@ if ENV["SLACK_WEBHOOK_URL"].present?
       :webhook_url => ENV["SLACK_WEBHOOK_URL"],
       :channel => "#exceptions",
       :additional_parameters => {
-        icon_url: "http://Boilerplate",
+        icon_url: "#{ENV["HOST"]}/assets/logo.png",
         mrkdwn: true,
         username: "Boilerplate-#{Rails.env}"
       }
