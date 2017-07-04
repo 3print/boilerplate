@@ -50,9 +50,14 @@ gem 'faker'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 
+# Notifier
 gem 'exception_notification'
 gem 'slack-notifier'
+
+# Sumo custom tools
 gem 'tprint-debug', git: 'https://github.com/3print/tprint-debug'
+gem 'sumo_seed', git: 'https://github.com/3print/sumo_seed'
+
 
 group :development do
   gem 'better_errors'
