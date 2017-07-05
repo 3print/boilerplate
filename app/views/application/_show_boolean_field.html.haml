@@ -1,2 +1,2 @@
 %input{type: :checkbox, readonly: true, checked: value}
-%label= "#{resource.table_name.singularize}.#{column}".tmf
+%label= "#{resource.class.table_name.singularize}.#{column}".tmf
