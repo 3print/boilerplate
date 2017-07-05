@@ -66,8 +66,8 @@ module ModelsHelper
       end
     end
 
-    column = resource_class.columns_hash[col.to_s]
-    type = resource_class.get_column_display_type(col)
+    column = res.class.columns_hash[col.to_s]
+    type = res.class.get_column_display_type(col)
     type ||= column.present? ? column.type : :association
     type = :image if out.is_a?(CarrierWave::Uploader::Base)
     type = :active_record if out.is_a?(ActiveRecord::Base)

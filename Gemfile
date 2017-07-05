@@ -58,7 +58,6 @@ gem 'slack-notifier'
 gem 'tprint-debug', git: 'https://github.com/3print/tprint-debug'
 gem 'sumo_seed', git: 'https://github.com/3print/sumo_seed'
 
-
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', platforms: [:mri_22, :mri_23, :rbx]
@@ -73,10 +72,11 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
-  gem 'rspec'#, '>=3.0'
-  gem 'rspec-its'
   gem 'guard-spork'#, '1.5.1'
   gem 'guard-livereload'#, '1.0.3'
+
+  gem 'rspec'#, '>=3.0'
+
   gem 'listen'#, '1.3.0'
   gem 'spork'#, '1.0.0rc3'
 

@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/3print/sumo_seed
+  revision: a6843c7d0cb8d63bf928d255bf6ac668b092f069
+  specs:
+    sumo_seed (0.0.2)
+      colorize
+      rails (>= 4.1)
+
+GIT
   remote: https://github.com/3print/tprint-debug
   revision: dafe454a6921fc4ab867f39dc54e17ecfdb7d792
   specs:
@@ -96,6 +104,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    colorize (0.8.1)
     compass (1.0.3)
       chunky_png (~> 1.2)
       compass-core (~> 1.0.2)
@@ -503,6 +512,7 @@ DEPENDENCIES
   slack-notifier
   spork
   spring
+  sumo_seed!
   tprint-debug!
   uglifier
   unicorn
