@@ -40,7 +40,7 @@ module ModelsHelper
         else
           name
         end
-      end.compact
+      end.compact.map(&:intern)
     else
       []
     end
