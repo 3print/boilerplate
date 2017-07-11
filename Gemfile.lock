@@ -106,6 +106,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    colorize (0.8.1)
     concurrent-ruby (1.0.5)
     createsend (4.1.1)
       hashie (~> 3.0)
