@@ -7,7 +7,7 @@ class SassUtils
     assets = ActionView::Base::ASSET_PUBLIC_DIRECTORIES.values.map {|v| "app/assets/#{v}"}
     engine = Sass::Engine.new(source, {
       syntax: :sass,
-      load_paths: assets + [Compass::Frameworks['compass'].stylesheets_directory],
+      load_paths: Rails.application.assets.paths,
       style: :expanded,
       filesystem_importer: SassImporter,
       sprockets:  {
