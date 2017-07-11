@@ -1,8 +1,12 @@
-- if value.class == PdfUploader
-  %strong= "#{controller.resource_name.singularize}.#{column}".tmfc
-  = link_to value.url do
-    = icon 'file-pdf-o'
-    = value
-- elsif value.respond_to?(:thumb)
-  %strong= "#{controller.resource_name.singularize}.#{column}".tmf
-  = image_tag(value.thumb)
+- if value.present?
+  - if value.class == PdfUploader
+    %strong= "#{resource.class.table_name.singularize}.#{column}".tmfc
+    = link_to value.url do
+      = icon 'file-pdf-o'
+      = value
+  - elsif value.respond_to?(:thumb)
+    %strong= "#{resource.class.table_name.singularize}.#{column}".tmf
+    = image_tag(value.thumb)
+- else
+  %strong= "#{resource.class.table_name.singularize}.#{column}".tmfc
+  = value.to_s

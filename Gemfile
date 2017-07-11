@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.3.3'
-gem 'rails', '~> 4.2'
+ruby '2.3.4'
+gem 'rails', '~> 5.0'
 gem 'spring',        group: :development
 gem 'unicorn'
 gem 'unicorn-rails'
@@ -50,15 +50,18 @@ gem 'faker'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 
+# Notifier
 gem 'exception_notification'
 gem 'slack-notifier'
+
+# Sumo custom tools
 gem 'tprint-debug', git: 'https://github.com/3print/tprint-debug'
+gem 'sumo_seed', git: 'https://github.com/3print/sumo_seed'
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', platforms: [:mri_20, :mri_21, :mri_22, :mri_23, :rbx]
+  gem 'binding_of_caller', platforms: [:mri_22, :mri_23, :rbx]
   gem 'html2haml'
-  gem 'quiet_assets'
   gem 'rails_layout'
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
@@ -69,10 +72,11 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
-  gem 'rspec'#, '>=3.0'
-  gem 'rspec-its'
   gem 'guard-spork'#, '1.5.1'
   gem 'guard-livereload'#, '1.0.3'
+
+  gem 'rspec'#, '>=3.0'
+
   gem 'listen'#, '1.3.0'
   gem 'spork'#, '1.0.0rc3'
 

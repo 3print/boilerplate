@@ -18,8 +18,7 @@
 #  multiple_enum :integer          default([]), is an Array
 #
 
-class BpTest < ActiveRecord::Base
-  include Concerns::CommonExtensions
+class BpTest < ApplicationRecord
   include Concerns::HasSeo
   extend Concerns::Orderable
 

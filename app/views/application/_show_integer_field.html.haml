@@ -1,7 +1,7 @@
-%strong= "#{controller.resource_name.singularize}.#{column}".tmfc
+%strong= "#{resource.class.table_name.singularize}.#{column}".tmfc
 - if controller.resource_class.respond_to?(column.to_s.pluralize)
   - if value.present?
-    = "enums.#{controller.resource_name.singularize}.#{column}.#{value}".t
+    = "enums.#{resource.class.table_name.singularize}.#{column}.#{value}".t
   - else
     = 'errors.value.undefined'.t
 - else

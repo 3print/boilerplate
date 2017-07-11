@@ -1,2 +1,2 @@
-%strong= "#{controller.resource_name.singularize}.#{column}".tmfc
+%strong= "#{resource.class.table_name.singularize}.#{column}".tmfc
 = link_to phone_number(value), "tel:#{value}"

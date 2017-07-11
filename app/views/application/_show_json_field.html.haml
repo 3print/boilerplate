@@ -1,4 +1,4 @@
-%strong= "#{controller.resource_name.singularize}.#{column}".tmf
+%strong= "#{resource.class.table_name.singularize}.#{column}".tmf
 - if value.present?
   %pre
     %code.json= JSON.pretty_generate(value)
