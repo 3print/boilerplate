@@ -1,6 +1,6 @@
 class ImageUploader < CarrierWave::Uploader::Base
-  include PublicUploader
   include CarrierWave::RMagick
+  include PublicUploader
   include Sprockets::Rails::Helper
 
   def store_dir

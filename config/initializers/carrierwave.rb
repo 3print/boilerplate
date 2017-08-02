@@ -49,4 +49,8 @@ module PublicUploader
       [name, file.extension].compact.select(&:present?).join('.')
     end
   end
+
+  def rmagick_image
+    ::Magick::Image.from_blob(self.read).first
+  end
 end

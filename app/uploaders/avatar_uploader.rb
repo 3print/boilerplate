@@ -1,6 +1,6 @@
 class AvatarUploader < CarrierWave::Uploader::Base
-  include PublicUploader
   include CarrierWave::RMagick
+  include PublicUploader
   include Sprockets::Rails::Helper
 
 
