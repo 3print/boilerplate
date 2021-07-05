@@ -37,7 +37,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
     args = args[0].call if args[0].is_a?(Proc)
 
     gravity_key = :"#{mounted_as}_gravity"
-    if self.model.respond_to?(gravity_key) && gravity = self.model.send(gravity_key)
+    if self.model.respond_to?(gravity_key) && gravity = self.model.send(gravity_key).sub("#{mounted_as}_", "")
       args[2] = "Magick::#{gravity.camelize}Gravity".constantize
     end
 

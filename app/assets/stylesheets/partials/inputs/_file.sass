@@ -2,7 +2,7 @@
   // padding: 10px 0
   +relative
 
-  input
+  input.file
     opacity: 0
     position: absolute
     top: 0
@@ -11,6 +11,12 @@
     z-index: 1
     height: 100%
     display: none
+
+  input.file_alt_text
+    position: relative
+    z-index: 2
+    margin: 6px -13px -7px
+    width: calc(100% + 26px)
 
   .controls
     @extend .form-control
@@ -32,7 +38,7 @@
 
   .progress
     height: 4px
-    border-bottom: 1px solid $bootstrap-border-color
+    border-bottom: 1px solid $bootstrap_border_color
     border-radius: 0
     +absolute(0,0,initial,0)
 
@@ -43,12 +49,8 @@
     min-height: 21px
     img
       margin: 0
-      max-width: none
-      max-height: none
-
-      &.loaded
-        max-width: 220px
-        max-height: 220px
+      max-width: 220px
+      max-height: 220px
 
     .label
       display: inline-block
@@ -58,11 +60,14 @@
       text-overflow: ellipsis
       border-radius: 0
       border-bottom-right-radius: 3px
-      background: $color-grey-lighter
-      color: $color-grey-darker
-      border-right: 1px solid $bootstrap-border-color
-      border-bottom: 1px solid $bootstrap-border-color
+      background: $color_grey_lighter
+      color: $color_grey_darker
+      border-right: 1px solid $bootstrap_border_color
+      border-bottom: 1px solid $bootstrap_border_color
       +absolute(-1px,0)
+
+    img ~ .placeholder
+      display: none
 
     .meta
       padding: 3px
@@ -78,21 +83,12 @@
   .crop-settings
     clear: both
     padding-top: 6px
-    position: absolute
-    bottom: -1px
-    left: -1px
-    right: -1px
+    margin: 0 -13px -7px
 
     .control-label
       padding: 0 6px
       font-size: 0.8em
       +relative
-
-  .with-crop-settings + .preview
-    padding-bottom: 70px
-
-  &.has-error .alert
-    clear: both
 
 .well.gallery .file .controls
   height: 140px
@@ -103,13 +99,7 @@
 .has-error.file
   .controls
     padding-bottom: 0
-    border-color: $color-red
-
-  .crop-settings
-    bottom: 36px
-
-  .form-control-feedback
-    top: 0
+    border-color: $color_red
 
   .alert.alert-danger
     margin-bottom: 0
@@ -117,24 +107,29 @@
     margin-right: -12px
     border: none
     margin-top: 6px
-    border-top: 1px solid $color-red
+    border-top: 1px solid $color_red
+
+.has-warning.file
+  .controls
+    padding-bottom: 0
+    border-color: $state-warning-border
+
+  .alert.alert-danger
+    margin-bottom: 0
+    margin-left: -12px
+    margin-right: -12px
+    border: none
+    margin-top: 6px
+    border-top: 1px solid $state-warning-border
 
 .has-success.file
   .controls
-    border-color: $color-green
+    border-color: $color_green
 
-.file.settings_image_uploader-handled
-  label
-    z-index: 1
-
-  .progress-bar
-    +transition(none)
-
-  button
-    z-index: 2
-    position: absolute
-    top: 8px
-    right: 4px
-
-  img[src=""], img[src="undefined"]
-    display: none
+.remove-file
+  // display: none
+  position: absolute
+  top: 7px
+  right: 7px
+  z-index: 10
+  padding: 0 5px
