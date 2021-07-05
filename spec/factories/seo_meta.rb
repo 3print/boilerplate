@@ -4,10 +4,10 @@
 #
 #  id              :integer          not null, primary key
 #  meta_owner_id   :integer
-#  meta_owner_type :string(255)
-#  title           :string(255)
+#  meta_owner_type :string
+#  title           :string
 #  description     :text
-#  static_action   :string(255)
+#  static_action   :string
 #  static_mode     :boolean
 #  created_at      :datetime
 #  updated_at      :datetime

@@ -3,8 +3,8 @@
 # Table name: bp_tests
 #
 #  id            :integer          not null, primary key
-#  image         :string(255)
-#  pdf           :string(255)
+#  image         :string
+#  pdf           :string
 #  int           :integer
 #  json          :json
 #  markdown      :text

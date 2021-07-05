@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2016_05_12_085426) do
+ActiveRecord::Schema.define(version: 2021_07_05_141852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 2016_05_12_085426) do
     t.datetime "validated_at"
     t.integer "sequence"
     t.integer "multiple_enum", default: [], array: true
+  end
+
+  create_table "old_passwords", force: :cascade do |t|
+    t.string "encrypted_password"
+    t.string "password_archivable_type"
+    t.integer "password_archivable_id"
+    t.string "password_salt"
+    t.datetime "created_at"
+    t.index ["password_archivable_type", "password_archivable_id"], name: "index_password_archivable"
   end
 
   create_table "seo_meta", id: :serial, force: :cascade do |t|
@@ -62,8 +71,14 @@ ActiveRecord::Schema.define(version: 2016_05_12_085426) do
     t.string "avatar"
     t.text "avatar_meta"
     t.integer "avatar_gravity"
+    t.datetime "password_changed_at"
+    t.datetime "locked_at"
+    t.integer "failed_attempts"
+    t.string "unlock_token"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["password_changed_at"], name: "index_users_on_password_changed_at"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
 end

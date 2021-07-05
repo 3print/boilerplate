@@ -3,9 +3,9 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default(""), not null
-#  reset_password_token   :string(255)
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
 #  sign_in_count          :integer          default(0), not null
@@ -15,12 +15,16 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime
 #  updated_at             :datetime
-#  first_name             :string(255)
-#  last_name              :string(255)
+#  first_name             :string
+#  last_name              :string
 #  role                   :integer
-#  avatar                 :string(255)
+#  avatar                 :string
 #  avatar_meta            :text
 #  avatar_gravity         :integer
+#  password_changed_at    :datetime
+#  locked_at              :datetime
+#  failed_attempts        :integer
+#  unlock_token           :string
 #
 
 FactoryBot.define do

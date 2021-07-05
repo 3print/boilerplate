@@ -3,12 +3,12 @@
 # Table name: seo_meta
 #
 #  id              :integer          not null, primary key
-#  title           :string(255)
-#  description     :text
 #  meta_owner_id   :integer
-#  meta_owner_type :string(255)
+#  meta_owner_type :string
+#  title           :string
+#  description     :text
+#  static_action   :string
 #  static_mode     :boolean
-#  static_action   :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
 #
