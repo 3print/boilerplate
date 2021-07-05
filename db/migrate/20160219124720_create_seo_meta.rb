@@ -1,4 +1,4 @@
-class CreateSeoMeta < ActiveRecord::Migration
+class CreateSeoMeta < ActiveRecord::Migration[4.2]
   def change
     create_table :seo_meta do |t|
       t.integer :meta_owner_id

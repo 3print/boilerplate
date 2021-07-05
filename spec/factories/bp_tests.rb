@@ -18,7 +18,7 @@
 #  multiple_enum :integer          default([]), is an Array
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :bp_test do
     image { fixture_file_upload('/files/sumo.png') }
     pdf { fixture_file_upload('/files/sumo.pdf') }

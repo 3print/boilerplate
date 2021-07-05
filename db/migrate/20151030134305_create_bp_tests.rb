@@ -1,4 +1,4 @@
-class CreateBpTests < ActiveRecord::Migration
+class CreateBpTests < ActiveRecord::Migration[4.2]
   def change
     create_table :bp_tests do |t|
       t.string :image

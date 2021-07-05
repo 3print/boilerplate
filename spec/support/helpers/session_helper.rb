@@ -9,7 +9,7 @@ module SessionHelper
     end
 
     def login user
-      user = FactoryGirl.create(user) if user.is_a? Symbol
+      user = FactoryBot.create(user) if user.is_a? Symbol
 
       @current_user = user
       setup_devise
@@ -17,7 +17,7 @@ module SessionHelper
     end
 
     def auth user, opts={}
-      user = FactoryGirl.create(user) if user.is_a? Symbol
+      user = FactoryBot.create(user) if user.is_a? Symbol
       ActiveSupport::OptionMerger.new self, opts.merge(auth_token: user.authentication_token)
     end
 

@@ -1,4 +1,4 @@
-class ChangeBpTestEnumType < ActiveRecord::Migration
+class ChangeBpTestEnumType < ActiveRecord::Migration[4.2]
   def change
     connection.execute(%q{
       ALTER TABLE bp_tests

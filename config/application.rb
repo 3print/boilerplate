@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 
@@ -7,8 +7,6 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Boilerplate
-  ActiveSupport.halt_callback_chains_on_return_false = false
-
   class Application < Rails::Application
     config.generators do |g|
       g.test_framework :rspec,
@@ -20,6 +18,8 @@ module Boilerplate
         request_specs: false
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 5.0
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

@@ -28,7 +28,7 @@ class User < ApplicationRecord
   extend Concerns::ImageGravity
 
   enum role: %w(user admin)
-  after_initialize :set_default_role, :if => :new_record?
+  after_initialize :set_default_role, :if -> { new_record? }
 
   gravity_enum :avatar
   mount_uploader :avatar, AvatarUploader
@@ -42,7 +42,7 @@ class User < ApplicationRecord
   add_to_dashboard size: 1, weight: 2, columns: [:user_card, actions: [:edit, masquerade: :user_masquerade_path, destroy: {method: :delete}]]
 
   validates :email, :first_name, :last_name, presence: true
-  validates :password, :password_confirmation, presence: true, if: :password_required?
+  validates :password, :password_confirmation, presence: true, if: -> {password_required? }
 
   before_save do
     self.avatar_meta = nil if avatar_meta.is_a?(String)

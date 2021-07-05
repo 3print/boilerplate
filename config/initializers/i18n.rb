@@ -1,23 +1,27 @@
-module I18n
-  class << self
-    def translate_with_fallback key, options={}, original=nil
-      begin
-        self.translate_without_fallback(key, {raise: true}.update(options))
-      rescue => e
-        split = key.to_s.split('.')
-        if split.size <= 2
-          translate_without_fallback original || key, options
-        else
-          v = split.pop
-          v2 = split.pop
-          split.pop if v2 == "default"
-          split << "default" << v
-          new_key = split.join('.')
-          translate_with_fallback new_key, options, original || key
-        end
+module I18nWithFallback
+  def translate key, options={}, original=nil
+    begin
+      super(key, {raise: true}.update(options))
+    rescue => e
+      split = key.to_s.split('.')
+      if split.size <= 2
+        super key || original, options
+      else
+        v = split.pop
+        v2 = split.pop
+        split.pop if v2 == "default"
+        split << "default" << v
+        new_key = split.join('.')
+        translate new_key, options, key || original
       end
     end
-    alias_method_chain :translate, :fallback
+  end
+end
+
+module I18n
+  prepend I18nWithFallback
+
+  class << self
     alias_method :t, :translate
   end
 

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.3.4'
-gem 'rails', '~> 5.0'
+ruby '2.6.7'
+gem 'rails', '~> 5.2'
 gem 'spring',        group: :development
 gem 'unicorn'
 gem 'unicorn-rails'
@@ -14,7 +14,7 @@ gem 'devise-i18n'
 gem 'devise_masquerade'
 gem 'pundit'
 gem 'createsend'
-gem 'pwdcalc'
+gem 'pwdcalc', git: 'https://github.com/trimentor/pwdcalc.git'
 
 # Database
 gem 'pg'
@@ -56,11 +56,11 @@ gem 'slack-notifier'
 
 # Sumo custom tools
 gem 'tprint-debug', git: 'https://github.com/3print/tprint-debug'
-gem 'sumo_seed', git: 'https://github.com/3print/sumo_seed'
+gem 'sumo_seed', git: 'https://github.com/3print/sumo_seed', branch: 'cn-rails-upgrade'
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', platforms: [:mri_22, :mri_23, :rbx]
+  gem 'binding_of_caller'
   gem 'html2haml'
   gem 'rails_layout'
   gem 'rb-fchange', :require=>false
@@ -83,7 +83,7 @@ group :development do
   gem 'annotate'
 end
 group :development, :test do
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rspec-rails'

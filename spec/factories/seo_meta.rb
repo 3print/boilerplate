@@ -13,7 +13,7 @@
 #  updated_at      :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :seo_meta do
     title { Faker::Lorem.sentence }
     description { Faker::Lorem.paragraph }
