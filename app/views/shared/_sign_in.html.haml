@@ -21,10 +21,8 @@
       = f.input :first_name
       = f.input :last_name
       = f.input :email
-      = f.input :password, as: :pwdcalc_simple
+      = f.input :password
       = f.input :password_confirmation
       = hidden_field_tag :redirect, params[:redirect]
 
       = f.submit 'actions.sign_up'.t, class: 'btn btn-grey btn-block'
-
-= pwdcalc_hints

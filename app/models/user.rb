@@ -28,7 +28,7 @@ class User < ApplicationRecord
   extend Concerns::ImageGravity
 
   enum role: %w(user admin)
-  after_initialize :set_default_role, :if -> { new_record? }
+  after_initialize :set_default_role, if: -> { new_record? }
 
   gravity_enum :avatar
   mount_uploader :avatar, AvatarUploader

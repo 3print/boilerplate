@@ -11,7 +11,7 @@
 
         - if !resource.persisted? || resource == current_user
           .row
-            .col-md-6= f.input :password, as: :pwdcalc_simple
+            .col-md-6= f.input :password
             .col-md-6= f.input :password_confirmation
 
         = f.input :email
@@ -24,4 +24,3 @@
   = default_actions
 
 = render 'direct_download'
-= pwdcalc_hints

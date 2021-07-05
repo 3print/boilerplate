@@ -41,7 +41,6 @@ module Boilerplate
     config.eager_load_paths << "#{config.root}/lib"
     config.autoload_paths << "#{config.root}/lib"
 
-    config.active_record.raise_in_transactional_callbacks = true
     config.active_record.belongs_to_required_by_default = false
 
     config.exceptions_app = self.routes

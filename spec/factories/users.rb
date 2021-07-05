@@ -32,7 +32,7 @@ FactoryBot.define do
     password_confirmation { "please123" }
 
     trait :admin do
-      role 'admin'
+      role { 'admin' }
     end
 
     trait :no_password do

@@ -1,18 +1,18 @@
-require 'sass'
-require 'sass/importer'
+require 'sassc'
+require 'sassc/importer'
 
 class SassUtils
   def self.compile (source)
     view_context = ActionView::Base.new
-    assets = ActionView::Base::ASSET_PUBLIC_DIRECTORIES.values.map {|v| "app/assets/#{v}"}
     engine = Sass::Engine.new(source, {
       syntax: :sass,
-      load_paths: Rails.application.assets.paths,
+      load_paths: view_context.assets.paths,
+      # load_paths: view_context.assets.paths + [Compass::Frameworks['compass'].stylesheets_directory],
       style: :expanded,
       filesystem_importer: SassImporter,
       sprockets:  {
         context:     view_context,
-        environment: assets
+        environment: view_context.assets
       }
     })
     engine.render

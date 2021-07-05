@@ -14,7 +14,6 @@ gem 'devise-i18n'
 gem 'devise_masquerade'
 gem 'pundit'
 gem 'createsend'
-gem 'pwdcalc', git: 'https://github.com/trimentor/pwdcalc.git'
 
 # Database
 gem 'pg'

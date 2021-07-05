@@ -23,8 +23,8 @@ class SeoMeta < ApplicationRecord
   scope :for_resource_index, ->(res) { no_owner.where(meta_owner_type: res) }
   scope :for_static_action, ->(a) { where(static_mode: true, static_action: a) }
 
-  validates :meta_owner_type, presence: true, unless: 'static_mode'
-  validates :static_action, presence: true, if: 'static_mode'
+  validates :meta_owner_type, presence: true, unless: -> { static_mode }
+  validates :static_action, presence: true, if: -> { static_mode }
 
   def caption
     if meta_owner.present?

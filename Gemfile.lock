@@ -13,12 +13,6 @@ GIT
   specs:
     tprint-debug (1.2.0)
 
-GIT
-  remote: https://github.com/trimentor/pwdcalc.git
-  revision: 905e3812917227928af0f02632d01dfa00ebd71d
-  specs:
-    pwdcalc (2.0.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -538,7 +532,6 @@ DEPENDENCIES
   pry-rails
   pry-rescue
   pundit
-  pwdcalc!
   rails (~> 5.2)
   rails_layout
   rb-fchange

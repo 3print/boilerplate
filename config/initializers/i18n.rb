@@ -16,21 +16,18 @@ module I18nWithFallback
       end
     end
   end
+
 end
 
 module I18n
   prepend I18nWithFallback
-
-  class << self
-    alias_method :t, :translate
-  end
 
   def self.tc(key, params={})
     self.t('label_with_colon', label: key.t(params)).html_safe
   end
 
   def self.tp(key, params={})
-    self.t("prefix.#{key}", label: key.t(params)).html_safe
+    self.t("prefix.#{key}", label: key.t(params).downcase).html_safe
   end
 
   def self.tmf(key, params={})
@@ -50,14 +47,15 @@ module I18n
     self.t('label_with_colon', label: self.tmf(key, params)).html_safe
   end
 
+
   def self.t_with_default(key, params={})
     begin
-      self.t(key, {raise: true}.update(params))
+      self.translate(key, {raise: true}.update(params))
     rescue
       if Rails.env.development?
-        "<span class='label label-danger' title='#{self.t(key, params)}'>!</span>#{key.split('.').last}".html_safe
+        "<span class='label label-danger' title='#{self.t(key, params)}'>!</span>#{key.to_s.split('.').last}".html_safe
       else
-        key.split('.').last
+        key.to_s.split('.').last
       end
     end
   end
@@ -120,6 +118,10 @@ end
 class ActiveRecord::Base
   def self.t
     "models.#{model_name.to_s.underscore.gsub('/', '_').pluralize}".t
+  end
+
+  def self.ts
+    "models.#{model_name.to_s.underscore.gsub('/', '_')}".t
   end
 
   def self.tp(params={})
