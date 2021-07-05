@@ -14,28 +14,15 @@
           = icon_for(:profile)
           %span.text= 'actions.edit_profile'.t
 
-    - if user_masquerade?
-      %li
-        = link_to back_user_masquerade_index_path do
-          = icon_for(:sign_out)
-          %span.text= 'reverse_masquerade'.t
-
-    - else
-      %li
-        = link_to destroy_user_session_path, method: :delete do
-          = icon_for(:sign_out)
-          %span.text= 'actions.sign_out'.t
+    %li
+      = link_to destroy_user_session_path, method: :delete do
+        = icon_for(:sign_out)
+        %span.text= 'actions.sign_out'.t
 
   .session{class: 'dropdown-toggle', data: { toggle: 'dropdown' }}
-    - if user_masquerade?
-      %span.text.masqueraded!= 'masqueraded'.t user: current_user.name
-    - else
-      %span= current_user.name
+    %span= current_user.name
 
     .details
-      - if current_user.admin?
-        .label.label-warning= "enums.user.role.#{current_user.role}".t
-      - else
-        .label.label-info= "enums.user.role.#{current_user.role}".t
+      .label.label-info= "enums.user.role.#{current_user.role}".t
       = icon('chevron-down')
       = icon('chevron-up')

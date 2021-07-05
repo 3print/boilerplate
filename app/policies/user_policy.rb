@@ -15,8 +15,4 @@ class UserPolicy < AdminPolicy
   def destroy?
     (only_super_admin || (only_admin && !record.super_admin?)) && user != record
   end
-
-  def masquerade?
-    only_super_admin && user != record
-  end
 end

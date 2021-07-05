@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  devise_for :users, controllers: { registrations: "registrations", sessions: "sessions", passwords: 'passwords', masquerades: 'admin/masquerades' }
+  devise_for :users, controllers: {
+    registrations: "registrations",
+    sessions: "sessions",
+    passwords: 'passwords',
+  }
 
   get '/result', to: 'static#s3_results', as: :s3_results
 
