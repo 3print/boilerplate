@@ -1,6 +1,6 @@
 // make all images responsive by default
 img
-  @extend .img-responsive
+  @extend .img-fluid
   margin: 0 auto
 
 // override for the 'Home' navigation link
@@ -121,8 +121,6 @@ section
   margin: 0 auto
 
 .authform form
-  @extend .well
-  @extend .well-lg
   padding-bottom: 40px
 
 .authform .right
@@ -132,9 +130,6 @@ section
   @extend .btn
   @extend .btn-primary
 
-.authform fieldset
-  @extend .well
-
 #error_explanation
   @extend .alert
   @extend .alert-danger
@@ -142,10 +137,10 @@ section
 #error_explanation h2
   font-size: 16px
 
-.button-xs
+.button-sm
   @extend .btn
   @extend .btn-primary
-  @extend .btn-xs
+  @extend .btn-sm
 
 .short-actions .actions .btn span
   display: none
