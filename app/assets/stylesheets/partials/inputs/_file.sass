@@ -1,6 +1,6 @@
 .file
   // padding: 10px 0
-  +relative
+  position: relative
 
   input.file
     opacity: 0
@@ -26,7 +26,11 @@
 
     label
       display: block
-      +absolute(0,0,0,0)
+      position: absolute
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
 
   select
     position: absolute
@@ -38,9 +42,13 @@
 
   .progress
     height: 4px
-    border-bottom: 1px solid $bootstrap_border_color
+    border-bottom: 1px solid $input-border-color
     border-radius: 0
-    +absolute(0,0,initial,0)
+    position: absolute
+    top: 0
+    left: 0
+
+    right: 0
 
     .progress-bar
       border-radius: 0
@@ -60,11 +68,13 @@
       text-overflow: ellipsis
       border-radius: 0
       border-bottom-right-radius: 3px
-      background: $color_grey_lighter
-      color: $color_grey_darker
-      border-right: 1px solid $bootstrap_border_color
-      border-bottom: 1px solid $bootstrap_border_color
-      +absolute(-1px,0)
+      background: $input-bg
+      color: $input-color
+      border-right: 1px solid $input-border-color
+      border-bottom: 1px solid $input-border-color
+      position: absolute
+      top: -1px
+      left: 0
 
     img ~ .placeholder
       display: none
@@ -88,7 +98,7 @@
     .control-label
       padding: 0 6px
       font-size: 0.8em
-      +relative
+      position: relative
 
 .well.gallery .file .controls
   height: 140px
@@ -99,7 +109,7 @@
 .has-error.file
   .controls
     padding-bottom: 0
-    border-color: $color_red
+    border-color: $danger
 
   .alert.alert-danger
     margin-bottom: 0
@@ -107,12 +117,12 @@
     margin-right: -12px
     border: none
     margin-top: 6px
-    border-top: 1px solid $color_red
+    border-top: 1px solid $danger
 
 .has-warning.file
   .controls
     padding-bottom: 0
-    border-color: $state-warning-border
+    border-color: $warning
 
   .alert.alert-danger
     margin-bottom: 0
@@ -120,11 +130,11 @@
     margin-right: -12px
     border: none
     margin-top: 6px
-    border-top: 1px solid $state-warning-border
+    border-top: 1px solid $warning
 
 .has-success.file
   .controls
-    border-color: $color_green
+    border-color: $success
 
 .remove-file
   // display: none

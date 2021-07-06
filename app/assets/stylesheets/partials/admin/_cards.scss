@@ -1,0 +1,14 @@
+.card {
+  .table {
+    margin: -1rem;
+    width: calc(100% + 2rem);
+
+    :not(:last-child) > :last-child > * {
+      border-bottom-color: inherit;
+    }
+
+    :last-child > :last-child > * {
+      border-bottom-width: 0;
+    }
+  }
+}

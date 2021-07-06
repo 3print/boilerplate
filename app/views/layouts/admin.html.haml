@@ -26,47 +26,42 @@
     <![endif]-->
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
-    %nav.navbar.navbar-default{role: :navigation}
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light{role: :navigation}
 
-      .container-fluid
+      .container
         .navbar-header
-          %button.navbar-toggle{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
+          %button.navbar-toggler{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
             %span.sr-only Toggle navigation
             %i.fa.fa-navicon
           %a.navbar-brand{href: "/"}
+            = image_tag asset_path('logo.png'), alt: 'Logo'
             %span.text= 'app_name'.t
 
         #menu.collapse.navbar-collapse{role: :navigation}
+          = render_partial_for_user 'admin/shared/nav'
           = render partial: 'admin/shared/session'
 
-          %ul.nav.navbar-nav
-            = render_partial_for_user 'admin/shared/nav'
+    = render partial: 'shared/flash', locals: { flash: flash }
+    .container
+      #content
+        = yield :before_page
 
-    .scroll-wrapper
-      .inner-scroll-wrapper
-        = render partial: 'shared/flash', locals: { flash: flash }
-        .container-fluid
-          #content
-            = yield :before_page
+        #content-header
+          %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'admin_app_name'.t
+          = yield :content_header
 
-            #content-header
-              %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'admin_app_name'.t
-              = yield :content_header
+        - if content_for?(:pills)
+          = yield :pills
 
-            - if content_for?(:pills)
-              = yield :pills
+        - if content_for?(:breadcrumb)
+          = yield :breadcrumb
 
-            - if content_for?(:breadcrumb)
-              = yield :breadcrumb
+        = yield :before_content
 
-            = yield :before_content
+        = yield
 
-            = yield
-
-            = yield :after_content
-            = yield :after_page
-
-
+        = yield :after_content
+        = yield :after_page
 
     = javascript_include_tag "admin"
 

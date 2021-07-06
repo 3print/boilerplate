@@ -1,5 +1,5 @@
 - admin = (controller_name =~ /admin/ ? 'admin' : nil)
-.row.dashboard
+.card-group
   - Dashboard.weighed_items.each do |klass, opts|
     :ruby
       unless_clause = opts[:unless]
@@ -23,56 +23,53 @@
       scope_counter = collection_counter(scope)
       scope = opts[:limit].present? ? scope.limit(opts[:limit]) : scope.limit(5)
 
-    %div{class: "col-md-#{size*6}"}
-      - title_content = opts[:title] || "models.dashboard.#{klass.table_name}".t(default: render_partial_for_user('index_panel_header', locals: {resource_class: klass}))
+    - title_content = opts[:title] || "models.dashboard.#{klass.table_name}".t(default: render_partial_for_user('index_panel_header', locals: {resource_class: klass}))
 
-      - title = capture_haml do
-        = icon_for(klass)
-        = title_content
+    - title = capture_haml do
+      = icon_for(klass)
+      = title_content
 
-      - if opts[:columns].present?
-        :ruby
-          url = [:admin, klass]
+    - if opts[:columns].present?
+      :ruby
+        url = [:admin, klass]
 
-          def get_proc(c, *args)
-            try(:"admin_resource_#{c}_proc", *args) ||
-            try(:"resource_#{c}_proc", *args) ||
-            try(:"#{c}_proc", *args) ||
-            try(c, *args)
-          end
+        def get_proc(c, *args)
+          try(:"admin_resource_#{c}_proc", *args) ||
+          try(:"resource_#{c}_proc", *args) ||
+          try(:"#{c}_proc", *args) ||
+          try(c, *args)
+        end
 
-          options = {
-            columns: opts[:columns].map { |c|
-              if c.is_a?(Hash)
-                c.map do |k,v|
-                  get_proc(k, *v)
-                end
-              else
-                get_proc(c)
+        options = {
+          columns: opts[:columns].map { |c|
+            if c.is_a?(Hash)
+              c.map do |k,v|
+                get_proc(k, *v)
               end
-            }.flatten.compact,
-          }.reverse_merge(opts)
+            else
+              get_proc(c)
+            end
+          }.flatten.compact,
+        }.reverse_merge(opts)
 
-        .panel.panel-default{class: size == 1 && 'short-actions'}
-          .panel-heading
-            = scope_counter
-            = icon_for(klass)
-            %h5.panel-title
-              = link_to title_content, url
+      .card{class: size == 1 && 'short-actions'}
+        %h5.card-header
+          = scope_counter
+          = icon_for(klass)
+          = link_to title_content, url
 
-          = models_list scope, options
+        .card-body= models_list scope, options
+        - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.namespaced_name.to_sym].compact) rescue nil)
+          .card-footer
+            = link_to new_url, class: 'btn btn-success' do
+              = icon_for(:create)
+              %span.text= 'admin.actions.add'.t
 
-          - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.namespaced_name].compact) rescue nil)
-            .panel-footer
-              = link_to new_url, class: 'btn btn-success' do
-                = icon_for(:create)
-                %span.text= 'admin.actions.add'.t
-
-      - else
-        = widget_box title, class: "panel-default #{size == 1 && 'short-actions'}", before_title: collection_counter(klass.where(nil)) do
-          = collection scope, resource_class: klass, no_pagination: true
-          - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.namespaced_name].compact) rescue nil)
-            .panel-footer
-              = link_to new_url, class: 'btn btn-success' do
-                = icon_for(:create)
-                %span.text= 'admin.actions.add'.t
+    - else
+      = widget_box title, class: "panel-default #{size == 1 && 'short-actions'}", before_title: collection_counter(klass.where(nil)) do
+        .card-body= collection scope, resource_class: klass, no_pagination: true
+        - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.namespaced_name.to_sym].compact) rescue nil)
+          .card-footer
+            = link_to new_url, class: 'btn btn-success' do
+              = icon_for(:create)
+              %span.text= 'admin.actions.add'.t

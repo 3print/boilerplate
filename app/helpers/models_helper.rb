@@ -94,11 +94,11 @@ module ModelsHelper
   end
 
   def collection_counter(collection)
-    return content_tag(:div, 0, class: 'label label-info tip-left pull-right') if collection.size == 0
+    return content_tag(:div, 0, class: 'badge bg-info tip-left pull-right') if collection.size == 0
 
     model_class = collection.is_a?(Array) ? collection.first.try(:class) : collection.klass
     count = collection.size
-    content_tag(:div, class: 'label label-info tip-left pull-right', title: 'tips.models_count'.t(count: count, singular: "models.#{model_class.namespaced_name}".t.downcase, plural: "models.#{model_class.table_name}".t.downcase)) do
+    content_tag(:div, class: 'badge bg-info tip-left pull-right', title: 'tips.models_count'.t(count: count, singular: "models.#{model_class.namespaced_name}".t.downcase, plural: "models.#{model_class.table_name}".t.downcase)) do
         concat(count)
     end
   end
@@ -121,8 +121,8 @@ module ModelsHelper
     if collection.empty?
       raw "<div class='row panel-body'><em class='col-md-12'>#{:no_data_no_creation.t}</em></div>"
     else
-      content_tag :table, class: "table table-bordered table-stripped table-hover #{resource_name}" do
-        concat(content_tag(:thead) do
+      content_tag :table, class: "table table-stripped table-hover #{resource_name}" do
+        concat(content_tag(:thead, class: 'table-light') do
           concat(content_tag(:tr) do
             columns.each do |column|
               concat(content_tag(:th, "tables.columns.#{column.to_s}".t))
@@ -163,17 +163,15 @@ module ModelsHelper
     self.collection_class = options[:collection_class] || collection.klass
 
     if collection.empty?
-      content_tag :div, class: 'row panel-body' do
-        concat(content_tag(:div, class: 'col-md-12') do
-          if can? :create, collection_class
-            message = I18n.t("models.#{collection_class.name.tableize}.no_data", default: '')
-            message = :no_data.t if message.blank?
-          else
-            message = I18n.t("models.#{collection_class.name.tableize}.no_data_no_creation", default: '')
-            message = :no_data_no_creation.t  if message.blank?
-          end
-          concat raw "<em>#{message}</em>"
-        end)
+      content_tag :div, class: 'card-body' do
+        if can? :create, collection_class
+          message = I18n.t("models.#{collection_class.name.tableize}.no_data", default: '')
+          message = :no_data.t if message.blank?
+        else
+          message = I18n.t("models.#{collection_class.name.tableize}.no_data_no_creation", default: '')
+          message = :no_data_no_creation.t  if message.blank?
+        end
+        concat raw "<em>#{message}</em>"
       end
 
     else

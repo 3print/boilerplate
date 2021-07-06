@@ -23,7 +23,7 @@ module PillsHelper
         if path[2] && path[2][:class]
           path[2][:class] = "btn #{path[2][:class]}"
         else
-          path[2] = { class: 'btn btn-default' }
+          path[2] = { class: 'btn btn-secondary' }
         end
 
         if path[1]

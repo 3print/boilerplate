@@ -1,4 +1,5 @@
-= nav_link_to admin_root_path, 'nav.admin.dashboard'.t, :home, icon_class_for(:dashboard)
-= nav_link_to admin_root_path, 'nav.admin.root'.t, :home, icon_class_for(:main_nav) do
-  = nav_link_to User
-= nav_link_to BpTest # BOILERPLATE_ONLY
+%ul.nav.navbar-nav.me-auto.mb-2.mb-lg-0
+  = nav_link_to admin_root_path, 'nav.admin.dashboard'.t, :home, icon_class_for(:dashboard)
+  = nav_link_to admin_root_path, 'nav.admin.root'.t, :home, icon_class_for(:main_nav) do
+    = nav_link_to User
+  = nav_link_to BpTest # BOILERPLATE_ONLY

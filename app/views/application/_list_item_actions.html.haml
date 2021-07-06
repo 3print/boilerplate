@@ -4,7 +4,7 @@
 = contextual_partial 'list_item_before_actions', locals: local_assigns
 
 - if can? :edit, item
-  = link_to edit_url, class: 'btn btn-default' do
+  = link_to edit_url, class: 'btn btn-secondary' do
     = icon_for(:edit)
     %span.text= 'admin.actions.edit'.t
 

@@ -8,6 +8,6 @@
       = widget_box title_content, content_class: 'nopadding', before_title: collection_counter(resource_collection) do
         = contextual_partial 'index_before_collection'
 
-        = collection resource_collection
+        .card-body= collection resource_collection
 
         = contextual_partial 'index_after_collection'

@@ -3,17 +3,24 @@
     z-index: 4
 
   .input-group
-    +relative
+    position: relative
 
     .form-control.value
-      +absolute(0,37px, initial, 0)
+      position: absolute
+      top: 0
+      left: 37px
+      right: 0
       width: auto
       z-index: 3
       pointer-events: none
 
   .input-group .overlay
     @extend .form-control
-    +absolute(0,37px, 0, 0)
+    position: absolute
+    top: 0
+    left: 37px
+    bottom: 0
+    right: 0
     width: auto
     z-index: 3
 

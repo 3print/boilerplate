@@ -1,13 +1,13 @@
 CLASSNAME_BY_ACTION = {
-  index: 'default',
+  index: 'secondary',
   destroy: 'danger',
-  show: 'default',
+  show: 'secondary',
   new: 'success',
   masquerade: 'warning'
 }
 
 module ActionsHelper
   def classname_for_action(action)
-    CLASSNAME_BY_ACTION[action.to_sym] || 'default'
+    CLASSNAME_BY_ACTION[action.to_sym] || 'secondary'
   end
 end

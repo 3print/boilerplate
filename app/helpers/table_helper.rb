@@ -11,15 +11,15 @@ module TableHelper
     content_options = options.delete(:content) || {}
 
     if options[:class]
-      options[:class] = 'panel ' + options[:class]
+      options[:class] = 'card ' + options[:class]
     else
-      options[:class] = 'panel panel-default'
+      options[:class] = 'card'
     end
 
     if title_options[:class]
-      title_options[:class] = 'panel-heading ' + title_options[:class]
+      title_options[:class] = 'card-header ' + title_options[:class]
     else
-      title_options[:class] = 'panel-heading'
+      title_options[:class] = 'card-header'
     end
 
     if content_options[:class]
@@ -30,7 +30,7 @@ module TableHelper
     content_options[:class] += ' ' + content_class if content_class
 
     content_tag(:div, options) do
-      concat(content_tag(:div, title_options) do
+      concat(content_tag(:h5, title_options) do
         if ico
           concat(content_tag(:span, class: 'icon') do
             concat(icon(ico))
@@ -38,7 +38,7 @@ module TableHelper
         end
 
         concat(before_title) if before_title
-        concat(content_tag(:h5, title, class: 'panel-title'))
+        concat(title)
         if actions
           concat(content_tag(:div, class: 'buttons') do
             actions.each_pair do |path, content|

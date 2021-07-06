@@ -6,17 +6,19 @@ img
 // override for the 'Home' navigation link
 .navbar-brand
   font-size: inherit
+  display: block
 
 .navbar-collapse
   padding: 0
 
 .navbar
   border-top: none
+  padding: 0
 
 .nav.navbar-nav
   li a
-    padding-top: 24px
-    padding-bottom: 24px
+    padding-top: 8px
+    padding-bottom: 8px
 
     span + .fa
       margin-left: 5px
@@ -38,21 +40,20 @@ img
       padding-right: 40px
 
   & > li.active > a
-    padding-bottom: 20px
-    border-bottom: 4px solid $color-red
+    color: $color-red
 
   +for-desktop
     .dropdown-menu
       li
         +relative
         a
-          padding: 16px 40px 16px 52px
+          padding: 8px 36px 8px 36px
           i
             color: $color-blue-dark
-            font-size: 2em
+            font-size: 1.6em
             text-align: center
-            +box(28px)
-            +absolute(12px, 12px)
+            +box(20px)
+            +absolute(8px, 8px)
 
         &.active a i
           color: white

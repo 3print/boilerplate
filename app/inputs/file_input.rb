@@ -131,7 +131,7 @@ class FileInput < SimpleForm::Inputs::FileInput
   end
 
   def field_label(res)
-    s = "<div class='label label-default' title='#{res}'>#{clear_url_query res.to_s.split('/').last}</div>"
+    s = "<div class='badge bg-default' title='#{res}'>#{clear_url_query res.to_s.split('/').last}</div>"
     return s if !res.respond_to?(:width) && !res.respond_to?(:height)
 
     s += "<div class='meta'>"

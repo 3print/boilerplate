@@ -9,6 +9,6 @@
 - if !user.user?
   .details
     - if user.role == 'admin'
-      .label.label-warning= "enums.user.role.#{user.role}".t
+      .badge.bg-warning= "enums.user.role.#{user.role}".t
     - else
-      .label.label-info= "enums.user.role.#{user.role}".t
+      .badge.bg-info= "enums.user.role.#{user.role}".t

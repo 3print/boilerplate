@@ -2,7 +2,7 @@
   = contextual_partial 'instances_header_before_pills', locals: {resource: resource}
 
   - if can?(:edit, resource) && controller.route_exists_for?(:edit)
-    - pill controller.resource_path(:edit), class: 'btn-default' do
+    - pill controller.resource_path(:edit), class: 'btn-secondary' do
       = icon_for(:edit)
       %span.text= 'admin.actions.edit'.t
 

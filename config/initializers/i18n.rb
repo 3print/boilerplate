@@ -53,7 +53,7 @@ module I18n
       self.translate(key, {raise: true}.update(params))
     rescue
       if Rails.env.development?
-        "<span class='label label-danger' title='#{self.t(key, params)}'>!</span>#{key.to_s.split('.').last}".html_safe
+        "<span class='badge bg-danger' title='#{self.t(key, params)}'>!</span>#{key.to_s.split('.').last}".html_safe
       else
         key.to_s.split('.').last
       end
