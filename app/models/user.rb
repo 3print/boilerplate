@@ -32,7 +32,7 @@ class User < ApplicationRecord
   extend Concerns::ImageGravity
   include ActiveModel::Validations
 
-  enum role: %w(user admin)
+  enum role: %w(user admin).freeze
   after_initialize :set_default_role, if: -> { new_record? }
 
   gravity_enum :avatar
@@ -41,6 +41,7 @@ class User < ApplicationRecord
   light_search_by :name, :email
 
   scope :admins, -> { where 'users.role = 1' }
+  scope :users, -> { where 'users.role = 0' }
 
   paginates_per 10
 

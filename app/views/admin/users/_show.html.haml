@@ -4,18 +4,17 @@
     = show_avatar resource.avatar, :medium
 
   .col-md-8.col-xs-8
-    .panel.panel-default
-      .panel-heading
+    .card
+      %h5.card-header
         - if resource.admin?
           .pull-right.badge.bg-warning= "enums.user.role.#{resource.role}".t
         - else
           .pull-right.badge.bg-info= "enums.user.role.#{resource.role}".t
 
-        %h5.panel-title
-          = icon :info
-          Informations
+        = icon :info
+        Informations
 
-      %ul.list-group
+      %ul.list-group.list-group-flush
         %li.list-group-item
           %strong
             = icon_for(:email)

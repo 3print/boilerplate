@@ -3,7 +3,7 @@ module SimpleFormHelper
 
   def default_actions(options={}, &block)
     capture_haml do
-      haml_tag 'div', class: 'panel-footer' do
+      haml_tag 'div', class: 'card-footer' do
         haml_tag 'fieldset', class: 'form-actions' do
           haml_tag 'button', class: "btn btn-success #{options[:class]}" do
             haml_tag 'span', class: icon_class(options[:icon] || 'check')

@@ -1,6 +1,6 @@
 
 = simple_nested_form_for resource, url: controller.controller_namespace + [resource] do |f|
-  %fieldset.inputs.panel-body
+  %fieldset.inputs.card-body
     .row
       .col-md-4
         = f.input :avatar, version: :medium
@@ -11,8 +11,8 @@
 
         - if !resource.persisted? || resource == current_user
           .row
-            .col-md-6= f.input :password
-            .col-md-6= f.input :password_confirmation
+            .col-md-6= f.input :password, required: params[:action] == 'new'
+            .col-md-6= f.input :password_confirmation, required: params[:action] == 'new'
 
         = f.input :email
 

@@ -2,7 +2,7 @@
 
 = widget_box 'labels.informations'.t, :info, content_class: 'nopadding' do
   = render_partial_for_user 'show_before_fields'
-  %ul.list-group.nomargin
+  %ul.list-group.list-group-flush
     - columns.each do |col|
       - if can? :view, resource, col
         %li.list-group-item= show_field(col)

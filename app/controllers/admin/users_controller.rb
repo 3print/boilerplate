@@ -3,10 +3,8 @@ class Admin::UsersController < Admin::ApplicationController
   sort_resource by: 'last_name ASC'
 
   def index
-    @users = @users.with_text params[:q] if params[:q].present?
-    @users = @users.try(params[:r]) if params[:r].present?
-
-    @users
+    @resource = @resource.with_text params[:q] if params[:q].present?
+    @resource = @resource.try(params[:r]) if params[:r].present?
   end
 
   def resource_params

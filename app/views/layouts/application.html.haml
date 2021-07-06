@@ -58,7 +58,7 @@
   %body{class: body_class}
     %nav.navbar{role: :navigation}
 
-      .container-fluid
+      .container
         .navbar-header
           %button.navbar-toggle{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
             %span.sr-only Toggle navigation
@@ -73,11 +73,11 @@
           - content_header_class = yield :content_header_class
           - content_header_style = yield :content_header_style
           .content-header{class: content_header_class, style: content_header_style}
-            .container-fluid= yield :content_header
+            .container= yield :content_header
 
         - content_class = yield :extra_content_class
         #content{class: content_class}
-          .container-fluid
+          .container
             = yield :before_page
 
             #content-header

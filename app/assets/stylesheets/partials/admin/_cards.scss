@@ -1,4 +1,7 @@
 .card {
+  .card-body + .card-body {
+    border-top: 1px solid $card-border-color;
+  }
   .table {
     margin: -1rem;
     width: calc(100% + 2rem);
