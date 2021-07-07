@@ -1,17 +1,20 @@
-@import bourbon
-@import bootstrap-markdown
-
-@import partials/common
-@import partials/variables
-@import partials/fonts
-@import partials/responsive
+@import bootstrap
+@import 'bootstrap/variables'
 @import partials/mixins
-@import partials/panel
+
+// @import partials/common
+// @import partials/variables
+// @import partials/fonts
+// @import partials/responsive
+// @import partials/panel
+// @import partials/front/buttons
+// @import partials/inputs/all
+// @import partials/admin/welcome
+// @import partials/admin/mobile
+
 @import partials/avatar
-@import partials/front/buttons
-@import partials/inputs/all
-@import partials/admin/welcome
-@import partials/admin/mobile
+@import partials/inputs/select
+@import partials/inputs/file
 
 .direct-upload-section
   visibility: hidden
@@ -22,4 +25,4 @@ html, body
   height: 100%
   margin: 0
   overflow-x: hidden
-  background-color: $color-grey-lighter
+  background-color: $gray-200

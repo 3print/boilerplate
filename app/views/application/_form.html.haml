@@ -1,7 +1,9 @@
 = simple_nested_form_for resource, url: controller.controller_namespace + [resource] do |f|
-  %fieldset.inputs.panel-body
+
+  %fieldset.inputs.card-body
     = inputs_for resource, f
-  %fieldset.inputs.panel-body
+
+  %fieldset.inputs.card-body
     = render_partial_for_user 'form_extra_fields', locals: local_assigns.merge(form: f)
 
   = default_actions

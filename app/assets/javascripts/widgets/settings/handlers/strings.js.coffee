@@ -17,13 +17,15 @@ SettingsEditor.handlers.push
       <div class="col-sm-3">
         <div class="form-group">
           <div class="controls">
-            <input
-              type="checkbox"
-              class="form-control"
-              id="#{hidden.id}_textarea"
-              data-name="textarea">
-            </input>
-            <label for="#{hidden.id}_textarea">#{"settings_input.string.textarea.label".t()}</label>
+            <label for="#{hidden.id}_textarea">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="#{hidden.id}_textarea"
+                data-name="textarea">
+              </input>
+              #{"settings_input.string.textarea.label".t()}
+            </label>
           </div>
         </div>
       </div>

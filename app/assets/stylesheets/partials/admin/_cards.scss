@@ -1,16 +1,20 @@
 .card {
+
   .card-body + .card-body {
     border-top: 1px solid $card-border-color;
   }
-  .table {
+
+  .card-body > .table {
     margin: -1rem;
     width: calc(100% + 2rem);
 
-    :not(:last-child) > :last-child > * {
-      border-bottom-color: inherit;
+    :not(:last-child) > :last-child {
+      > td, > th {
+        border-bottom-color: inherit;
+      }
     }
 
-    :last-child > :last-child > * {
+    :last-child > :last-child > td {
       border-bottom-width: 0;
     }
   }

@@ -19,9 +19,9 @@ class SettingsInput < SimpleForm::Inputs::TextInput
 
   def input(wrapper_options = nil)
     class_name = @builder.object.class.name.singularize.underscore
-    res = "<table class='settings_editor table table-stripped' data-row-blueprint='#{light_escape(get_field_row '', '')}' data-model='#{class_name}' data-attribute-name='#{attribute_name}'>"
+    res = "<table class='settings_editor table table-bordered table-stripped' data-row-blueprint='#{light_escape(get_field_row '', '')}' data-model='#{class_name}' data-attribute-name='#{attribute_name}'>"
 
-    res += '<thead><tr>'
+    res += '<thead class="bg-light"><tr>'
     %w(field type).each do |k|
       res += "<th>#{"tables.columns.#{k}".t}</th>"
     end
@@ -34,7 +34,7 @@ class SettingsInput < SimpleForm::Inputs::TextInput
       res += get_field_row k, v
     end if hash.present?
 
-    res += "<tr><td colspan='3'><a href='#' class='add btn btn-success'><i class='fa fa-plus'></i> #{'actions.add'.t}</a></td></tr>"
+    res += "<tr><td colspan='3'  class='bg-light'><a href='#' class='add btn btn-success'><i class='fa fa-plus'></i> #{'actions.add'.t}</a></td></tr>"
 
     res += '</table>'
     res

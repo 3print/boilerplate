@@ -26,13 +26,15 @@ required_field = (hidden) ->
   """
   <div class="form-group">
     <div class="controls">
-      <input
-        type="checkbox"
-        class="form-control"
-        id="#{hidden.id}_required"
-        data-name="required">
-      </input>
-      <label for="#{hidden.id}_required">#{"settings_input.required.label".t()}</label>
+      <label for="#{hidden.id}_required">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          id="#{hidden.id}_required"
+          data-name="required">
+        </input>
+        #{"settings_input.required.label".t()}
+      </label>
     </div>
   </div>
   """

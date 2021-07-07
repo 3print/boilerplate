@@ -1,6 +1,12 @@
 fr:
   markdown: &markdown "Le texte peut être mis en forme en suivant les règles de la syntaxe <a href='http://fr.wikipedia.org/wiki/Markdown'>Markdown</a>."
   <%= YAML::include("models_fields.fr.yml") %>
+
+  date:
+    order:
+    - day
+    - month
+    - year
   simple_form:
     "yes": 'Oui'
     "no": 'Non'

@@ -4,7 +4,7 @@ class FileInput < SimpleForm::Inputs::FileInput
   include ActionView::Helpers::FormOptionsHelper
 
   def input(wrapper_options = nil)
-    buffer = ''
+    buffer = '<div class="controls">'
 
     opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
     if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog
@@ -56,6 +56,7 @@ class FileInput < SimpleForm::Inputs::FileInput
       required_by_validators? && object.send(attribute_name).blank?
     end
     # rubocop:enable Lint/NestedMethodDefinition
+    buffer << '</div>'
 
     buffer.html_safe
   end
