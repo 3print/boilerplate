@@ -35,6 +35,8 @@ gem 'jbuilder'#, '~> 2.0'
 gem 'bootstrap'
 gem 'bourbon'
 gem 'eco'
+gem 'babel-transpiler'
+gem 'sprockets-commoner'
 
 # Models
 gem 'kaminari'

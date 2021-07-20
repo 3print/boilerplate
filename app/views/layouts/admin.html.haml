@@ -15,7 +15,6 @@
     %link{href: "https://fonts.googleapis.com/css?family=Raleway:400,300,600", rel: "stylesheet", type: "text/css"}/
     = yield :stylesheets
     = csrf_meta_tags
-    = javascript_include_tag 'critical'
 
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}

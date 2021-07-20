@@ -79,3 +79,6 @@ pickle-email-*.html
 .powenv
 
 public/uploads/*
+
+# node modules
+node_modules
