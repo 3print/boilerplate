@@ -17,13 +17,6 @@
     = csrf_meta_tags
     = javascript_include_tag 'critical'
 
-    <!--[if IE 8]>
-    = stylesheet_link_tag 'shame', media: 'all'
-    <![endif]-->
-
-    <!--[if IE 9]>
-    = stylesheet_link_tag 'shame', media: 'all'
-    <![endif]-->
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
     %nav.navbar.navbar-expand-lg.navbar-light.bg-light{role: :navigation}
@@ -64,13 +57,5 @@
         = yield :after_page
 
     = javascript_include_tag "admin"
-
-    <!--[if IE 8]>
-    = javascript_include_tag 'shame'
-    <![endif]-->
-
-    <!--[if IE 9]>
-    = javascript_include_tag 'shame'
-    <![endif]-->
 
     = yield :scripts
