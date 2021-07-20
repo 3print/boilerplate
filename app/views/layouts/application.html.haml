@@ -56,46 +56,46 @@
 
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
-    %nav.navbar{role: :navigation}
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light{role: :navigation}
 
       .container
         .navbar-header
-          %button.navbar-toggle{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
+          %button.navbar-toggler{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
             %span.sr-only Toggle navigation
             %i.fa.fa-navicon
           %a.navbar-brand{href: "/"}
             = icon :flag
             %span.text= 'app_name'.t
 
-    .scroll-wrapper
-      .inner-scroll-wrapper
-        - if content_for?(:content_header)
-          - content_header_class = yield :content_header_class
-          - content_header_style = yield :content_header_style
-          .content-header{class: content_header_class, style: content_header_style}
-            .container= yield :content_header
 
-        - content_class = yield :extra_content_class
-        #content{class: content_class}
-          .container
-            = yield :before_page
+    .container
+      - if content_for?(:content_header)
+        - content_header_class = yield :content_header_class
+        - content_header_style = yield :content_header_style
+        .content-header{class: content_header_class, style: content_header_style}
+          .container= yield :content_header
 
-            #content-header
-              %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'app_name'.t
-              = yield :content_header
+      - content_class = yield :extra_content_class
+      #content{class: content_class}
+        .container
+          = yield :before_page
 
-            - if content_for?(:pills)
-              = yield :pills
+          #content-header
+            %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'app_name'.t
+            = yield :content_header
 
-            - if content_for?(:breadcrumb)
-              = yield :breadcrumb
+          - if content_for?(:pills)
+            = yield :pills
 
-            = yield :before_content
+          - if content_for?(:breadcrumb)
+            = yield :breadcrumb
 
-            = yield
+          = yield :before_content
 
-            = yield :after_content
-            = yield :after_page
+          = yield
+
+          = yield :after_content
+          = yield :after_page
 
 
     <!--[if IE 8]>
