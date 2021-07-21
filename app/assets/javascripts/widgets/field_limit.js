@@ -1,13 +1,17 @@
-widgets.define('field_limit', function(el) {
-  let limit = Number(el.getAttribute('data-limit'));
+import widgets from 'widjet';
+import {CompositeDisposable, DisposableEvent} from 'widjet-disposables';
+
+widgets.define('field_limit', (option) => (el) => {
+  const limit = Number(el.getAttribute('data-limit'));
 
   if ((limit == null) || (limit === 0)) { return; }
 
-  let result = document.createElement('div');
-  result.textContent = `Caractères restant : ${limit - el.value.length}`;
+  const result = document.createElement('div');
 
-  let check = function() {
-    result.textContent = `Caractères restant : ${limit - el.value.length}`;
+  function check() {
+    result.textContent = 'widgets.field_limit.remaining'.t({
+      count: limit - el.value.length
+    });
 
     if (el.value.length > limit) {
       return result.className = 'text-danger';
@@ -18,8 +22,12 @@ widgets.define('field_limit', function(el) {
 
   el.parentNode.appendChild(result);
 
-  el.addEventListener('input', check);
-  el.addEventListener('change', check);
+  const composite = new CompositeDisposable([
+    new DisposableEvent(el, 'input', check),
+    new DisposableEvent(el, 'change', check)
+  ]);
 
-  return check();
+  check();
+
+  return composite;
 });

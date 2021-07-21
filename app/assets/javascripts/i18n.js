@@ -5,10 +5,11 @@ export default class I18n {
   static attachToWindow() {
     this.locale = document.querySelector('html').getAttribute('lang') || 'en';
     let instance = new I18n(LOCALES, this.locale);
-    window.t = instance.getHelper();
+    const t = instance.getHelper();
+    window.t = t;
     window.I18n = this;
 
-    return String.prototype.t = function() { return window.t(this); };
+    String.prototype.t = function(tokens) { return t(this, tokens); }
   }
 
   /* Public */
@@ -18,13 +19,7 @@ export default class I18n {
     this.locales = locales;
     if (defaultLanguage == null) { defaultLanguage = 'en'; }
     this.defaultLanguage = defaultLanguage;
-    this.languages = ((() => {
-      let result = [];
-      for (let k in this.locales) {
-        result.push(k);
-      }
-      return result;
-    })()).sort();
+    this.languages = Object.keys(this.locales).sort();
   }
 
   // Returns a string from the locales.

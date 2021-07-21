@@ -90,7 +90,7 @@
           var z,
               buttons = btnGroups[y].data,
               btnGroupContainer = $('<div/>', {
-                                    'class': 'btn-group'
+                                    'class': 'btn-group me-2'
                                   });
 
           for (z=0;z<buttons.length;z++) {
@@ -106,9 +106,9 @@
 
             // Construct the button object
             buttonContainer = $('<button></button>');
-            buttonContainer.text(' ' + this.__localize(btnText)).addClass('btn-default btn-sm').addClass(btnClass);
+            buttonContainer.text(' ' + this.__localize(btnText)).addClass('btn-outline-secondary btn-sm').addClass(btnClass);
             if(btnClass.match(/btn\-(primary|success|info|warning|danger|link)/)){
-                buttonContainer.removeClass('btn-default');
+                buttonContainer.removeClass('btn-outline-secondary');
             }
             buttonContainer.attr({
                 'type': 'button',
@@ -249,7 +249,7 @@
       if (this.$editor === null) {
         // Create the panel
         var editorHeader = $('<div/>', {
-                            'class': 'md-header btn-toolbar'
+                            'class': 'md-header btn-toolbar mb-2'
                             });
 
         // Merge the main & additional button groups together

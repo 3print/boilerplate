@@ -20,9 +20,12 @@ import widgets from 'widjet';
 import {parent} from 'widjet-utils';
 import 'nested_form';
 
+import 'widjet-validation';
+
 import './widgets/datepicker';
 import './widgets/select2';
 import './widgets/markdown';
+import './widgets/field_limit';
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY';
@@ -67,9 +70,36 @@ widgets('timepicker', '.timepicker', {on: DEFAULT_EVENTS, unless: isMobileOrInTe
 widgets('markdown', '[data-editor="markdown"]', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
 // widgets('propagate_input_value', 'input:not(.select2-offscreen):not(.select2-input), select', {on: DEFAULT_EVENTS, unless: isInTemplate});
 widgets('select2', 'select, .select2', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
-// widgets('field_limit', '[data-limit]', {on: DEFAULT_EVENTS, unless: isInTemplate});
-// widgets('live_validation', '[required]', {on: DEFAULT_EVENTS, unless: isInTemplate});
-// widgets('form_validation', 'form', {on: DEFAULT_EVENTS, unless: isInTemplate});
+widgets('field_limit', '[data-limit]', {on: DEFAULT_EVENTS, unless: isInTemplate});
+const VALIDATION_OPTIONS = {
+  on: DEFAULT_EVENTS,
+  unless: isInTemplate,
+  clean(input) {
+    const group = parent(input, '.form-group');
+    if(group) {
+      group.classList.remove('is-valid');
+      group.classList.remove('is-invalid');
+    }
+    input.classList.remove('is-valid');
+    input.classList.remove('is-invalid');
+  },
+  onSuccess(input) {
+    const group = parent(input, '.form-group');
+    if(group) {
+      group.classList.add('is-valid');
+    }
+    input.classList.add('is-valid');
+  },
+  onError(input) {
+    const group = parent(input, '.form-group');
+    if(group) {
+      group.classList.add('is-invalid');
+    }
+    input.classList.add('is-invalid');
+  }
+}
+widgets('live-validation', '[required]', VALIDATION_OPTIONS);
+widgets('form-validation', 'form', VALIDATION_OPTIONS);
 // widgets('json_form', 'form', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
 I18n.attachToWindow();
