@@ -11,6 +11,14 @@
   doesnotexist:-o-prefocus, &
     @content
 
+=for-safari-ios()
+  @supports(font:-apple-system-body) and (-webkit-touch-callout:default)
+    @content
+
+=for-safari-desktop()
+  @supports(font:-apple-system-body) and (not(-webkit-touch-callout:default))
+    @content
+
 =for-retina()
   @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2)
     @content

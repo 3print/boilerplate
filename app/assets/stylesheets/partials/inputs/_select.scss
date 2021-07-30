@@ -1,0 +1,89 @@
+.select {
+  position: relative;
+
+  &:active {
+
+  }
+
+  select {
+    width: 100%;
+    // padding: $input-padding;
+    cursor: pointer;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+
+  }
+  @include for-safari-desktop {
+    select {
+      -webkit-appearance: none;
+    }
+
+    &:after {
+      content: "";
+      font-family: FontAwesome;
+      font-size: 10px;
+      margin-top: -0.6em;
+
+      @include absolute(50%, initial, initial, 1.6em);
+    }
+  }
+}
+
+.select-multiple {
+  // @extend %inset;
+
+  // background: $input-background-color;
+  // border-color: $input-border-color;
+  position: relative;
+  min-height: 28px;
+
+  select[multiple] {
+    display: none;
+  }
+
+  select:not([multiple]) {
+    opacity: 0;
+    width: 100%;
+    cursor: pointer;
+
+    @include absolute(0, 0, 0, 0);
+  }
+
+  .values {
+    overflow: hidden;
+    padding: 4px 0 0 4px;
+
+    .option {
+      padding-right: 24px;
+      display: inline-block;
+      position: relative;
+      float: left;
+
+      margin-right: 4px;
+      margin-bottom: 4px;
+
+      .label {
+        font-weight: normal;
+        margin: 0;
+        font-size: 1em;
+        line-height: 1em;
+      }
+
+      button {
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+
+        @include box(1.4em);
+        @include absolute(0.2em, initial, initial, 0.2em);
+
+        > * {
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}

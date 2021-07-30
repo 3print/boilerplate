@@ -1,19 +1,25 @@
-let {additional_field, required_field, collect_setting_data, format_setting_data} = SettingsEditor.Utils;
+import {getNode} from 'widjet-utils';
+import {
+  additionalField,
+  requiredField,
+  collectSettingData,
+  formatSettingData,
+} from '../utils';
 
-SettingsEditor.handlers.push({
+export const STRING_HANDLER = {
   type: 'string',
   match(v) { return (v === 'string') || (v.type === 'string'); },
-  fake_value() { return 'preview string'; },
+  fakeValue() { return 'preview string'; },
   save(hidden) {
-    let data = collect_setting_data('string', hidden, 'required', 'textarea', 'limit');
-    return hidden.value = format_setting_data(data);
+    const data = collectSettingData('string', hidden, 'required', 'textarea', 'limit');
+    hidden.value = formatSettingData(data);
   },
-  additional_fields(value, hidden) {
-    let on_update = () => this.save(hidden);
-    let html = `\
+  additionalFields(value, hidden) {
+    const onUpdate = () => this.save(hidden);
+    const html = `\
 <div class="row">
   <div class="col-sm-3">
-    ${required_field(hidden)}
+    ${requiredField(hidden)}
   </div>
   <div class="col-sm-3">
     <div class="form-group">
@@ -48,28 +54,29 @@ SettingsEditor.handlers.push({
 </div>\
 `;
 
-    let fields = $(html);
+    let field = getNode(html);
 
-    additional_field('required', value, hidden, fields, on_update);
-    additional_field('textarea', value, hidden, fields, on_update);
-    additional_field('limit', value, hidden, fields, on_update);
+    additionalField('required', value, hidden, field, onUpdate);
+    additionalField('textarea', value, hidden, field, onUpdate);
+    additionalField('limit', value, hidden, field, onUpdate);
 
-    return fields;
+    return [field];
   }
-});
+};
 
-SettingsEditor.handlers.push({
+export const MARKDOWN_HANDLER = {
   type: 'markdown',
   match(v) { return (v === 'markdown') || (v.type === 'markdown'); },
-  fake_value() { return 'preview string'; },
+  fakeValue() { return 'preview string'; },
   save(hidden) {
-    let data = collect_setting_data('markdown', hidden, 'required');
-    return hidden.value = format_setting_data(data);
+    const data = collectSettingData('markdown', hidden, 'required');
+    hidden.value = formatSettingData(data);
   },
-  additional_fields(value, hidden) {
-    let on_update = () => this.save(hidden);
-    let fields = $(required_field(hidden));
-    additional_field('required', value, hidden, fields, on_update);
-    return fields;
+  additionalFields(value, hidden) {
+    const field = getNode(requiredField(hidden));
+    additionalField('required', value, hidden, field, () => {
+      this.save(hidden);
+    });
+    return [field];
   }
-});
+};

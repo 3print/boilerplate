@@ -7,25 +7,30 @@
 //= require moment.min
 //= require datetimepicker
 //= #require fastclick
-//= require select2
 //= require bootstrap-markdown
 //= require bootstrap-markdown.fr
 //= #require highlight.pack
 //= #require utils/markdown
 //= #require_tree ./widgets
-//= #require_tree ./templates
+//= require_tree ./templates
 
 import I18n from './i18n';
+I18n.attachToWindow();
+
 import widgets from 'widjet';
 import {parent} from 'widjet-utils';
 import 'nested_form';
 
 import 'widjet-validation';
+import 'widjet-select-multiple';
 
 import './widgets/datepicker';
-import './widgets/select2';
 import './widgets/markdown';
-import './widgets/field_limit';
+import './widgets/field-limit';
+import './widgets/select';
+import './widgets/navigation-highlight';
+import './widgets/auto-resize';
+import './widgets/settings-editor';
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY';
@@ -40,11 +45,11 @@ const isMobile = () => window.innerWidth < 992;
 const isInTemplate = el => parent(el, '.tpl') != null;
 const isMobileOrInTemplate = el => isMobile() || isInTemplate(el);
 
-// widgets('navigation_highlight', '.navbar-nav', {on: DEFAULT_EVENTS});
+widgets('navigation-highlight', '.navbar-nav', {on: DEFAULT_EVENTS});
 
 // widgets('popover', '[data-toggle=popover]', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
-// widgets('auto_resize', 'textarea', {on: DEFAULT_EVENTS, unless: isInTemplate});
+widgets('auto-resize', 'textarea', {on: DEFAULT_EVENTS, unless: isInTemplate});
 // widgets('collapse_toggle', '.open-settings', {on: DEFAULT_EVENTS, unless: isInTemplate});
 // widgets('collapse', '.collapse', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
@@ -57,20 +62,27 @@ const isMobileOrInTemplate = el => isMobile() || isInTemplate(el);
 // widgets('order_list', '.sortable-list', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
 // widgets('order_table', '.sortable', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
 
-// widgets('settings_editor', '.settings_editor', {on: DEFAULT_EVENTS});
-// widgets('settings_form', '[data-settings]', {on: DEFAULT_EVENTS});
+widgets('select', 'select.form-control:not([multiple])', {on: DEFAULT_EVENTS})
+widgets('select-multiple', 'select[multiple]', {
+  on: DEFAULT_EVENTS,
+  wrapperClass: 'select-multiple form-control',
+  itemClass: 'option badge bg-light text-dark',
+})
+
+widgets('settings-editor', '.settings_editor', {on: DEFAULT_EVENTS});
+widgets('settings-form', '[data-settings]', {on: DEFAULT_EVENTS});
 // widgets('settings_image_uploader', '[data-settings] .file', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
 // widgets('color_button', '.color-icon-wrapper[data-url]', {on: DEFAULT_EVENTS, unless: isInTemplate});
-widgets('datepicker_mobile', '.datepicker, .datetimepicker, .timepicker', {on: DEFAULT_EVENTS, if: isMobile, unless: isInTemplate});
+widgets('datepicker-mobile', '.datepicker, .datetimepicker, .timepicker', {on: DEFAULT_EVENTS, if: isMobile, unless: isInTemplate});
 widgets('datepicker', '.datepicker', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
 widgets('datetimepicker', '.datetimepicker', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
 widgets('timepicker', '.timepicker', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
 // widgets('filepicker', '.form-group.file', {on: DEFAULT_EVENTS, unless: isInTemplate});
 widgets('markdown', '[data-editor="markdown"]', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
 // widgets('propagate_input_value', 'input:not(.select2-offscreen):not(.select2-input), select', {on: DEFAULT_EVENTS, unless: isInTemplate});
-widgets('select2', 'select, .select2', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
-widgets('field_limit', '[data-limit]', {on: DEFAULT_EVENTS, unless: isInTemplate});
+
+widgets('field-limit', '[data-limit]', {on: DEFAULT_EVENTS, unless: isInTemplate});
 const VALIDATION_OPTIONS = {
   on: DEFAULT_EVENTS,
   unless: isInTemplate,
@@ -100,9 +112,8 @@ const VALIDATION_OPTIONS = {
 }
 widgets('live-validation', '[required]', VALIDATION_OPTIONS);
 widgets('form-validation', 'form', VALIDATION_OPTIONS);
-// widgets('json_form', 'form', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
-I18n.attachToWindow();
+// widgets('json_form', 'form', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
 // hljs.initHighlightingOnLoad();
 

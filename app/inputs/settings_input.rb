@@ -60,7 +60,7 @@ class SettingsInput < SimpleForm::Inputs::TextInput
     row += "></input>"
     row += "<div class=\"form-group has-feedback\"><div class=\"controls\"><input type=\"text\" value=\"#{field}\" class=\"form-control\" required></input></div></div>"
     row += '</td>'
-    row += "<td><div class=\"form-group has-feedback\"><div class=\"controls\"><select style=\"width: 100%\" placeholder=\"#{placeholder}\" required>"
+    row += "<td><div class=\"form-group has-feedback\"><div class=\"controls\"><select class=\"form-control\" style=\"width: 100%\" placeholder=\"#{placeholder}\" required>"
 
     ([''] + types).each do |type|
       row += "<option value=\"#{type}\">#{type == '' ? '' : "enums.settings.types.#{type}".t.gsub("'", '&#39;')}</option>"

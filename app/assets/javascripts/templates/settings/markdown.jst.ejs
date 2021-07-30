@@ -1,0 +1,14 @@
+<div class='form-group has-feedback'>
+  <label for='<%= obj.id %>'><%= obj.label %></label>
+
+  <div class='controls'>
+    <textarea id='<%= obj.id %>'
+              data-name='<%= obj.setting %>'
+              data-iconlibrary='fa'
+              data-editor='markdown'
+              data-language='fr'
+              data-resize='vertical'
+              <% if(obj.settingParameters.required) { %>required<% } %>
+              class='form-control'><%= obj.value || obj.settingParameters.default || "" %></textarea>
+  </div>
+</div>

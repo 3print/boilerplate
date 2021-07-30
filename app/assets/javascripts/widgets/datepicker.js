@@ -34,7 +34,7 @@ defineWidget('datepicker', 'DATE');
 defineWidget('datetimepicker', 'DATETIME');
 defineWidget('timepicker', 'TIME');
 
-widgets.define('datepicker_mobile', (options) => (el, widget) => {
+widgets.define('datepicker-mobile', (options) => (el, widget) => {
   let value;
 
   let type = (() => { switch (true) {

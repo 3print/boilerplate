@@ -1,0 +1,24 @@
+<div class='form-group has-feedback'>
+  <label for='<%= obj.id %>'><%= obj.label %></label>
+
+  <div class='controls'>
+    <% if(obj.settingParameters.textarea) { %>
+      <textarea id='<%= obj.id %>'
+                data-name='<%= obj.setting %>'
+                <% if(obj.settingParameters.limit) { %>
+                data-limit='<%= obj.settingParameters.limit %>'<% } %>
+                <% if(obj.settingParameters.required) { %>required<% } %>
+                class='form-control'><%= obj.value || obj.settingParameters.default || "" %></textarea>
+    <% } else { %>
+      <input type='text'
+             id='<%= obj.id %>'
+             value='<%= obj.value || obj.settingParameters.default || "" %>'
+             data-name='<%= obj.setting %>'
+             <% if(obj.settingParameters.limit) { %>
+             data-limit='<%= obj.settingParameters.limit %>'<% } %>
+             <% if(obj.settingParameters.required) { %>required<% } %>
+             class='form-control'>
+      </input>
+    <% } %>
+  </div>
+</div>

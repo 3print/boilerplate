@@ -1,0 +1,18 @@
+<div class='form-group has-feedback'>
+  <label for='<%= obj.id %>'><%= obj.label %></label>
+
+  <div class='controls'>
+    <div class='input-group'>
+      <label class='input-group-addon' for='<%= obj.id %>'>
+        <i class='fa fa-calendar'></i>
+      </label>
+      <input type='text'
+             id='<%= obj.id %>'
+             value='<%= obj.value || obj.settingParameters.default || "" %>'
+             data-name='<%= obj.setting %>'
+             <% if(obj.settingParameters.required) { %>required<% } %>
+             class='form-control datepicker'>
+      </input>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class='form-group has-feedback'>
+  <label for='<%= obj.id %>'><%= obj.label %></label>
+
+  <div class='controls'>
+    <select id='<%= obj.id %>'
+              data-name='<%= obj.setting %>'
+              placeholder='<%= 'placeholders.select'.t() %>'
+              <% if(obj.settingParameters.required) { %>required<% } %>
+              <% if(obj.settingParameters.multiple) { %>multiple<% } %>
+              style='width: 100%'
+              class='form-control'>
+
+      <% obj.settingParameters.values.forEach((value) => { %>
+        <option <%= obj.value.include(value) ? 'selected' : '' %>><%= value %></option>
+      <% }) %>
+    </select>
+  </div>
+</div>

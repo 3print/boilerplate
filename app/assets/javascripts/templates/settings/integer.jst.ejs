@@ -1,0 +1,15 @@
+<div class='form-group has-feedback'>
+  <label for='<%= obj.id %>'><%= obj.label %></label>
+
+  <div class='controls'>
+    <input type='number'
+           id='<%= obj.id %>'
+           value='<%= obj.value || obj.settingParameters.default || "" %>'
+           step='<%= obj.settingParameters.step || 1 %>'
+           <% if(obj.settingParameters.min != undefined) { %>min="<%= obj.settingParameters.min %>"<% } %>
+           <% if(obj.settingParameters.max != undefined) { %>max="<%= obj.settingParameters.max %>"<% } %>
+           <% if(obj.settingParameters.required) { %>required<% } %>
+           class='form-control'>
+    </input>
+  </div>
+</div>

@@ -1,26 +1,32 @@
-let {additional_field, required_field, collect_setting_data, format_setting_data} = SettingsEditor.Utils;
+import {getNodes} from 'widjet-utils';
+import {
+  additionalField,
+  requiredField,
+  collectSettingData,
+  formatSettingData,
+} from '../utils';
 
-let fields = ['default', 'min', 'max', 'step'];
+const fields = ['default', 'min', 'max', 'step'];
 
-let get_handler = function(name) {
+export default (name) => {
   return {
     type: name,
 
     match(v) { return (v === name) || (v.type === name); },
 
-    fake_value() { return Math.round(Math.random() * 100); },
+    fakeValue() { return Math.round(Math.random() * 100); },
 
     save(hidden) {
-      let data = collect_setting_data(name, hidden, 'required', ...Array.from(fields));
-      return hidden.value = format_setting_data(data);
+      let data = collectSettingData(name, hidden, 'required', ...Array.from(fields));
+      return hidden.value = formatSettingData(data);
     },
 
-    additional_fields(value, hidden) {
-      let on_update = () => this.save(hidden);
+    additionalFields(value, hidden) {
+      const onUpdate = () => this.save(hidden);
 
       let html = '<div class="row">';
-      fields.forEach(key =>
-        html += `\
+      fields.forEach((key) => {
+        html += `
 <div class="col-sm-3">
     <label for="${hidden.id}_${key}">${`settings_input.${name}.${key}.label`.t()}</label>
     <input
@@ -31,21 +37,22 @@ let get_handler = function(name) {
       placeholder="${`settings_input.${name}.${key}.placeholder`.t()}"
       data-name="${key}">
     </input>
-</div>\
+</div>
 `
-      );
+      });
       html += '</div>';
-      html += required_field(hidden);
+      html += requiredField(hidden);
 
-      let additional_fields = $(html);
+      const additionalFields = getNodes(html);
 
-      additional_field('required', value, hidden, additional_fields, on_update);
-      fields.forEach(key => additional_field(key, value, hidden, additional_fields, on_update));
+      additionalField('required', value, hidden, additionalFields[1], onUpdate);
+      fields.forEach(key => {
+        additionalField(key, value, hidden, additionalFields[0], onUpdate);
+      });
 
-      return additional_fields;
+      return additionalFields;
     }
   };
 };
 
-SettingsEditor.handlers.push(get_handler('integer'));
-SettingsEditor.handlers.push(get_handler('float'));
+

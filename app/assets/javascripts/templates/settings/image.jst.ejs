@@ -1,11 +1,11 @@
 <div class="file form-group">
-  <label for="<%= @id %>"><%= @label %></label>
+  <label for="<%= obj.id %>"><%= obj.label %></label>
 
   <div class="controls">
-    <input id="<%= @id %>"
-           data-name="<%= @setting %>"
+    <input id="<%= obj.id %>"
+           data-name="<%= obj.setting %>"
            type="hidden"
-           value="<%= @value %>"
+           value="<%= obj.value %>"
            class="form-control"></input>
 
     <div class="preview">
@@ -13,9 +13,9 @@
         <div class="progress-bar progress-bar-success"></div>
       </div>
 
-      <% if @value?: %>
-        <img class="loaded" src="<%= @value %>">
-      <% end %>
+      <% if(obj.value) { %>
+        <img class="loaded" src="<%= obj.value %>">
+      <% } %>
     </div>
 
     <button class="btn btn-danger btn-xs">

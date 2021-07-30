@@ -1,24 +1,27 @@
-let {additional_field, required_field, collect_setting_data, format_setting_data} = SettingsEditor.Utils;
+import {getNode} from 'widjet-utils';
+import {
+  additionalField,
+  collectSettingData,
+  formatSettingData,
+  requiredField,
+} from '../utils';
 
-let get_handler = function(type) {
+export default (type) => {
   return {
     type,
     match(v) { return (v === type) || (v.type === type); },
-    fake_value() { return new Date(); },
+    fakeValue() { return new Date(); },
     save(hidden) {
-      let data = collect_setting_data(type, hidden, 'required');
-      return hidden.value = format_setting_data(data);
+      const data = collectSettingData(type, hidden, 'required');
+      hidden.value = formatSettingData(data);
     },
 
-    additional_fields(value, hidden) {
-      let on_update = () => this.save(hidden);
-      let fields = $(required_field(hidden));
-      additional_field('required', value, hidden, fields, on_update);
-      return fields;
+    additionalFields(value, hidden) {
+      let field = getNode(requiredField(hidden));
+      additionalField('required', value, hidden, field, () => {
+        this.save(hidden);
+      });
+      return [field];
     }
   };
 };
-
-SettingsEditor.handlers.push(get_handler('date'));
-SettingsEditor.handlers.push(get_handler('datetime'));
-SettingsEditor.handlers.push(get_handler('time'));

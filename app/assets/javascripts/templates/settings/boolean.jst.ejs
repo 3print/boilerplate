@@ -1,10 +1,10 @@
 <div class='form-group has-feedback'>
   <div class='controls'>
-    <label for='<%= @id %>'><%= @label %>
+    <label for='<%= obj.id %>'><%= obj.label %>
       <input type='checkbox'
-             id='<%= @id %>'
-             <%= 'checked' if @value %>
-             data-name='<%= @setting %>'
+             id='<%= obj.id %>'
+             <% if(obj.value) { %>checked<% } %>
+             data-name='<%= obj.setting %>'
              class='form-check-input'>
       </input>
     </label>

@@ -1,7 +1,7 @@
 import widgets from 'widjet';
 import {CompositeDisposable, DisposableEvent} from 'widjet-disposables';
 
-widgets.define('field_limit', (option) => (el) => {
+widgets.define('field-limit', (option) => (el) => {
   const limit = Number(el.getAttribute('data-limit'));
 
   if ((limit == null) || (limit === 0)) { return; }
