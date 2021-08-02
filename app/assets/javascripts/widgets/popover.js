@@ -5,12 +5,13 @@ widgets.define('popover', (options) => (el) => {
   if (window.innerWidth < 992) {
     el.setAttribute('data-trigger', 'click');
   }
+
   $el.popover();
-  return $el.on('click', () =>
+  $el.on('click', () =>
     requestAnimationFrame(() =>
-      $('body').on('click', function() {
+      $('body').on('click', () => {
         $('body').off('click');
-        return $el.popover('hide');
+        $el.popover('hide');
       })
     
     , 500)

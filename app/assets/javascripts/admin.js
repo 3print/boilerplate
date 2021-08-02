@@ -23,6 +23,7 @@ import 'nested_form';
 
 import 'widjet-validation';
 import 'widjet-select-multiple';
+import 'widjet-file-upload';
 
 import './widgets/datepicker';
 import './widgets/markdown';
@@ -31,6 +32,8 @@ import './widgets/select';
 import './widgets/navigation-highlight';
 import './widgets/auto-resize';
 import './widgets/settings-editor';
+import './widgets/propagate-input-value';
+import './widgets/popover';
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY';
@@ -47,7 +50,7 @@ const isMobileOrInTemplate = el => isMobile() || isInTemplate(el);
 
 widgets('navigation-highlight', '.navbar-nav', {on: DEFAULT_EVENTS});
 
-// widgets('popover', '[data-toggle=popover]', {on: DEFAULT_EVENTS, unless: isInTemplate});
+widgets('popover', '[data-toggle=popover]', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
 widgets('auto-resize', 'textarea', {on: DEFAULT_EVENTS, unless: isInTemplate});
 // widgets('collapse_toggle', '.open-settings', {on: DEFAULT_EVENTS, unless: isInTemplate});
@@ -80,7 +83,7 @@ widgets('datetimepicker', '.datetimepicker', {on: DEFAULT_EVENTS, unless: isMobi
 widgets('timepicker', '.timepicker', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
 // widgets('filepicker', '.form-group.file', {on: DEFAULT_EVENTS, unless: isInTemplate});
 widgets('markdown', '[data-editor="markdown"]', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
-// widgets('propagate_input_value', 'input:not(.select2-offscreen):not(.select2-input), select', {on: DEFAULT_EVENTS, unless: isInTemplate});
+widgets('propagate-input-value', 'input:not(.select2-offscreen):not(.select2-input), select', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
 widgets('field-limit', '[data-limit]', {on: DEFAULT_EVENTS, unless: isInTemplate});
 const VALIDATION_OPTIONS = {
@@ -110,8 +113,10 @@ const VALIDATION_OPTIONS = {
     input.classList.add('is-invalid');
   }
 }
+
 widgets('live-validation', '[required]', VALIDATION_OPTIONS);
 widgets('form-validation', 'form', VALIDATION_OPTIONS);
+widgets('file-preview', 'input[type="file"]', {on: DEFAULT_EVENTS});
 
 // widgets('json_form', 'form', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
