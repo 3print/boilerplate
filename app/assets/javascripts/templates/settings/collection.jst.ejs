@@ -11,7 +11,7 @@
               class='form-control'>
 
       <% obj.settingParameters.values.forEach((value) => { %>
-        <option <%= obj.value.include(value) ? 'selected' : '' %>><%= value %></option>
+        <option <%= (obj.value || []).includes(value) ? 'selected' : '' %>><%= value %></option>
       <% }) %>
     </select>
   </div>

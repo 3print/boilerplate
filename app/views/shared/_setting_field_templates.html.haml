@@ -5,7 +5,7 @@
     .form-group.has-feedback
       %label{for:'{{= id}}'} {{= label}}
 
-      %select{id: '{{= id}}', style: 'width: 100%', required:'{{= setting_parameters.required ? \'required\' : \'no\'}}', placeholder: 'simple_form.placeholders.select'.t}
+      %select.form-control{id: '{{= id}}', style: 'width: 100%', required:'{{= settingParameters.required ? \'required\' : \'no\'}}', placeholder: 'simple_form.placeholders.select'.t}
     -#     = options_for_select([['', '']] +  Page.custom_resources.keys.map {|c| [c.t, c.name]})
     -#
     -# - Page.custom_resources.each_pair do |cls, routes|
@@ -25,7 +25,7 @@
     -#     end
     -#
     -#   .form-group.has-feedback.slave{class: cls.name.downcase, data: {master: '[name*="target_model"]'}}
-    -#     = select_tag '', options_for_select(collection, resource.target_model), style: 'width: 100%', input_html: {required:'{{= setting_parameters.required ? \'required\' : \'no\'}}'}
+    -#     = select_tag '', options_for_select(collection, resource.target_model), style: 'width: 100%', input_html: {required:'{{= settingParameters.required ? \'required\' : \'no\'}}'}
 
 
 = render 'shared/setting_field_templates_extra'

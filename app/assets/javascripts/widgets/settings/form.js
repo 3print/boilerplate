@@ -46,7 +46,7 @@ const convert = str =>
 
 export default class SettingsForm {
   static tpl(str, data) {
-    if (this.tplCache == null) { this.tplCache = {}; }
+    if (this.tplCache == null) { this.tplCache = {}; }
     // Figure out if we're getting a template, or if we need to
     // load the template - and be sure to cache the result.
     let fn = /^[-_a-zA-Z]+$/.test(str)
@@ -112,7 +112,7 @@ export default class SettingsForm {
   }
 
   getField(type, options) {
-    const tpl = typeof JST != 'undefined'
+    const tpl = typeof JST != 'undefined' && JST[`templates/settings/${type}`]
       ? JST[`templates/settings/${type}`]
       : this.constructor.tpl(type)
     return tpl(options);
