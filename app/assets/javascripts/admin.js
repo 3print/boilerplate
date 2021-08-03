@@ -18,22 +18,24 @@ import I18n from './i18n';
 I18n.attachToWindow();
 
 import widgets from 'widjet';
-import {parent} from 'widjet-utils';
+import {parent, getNode} from 'widjet-utils';
+import {getTextPreview, getPDFPreview} from 'widjet-file-upload';
 import 'nested_form';
 
 import 'widjet-validation';
 import 'widjet-select-multiple';
 import 'widjet-file-upload';
 
-import './widgets/datepicker';
-import './widgets/markdown';
-import './widgets/field-limit';
-import './widgets/select';
-import './widgets/navigation-highlight';
 import './widgets/auto-resize';
-import './widgets/settings-editor';
-import './widgets/propagate-input-value';
+import './widgets/datepicker';
+import './widgets/field-limit';
+import './widgets/markdown';
+import './widgets/navigation-highlight';
 import './widgets/popover';
+import './widgets/propagate-input-value';
+import './widgets/select';
+import './widgets/settings-editor';
+
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY';
@@ -86,6 +88,7 @@ widgets('markdown', '[data-editor="markdown"]', {on: DEFAULT_EVENTS, unless: isM
 widgets('propagate-input-value', 'input:not(.select2-offscreen):not(.select2-input), select', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
 widgets('field-limit', '[data-limit]', {on: DEFAULT_EVENTS, unless: isInTemplate});
+
 const VALIDATION_OPTIONS = {
   on: DEFAULT_EVENTS,
   unless: isInTemplate,
@@ -116,7 +119,39 @@ const VALIDATION_OPTIONS = {
 
 widgets('live-validation', '[required]', VALIDATION_OPTIONS);
 widgets('form-validation', 'form', VALIDATION_OPTIONS);
-widgets('file-preview', 'input[type="file"]', {on: DEFAULT_EVENTS});
+widgets('file-preview', 'input[type="file"]', {
+  on: DEFAULT_EVENTS,
+  previewers: [
+    [o => o.file.type === 'application/pdf', getPDFPreview],
+    [o => o.file.type === 'text/plain', getTextPreview]
+  ],
+  wrap: (input) => {
+    const wrapper = getNode(`
+      <div class="new-value">
+        <div class='file-container'>
+          <label for="${input.id}"></label>
+          <div class="preview"></div>
+          <div class="file-placeholder">
+            <i class="fa fa-upload"></i>
+            <span>${'widgets.file_preview.label'.t()}</span>
+          </div>
+          <button class="btn btn-danger remove-file" type="button" tabindex="-1"><i class="fa fa-times"></i></button>
+        </div>
+        <progress min="0" max="100"></progress>
+        <div class="meta">
+          <div class="name"></div>
+          <div class="mime"></div>
+          <div class="size"></div>
+          <div class="dimensions"></div>
+        </div>
+      </div>
+    `);
+
+    const label = wrapper.querySelector('label');
+    label.parentNode.insertBefore(input, label);
+    return wrapper;
+  },
+});
 
 // widgets('json_form', 'form', {on: DEFAULT_EVENTS, unless: isInTemplate});
 

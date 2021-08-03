@@ -37,6 +37,7 @@ fr:
       crop_settings: 'Choisissez une option'
       float: '0.000'
       url: http://nom-de-domaine.fr
+      alt_text: Texte de remplacement
 
     hints:
       user:

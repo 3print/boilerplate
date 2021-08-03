@@ -84,12 +84,14 @@ group :development do
 
   gem 'annotate'
 end
+
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rspec-rails'
 end
+
 group :test do
   gem 'capybara'
   gem 'database_cleaner'

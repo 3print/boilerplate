@@ -4,9 +4,12 @@ class FileInput < SimpleForm::Inputs::FileInput
   include ActionView::Helpers::FormOptionsHelper
 
   def input(wrapper_options = nil)
-    buffer = '<div class="controls">'
+    buffer = "<div class='controls'><div class='file-content form-control #{object.try("#{attribute_name}?") ? 'with-value' : '' }'>"
+
+    buffer << preview
 
     opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
+
     if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog
       if object.respond_to?(:"#{attribute_name}_tmp")
         buffer << @builder.hidden_field(:"#{attribute_name}_tmp", opts)
@@ -18,7 +21,7 @@ class FileInput < SimpleForm::Inputs::FileInput
       buffer << super
     end
 
-    buffer << preview
+    buffer << '</div>'
 
     has_gravity = object.respond_to?(:"#{attribute_name}_gravity")
     has_alt_text = object.respond_to?(:"#{attribute_name}_alt_text")
@@ -33,7 +36,8 @@ class FileInput < SimpleForm::Inputs::FileInput
           [['', '']] + %w(north south east west north_west north_east south_west south_east center).map { |s| ["enums.file.gravity.#{s}".t, "#{attribute_name}_#{s}"] },
           object.send(:"#{attribute_name}_gravity")
         ),
-        placeholder: 'simple_form.placeholders.crop_settings'.t
+        placeholder: 'simple_form.placeholders.crop_settings'.t,
+        class: 'form-control',
       )
       buffer << '</div>'
     end
@@ -67,10 +71,10 @@ class FileInput < SimpleForm::Inputs::FileInput
   end
 
   def preview
-    template.content_tag :div, class: 'preview' do
-      s = '<div class="progress"><div class="progress-bar progress-bar-success"></div></div>'.html_safe
+    if object.try("#{attribute_name}?")
+      template.content_tag :div, class: 'current-value' do
+        s = ''.html_safe
 
-      if object.try("#{attribute_name}?")
         image = object.send(attribute_name)
         ext = image.present? ? clear_url_query(File.extname(image.url)) : nil
         if image_extensions.include?(ext)
@@ -79,12 +83,11 @@ class FileInput < SimpleForm::Inputs::FileInput
           s << build_file_path(image).html_safe
         end
         s << remove_button(true).html_safe
-      else
-        s << default_field_label
-        s << remove_button(false).html_safe
-      end
 
-      s
+        s
+      end
+    else
+      ''
     end
   end
 
@@ -116,7 +119,7 @@ class FileInput < SimpleForm::Inputs::FileInput
   def get_version(image)
     if options[:version] && image.respond_to?(options[:version])
       image.send(options[:version])
-    elsif image.respond_to?(:thumb)
+    elsif image.respond_to?(:file_input)
       image.thumb
     else
       image

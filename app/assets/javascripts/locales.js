@@ -19,6 +19,9 @@ export const LOCALES = {
       field_limit: {
         remaining: "Remaining characters: #{count}"
       },
+      file_preview: {
+        label: "Browse…",
+      },
     },
 
     settings_input: {
@@ -108,6 +111,9 @@ export const LOCALES = {
       },
       field_limit: {
         remaining: "Caractères restants : #{count}",
+      },
+      file_preview: {
+        label: "Parcourir…",
       },
     },
 

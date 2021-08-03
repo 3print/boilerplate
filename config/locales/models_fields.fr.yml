@@ -42,6 +42,7 @@ fr:
         enum: Enumération                    # BOILERPLATE_ONLY
         multiple_enum: Enumération Multiple  # BOILERPLATE_ONLY
         validated_at: Date de validation     # BOILERPLATE_ONLY
+        visual: visual                       # BOILERPLATE_ONLY
 
       seo_meta:
         title: Titre de la page

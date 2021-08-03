@@ -11,7 +11,8 @@ module ModelsHelper
 
     # CarrierWave Meta
     :avatar_meta, :avatar_gravity,
-    :image_meta, :image_gravity,
+    :image_meta, :image_gravity, :image_alt_text,
+    :visual_meta, :visual_regions, :visual_alt_text,
 
     # Misc
     :avatar_tmp, :image_tmp,
