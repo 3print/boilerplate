@@ -125,6 +125,7 @@ widgets('file-preview', 'input[type="file"]', {
     [o => o.file.type === 'application/pdf', getPDFPreview],
     [o => o.file.type === 'text/plain', getTextPreview]
   ],
+  nameMetaSelector: '.new-value .name',
   wrap: (input) => {
     const wrapper = getNode(`
       <div class="new-value">
@@ -138,8 +139,8 @@ widgets('file-preview', 'input[type="file"]', {
           <button class="btn btn-danger remove-file" type="button" tabindex="-1"><i class="fa fa-times"></i></button>
         </div>
         <progress min="0" max="100"></progress>
+        <div class="name"></div>
         <div class="meta">
-          <div class="name"></div>
           <div class="mime"></div>
           <div class="size"></div>
           <div class="dimensions"></div>

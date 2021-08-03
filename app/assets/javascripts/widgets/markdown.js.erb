@@ -243,13 +243,14 @@ widgets.define('markdown', (option) => (el, widget) => {
         data: [
           <% if use_aws %>
           {
-            name: "cmdUploadImage"
-            toggle: false
-            title: "Image"
-            icon: "fa fa-picture-o"
-            callback: (e) ->
-              uploadFile($mdEditor, e)
-          }
+            name: "cmdUploadImage",
+            toggle: false,
+            title: "Image",
+            icon: "fa fa-picture-o",
+            callback: (e) => {
+              uploadFile($mdEditor, e);
+            },
+          },
           <% end %>
           {
             name: "cmdIcon",

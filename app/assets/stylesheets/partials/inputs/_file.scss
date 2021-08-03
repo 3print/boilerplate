@@ -16,6 +16,32 @@
     display: none;
   }
 
+  .meta {
+    display: flex;
+    flex-direction: row;
+    * {
+      flex: 1 1 33%;
+    }
+
+  }
+  .name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:empty {
+      display: none;
+
+      & + .meta {
+        display: none;
+      }
+    }
+  }
+
+  .name, .meta {
+    padding: 4px 12px;
+  }
+
   .file-content {
     padding: 0;
     display: flex;
@@ -29,7 +55,7 @@
         display: block;
         max-width: 100%;
         max-height: 240px;
-        margin: 0 auto;
+        margin: 4px auto 0;
       }
 
       iframe {
@@ -81,6 +107,9 @@
     }
 
     &.with-value {
+      .new-value {
+        min-height: 156px;
+      }
       .file-placeholder {
         position: absolute;
         left: 50%;

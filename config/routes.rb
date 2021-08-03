@@ -7,9 +7,6 @@ Rails.application.routes.draw do
     passwords: 'passwords',
   }
 
-  get '/result', to: 'static#s3_results', as: :s3_results
-
-  resources :signed_urls, only: :index
   resources :bp_tests # BOILERPLATE_ONLY
   namespace :admin do
     root to: 'home#index'

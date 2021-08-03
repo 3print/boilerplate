@@ -10,16 +10,18 @@ class FileInput < SimpleForm::Inputs::FileInput
 
     opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
 
-    if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::Fog
-      if object.respond_to?(:"#{attribute_name}_tmp")
-        buffer << @builder.hidden_field(:"#{attribute_name}_tmp", opts)
-      else
-        buffer << @builder.hidden_field(:"remote_#{attribute_name}_url", opts)
-      end
-      buffer << @builder.hidden_field(:"remove_#{attribute_name}", input_html_options.merge(id: "remove_#{hidden_dom_id}"))
-    else
-      buffer << super
-    end
+    # if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::AWS
+    #   if object.respond_to?(:"#{attribute_name}_tmp")
+    #     buffer << @builder.hidden_field(:"#{attribute_name}_tmp", opts)
+    #   else
+    #     buffer << @builder.hidden_field(:"remote_#{attribute_name}_url", opts)
+    #   end
+    #   buffer << @builder.hidden_field(:"remove_#{attribute_name}", input_html_options.merge(id: "remove_#{hidden_dom_id}"))
+    # else
+    #  buffer << super
+    # end
+
+    buffer << super
 
     buffer << '</div>'
 
@@ -82,7 +84,7 @@ class FileInput < SimpleForm::Inputs::FileInput
         else
           s << build_file_path(image).html_safe
         end
-        s << remove_button(true).html_safe
+        # s << remove_button(true).html_safe
 
         s
       end
@@ -135,16 +137,11 @@ class FileInput < SimpleForm::Inputs::FileInput
   end
 
   def field_label(res)
-    s = "<div class='badge bg-default' title='#{res}'>#{clear_url_query res.to_s.split('/').last}</div>"
-    return s if !res.respond_to?(:width) && !res.respond_to?(:height)
-
+    s = "<div class='name'>#{clear_url_query res.to_s.split('/').last}</div>"
     s += "<div class='meta'>"
-    s += "<div class='dimensions'><span class='number'>#{res.width}</span>x<span class='number'>#{res.height}</span>px</div>"
-    begin
-      s += "<div class='size'><span class='number'>#{res.file.size / 1024}</span>ko</div>"
-    rescue
-      s += "<div class='size'>Unable to retrieve file size</div>"
-    end
+    s += "<div class='mime'>#{res.content_type}</div>"
+    s += "<div class='size'>#{(res.file.size rescue 0) / 1024}ko</div>"
+    s += "<div class='dimensions'>#{res.width rescue '?'}x#{res.height rescue '?'}px</div>"
     s += "</div>"
 
     s.html_safe
