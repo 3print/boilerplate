@@ -19,7 +19,6 @@
 #  last_name              :string
 #  role                   :integer
 #  avatar                 :string
-#  avatar_meta            :text
 #  avatar_gravity         :integer
 #  password_changed_at    :datetime
 #  locked_at              :datetime
@@ -50,10 +49,6 @@ class User < ApplicationRecord
 
   validates :email, presence: true, 'valid_email_2/email': true
   validates :first_name, :last_name, presence: true
-
-  before_save do
-    self.avatar_meta = nil if avatar_meta.is_a?(String)
-  end
 
   before_validation do
     self.encrypted_password = nil if password != password_confirmation

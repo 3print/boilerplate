@@ -19,7 +19,6 @@
 #  last_name              :string
 #  role                   :integer
 #  avatar                 :string
-#  avatar_meta            :text
 #  avatar_gravity         :integer
 #  password_changed_at    :datetime
 #  locked_at              :datetime
