@@ -61,6 +61,8 @@ task :clone, [:name] do |t, args|
     end
   end
   FileUtils.cp '.gitignore', rel_path
+  FileUtils.cp '.babelrc', rel_path
+  FileUtils.cp '.rspec', rel_path
 
   to_be_removed.each_with_index do |tgt, i|
     Dir["#{rel_path}/#{tgt}"].each do |f|
