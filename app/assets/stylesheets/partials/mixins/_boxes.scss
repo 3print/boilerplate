@@ -1,0 +1,36 @@
+@mixin bounds($top: initial, $left: initial, $bottom: initial, $right: initial) {
+  top: $top;
+  left: $left;
+  bottom: $bottom;
+  right: $right;
+}
+
+@mixin absolute($top: initial, $left: initial, $bottom: initial, $right: initial) {
+  position: absolute;
+
+  @include bounds($top, $left, $bottom, $right);
+}
+
+@mixin relative($top: initial, $left: initial, $bottom: initial, $right: initial) {
+  position: relative;
+
+  @include bounds($top, $left, $bottom, $right);
+}
+
+@mixin fixed($top: initial, $left: initial, $bottom: initial, $right: initial) {
+  position: fixed;
+
+  @include bounds($top, $left, $bottom, $right);
+}
+
+@mixin box($width: auto, $height: $width) {
+  display: block;
+  width: $width;
+  height: $height;
+}
+
+@mixin box-inline($width: auto, $height: $width) {
+  display: inline-block;
+  width: $width;
+  height: $height;
+}

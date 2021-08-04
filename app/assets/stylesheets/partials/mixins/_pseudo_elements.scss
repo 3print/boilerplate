@@ -1,0 +1,56 @@
+@mixin before($content: "") {
+  &:before {
+    content: $content;
+
+    @content;
+  }
+}
+
+@mixin after($content: "") {
+  &:after {
+    content: $content;
+
+    @content;
+  }
+}
+
+@mixin before-and-after($content: "") {
+  @include before($content) {
+    @content;
+  }
+
+
+  @include after($content) {
+    @content;
+  }
+}
+
+@mixin expand-outside-gutter {
+  @include relative;
+
+  @include before-and-after {
+    background: inherit;
+
+    @include box(100%);
+    @include absolute(0, 0, 0);
+
+    @content;
+  }
+
+
+  @include before {
+    left: 1px;
+    margin-left: -100%;
+  }
+
+
+  @include after {
+    right: 1px;
+    margin-left: 100%;
+  }
+
+
+  @include for-phone {
+    @include before-and-after(none);
+  }
+}

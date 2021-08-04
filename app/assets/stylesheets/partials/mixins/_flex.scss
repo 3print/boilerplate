@@ -1,0 +1,34 @@
+@mixin flex-display {
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex-direction($direction: column) {
+  -webkit-flex-direction: $direction;
+  flex-direction: $direction;
+}
+
+@mixin flex-justify($justify: flex-start) {
+  -webkit-justify-content: $justify;
+  justify-content: $justify;
+}
+
+@mixin flex-align($align: baseline) {
+  -webkit-align-items: $align;
+  align-items: $align;
+}
+
+@mixin flex-wrap($wrap: nowrap) {
+  -webkit-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+}
+
+@mixin flex-basis($basis: auto) {
+  -webkit-flex-basis: $basis;
+  flex-basis: $basis;
+}
+
+@mixin flex($flex: 1 1 0) {
+  -webkit-flex: $flex;
+  flex: $flex;
+}

@@ -1,0 +1,113 @@
+textarea.markdown, .md-preview {
+  padding: 6px;
+}
+
+.md-editor > textarea {
+  background: white;
+}
+
+.markdown .form-control-feedback {
+  right: 20px;
+}
+
+.has-error .md-editor {
+  border-color: $danger;
+}
+
+.has-success .md-editor {
+  border-color: $success;
+}
+
+.md-preview {
+  overflow: auto;
+}
+
+.md-preview,
+.layout-editor .md-preview {
+  width: 613px !important;
+  margin: 0 auto;
+
+  @include content_styles;
+}
+
+.controls .md-editor.md-fullscreen-mode .md-preview {
+  font-size: 14px !important;
+}
+
+.markdown-help, .font-awesome-selector {
+  padding: 20px;
+  background: white;
+  display: none;
+  z-index: 100;
+
+  @include box-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+  @include fixed(20%, 20%, 20%, 20%);
+
+  &.visible {
+    display: block;
+  }
+
+  > .btn {
+    @include absolute(10px, initial, initial, 10px);
+
+    z-index: 2;
+  }
+
+  .wrapper {
+    @include absolute(20px, 20px, 20px, 20px);
+
+    overflow-y: auto;
+  }
+
+  .section {
+    border: 1px solid darken($gray-200, 10%);
+    margin: 0;
+    margin-bottom: 20px;
+
+    @include flex-display;
+    @include flex-direction(row);
+    @include flex-justify(stretch);
+
+    .code {
+      padding: 20px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      border-right: 1px solid darken($gray-200, 10%);
+      background: $gray-200;
+    }
+  }
+}
+
+.md-control-fullscreen,
+.md-fullscreen-controls {
+  display: none;
+}
+
+.font-awesome-selector {
+  .wrapper {
+    .icon {
+      float: left;
+      width: 25%;
+      padding: 1%;
+      cursor: pointer;
+
+      &:hover {
+        background: $gray-300;
+      }
+    }
+
+    .text {
+      vertical-align: middle;
+      font-size: 0.8em;
+      margin-left: 0.6em;
+    }
+
+    i {
+      font-size: 1.6em;
+      width: 1em;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+}

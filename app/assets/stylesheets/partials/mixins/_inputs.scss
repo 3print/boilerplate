@@ -1,0 +1,56 @@
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-moz-placeholder {
+    @content;
+  }
+
+  &::-moz-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+
+  &::placeholder {
+    @content;
+  }
+}
+
+@mixin range-thumb {
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+
+    @content;
+  }
+
+  &::-moz-range-thumb {
+    @content;
+  }
+
+  & .thumb {
+    @content;
+  }
+}
+
+@mixin range-track {
+  & .track {
+    @content;
+  }
+
+  @include for-webkit {
+    & {
+      -webkit-appearance: none;
+
+      @content;
+    }
+  }
+
+
+  &::-moz-range-track {
+    @content;
+  }
+}

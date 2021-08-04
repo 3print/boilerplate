@@ -1,0 +1,18 @@
+@import "bootstrap";
+@import "bootstrap/variables";
+
+@import "partials/mixins";
+@import "partials/responsive";
+@import "partials/framework_and_overrides";
+@import "partials/avatar";
+
+@import "partials/inputs/select";
+@import "partials/inputs/file";
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  background-color: $gray-200;
+}

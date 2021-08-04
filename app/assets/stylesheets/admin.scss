@@ -1,0 +1,29 @@
+@import "bootstrap";
+@import "bootstrap/variables";
+@import "datetimepicker";
+
+@import "partials/responsive";
+@import "partials/markdown_content";
+@import "partials/mixins";
+@import "partials/framework_and_overrides";
+@import "partials/avatar";
+
+@import "partials/inputs/select";
+@import "partials/inputs/file";
+@import "partials/inputs/markdown";
+@import "partials/inputs/datepicker";
+@import "partials/inputs/settings";
+
+@import "partials/admin/avatar";
+
+.navbar-brand {
+  background-image: url(/assets/logo.png);
+  background-size: cover;
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+
+  span.text {
+    display: none;
+  }
+}
