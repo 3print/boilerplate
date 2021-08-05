@@ -3,6 +3,7 @@
 //= #require jquery.widget
 //= #require jquery.iframe-transport
 //= #require utils/jquery.fileupload
+//= require popper
 //= require bootstrap
 //= require moment.min
 //= require datetimepicker
@@ -27,6 +28,7 @@ import 'widjet-select-multiple';
 import 'widjet-file-upload';
 
 import './widgets/auto-resize';
+import './widgets/collapse';
 import './widgets/datepicker';
 import './widgets/field-limit';
 import './widgets/markdown';
@@ -50,11 +52,24 @@ const isMobile = () => window.innerWidth < 992;
 const isInTemplate = el => parent(el, '.tpl') != null;
 const isMobileOrInTemplate = el => isMobile() || isInTemplate(el);
 
-widgets('navigation-highlight', '.navbar-nav', {on: DEFAULT_EVENTS});
+widgets('admin-navigation-highlight', '.sidebar-nav', {on: DEFAULT_EVENTS});
 
 widgets('popover', '[data-toggle=popover]', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
 widgets('auto-resize', 'textarea', {on: DEFAULT_EVENTS, unless: isInTemplate});
+widgets('collapse-toggle', '[data-collapse]', {
+  collapseClass: 'collapsed',
+  on: DEFAULT_EVENTS,
+  unless: isInTemplate
+});
+widgets('collapse', '[data-bs-toggle="collapse"]', {
+  triggerClass: 'collapsed',
+  collapseClass: 'show',
+  collapsable: '.collapse',
+  on: DEFAULT_EVENTS,
+  unless: isInTemplate
+});
+
 // widgets('collapse_toggle', '.open-settings', {on: DEFAULT_EVENTS, unless: isInTemplate});
 // widgets('collapse', '.collapse', {on: DEFAULT_EVENTS, unless: isInTemplate});
 

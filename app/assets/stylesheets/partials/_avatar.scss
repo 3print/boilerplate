@@ -4,16 +4,6 @@
   border-radius: 50%;
   display: inline-block;
 
-  svg {
-    fill: currentColor;
-    width: 80%;
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    right: 10%;
-    bottom: 10%;
-  }
-
   &.default {
     text-align: center;
   }

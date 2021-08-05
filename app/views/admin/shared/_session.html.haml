@@ -1,17 +1,31 @@
-.dropdown
-  .flex-row.d-flex.align-items-center.dropdown-toggle{"data-bs-toggle": 'dropdown' }
-    .session.mr-1.text-right
-      %span= current_user.name
-      .details
-        - if current_user.admin?
-          .badge.bg-warning= "enums.user.role.#{current_user.role}".t
-        - else
-          .badge.bg-info= "enums.user.role.#{current_user.role}".t
-    = show_avatar current_user.avatar, :thumb, class: "mr-1"
 
-  .dropdown-menu
+.dropdown
+  .dropdown-toggle{"data-bs-toggle": 'dropdown', class: context == :sidebar ? 'flex-row d-flex align-items-center' : ''}
+    = show_avatar current_user.avatar, :thumb, class: "me-1"
+    - if context == :sidebar
+      .session.ms-1
+        %span= current_user.name
+        .details
+          - if current_user.is_admin?
+            .badge.bg-warning= "enums.user.role.#{current_user.role}".t
+          - else
+            .badge.bg-info= "enums.user.role.#{current_user.role}".t
+
+  .dropdown-menu.dropdown-menu-end
+    - if context == :navbar
+      .dropdown-item
+        .session
+          %span= current_user.name
+          .details
+            - if current_user.is_admin?
+              .badge.bg-warning= "enums.user.role.#{current_user.role}".t
+            - else
+              .badge.bg-info= "enums.user.role.#{current_user.role}".t
+
+      .dropdown-divider
+
     = link_to url_for([controller.controller_namespace, current_user].flatten), class: 'dropdown-item' do
-      = icon_for(User)
+      = icon(:user)
       %span.text= 'actions.show_profile'.t
 
     - if can?(:edit, current_user)
@@ -19,7 +33,7 @@
         = icon_for(:profile)
         %span.text= 'actions.edit_profile'.t
 
+    .dropdown-divider
     = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do
-      = icon_for(:sign_out)
       %span.text= 'actions.sign_out'.t
 

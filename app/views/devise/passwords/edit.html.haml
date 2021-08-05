@@ -1,12 +1,6 @@
 - content_for :page_title do
   = 'devise.passwords.new_password.title'.t
 
-- content_for :breadcrumb do
-  - breadcrumb 'nav.account'.t, new_user_session_path
-  - breadcrumb 'devise.passwords.new_password.title'.t
-  - breadcrumbs do
-    = 'labels.breadcrumb'.tc
-
 .row.sign-in
   .col-md-12
     = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|

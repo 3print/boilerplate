@@ -1,0 +1,37 @@
+
+.avatar {
+  width: auto;
+  height: auto;
+
+  &.default {
+    &.thumb svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    &.medium svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    &.devise svg {
+      width: 120px;
+      height: 120px;
+    }
+  }
+}
+
+.dropdown-toggle img {
+  max-width: 100%;
+}
+
+.table, .list-group {
+  .avatar {
+    float: left;
+    margin-right: 10px;
+
+    &.thumb img {
+      max-width: 40px;
+    }
+  }
+}

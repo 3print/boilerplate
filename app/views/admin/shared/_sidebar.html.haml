@@ -1,0 +1,9 @@
+%ul.sidebar-nav
+  = with_context :sidebar do
+    = admin_nav_link_to admin_root_path, 'nav.admin.dashboard'.t, :home, icon_name_for(:dashboard)
+    = admin_nav_link_to '#', 'nav.admin.resources'.t, :home, icon_name_for(:resources) do
+      = admin_nav_link_to User
+      = admin_nav_link_to Store
+      = admin_nav_link_to Brand
+      = admin_nav_link_to Product
+

@@ -1,6 +1,8 @@
-- content_for :breadcrumb do
-  - breadcrumb 'actions.sign_in'.t
-  - breadcrumbs do
-    = 'labels.breadcrumb'.tc
+
+- content_for :page_stitle do
+  = 'views.sign_in.title'.t
+
+- content_for :sub_title do
+  = 'views.sign_in.lead'.t
 
 = render partial: 'shared/sign_in', locals: {sign_in_model: resource, sign_up_model: User.new}

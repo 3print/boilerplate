@@ -1,3 +1,217 @@
+@import "adminkit/1-variables/app";
+@import "bootstrap/variables";
+
+// Forms
 .form-control.form-check-input {
   padding: 0;
+}
+.control-label {
+  @extend .form-label;
+}
+
+// Buttons
+.btn .feather {
+  width: 18px;
+  height: 18px;
+  vertical-align: sub;
+  margin-right: 0.5em;
+}
+
+// Sidebar
+
+.sidebar-brand {
+  img {
+    height: 40px;
+  }
+}
+
+.sidebar-toggle .feather {
+  width: 26px;
+  height: 26px;
+}
+
+.sidebar {
+  [data-bs-toggle=collapse] {
+    position:relative;
+  }
+  [data-bs-toggle=collapse]:after {
+    content:" ";
+    border:solid;
+    border-width:0 .075rem .075rem 0;
+    display:inline-block;
+    padding:2px;
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
+    position:absolute;
+    top:1.2rem;
+    right:1.5rem;
+    transition:all .2s ease-out;
+  }
+  [aria-expanded=true]:after,
+  [data-bs-toggle=collapse]:not(.collapsed):after {
+    -webkit-transform:rotate(-135deg);
+    transform:rotate(-135deg);
+    top:1.4rem;
+  }
+
+  // Popper seems to to do shit with dropdown insets
+  .dropdown-menu.show {
+    inset: auto !important;
+  }
+
+  [data-bs-toggle=dropdown] {
+    cursor: pointer;
+    color: $sidebar-link-color;
+  }
+}
+.sidebar-dropdown {
+  [data-bs-toggle=collapse]:after {
+    top:1rem;
+  }
+
+  [aria-expanded=true]:after,
+  [data-bs-toggle=collapse]:not(.collapsed):after {
+    top:1.2rem;
+  }
+
+  .sidebar-item .sidebar-link:hover {
+    font-weight: 400;
+    border-left: 0;
+    color: $sidebar-link-hover-color;
+    background: transparent;
+  }
+
+  .sidebar-item.active .sidebar-link {
+    font-weight: 400;
+    border-left: 0;
+    color: $blue;
+    background: transparent;
+
+    svg {
+      stroke: $blue;
+    }
+  }
+}
+.sidebar-user {
+  padding: .75rem 1.5rem;
+}
+
+// Navbar
+.dropdown-mega-list {
+  min-width: 250px;
+}
+
+.navbar .avatar {
+  img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.input-group-navbar {
+  .btn,
+  .form-control {
+    height: calc(2.1875rem + 2px);
+    background: $gray-200;
+    box-shadow: none;
+    border: 0;
+    padding: .4rem 1rem;
+    border-radius: 20px;
+
+    &:focus {
+      background: $gray-200;
+      box-shadow: none;
+      outline: 0;
+    }
+  }
+
+  .btn {
+    color: $gray-600;
+  }
+  .btn .feather {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// Cards
+.card {
+  >.dataTables_wrapper .table.dataTable,
+  >.table,
+  >.table-responsive-lg .table,
+  >.table-responsive-md .table,
+  >.table-responsive-sm .table,
+  >.table-responsive-xl .table,
+  >.table-responsive .table {
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    margin-bottom: 0;
+  }
+  >.dataTables_wrapper .table.dataTable td:first-child,
+  >.dataTables_wrapper .table.dataTable th:first-child,
+  >.table-responsive-lg .table td:first-child,
+  >.table-responsive-lg .table th:first-child,
+  >.table-responsive-md .table td:first-child,
+  >.table-responsive-md .table th:first-child,
+  >.table-responsive-sm .table td:first-child,
+  >.table-responsive-sm .table th:first-child,
+  >.table-responsive-xl .table td:first-child,
+  >.table-responsive-xl .table th:first-child,
+  >.table-responsive .table td:first-child,
+  >.table-responsive .table th:first-child,
+  >.table td:first-child,
+  >.table th:first-child {
+    border-left: 0;
+    padding-left: 1.25rem;
+  }
+  >.dataTables_wrapper .table.dataTable td:last-child,
+  >.dataTables_wrapper .table.dataTable th:last-child,
+  >.table-responsive-lg .table td:last-child,
+  >.table-responsive-lg .table th:last-child,
+  >.table-responsive-md .table td:last-child,
+  >.table-responsive-md .table th:last-child,
+  >.table-responsive-sm .table td:last-child,
+  >.table-responsive-sm .table th:last-child,
+  >.table-responsive-xl .table td:last-child,
+  >.table-responsive-xl .table th:last-child,
+  >.table-responsive .table td:last-child,
+  >.table-responsive .table th:last-child,
+  >.table td:last-child,
+  >.table th:last-child {
+    border-right: 0;
+    padding-right: 1.25rem;
+  }
+  >.dataTables_wrapper .table.dataTable tr:first-child td,
+  >.dataTables_wrapper .table.dataTable tr:first-child th,
+  >.table-responsive-lg .table tr:first-child td,
+  >.table-responsive-lg .table tr:first-child th,
+  >.table-responsive-md .table tr:first-child td,
+  >.table-responsive-md .table tr:first-child th,
+  >.table-responsive-sm .table tr:first-child td,
+  >.table-responsive-sm .table tr:first-child th,
+  >.table-responsive-xl .table tr:first-child td,
+  >.table-responsive-xl .table tr:first-child th,
+  >.table-responsive .table tr:first-child td,
+  >.table-responsive .table tr:first-child th,
+  >.table tr:first-child td,
+  >.table tr:first-child th {
+    border-top: 0;
+  }
+  >.dataTables_wrapper .table.dataTable tr:last-child td,
+  >.table-responsive-lg .table tr:last-child td,
+  >.table-responsive-md .table tr:last-child td,
+  >.table-responsive-sm .table tr:last-child td,
+  >.table-responsive-xl .table tr:last-child td,
+  >.table-responsive .table tr:last-child td,
+  >.table tr:last-child td {
+    border-bottom: 0;
+  }
+   .card-header + .table {
+    border-top: 0;
+  }
+
+  .card-title a {
+    color: inherit;
+  }
 }

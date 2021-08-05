@@ -122,8 +122,8 @@ module ModelsHelper
     if collection.empty?
       raw "<div class='row panel-body'><em class='col-md-12'>#{:no_data_no_creation.t}</em></div>"
     else
-      content_tag :table, class: "table table-stripped table-hover #{resource_name}" do
-        concat(content_tag(:thead, class: 'table-light') do
+      content_tag :table, class: "table #{resource_name}" do
+        concat(content_tag(:thead) do
           concat(content_tag(:tr) do
             columns.each do |column|
               concat(content_tag(:th, "tables.columns.#{column.to_s}".t))

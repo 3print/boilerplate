@@ -1,5 +1,34 @@
-%ul.nav.navbar-nav.me-auto.mb-2.mb-lg-0
-  = nav_link_to admin_root_path, 'nav.admin.dashboard'.t, :home, icon_class_for(:dashboard)
-  = nav_link_to admin_root_path, 'nav.admin.root'.t, :home, icon_class_for(:main_nav) do
-    = nav_link_to User
-  = nav_link_to BpTest # BOILERPLATE_ONLY
+.navbar-nav.d-none.d-lg-block
+  / %li.nav-item.px-2.dropdown
+  /   %a.nav-link.dropdown-toggle{aria: {expanded: "true", haspopup: "true"}, "data-bs-toggle" => "dropdown", href: "#", role: "button"}
+  /     Mega Menu
+  /   .dropdown-menu.dropdown-menu-start.dropdown-mega{"aria-labelledby" => "servicesDropdown", "data-bs-popper" => "none"}
+  /     .d-md-flex.align-items-start.justify-content-start
+  /       .dropdown-mega-list
+  /         .dropdown-header UI Elements
+  /         %a.dropdown-item{:href => "#"} Alerts
+  /         %a.dropdown-item{:href => "#"} Buttons
+  /         %a.dropdown-item{:href => "#"} Cards
+  /         %a.dropdown-item{:href => "#"} Carousel
+  /         %a.dropdown-item{:href => "#"} General
+  /         %a.dropdown-item{:href => "#"} Grid
+  /         %a.dropdown-item{:href => "#"} Modals
+  /         %a.dropdown-item{:href => "#"} Tabs
+  /         %a.dropdown-item{:href => "#"} Typography
+  /       .dropdown-mega-list
+  /         .dropdown-header Forms
+  /         %a.dropdown-item{:href => "#"} Layouts
+  /         %a.dropdown-item{:href => "#"} Basic Inputs
+  /         %a.dropdown-item{:href => "#"} Input Groups
+  /         %a.dropdown-item{:href => "#"} Advanced Inputs
+  /         %a.dropdown-item{:href => "#"} Editors
+  /         %a.dropdown-item{:href => "#"} Validation
+  /         %a.dropdown-item{:href => "#"} Wizard
+  /       .dropdown-mega-list
+  /         .dropdown-header Tables
+  /         %a.dropdown-item{:href => "#"} Basic Tables
+  /         %a.dropdown-item{:href => "#"} Responsive Table
+  /         %a.dropdown-item{:href => "#"} Table with Buttons
+  /         %a.dropdown-item{:href => "#"} Column Search
+  /         %a.dropdown-item{:href => "#"} Muulti Selection
+  /         %a.dropdown-item{:href => "#"} Ajax Sourced Data

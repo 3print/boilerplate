@@ -1,42 +1,31 @@
-Iconic.config do |i|
-  i.set_default_icon 'circle-thin'
+Feather.config do |i|
+  i.set_default_icon 'circle'
 
-  i.set_icon :create, :plus
-  i.set_icon :edit, :pencil
-  i.set_icon :destroy, :times
-  i.set_icon :masquerade, 'user-secret'
-  i.set_icon :email, :envelope
+  i.set_icon :create, 'plus-square'
+  i.set_icon :edit, :edit
+  i.set_icon :destroy, :delete
+  i.set_icon :email, :mail
   i.set_icon :sign_out, 'sign-out'
-  i.set_icon :profile, :cog
+  i.set_icon :profile, :settings
 
-  i.set_icon :dashboard, :dashboard
-  i.set_icon :main_nav, :cogs
+  i.set_icon :dashboard, :sliders
+  i.set_icon :resources, :database
 
-  i.set_icon User, :user
+  i.set_icon User, :users
   i.set_icon BpTest, :cubes # BOILERPLATE_ONLY
 end
 
 module IconHelper
-  def icon(name, options={})
-    if options[:class]
-      options[:class] += ' ' + icon_class(name)
-    else
-      options[:class] = icon_class(name)
-    end
-
-    content_tag(:i, nil, options) + ' '
+  def icon(name)
+    Feather[name]
   end
 
-  def icon_class(name)
-    "fa fa-#{name}"
+  def icon_name_for(o)
+    Feather.icon_name_for(o)
   end
 
   def icon_for(o)
-    icon(icon_class_for(o))
-  end
-
-  def icon_class_for(o)
-    Iconic.get_icon(o)
+    Feather.get_icon(o)
   end
 
   def text_and_icon(text, ico)
@@ -52,4 +41,13 @@ module IconHelper
     s += content_tag(:span, text, class: 'text')
     s.html_safe
   end
+
+  def svg_icon(name)
+    Feather[name]
+  end
+
+  def svg_icon_for(o)
+    Feather.get_icon(o)
+  end
+
 end

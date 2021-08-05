@@ -1,4 +1,33 @@
 module NavigationHelper
+  mattr_accessor :context
+
+  SIDEBAR = {
+    li_class: 'sidebar-item',
+    a_class: 'sidebar-link',
+    group_toggle: 'collapse',
+    group_li_class: '',
+    group_toggle_class: '',
+    group_class: 'sidebar-dropdown list-unstyled collapse show',
+  }
+  NAVBAR = {
+    li_class: 'nav-item',
+    a_class: 'nav-link',
+    group_toggle: 'dropdown',
+    group_li_class: 'dropdown',
+    group_toggle_class: 'dropdown-toggle',
+    group_class: 'dropdown',
+  }
+
+  CONTEXTS = {
+    sidebar: SIDEBAR,
+    navbar: NAVBAR,
+  }
+
+  def with_context(context, &block)
+    self.context = CONTEXTS[context]
+    capture_haml(&block)
+  end
+
   def admin_nav_link_to(url, label = nil, controller_name = nil, ico = nil, options = {}, &block)
     if url.is_a?(Class)
       cls = url
@@ -11,13 +40,15 @@ module NavigationHelper
   end
 
   def nav_link_to(url, label = nil, controller_name = nil, ico = nil, options = {}, &block)
+
+
     if url.is_a?(Class)
       cls = url
       options = label if label.is_a?(Hash)
       url = [controller.controller_namespace[0]] + [cls]
       label = cls.t
       controller_name = cls.name.pluralize.underscore
-      ico = icon_class_for(cls)
+      ico = icon_name_for(cls)
     end
 
     url = options.delete(:url) if options[:url].present?
@@ -32,15 +63,15 @@ module NavigationHelper
       ico = nil
     end
 
-    li_class = "nav-item #{controller_name.to_s}"
+    li_class = "#{context[:li_class]} #{controller_name.to_s}"
 
     if block_given?
-      li_class += ' dropdown'
+      li_class += " #{context[:group_li_class]}"
 
       content_tag(:li, class: li_class) do
         opts = {
-          class: 'dropdown-toggle nav-link',
-          "data-bs-toggle": 'dropdown',
+          class: "#{context[:group_toggle_class]} #{context[:a_class]}",
+          "data-bs-toggle": context[:group_toggle],
         }
 
         opts[:method] = options[:method] if options[:method].present?
@@ -50,13 +81,13 @@ module NavigationHelper
           concat(get_badge(options[:badge])) if options[:badge].present?
         end)
 
-        concat(content_tag(:ul, class: 'dropdown-menu') do
+        concat(content_tag(:ul, class: context[:group_class]) do
           concat(capture_haml(&block))
         end)
       end
     else
       content_tag(:li, class: li_class) do
-        opts = {class: 'nav-link'}
+        opts = {class: context[:a_class]}
         opts[:method] = options[:method] if options[:method].present?
 
         concat(link_to(url, opts) do
@@ -66,60 +97,5 @@ module NavigationHelper
         end)
       end
     end
-  end
-
-  def extra_menu_items(page)
-    filename = "#{page.permalink.underscore}.html.haml"
-    html = ""
-    if lookup_context.exists? "_#{filename}", "shared/extra_menu_items"
-      html = render partial: ["shared/extra_menu_items", filename].join('/'), locals: { page: page }
-    end
-    html
-  end
-
-  def admin_store_link_to(resource_class, options = {})
-    if can?(:edit, resource_class)
-      link_to [:admin, @store, resource_class], class: 'btn btn-secondary btn-lg btn-primary' do
-        badge = options[:badge].present? ? get_badge(options[:badge]) : ''
-        icon(icon_class_for(resource_class), class: 'fa-3x') +
-          content_tag(:span, resource_class.t, class: 'text') + badge
-      end
-    end
-  end
-
-  def admin_store_nav_link_to(resource_class, options = {})
-    if can?(:edit, resource_class)
-      admin_nav_link_to [:admin, @store, resource_class], resource_class.t, resource_class.name.tableize, icon_class_for(resource_class), options
-    end
-  end
-
-  def extra_menu_items_loaded?
-    @sub_nav_links.present?
-  end
-
-  def sub_nav_link_to(url, label = nil, priority = 0, controller_name = nil, ico = nil, options = {}, &block)
-    @sub_nav_links ||= []
-    @sub_nav_links << [[url, label, controller_name, ico, options], priority]
-  end
-
-  def clear_sub_nav_links
-    @sub_nav_links = []
-  end
-
-  def sub_nav_links
-    @sub_nav_links.sort { |a, b| a[1] - b[1] }
-  end
-
-  def get_badge(count)
-    count.positive? ? content_tag(:span, count, class: "badge") : ''
-  end
-
-  def load_extra_menu_items(page)
-    filename = "#{page.permalink.underscore}.html.haml"
-    html = ""
-    if lookup_context.exists? "_#{filename}", "shared/extra_menu_items"
-      html = render partial: ["shared/extra_menu_items", filename].join('/'), locals: { page: page }
-    end
-    html
   end
 end

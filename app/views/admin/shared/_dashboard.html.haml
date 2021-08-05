@@ -53,12 +53,13 @@
         }.reverse_merge(opts)
 
       .card{class: size == 1 && 'short-actions'}
-        %h5.card-header
+        .card-header
           = scope_counter
-          = icon_for(klass)
-          = link_to title_content, url
+          %h5.card-title
+            = icon_for(klass)
+            = link_to title_content, url
 
-        .card-body= models_list scope, options
+        = models_list scope, options
         - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.namespaced_name.to_sym].compact) rescue nil)
           .card-footer
             = link_to new_url, class: 'btn btn-success' do
@@ -67,7 +68,7 @@
 
     - else
       = widget_box title, class: "panel-default #{size == 1 && 'short-actions'}", before_title: collection_counter(klass.where(nil)) do
-        .card-body= collection scope, resource_class: klass, no_pagination: true
+        = collection scope, resource_class: klass, no_pagination: true
         - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.namespaced_name.to_sym].compact) rescue nil)
           .card-footer
             = link_to new_url, class: 'btn btn-success' do

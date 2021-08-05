@@ -1,28 +1,14 @@
 
-.row.sign-in
-  - if alert.present?
-    .col-md-12
-      .alert.alert-danger= alert
-  .col-md-6
-    = simple_form_for(sign_in_model, url: session_path(:user), html: { role: 'form'}) do |f|
-      %h3= 'actions.sign_in'.t
-      = f.input :email, autofocus: true
-      = f.input :password
-      = f.input :remember_me, as: :boolean
-      = hidden_field_tag :redirect, params[:redirect]
+- if alert.present?
+  .alert.alert-danger= alert
 
-      = f.submit 'actions.connect'.t, class: 'btn btn-primary'
-      = link_to 'actions.recover_password'.t, new_password_path(resource)
+= simple_form_for(sign_in_model, url: session_path(:user), html: { role: 'form'}) do |f|
+  .mb-3= f.input :email, autofocus: true
+  .mb-3
+    = f.input :password, hint: false
+    %small= link_to 'actions.recover_password'.t, new_password_path(resource)
 
-  .col-md-6
-    = simple_form_for(sign_up_model, url: registration_path(resource_name), html: { role: 'form'}) do |f|
-      %h3= 'actions.sign_up'.t
+  = f.input :remember_me, as: :boolean
+  = hidden_field_tag :redirect, params[:redirect]
 
-      = f.input :first_name
-      = f.input :last_name
-      = f.input :email
-      = f.input :password
-      = f.input :password_confirmation
-      = hidden_field_tag :redirect, params[:redirect]
-
-      = f.submit 'actions.sign_up'.t, class: 'btn btn-primary'
+  .text-center.mt-3= f.submit 'actions.connect'.t, class: 'btn btn-primary btn-block'

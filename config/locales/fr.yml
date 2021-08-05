@@ -86,3 +86,7 @@ fr:
       last: Dernier
       previous: Précédent
       truncate: ...
+
+    sign_in:
+      title: Connexion
+      lead: Identifiez-vous pour continuer

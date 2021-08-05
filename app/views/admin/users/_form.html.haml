@@ -2,9 +2,9 @@
 = simple_nested_form_for resource, url: controller.controller_namespace + [resource] do |f|
   %fieldset.inputs.card-body
     .row
-      .col-md-4
+      .col-md-6
         = f.input :avatar, version: :medium
-      .col-md-8
+      .col-md-6
         .row
           .col-md-6= f.input :first_name
           .col-md-6= f.input :last_name

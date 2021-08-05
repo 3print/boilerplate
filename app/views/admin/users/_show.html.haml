@@ -1,18 +1,23 @@
 
 .row
   .col-md-4.col-xs-4
-    = show_avatar resource.avatar, :medium
+    .card
+      .card-header
+
+      .card-body.text-center
+        = show_avatar resource.avatar, :medium
 
   .col-md-8.col-xs-8
     .card
-      %h5.card-header
-        - if resource.admin?
+      .card-header
+        - if resource.is_admin?
           .pull-right.badge.bg-warning= "enums.user.role.#{resource.role}".t
         - else
           .pull-right.badge.bg-info= "enums.user.role.#{resource.role}".t
 
-        = icon :info
-        Informations
+        %h5.card-title
+          = icon :info
+          Informations
 
       %ul.list-group.list-group-flush
         %li.list-group-item

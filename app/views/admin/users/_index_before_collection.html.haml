@@ -12,7 +12,7 @@
           = label_tag(:r, 'user.role'.tmf, class: 'control-label')
           .controls
             - options = "<option></option>" + options_for_select(User.roles.map{|r| ["enums.user.role.#{r[0]}".t, r[0].pluralize]}, params[:r])
-            = select_tag(:r, options.html_safe, placeholder: 'Rôle', style: 'width: 100%')
+            = select_tag(:r, options.html_safe, placeholder: 'Rôle', style: 'width: 100%', class: 'form-control')
 
 
     .btn-group.pull-right.mt-4

@@ -18,43 +18,57 @@
 
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light{role: :navigation}
-
-      .container
-        .navbar-header
-          %button.navbar-toggler{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
-            %span.sr-only Toggle navigation
-            %i.fa.fa-navicon
-          %a.navbar-brand{href: "/"}
+    .wrapper
+      #sidebar.sidebar{role: :navigation}
+        .sidebar-content
+          %a.sidebar-brand{href: "/"}
             = image_tag asset_path('logo.png'), alt: 'Logo'
             %span.text= 'app_name'.t
 
-        #menu.collapse.navbar-collapse{role: :navigation}
+          .sidebar-user= render partial: 'admin/shared/session', locals: {context: :sidebar}
+
+          = render_partial_for_user 'admin/shared/sidebar'
+
+      .main
+        .navbar.navbar-expand.navbar-light.navbar-bg
+          .sidebar-toggle{data: {collapse: '#sidebar'}}= icon(:menu)
+
+          = render_partial_for_user 'admin/shared/search'
           = render_partial_for_user 'admin/shared/nav'
-          = render partial: 'admin/shared/session'
 
-    = render partial: 'shared/flash', locals: { flash: flash }
-    .container
-      #content
-        = yield :before_page
+          .navbar-collapse.collapse
+            .navbar-nav.navbar-align
+              = render partial: 'admin/shared/session', locals: {context: :navbar}
 
-        #content-header
-          %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'admin_app_name'.t
-          = yield :content_header
+        %main.content
+          = render partial: 'shared/flash', locals: { flash: flash }
+          .container-fluid.p-0
+            #content
+              = yield :before_page
 
-        - if content_for?(:pills)
-          = yield :pills
+              #content-header
+                %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'admin_app_name'.t
+                = yield :content_header
 
-        - if content_for?(:breadcrumb)
-          = yield :breadcrumb
+              - if content_for?(:pills)
+                = yield :pills
 
-        = yield :before_content
+              - if content_for?(:breadcrumb)
+                = yield :breadcrumb
 
-        = yield
+              = yield :before_content
 
-        = yield :after_content
-        = yield :after_page
+              = yield
 
-    = javascript_include_tag "admin"
+              = yield :after_content
+              = yield :after_page
 
-    = yield :scripts
+          = javascript_include_tag "admin"
+
+          = yield :scripts
+
+          / .row
+          /   - FEATHER_SVGS.keys.each do |k|
+          /     .col-md-2
+          /       = svg_icon(k)
+          /       = k

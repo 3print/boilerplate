@@ -1,5 +1,5 @@
-@import "bootstrap";
-@import "bootstrap/variables";
+@import "adminkit/app";
+
 @import "datetimepicker";
 
 @import "partials/responsive";
@@ -15,15 +15,3 @@
 @import "partials/inputs/settings";
 
 @import "partials/admin/avatar";
-
-.navbar-brand {
-  background-image: url(/assets/logo.png);
-  background-size: cover;
-  width: 48px;
-  height: 48px;
-  margin-right: 10px;
-
-  span.text {
-    display: none;
-  }
-}
