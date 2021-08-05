@@ -17,7 +17,7 @@
 
         %h5.card-title
           = icon :info
-          Informations
+          = 'labels.informations'.t
 
       %ul.list-group.list-group-flush
         %li.list-group-item
@@ -26,3 +26,28 @@
             Email :
 
           = resource.email
+
+    - if current_user.is_super_admin?
+      .card
+        .card-header
+          %h5.card-title
+            = icon :key
+            = 'labels.login_activity'.t
+
+        %table.table
+          %thead
+            %tr
+              %th= 'tables.columns.login_date'.t
+              %th= 'tables.columns.login_success'.t
+              %th= 'tables.columns.login_ip'.t
+          - resource.login_activities.order('created_at DESC').each do |a|
+            %tr
+              %td= a.created_at.l format: :long
+              %td
+                - if a.success
+                  = icon :check, class: 'text-success'
+                  = 'labels.login_success'.t
+                - else
+                  = icon :times, class: 'text-danger'
+                  = show_field :failure_reason, resource: a
+              %td= a.ip

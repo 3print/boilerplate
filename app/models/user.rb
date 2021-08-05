@@ -39,6 +39,8 @@ class User < ApplicationRecord
 
   light_search_by :name, :email
 
+  has_many :login_activities
+
   scope :admins, -> { where 'users.role = 1' }
   scope :users, -> { where 'users.role = 0' }
 

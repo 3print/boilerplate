@@ -42,7 +42,7 @@ fr:
       undefined: Non définie
 
   labels:
-    informations: informations
+    informations: Informations
     more_informations: plus d'informations
     breadcrumb: 'Vous êtes ici'
     approved: Approuvé
@@ -53,6 +53,9 @@ fr:
     waiting_publication: "En attente de publication"
     video_published_at: "Vidéo publié le %{date}"
     video_waiting_publication: "Vidéo en attente de publication"
+    personal_data: Information personnelles
+    login_activity: Historique de connexions
+    login_success: Connexion réussie
 
     states:
       published: Publié

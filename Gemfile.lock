@@ -63,6 +63,11 @@ GEM
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
     arel (9.0.0)
+    authtrail (0.3.1)
+      activerecord (>= 5.2)
+      geocoder
+      railties (>= 5.2)
+      warden
     autoprefixer-rails (10.2.5.1)
       execjs (> 0)
     aws-eventstream (1.1.1)
@@ -197,6 +202,7 @@ GEM
     ffi (1.15.3)
     filetree (1.0.0)
     formatador (0.3.0)
+    geocoder (1.6.7)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     guard (2.17.0)
@@ -501,6 +507,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  authtrail
   babel-transpiler
   better_errors
   binding_of_caller

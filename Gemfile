@@ -15,6 +15,7 @@ gem "valid_email2"
 gem 'devise-i18n'
 gem 'pundit'
 gem 'createsend'
+gem 'authtrail'
 
 # Database
 gem 'pg'

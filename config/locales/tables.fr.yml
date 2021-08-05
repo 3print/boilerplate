@@ -29,3 +29,7 @@ fr:
       order: Ordre
       masquerade: Mascarade
       user_card: Utilisateur
+      login_date: Date
+      login_success: Résulat
+      login_ip: IP
+      login_geo: Coordonnées
