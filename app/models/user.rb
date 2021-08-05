@@ -62,11 +62,11 @@ class User < ApplicationRecord
     'user_name'.t(first_name: first_name, last_name: last_name)
   end
 
-  def super_admin?
-    self.admin?
+  def is_super_admin?
+    self.is_admin?
   end
 
-  def admin?
+  def is_admin?
     self.role == 'admin'
   end
 

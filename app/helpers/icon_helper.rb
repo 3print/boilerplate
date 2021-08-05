@@ -12,7 +12,7 @@ Feather.config do |i|
   i.set_icon :resources, :database
 
   i.set_icon User, :users
-  i.set_icon BpTest, :cubes # BOILERPLATE_ONLY
+  i.set_icon BpTest, :package # BOILERPLATE_ONLY
 end
 
 module IconHelper

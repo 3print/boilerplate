@@ -92,10 +92,10 @@ class AdminPolicy
 protected
 
   def only_admin
-    user && user.admin?
+    user && user.is_admin?
   end
 
   def only_super_admin
-    user && user.super_admin?
+    user && user.is_super_admin?
   end
 end
