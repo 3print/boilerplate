@@ -30,22 +30,24 @@ module TableHelper
     content_options[:class] += ' ' + content_class if content_class
 
     content_tag(:div, options) do
-      concat(content_tag(:h5, title_options) do
-        if ico
-          concat(content_tag(:span, class: 'icon') do
-            concat(icon(ico))
-          end)
-        end
-
+      concat(content_tag(:div, title_options) do
         concat(before_title) if before_title
-        concat(title)
-        if actions
-          concat(content_tag(:div, class: 'buttons') do
-            actions.each_pair do |path, content|
-              concat(link_to content, path, class: 'btn')
-            end
-          end)
-        end
+        concat(content_tag(:h5, class: 'card-title') do
+          if ico
+            concat(content_tag(:span, class: 'icon') do
+              concat(icon(ico))
+            end)
+          end
+
+          concat(title)
+          if actions
+            concat(content_tag(:div, class: 'buttons') do
+              actions.each_pair do |path, content|
+                concat(link_to content, path, class: 'btn')
+              end
+            end)
+          end
+        end)
         concat(extra_title) if extra_title
       end)
 

@@ -3,7 +3,7 @@ Feather.config do |i|
 
   i.set_icon :create, 'plus-square'
   i.set_icon :edit, :edit
-  i.set_icon :destroy, :delete
+  i.set_icon :destroy, :trash
   i.set_icon :email, :mail
   i.set_icon :sign_out, 'sign-out'
   i.set_icon :profile, :settings

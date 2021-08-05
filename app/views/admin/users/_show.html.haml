@@ -2,31 +2,28 @@
 .row
   .col-md-4.col-xs-4
     .card
-      .card-header
-
       .card-body.text-center
-        = show_avatar resource.avatar, :medium
-
-  .col-md-8.col-xs-8
-    .card
-      .card-header
+        = show_avatar resource.avatar, :profile
+        %h5.card-title.mb-0= resource.name
         - if resource.is_admin?
-          .pull-right.badge.bg-warning= "enums.user.role.#{resource.role}".t
+          .badge.bg-warning= "enums.user.role.#{resource.role}".t
         - else
-          .pull-right.badge.bg-info= "enums.user.role.#{resource.role}".t
+          .badge.bg-info= "enums.user.role.#{resource.role}".t
 
+      %hr.my-0
+      .card-body
         %h5.card-title
           = icon :info
           = 'labels.informations'.t
+        %ul.list-group.list-group-flush
+          %li.list-group-item
+            %strong
+              = icon_for(:email)
+              Email :
 
-      %ul.list-group.list-group-flush
-        %li.list-group-item
-          %strong
-            = icon_for(:email)
-            Email :
+            = resource.email
 
-          = resource.email
-
+  .col-md-8.col-xs-8
     - if current_user.is_super_admin?
       .card
         .card-header

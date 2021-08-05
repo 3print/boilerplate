@@ -10,8 +10,13 @@
     }
 
     &.medium svg {
-      width: 40px;
-      height: 40px;
+      width: 300px;
+      height: 300px;
+    }
+
+    &.profile svg {
+      width: 128px;
+      height: 128px;
     }
 
     &.devise svg {
