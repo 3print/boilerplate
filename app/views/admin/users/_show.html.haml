@@ -15,13 +15,12 @@
         %h5.card-title
           = icon :info
           = 'labels.informations'.t
-        %ul.list-group.list-group-flush
-          %li.list-group-item
-            %strong
-              = icon_for(:email)
-              Email :
+        %ul.list-unstyled
+          %li.mb-1
+            = icon_for(:email)
+            = 'user.email'.tmfc
+            = mail_to resource.email
 
-            = resource.email
 
   .col-md-8.col-xs-8
     - if current_user.is_super_admin?

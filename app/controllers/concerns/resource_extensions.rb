@@ -168,7 +168,11 @@ module ResourceExtensions
     when 'show' then controller_namespace + namespace + [res]
     when 'new' then [:new] + controller_namespace + namespace + [singular]
     else
-      [action.to_sym] + controller_namespace + namespace + [res]
+      if res.is_a?(ActiveRecord::Relation)
+        [action.to_sym] + controller_namespace + namespace + [plural]
+      else
+        [action.to_sym] + controller_namespace + namespace + [res]
+      end
     end
   end
 

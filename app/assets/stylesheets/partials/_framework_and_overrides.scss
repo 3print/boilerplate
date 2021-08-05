@@ -1,6 +1,11 @@
 @import "adminkit/1-variables/app";
 @import "bootstrap/variables";
 
+// Feather
+.feather {
+  vertical-align: sub;
+}
+
 // Forms
 .form-control.form-check-input {
   padding: 0;
@@ -18,7 +23,6 @@
 }
 
 // Sidebar
-
 .sidebar-brand {
   img {
     height: 40px;
