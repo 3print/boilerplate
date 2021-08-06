@@ -202,13 +202,13 @@
   >.table tr:first-child th {
     border-top: 0;
   }
-  >.dataTables_wrapper .table.dataTable tr:last-child td,
-  >.table-responsive-lg .table tr:last-child td,
-  >.table-responsive-md .table tr:last-child td,
-  >.table-responsive-sm .table tr:last-child td,
-  >.table-responsive-xl .table tr:last-child td,
-  >.table-responsive .table tr:last-child td,
-  >.table tr:last-child td {
+  >.dataTables_wrapper:last-child .table.dataTable tr:last-child td,
+  >.table-responsive-lg:last-child .table tr:last-child td,
+  >.table-responsive-md:last-child .table tr:last-child td,
+  >.table-responsive-sm:last-child .table tr:last-child td,
+  >.table-responsive-xl:last-child .table tr:last-child td,
+  >.table-responsive:last-child .table tr:last-child td,
+  >.table:last-child tr:last-child td {
     border-bottom: 0;
   }
    .card-header + .table {

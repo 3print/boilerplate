@@ -5,7 +5,7 @@
 -#    total_pages:   total number of pages
 -#    per_page:      number of items to fetch per page
 -#    remote:        data-remote
-%li.prev{class: current_page.first? ? 'disabled' : '' }
-  = link_to url, rel: 'prev', remote: remote do
-    = icon 'angle-left'
+%li.page-item.prev{class: current_page.first? ? 'disabled' : '' }
+  = link_to url, rel: 'prev', remote: remote, class: 'page-link' do
+    = icon 'chevron-left'
     %span.text=raw(t 'views.pagination.previous')

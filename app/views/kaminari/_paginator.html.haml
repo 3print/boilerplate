@@ -6,7 +6,7 @@
 -#    remote:        data-remote
 -#    paginator:     the paginator that renders the pagination tags inside
 = paginator.render do
-  %ul.pagination
+  %ul.pagination.d-flex.justify-content-center.mt-3
     = first_page_tag
     = prev_page_tag
     - each_page do |page|
