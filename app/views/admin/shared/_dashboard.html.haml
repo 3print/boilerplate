@@ -64,7 +64,7 @@
           = models_list scope, options
           - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.namespaced_name.to_sym].compact) rescue nil)
             .card-footer
-              = link_to new_url, class: 'btn btn-success' do
+              = link_to new_url, class: 'btn btn-outline-success' do
                 = icon_for(:create)
                 %span.text= 'admin.actions.add'.t
 
@@ -73,6 +73,6 @@
           = collection scope, resource_class: klass, no_pagination: true
           - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.namespaced_name.to_sym].compact) rescue nil)
             .card-footer
-              = link_to new_url, class: 'btn btn-success' do
+              = link_to new_url, class: 'btn btn-outline-success' do
                 = icon_for(:create)
                 %span.text= 'admin.actions.add'.t

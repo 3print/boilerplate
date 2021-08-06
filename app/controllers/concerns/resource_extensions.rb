@@ -106,11 +106,11 @@ module ResourceExtensions
   end
 
   def resource_count
-    resource_class.all.size
+    resource_class.present? ? resource_class.all.size : resource.size
   end
 
   def resource_count_label
-    resource_class.all.size
+    resource_class.present? ? resource_class.all.size : resource.size
   end
 
   def resource opts={}

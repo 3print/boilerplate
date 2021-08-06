@@ -98,9 +98,13 @@ module ModelsHelper
     return content_tag(:div, 0, class: 'badge bg-info tip-left pull-right') if collection.size == 0
 
     model_class = collection.is_a?(Array) ? collection.first.try(:class) : collection.klass
-    content_tag(:div, class: 'badge bg-info tip-left pull-right', title: 'tips.models_count'.t(count: controller.resource_count, singular: "models.#{model_class.namespaced_name}".t.downcase, plural: "models.#{model_class.table_name}".t.downcase)) do
-        concat(controller.resource_count_label)
+    count = collection.size
+    content_tag(:div, class: 'badge bg-info tip-left pull-right', title: 'tips.models_count'.t(count: count, singular: "models.#{model_class.namespaced_name}".t.downcase, plural: "models.#{model_class.table_name}".t.downcase)) do
+        concat(count)
     end
+    # content_tag(:div, class: 'badge bg-info tip-left pull-right', title: 'tips.models_count'.t(count: controller.resource_count, singular: "models.#{model_class.namespaced_name}".t.downcase, plural: "models.#{model_class.table_name}".t.downcase)) do
+    #     concat(controller.resource_count_label)
+    # end
   end
 
   def models_list(collection, options={}, &block)
