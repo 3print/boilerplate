@@ -41,9 +41,9 @@
               %td= a.created_at.l format: :long
               %td
                 - if a.success
-                  = icon :check, class: 'text-success'
+                  %span.text-success= icon :check
                   = 'labels.login_success'.t
                 - else
-                  = icon :times, class: 'text-danger'
+                  %span.text-danger= icon :times
                   = show_field :failure_reason, resource: a
               %td= a.ip

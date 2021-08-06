@@ -37,6 +37,7 @@ import './widgets/popover';
 import './widgets/propagate-input-value';
 import './widgets/select';
 import './widgets/settings-editor';
+import './widgets/table-sort-header';
 
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
@@ -87,8 +88,13 @@ widgets('select-multiple', 'select[multiple]', {
   on: DEFAULT_EVENTS,
   wrapperClass: 'select-multiple form-control',
   itemClass: 'option badge bg-light text-dark',
-})
-
+});
+widgets('table-sort-header', '[data-sort]', {
+  on: DEFAULT_EVENTS,
+  iconAsc: document.querySelector('.tpl.icon-asc').innerHTML,
+  iconDesc: document.querySelector('.tpl.icon-desc').innerHTML,
+  iconReset: document.querySelector('.tpl.icon-reset').innerHTML,
+});
 widgets('settings-editor', '.settings_editor', {on: DEFAULT_EVENTS});
 widgets('settings-form', '[data-settings]', {on: DEFAULT_EVENTS});
 // widgets('settings_image_uploader', '[data-settings] .file', {on: DEFAULT_EVENTS, unless: isInTemplate});

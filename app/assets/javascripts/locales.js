@@ -22,6 +22,9 @@ export const LOCALES = {
       file_preview: {
         label: "Browse…",
       },
+      table_header_sort: {
+        reset: 'Reset order',
+      },
     },
 
     settings_input: {
@@ -114,6 +117,9 @@ export const LOCALES = {
       },
       file_preview: {
         label: "Parcourir…",
+      },
+      table_header_sort: {
+        reset: 'Remettre à zéro le tri',
       },
     },
 

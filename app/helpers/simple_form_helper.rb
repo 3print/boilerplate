@@ -5,7 +5,7 @@ module SimpleFormHelper
     capture_haml do
       haml_tag 'div', class: 'card-footer' do
         haml_tag 'fieldset', class: 'form-actions' do
-          haml_tag 'button', class: "btn btn-success #{options[:class]}" do
+          haml_tag 'button', class: "btn btn-outline-success #{options[:class]}" do
             haml_concat icon(options[:icon] || 'check')
             haml_concat options[:submit] || "actions.submit".t
           end
@@ -13,7 +13,7 @@ module SimpleFormHelper
           haml_concat capture_haml(&block) if block_given?
 
           if request.referrer && !options[:no_cancel]
-            haml_tag 'a', href: request.referrer, class: "btn btn-danger #{options[:class]}" do
+            haml_tag 'a', href: request.referrer, class: "btn btn-outline-danger #{options[:class]}" do
               haml_concat icon(options[:cancel_icon] || 'x')
               haml_concat options[:cancel] || 'actions.cancel'.t
             end

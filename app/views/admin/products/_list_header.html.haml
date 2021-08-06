@@ -1,0 +1,6 @@
+= contextual_partial 'list_header_before_name', locals: {resource_name: resource_name}
+%th.item{class: %w(name name_desc).include?(params[:o]) ? 'table-active' : '', data: {sort: params[:o] == 'name' ? 'name_desc' : 'name', titleasc: 'tables.sort.name_asc'.t, titledesc: 'tables.sort.name_desc'.t, reverse: true, reversed: params[:o] == 'name_desc'}}= resource_name
+= contextual_partial 'list_header_after_name', locals: {resource_name: resource_name}
+
+- in_admin do
+  %th= 'tables.columns.actions'.t

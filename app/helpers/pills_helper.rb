@@ -14,7 +14,7 @@ module PillsHelper
   def pills
     return nil unless @_pills.present?
 
-    out = content_tag :div, class: 'pull-right btn-group' do
+    out = content_tag :div, class: 'pills pull-right btn-group' do
       @_pills.each do |path|
         caption = path[0]
 
@@ -23,7 +23,7 @@ module PillsHelper
         if path[2] && path[2][:class]
           path[2][:class] = "btn #{path[2][:class]}"
         else
-          path[2] = { class: 'btn btn-secondary' }
+          path[2] = { class: 'btn btn-outline-secondary' }
         end
 
         if path[1]
