@@ -105,6 +105,14 @@ module ResourceExtensions
     params[resource_name.singularize]
   end
 
+  def resource_count
+    resource_class.all.size
+  end
+
+  def resource_count_label
+    resource_class.all.size
+  end
+
   def resource opts={}
     return @resource if @resource.present?
     return nil if resource_class.nil?
