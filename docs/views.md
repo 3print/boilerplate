@@ -21,6 +21,35 @@ The content partial will then create the actual content of the page as follow:
 
 ### Helpers
 
+#### Actions
+
+The `classname_for_action` function returns the bootstrap class associated with the given rails action, such as:
+- index: secondary
+- destroy: danger
+- show: secondary
+- new: success
+- masquerade: warning
+
+#### Application
+
+The `current_controller?` function returns whether the current controller's name is the one passed as argument or not.
+
+The `in_admin` helper takes a block and will only execute it if the current controller is an admin controller.
+
+#### Assets
+
+Various helpers to inline content from assets into views.
+
+- `inline_file`: Returns the raw content of the file
+- `inline_js`: Returns a `script` tag with the content of the specified file in it.
+- `inline_css`: Returns a `style` tag with the content of the specified file in it.
+- `compile`: Used to compile and inline a single `*.sass` file to be used in a mail template.
+- `styles`: Used to compile and inline multiple `*.sass` file to be used in a mail template.
+
+#### Avatar
+
+The `show_avatar` function returns the markup for the corresponding image version decorated with the `avatar` class.
+
 #### Collections
 
 The content of the index page content is created using the `collection` helper. This helper will generate a HTML table using various partials that can be overridden on a per-model basis.
@@ -99,26 +128,30 @@ The `breadcrumb` helper will produce two types of entries depending on the amoun
 
 #### Navigation
 
-The `nav_link_to` helper is used to generate the navigation bar visible in the admin header.
+The `nav_link_to` and `admin_nav_link_to` helper are used to generate navigation links in your application. The main difference between both helpers is that `admin_nav_link_to` will check edit permissions prior to build the link.
 
-See how it's used in the [`app/views/admin/shared/_nav.html.haml` file](../app/views/admin/shared/_nav.html.haml)
+Both helpers work within a specified `context`, defined using the `with_nav_context` function.
+Currently available contexts are.
+- `:sidebar`: To render links and groups using the classes used in the admin sidebar.
+- `:navbar`: To render links and groups as bootstrap navbar links and dropdowns.
+
+See how it's used in the [`app/views/admin/shared/_sidebar.html.haml` file](../app/views/admin/shared/_sidebar.html.haml)
 
 #### Icons
 
-Several helpers are available to ease the work with icons in UI. By default the helper is configured to work with [FontAwesome](http://fontawesome.io/) but it can be easily modified to support pretty much every icon font out-there.
+Several helpers are available to ease the work with icons in UI. By default the helper is configured to work with [Feather icons](https://feathericons.com/) and will generate inline SVG versions of the icons.
 These helpers are located in the [`app/helpers/icon_helper` file](../app/helpers/icon_helper.rb).
 
 Find below a quick description of these helpers:
 
-- `icon_class`: given a symbol or a string, it returns the class name of the corresponding icon, ie. `icon_class :user` returns `'fa fa-user'`.
-- `icon`: given a symbol or a string, it returns the HTML markup of the icon, ie. `icon :user` returns `<i class="fa fa-user"></i>`.
-- `icon_class_for`: this helper works using the `Iconic` module and returns the class name of the icon associated with the passed-in key.
-- `icon_for`: this helper works using the `Iconic` module and returns the HTML markup of the icon associated with the passed-in key.
+- `icon`: given a symbol or a string, it returns the SVG markup of the icon, ie. `icon :user` returns a SVG string with the corresponding icon.
+- `icon_name_for`: this helper works using the `Feather` module and returns the name of the icon associated with the passed-in key.
+- `icon_for`: this helper works using the `Feather` module and returns the SVG markup of the icon associated with the passed-in key.
 - `text_and_icon`: given a label string and an icon it returns the label wrapped in a `span` followed by the specified icon markup.
 - `icon_and_text`: given a label string and an icon it returns the label wrapped in a `span` preceded by the specified icon markup.
 
-##### Iconic
+##### Feather
 
-The `Iconic` module acts as an icon store within a project. You can use it to associate an icon to any kind of object. For instance, using `Iconic.set_icon User, :user` will register the `user` icon to the `User` model class so that calling `icon User` returns `<i class="fa fa-user"></i>`.
+The `Feather` module acts as an icon store within a project. You can use it to associate an icon to any kind of object. For instance, using `Feather.set_icon User, :user` will register the `user` icon to the `User` model class so that calling `icon User` returns the corresponding SVG string.
 
 It is used in all the default views so that you only need to change the association between an action or a model and an icon in a single place and have it taking effect everywhere.

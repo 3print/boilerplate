@@ -23,7 +23,7 @@ module NavigationHelper
     navbar: NAVBAR,
   }
 
-  def with_context(context, &block)
+  def with_nav_context(context, &block)
     self.context = CONTEXTS[context]
     capture_haml(&block)
   end
@@ -35,12 +35,10 @@ module NavigationHelper
     end
     return if !block_given? && cls.present? && cannot?(:edit, cls)
 
-    options[:dropdown] = true
     nav_link_to(url, label, controller_name, ico, options, &block)
   end
 
   def nav_link_to(url, label = nil, controller_name = nil, ico = nil, options = {}, &block)
-
 
     if url.is_a?(Class)
       cls = url
