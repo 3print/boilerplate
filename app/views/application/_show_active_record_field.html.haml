@@ -1,2 +1,2 @@
 %strong= "#{resource.class.table_name.singularize}.#{column}".tmfc
-= link_to value, [controller.controller_namespace, value].flatten
+= link_to resource_label_for(value), [controller.controller_namespace, value].flatten
