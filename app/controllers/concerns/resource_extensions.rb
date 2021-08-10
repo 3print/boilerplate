@@ -118,7 +118,7 @@ module ResourceExtensions
     authorize = opts.delete(:authorize)
     action = params[:action]
 
-    if @resource.present?
+    unless @resource.nil?
       authorize @resource, :"#{action}?" if authorize
       return @resource
     end
