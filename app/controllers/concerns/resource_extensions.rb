@@ -58,9 +58,9 @@ module ResourceExtensions
         if block_given?
           scope = instance_variable_get(key)
           scope = instance_exec scope, &blk
-          instance_variable_set key, scope
+          set_resource key, scope
         else
-          instance_variable_set(key, instance_variable_get(key).send(scope))
+          set_resource(key, instance_variable_get(key).send(scope))
         end
       end
     end
@@ -71,7 +71,7 @@ module ResourceExtensions
       before_action options do
         key = :"@#{resource_name}"
         resource
-        instance_variable_set(key, instance_variable_get(key).page(params[:page] || 1))
+        set_resource(key, instance_variable_get(key).page(params[:page] || 1))
       end
     end
 
@@ -93,7 +93,8 @@ module ResourceExtensions
     self.class.resource_class
   end
 
-  def set_resource val
+  def set_resource key, val
+    instance_variable_set key, val
     @resource = val
   end
 
@@ -114,43 +115,48 @@ module ResourceExtensions
   end
 
   def resource opts={}
-    return @resource if @resource.present?
-    return nil if resource_class.nil?
-
     authorize = opts.delete(:authorize)
     action = params[:action]
+
+    if @resource.present?
+      authorize @resource, :"#{action}?" if authorize
+      return @resource
+    end
+
+    return nil if resource_class.nil?
+
     class_scope = policy_scope(resource_scope)
+
     return if class_scope.nil?
 
     case action
     when 'new', 'create'
       key = :"@#{resource_name.singularize}"
       unless results = instance_variable_get(key)
-        instance_variable_set(key, results = resource_class.new)
+        set_resource(key, results = resource_class.new)
       end
     when 'index'
       key = :"@#{resource_name}"
 
       unless results = instance_variable_get(key)
-        instance_variable_set(key, results = class_scope)
+        set_resource(key, results = class_scope)
       end
     else
       if params[:id].present?
         key = :"@#{resource_name.singularize}"
         unless results = instance_variable_get(key)
           q = resource_scope.where(find_by_key => params[:id])
-          instance_variable_set(key, results = q.first)
+          set_resource(key, results = q.first)
         end
       else
         key = :"@#{resource_name}"
         unless results = instance_variable_get(key)
-          instance_variable_set(key, results = class_scope)
+          set_resource(key, results = class_scope)
         end
       end
     end
     authorize results, :"#{action}?" if authorize && results
     raise ActiveRecord::RecordNotFound if results.nil?
-    @resource = results
   end
   alias_method :load_resource, :resource
 
