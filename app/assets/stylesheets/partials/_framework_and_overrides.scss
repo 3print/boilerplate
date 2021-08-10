@@ -229,11 +229,26 @@ th, .table th {
   white-space: nowrap;
 }
 
-.no-action-labels .table .btn .text {
-  display: none;
+th, td {
+  &.nowrap {
+    white-space: nowrap;
+  }
+
+  &.compact {
+    width: 0;
+  }
 }
-.no-action-labels .table .btn .feather {
-  margin-right: 0;
+
+.no-action-labels .table,
+.table.no-action-labels {
+  .btn {
+    .text {
+      display: none;
+    }
+    .feather {
+      margin-right: 0;
+    }
+  }
 }
 
 [data-sort] .btn {
