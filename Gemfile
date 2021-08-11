@@ -1,12 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.6.7'
 gem 'rails', '~> 5.2'
-gem 'spring',        group: :development
-gem 'unicorn'
-gem 'unicorn-rails'
+gem 'puma', '~> 3.11'
 gem 'settingslogic'
 gem 'sendgrid'
-gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Auth
 gem 'devise'
@@ -62,6 +59,7 @@ gem 'tprint-debug', git: 'https://github.com/3print/tprint-debug'
 gem 'sumo_seed', git: 'https://github.com/3print/sumo_seed', branch: 'cn-rails-upgrade'
 
 group :development do
+  gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'html2haml'
@@ -69,7 +67,6 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
-  gem 'rsense'
   # Guard
   gem 'guard'
   gem 'guard-bundler'
@@ -84,6 +81,14 @@ group :development do
   gem 'spork'#, '1.0.0rc3'
 
   gem 'annotate'
+  gem 'sdoc', '~> 0.4.0'
+
+  gem "web-console"
+  gem "rack-mini-profiler", "~> 2.0"
+
+  gem 'spring', group: :development
+  gem 'spring-watcher-listen', '~> 2.0.0'
+
 end
 
 group :development, :test do
