@@ -95,6 +95,7 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
+    bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
     bootstrap (5.0.1)
@@ -182,25 +183,7 @@ GEM
       railties (>= 5.0.0)
     faker (2.18.0)
       i18n (>= 1.6, < 2)
-    faraday (1.5.0)
-      faraday-em_http (~> 1.0)
-      faraday-em_synchrony (~> 1.0)
-      faraday-excon (~> 1.1)
-      faraday-httpclient (~> 1.0.1)
-      faraday-net_http (~> 1.0)
-      faraday-net_http_persistent (~> 1.1)
-      faraday-patron (~> 1.0)
-      multipart-post (>= 1.2, < 3)
-      ruby2_keywords (>= 0.0.4)
-    faraday-em_http (1.0.0)
-    faraday-em_synchrony (1.0.0)
-    faraday-excon (1.1.0)
-    faraday-httpclient (1.0.1)
-    faraday-net_http (1.0.1)
-    faraday-net_http_persistent (1.1.0)
-    faraday-patron (1.0.0)
     ffi (1.15.3)
-    filetree (1.0.0)
     formatador (0.3.0)
     geocoder (1.6.7)
     globalid (0.4.2)
@@ -268,8 +251,6 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jruby-jars (1.7.27)
-    jruby-parser (0.5.4)
     json (1.8.6)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
@@ -283,9 +264,10 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    kgio (2.11.4)
     launchy (2.5.0)
       addressable (~> 2.7)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -306,9 +288,6 @@ GEM
     minitest (5.14.4)
     multi_json (1.15.0)
     multi_xml (0.6.0)
-    multipart-post (2.1.1)
-    mustermann (1.1.1)
-      ruby2_keywords (~> 0.0.1)
     nenv (0.3.0)
     nested_form (0.3.2)
     nio4r (2.5.7)
@@ -330,12 +309,13 @@ GEM
       interception (>= 0.5)
       pry (>= 0.12.0)
     public_suffix (4.0.6)
+    puma (3.12.6)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     racc (1.5.2)
     rack (2.2.3)
-    rack-protection (2.1.0)
-      rack
+    rack-mini-profiler (2.3.2)
+      rack (>= 1.2.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.6)
@@ -363,7 +343,6 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
-    raindrops (0.19.2)
     rake (13.0.3)
     rb-fchange (0.0.6)
       ffi
@@ -377,30 +356,6 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rmagick (4.2.2)
-    rsense (0.5.18)
-      bundler (~> 1.6)
-      filetree (~> 1.0.0)
-      jruby-jars (~> 1.7.4)
-      jruby-parser (~> 0.5.4)
-      rsense-core (~> 0.6.6)
-      rsense-server (~> 0.5.18)
-      spoon (~> 0.0.4)
-      thor (>= 0.18.1, < 0.20)
-    rsense-core (0.6.6)
-      filetree (~> 1.0.0)
-      jruby-jars (~> 1.7.4)
-      jruby-parser (~> 0.5.4)
-      spoon (~> 0.0.4)
-      thor (>= 0.18.1, < 0.20)
-    rsense-server (0.5.18)
-      bundler (~> 1.6)
-      faraday
-      filetree (~> 1.0.0)
-      jruby-jars (~> 1.7.4)
-      jruby-parser (~> 0.5.4)
-      rsense-core (~> 0.6.6)
-      sinatra
-      spoon (~> 0.0.4)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
@@ -424,7 +379,6 @@ GEM
     rspec-support (3.10.2)
     ruby-vips (2.1.2)
       ffi (~> 1.12)
-    ruby2_keywords (0.0.4)
     ruby_parser (3.16.0)
       sexp_processor (~> 4.15, >= 4.15.1)
     rubyzip (2.3.1)
@@ -453,16 +407,12 @@ GEM
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
-    sinatra (2.1.0)
-      mustermann (~> 1.0)
-      rack (~> 2.2)
-      rack-protection (= 2.1.0)
-      tilt (~> 2.0)
     slack-notifier (2.4.0)
-    spoon (0.0.6)
-      ffi
     spork (0.9.2)
     spring (2.1.1)
+    spring-watcher-listen (2.0.1)
+      listen (>= 2.7, < 4.0)
+      spring (>= 1.2, < 3.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -482,12 +432,6 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
-    unicorn (6.0.0)
-      kgio (~> 2.6)
-      raindrops (~> 0.7)
-    unicorn-rails (2.2.1)
-      rack
-      unicorn
     valid_email2 (4.0.0)
       activemodel (>= 3.2)
       mail (~> 2.5)
@@ -496,6 +440,11 @@ GEM
       i18n
     warden (1.2.9)
       rack (>= 2.0.9)
+    web-console (3.7.0)
+      actionview (>= 5.0)
+      activemodel (>= 5.0)
+      bindex (>= 0.4.0)
+      railties (>= 5.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -541,12 +490,15 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
+  letter_opener
   listen
   nested_form
   pg
   pry-rails
   pry-rescue
+  puma (~> 3.11)
   pundit
+  rack-mini-profiler (~> 2.0)
   rails (~> 5.2)
   rails_layout
   rb-fchange
@@ -554,7 +506,6 @@ DEPENDENCIES
   rb-inotify
   redcarpet
   rmagick
-  rsense
   rspec
   rspec-rails
   sassc-rails
@@ -567,14 +518,14 @@ DEPENDENCIES
   slack-notifier
   spork
   spring
+  spring-watcher-listen (~> 2.0.0)
   sprockets-commoner
   sumo_seed!
   tprint-debug!
   uglifier
-  unicorn
-  unicorn-rails
   valid_email2
   verbs
+  web-console
 
 RUBY VERSION
    ruby 2.6.7p197
