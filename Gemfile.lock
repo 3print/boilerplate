@@ -86,10 +86,6 @@ GEM
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.2.3)
       aws-eventstream (~> 1, >= 1.0.2)
-    babel-source (5.8.35)
-    babel-transpiler (0.7.0)
-      babel-source (>= 4.0, < 6)
-      execjs (~> 2.0)
     bcrypt (3.1.16)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
@@ -316,6 +312,8 @@ GEM
     rack (2.2.3)
     rack-mini-profiler (2.3.2)
       rack (>= 1.2.0)
+    rack-proxy (0.7.0)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.6)
@@ -390,13 +388,13 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    schmooze (0.1.6)
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    semantic_range (3.0.0)
     sendgrid (1.2.4)
       json
     settingslogic (2.0.9)
@@ -416,9 +414,6 @@ GEM
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-commoner (0.6.5)
-      schmooze (~> 0.1.6)
-      sprockets (>= 3, < 5)
     sprockets-rails (3.2.2)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
@@ -445,6 +440,11 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webpacker (5.4.0)
+      activesupport (>= 5.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 5.2)
+      semantic_range (>= 2.3.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -457,7 +457,6 @@ PLATFORMS
 DEPENDENCIES
   annotate
   authtrail
-  babel-transpiler
   better_errors
   binding_of_caller
   bootstrap
@@ -519,13 +518,13 @@ DEPENDENCIES
   spork
   spring
   spring-watcher-listen (~> 2.0.0)
-  sprockets-commoner
   sumo_seed!
   tprint-debug!
   uglifier
   valid_email2
   verbs
   web-console
+  webpacker
 
 RUBY VERSION
    ruby 2.6.7p197
