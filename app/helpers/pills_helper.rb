@@ -14,7 +14,7 @@ module PillsHelper
   def pills
     return nil unless @_pills.present?
 
-    out = content_tag :div, class: 'pills pull-right btn-group' do
+    out = content_tag :div, class: 'pills float-end btn-group' do
       @_pills.each do |path|
         caption = path[0]
 

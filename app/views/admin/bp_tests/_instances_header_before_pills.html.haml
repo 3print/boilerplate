@@ -1,6 +1,6 @@
 - toggle_pill resource, :approve, off: :revocate do |on|
   - if on
-    = icon('sign-out')
+    = icon('x')
     %span.text= 'admin.actions.revocate'.t
   - else
     = icon(:check)
@@ -8,7 +8,7 @@
 
 - toggle_pill resource, :validate do |on|
   - if on
-    = icon('sign-out')
+    = icon('x')
     %span.text= 'admin.actions.unvalidate'.t
   - else
     = icon(:check)
