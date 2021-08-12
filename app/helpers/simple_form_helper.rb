@@ -5,7 +5,7 @@ module SimpleFormHelper
     capture_haml do
       haml_tag 'div', class: 'card-footer' do
         haml_tag 'fieldset', class: 'form-actions' do
-          haml_tag 'button', class: "btn btn-outline-success #{options[:class]}" do
+          haml_tag 'button', class: "btn btn-outline-success #{options[:class]}", type: :submit do
             haml_concat icon(options[:icon] || 'check')
             haml_concat options[:submit] || "actions.submit".t
           end

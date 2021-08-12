@@ -1,5 +1,7 @@
 import {parent, getNode} from 'widjet-utils';
 import widgets from 'widjet';
+import {DisposableEvent, CompositeDisposable} from 'widjet-disposables';
+import EventDelegate from 'utils/events';
 
 export default class NestedFormEvents {
   addFields(e) {
@@ -84,6 +86,11 @@ export default class NestedFormEvents {
 }
 
 window.nestedFormEvents = new NestedFormEvents();
-$(document)
-  .delegate('form a.add_nested_fields',    'click', nestedFormEvents.addFields)
-  .delegate('form a.remove_nested_fields', 'click', nestedFormEvents.removeFields);
+const delegates = [
+  new EventDelegate(document, 'form a.add_nested_fields', {
+    'click': nestedFormEvents.addFields,
+  }),
+  new EventDelegate(document, 'form a.remove_nested_fields', {
+    'click': nestedFormEvents.removeFields,
+  }),
+];

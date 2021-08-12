@@ -1,6 +1,6 @@
 module JsonExtensions
   def arrayify(param_object)
-    if param_object.is_a?(Hash)
+    if param_object.is_a?(ActionController::Parameters)
       if param_object.keys.all? {|k| k.to_s =~ /^\d+$/ }
         param_object.keys.sort.map {|k| arrayify(param_object[k]) }
       else
@@ -15,15 +15,20 @@ module JsonExtensions
   end
 
   def rubyify(param_object)
-    if param_object.is_a?(Hash)
-      if param_object.keys.all? {|k| k.to_s =~ /^\d$/ }
-        param_object.keys.sort.map {|k| rubyify(param_object[k]) }
-      else
-        param_object.each_pair do |k,v|
-          param_object[k] = rubyify(v)
+    if param_object.is_a?(ActionController::Parameters)
+      out = nil
+      if param_object.keys.all? {|k| k.to_s =~ /^\d+$/ }
+        out = {}.with_indifferent_access
+        param_object.keys.sort.each do |k|
+          out[k] = rubyify(param_object[k])
         end
-        param_object
+      else
+        out = {}.with_indifferent_access
+        param_object.each_pair do |k, v|
+          out[k] = rubyify(v)
+        end
       end
+      out
     else
       if param_object =~ /^\d+$/
         param_object.to_i

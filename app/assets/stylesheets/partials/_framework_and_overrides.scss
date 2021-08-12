@@ -26,6 +26,20 @@
   margin-right: 0.5em;
 }
 
+.btn-sm .feather {
+  width: 14px;
+  height: 14px;
+}
+
+.btn-icon {
+  .text {
+    display: none;
+  }
+  .feather {
+    margin-right: 0;
+  }
+}
+
 // Sidebar
 .sidebar-brand {
   img {

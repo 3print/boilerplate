@@ -12,7 +12,7 @@
     = stylesheet_link_tag 'admin', media: 'all'
     = yield :stylesheets
 
-    = javascript_pack_tag 'admin', media: 'all', defer: true
+    = javascript_pack_tag 'admin', media: 'all', 'data-turbolinks-track': true, 'data-turbolinks-eval': false, cache: true, defer: "defer"
     = yield :scripts
 
 
@@ -21,6 +21,7 @@
     %template.tpl.icon-asc= icon('chevron-down')
     %template.tpl.icon-desc= icon('chevron-up')
     %template.tpl.icon-reset= icon('x')
+    %template.tpl.icon-close= icon('x')
 
     .wrapper
       #sidebar.sidebar{role: :navigation}
