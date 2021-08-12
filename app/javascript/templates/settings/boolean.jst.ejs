@@ -1,12 +1,12 @@
 <div class='form-group has-feedback'>
   <div class='controls'>
-    <label for='<%= obj.id %>'><%= obj.label %>
-      <input type='checkbox'
-             id='<%= obj.id %>'
-             <% if(obj.value) { %>checked<% } %>
-             data-name='<%= obj.setting %>'
-             class='form-check-input'>
-      </input>
+    <input type='checkbox'
+           id='<%= locals.id %>'
+           <% if(locals.value) { %>checked<% } %>
+           data-name='<%= locals.setting %>'
+           class='form-check-input'>
+    </input>
+    <label for='<%= locals.id %>'><%= locals.label %>
     </label>
   </div>
 </div>

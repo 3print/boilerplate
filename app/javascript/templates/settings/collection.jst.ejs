@@ -1,17 +1,17 @@
 <div class='form-group has-feedback'>
-  <label for='<%= obj.id %>'><%= obj.label %></label>
+  <label for='<%= locals.id %>'><%= locals.label %></label>
 
   <div class='controls'>
-    <select id='<%= obj.id %>'
-              data-name='<%= obj.setting %>'
+    <select id='<%= locals.id %>'
+              data-name='<%= locals.setting %>'
               placeholder='<%= 'placeholders.select'.t() %>'
-              <% if(obj.settingParameters.required) { %>required<% } %>
-              <% if(obj.settingParameters.multiple) { %>multiple<% } %>
+              <% if(locals.settingParameters.required) { %>required<% } %>
+              <% if(locals.settingParameters.multiple) { %>multiple<% } %>
               style='width: 100%'
               class='form-control'>
 
-      <% obj.settingParameters.values.forEach((value) => { %>
-        <option value="<%= value %>" <%= (obj.value || []).includes(value) ? 'selected' : '' %>><%= value %></option>
+      <% locals.settingParameters.values.forEach((value) => { %>
+        <option value="<%= value %>" <%= (locals.value || []).includes(value) ? 'selected' : '' %>><%= value %></option>
       <% }) %>
     </select>
   </div>

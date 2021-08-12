@@ -165,7 +165,7 @@ widgets('file-preview', 'input[type="file"]', {
           <label for="${input.id}"></label>
           <div class="preview"></div>
           <div class="file-placeholder">
-            <i class="fa fa-upload"></i>
+            ${document.querySelector('.tpl.icon-upload').innerHTML}
             <span>${'widgets.file_preview.label'.t()}</span>
           </div>
           <button class="btn btn-outline-danger btn-sm btn-icon remove-file" type="button" tabindex="-1">${document.querySelector('.tpl.icon-close').innerHTML}</button>

@@ -84,18 +84,12 @@ class FileInput < SimpleForm::Inputs::FileInput
         else
           s << build_file_path(image).html_safe
         end
-        # s << remove_button(true).html_safe
 
         s
       end
     else
       ''
     end
-  end
-
-  def remove_button(visible)
-    out = "<a class='btn btn-danger remove-file' #{!visible && "style='display: none'"}><i class='fa fa-times'></i></a>"
-    out
   end
 
   def default_field_label

@@ -1,25 +1,20 @@
 <div class="file form-group">
-  <label for="<%= obj.id %>"><%= obj.label %></label>
+  <label for="<%= locals.id %>"><%= locals.label %></label>
 
   <div class="controls">
-    <input id="<%= obj.id %>"
-           data-name="<%= obj.setting %>"
-           type="hidden"
-           value="<%= obj.value %>"
-           class="form-control"></input>
-
-    <div class="preview">
-      <div class="progress">
-        <div class="progress-bar progress-bar-success"></div>
-      </div>
-
-      <% if(obj.value) { %>
-        <img class="loaded" src="<%= obj.value %>">
+    <div class="file-content form-control <% if(locals.value) { %>with-value<% } %>">
+      <% if(locals.value) { %>
+        <div class="current-value">
+          <img class="loaded" src="<%= locals.value %>">
+        </div>
       <% } %>
-    </div>
 
-    <button class="btn btn-danger btn-xs">
-      <i class="fa fa-times"></i>
-    </button>
+      <input id="<%= locals.id %>"
+             data-name="<%= locals.setting %>"
+             type="file"
+             value="<%= locals.value %>"
+             <% if(locals.settingParameters.required) { %>required<% } %>
+             class="form-control-file file form-control"></input>
+    </div>
   </div>
 </div>

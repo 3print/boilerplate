@@ -4,7 +4,7 @@ let id = 0;
 class SettingsImageUploader {
   constructor(uploader) {
     this.editor = $(uploader);
-    this.clear_button = this.editor.find('.btn-danger');
+    this.clear_button = this.editor.find('.btn-outline-danger');
     this.active_area = this.editor.find('.controls label');
     this.preview = this.editor.find('.preview');
     this.input = this.editor.find('input');

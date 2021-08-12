@@ -34,7 +34,7 @@ class SettingsInput < SimpleForm::Inputs::TextInput
       res += get_field_row k, v
     end if hash.present?
 
-    res += "<tr><td colspan='3'  class='bg-light'><a href='#' class='add btn btn-outline-success'><i class='fa fa-plus'></i> #{'actions.add'.t}</a></td></tr>"
+    res += "<tr><td colspan='3' class='bg-light'><a href='#' class='add btn btn-outline-success'>#{Feather['plus-square']}</i> #{'actions.add'.t}</a></td></tr>"
 
     res += '</table>'
     res
@@ -72,7 +72,7 @@ class SettingsInput < SimpleForm::Inputs::TextInput
     row += '</td>'
 
     row += '<td>'
-    row += "<a href='#'' class='remove btn btn-outline-danger'>#{Feather[:x]}</a>"
+    row += "<a href=\"#\" class=\"remove btn btn-outline-danger\">#{Feather[:x].gsub("'", '"')}</a>"
 
     row += '</td>'
     row += '</tr>'

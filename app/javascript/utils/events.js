@@ -16,11 +16,9 @@ export default class EventDelegate {
   }
 
   subscribeTo(object, selector, events) {
-    console.log(object);
     if (!(object instanceof HTMLElement) && !(object instanceof HTMLDocument)) {
       [object, selector, events] = [this, object, selector];
     }
-    console.log(object);
     if (typeof selector === 'object') {
       [events, selector] = [selector, NO_SELECTOR];
     }

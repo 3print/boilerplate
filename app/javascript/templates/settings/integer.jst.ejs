@@ -1,14 +1,14 @@
 <div class='form-group has-feedback'>
-  <label for='<%= obj.id %>'><%= obj.label %></label>
+  <label for='<%= locals.id %>'><%= locals.label %></label>
 
   <div class='controls'>
     <input type='number'
-           id='<%= obj.id %>'
-           value='<%= obj.value || obj.settingParameters.default || "" %>'
-           step='<%= obj.settingParameters.step || 1 %>'
-           <% if(obj.settingParameters.min != undefined) { %>min="<%= obj.settingParameters.min %>"<% } %>
-           <% if(obj.settingParameters.max != undefined) { %>max="<%= obj.settingParameters.max %>"<% } %>
-           <% if(obj.settingParameters.required) { %>required<% } %>
+           id='<%= locals.id %>'
+           value='<%= locals.value || locals.settingParameters.default || "" %>'
+           step='<%= locals.settingParameters.step || 1 %>'
+           <% if(locals.settingParameters.min != undefined) { %>min="<%= locals.settingParameters.min %>"<% } %>
+           <% if(locals.settingParameters.max != undefined) { %>max="<%= locals.settingParameters.max %>"<% } %>
+           <% if(locals.settingParameters.required) { %>required<% } %>
            class='form-control'>
     </input>
   </div>
