@@ -1,20 +1,17 @@
 !!!
 = cc_html lang: :fr, class: 'no-js' do
   %head
+    %title= content_for?(:title) ? yield(:title) : 'admin_app_name'.t
+
     %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=no", name: "viewport"}/
     %meta{charset: "utf-8"}
     %meta{name: "apple-mobile-web-app-capable", content: "yes"}/
-
-    %title= content_for?(:title) ? yield(:title) : 'admin_app_name'.t
-
     %meta{name: "description", content: "#{content_for?(:description) ? yield(:description) : 'admin_app_name'.t}"}
-
-    %link{href: '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', media: 'screen', rel: 'stylesheet'}
+    = csrf_meta_tags
 
     = stylesheet_link_tag 'admin', media: 'all'
-    %link{href: "https://fonts.googleapis.com/css?family=Raleway:400,300,600", rel: "stylesheet", type: "text/css"}/
     = yield :stylesheets
-    = csrf_meta_tags
+
 
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}

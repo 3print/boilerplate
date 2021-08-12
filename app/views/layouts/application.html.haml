@@ -31,27 +31,27 @@
 !!!
 = cc_html lang: :fr, class: 'no-js' do
   %head
-    %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=no", name: "viewport"}/
-    %meta{charset: "utf-8"}/
-    %meta{name: "apple-mobile-web-app-capable", content: "yes"}/
-
     %title= title
-    %meta{name: "description", content: "#{description}"}/
-    = yield :meta
 
-    %link{href: '//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', media: 'screen', rel: 'stylesheet'}
 
     %meta{name: "apple-mobile-web-app-capable", content: "yes"}/
     %meta{name: "mobile-web-app-capable", content: "yes"}/
     %meta{name: "apple-mobile-web-app-status-bar-style", content: "black"}/
+    %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=no", name: "viewport"}/
+    %meta{charset: "utf-8"}/
+    %meta{name: "apple-mobile-web-app-capable", content: "yes"}/
+    %meta{name: "description", content: "#{description}"}/
+    = yield :meta
+    = csrf_meta_tags
 
     %link{ rel: "apple-touch-icon", href:"/images/apple-touch-icon.png"}/
 
     = favicon_link_tag 'favicon.ico'
     = stylesheet_link_tag 'application', media: 'all'
-    %link{href: "https://fonts.googleapis.com/css?family=Raleway:400,300,600", rel: "stylesheet", type: "text/css"}/
     = yield :styles
-    = csrf_meta_tags
+
+    = javascript_pack_tag 'application', defer: true
+    = yield :scripts
 
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
@@ -96,5 +96,4 @@
           = yield :after_content
           = yield :after_page
 
-    = javascript_include_tag 'application'
-    = yield :scripts
+    = yield :inline_scripts
