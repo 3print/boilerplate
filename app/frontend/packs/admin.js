@@ -6,7 +6,7 @@ import {parent, getNode} from 'widjet-utils';
 import {getTextPreview, getPDFPreview} from 'widjet-file-upload';
 import 'nested_form';
 
-// import 'bootstrap';
+import 'bootstrap';
 import 'widjet-validation';
 import 'widjet-select-multiple';
 import 'widjet-file-upload';
