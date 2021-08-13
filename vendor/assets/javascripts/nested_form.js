@@ -1,7 +1,7 @@
 import {parent, getNode} from 'widjet-utils';
 import widgets from 'widjet';
 import {DisposableEvent, CompositeDisposable} from 'widjet-disposables';
-import EventDelegate from 'utils/events';
+import EventDelegate from 'js/utils/events';
 
 export default class NestedFormEvents {
   addFields(e) {

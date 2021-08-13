@@ -1,4 +1,4 @@
-import I18n from '../utils/i18n';
+import I18n from '../js/utils/i18n';
 I18n.attachToWindow();
 
 import widgets from 'widjet';
@@ -6,21 +6,21 @@ import {parent, getNode} from 'widjet-utils';
 import {getTextPreview, getPDFPreview} from 'widjet-file-upload';
 import 'nested_form';
 
+// import 'bootstrap';
 import 'widjet-validation';
 import 'widjet-select-multiple';
 import 'widjet-file-upload';
 import {Markdown} from 'widjet-text-editor'
 
-import '../widgets/auto-resize';
-import '../widgets/collapse';
-// import '../widgets/datepicker';
-import '../widgets/field-limit';
-import '../widgets/navigation-highlight';
-import '../widgets/popover';
-import '../widgets/propagate-input-value';
-import '../widgets/select';
-import '../widgets/settings-editor';
-import '../widgets/table-sort-header';
+import '../js/widgets/auto-resize';
+import '../js/widgets/collapse';
+import '../js/widgets/field-limit';
+import '../js/widgets/navigation-highlight';
+import '../js/widgets/popover';
+import '../js/widgets/propagate-input-value';
+import '../js/widgets/select';
+import '../js/widgets/settings-editor';
+import '../js/widgets/table-sort-header';
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY';

@@ -15,5 +15,5 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import '../templates/index.js';
+import '../js/templates/index.js';
 import './admin';
