@@ -199,14 +199,14 @@ module ResourceExtensions
     end
   end
 
-  def resource_path action=nil
-    resource_path_for resource, action
+  def resource_path action=nil, resource=nil
+    resource_path_for resource || self.resource, action
   end
 
-  def route_exists_for?(action)
+  def route_exists_for?(action, record=nil)
     route_exist = true
     begin
-      polymorphic_url(resource_path(action))
+      polymorphic_url(resource_path(action, record))
     rescue => e
       TPrint.debug e
       TPrint.debug e.backtrace

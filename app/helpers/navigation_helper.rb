@@ -32,7 +32,11 @@ module NavigationHelper
     if url.is_a?(Class)
       cls = url
       options = label if label.is_a?(Hash)
+    elsif url.is_a?(ApplicationRecord)
+      cls = url
+      options = label if label.is_a?(Hash)
     end
+
     return if !block_given? && cls.present? && cannot?(:edit, cls)
 
     nav_link_to(url, label, controller_name, ico, options, &block)
@@ -47,6 +51,13 @@ module NavigationHelper
       label = cls.t
       controller_name = cls.name.pluralize.underscore
       ico = icon_name_for(cls)
+    elsif url.is_a?(ApplicationRecord)
+      cls = url
+      options = label if label.is_a?(Hash)
+      url = [controller.controller_namespace[0]] + [cls]
+      label = resource_label_for(cls)
+      controller_name = cls.class.name.pluralize.underscore
+      ico = icon_name_for(cls.class)
     end
 
     url = options.delete(:url) if options[:url].present?
