@@ -4,14 +4,13 @@ module TableHelper
 
     extra_title = options.delete(:extra_title)
     before_title = options.delete(:before_title)
-    content_class = options.delete(:content_class)
     actions = options.delete(:actions)
 
     title_options = options.delete(:title) || {}
     content_options = options.delete(:content) || {}
 
-    if options[:class]
-      options[:class] = 'card ' + options[:class]
+    if options[:class].present?
+      options[:class] += ' card'
     else
       options[:class] = 'card'
     end
@@ -21,13 +20,6 @@ module TableHelper
     else
       title_options[:class] = 'card-header'
     end
-
-    if content_options[:class]
-      content_options[:class] = content_options[:class]
-    else
-      content_options[:class] = ''
-    end
-    content_options[:class] += ' ' + content_class if content_class
 
     content_tag(:div, options) do
       concat(content_tag(:div, title_options) do

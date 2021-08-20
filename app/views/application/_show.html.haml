@@ -1,6 +1,6 @@
 - columns = default_columns_for_object(resource)
 
-= widget_box 'labels.informations'.t, :info, content_class: 'nopadding' do
+= widget_box 'labels.informations'.t, :info do
   = render_partial_for_user 'show_before_fields'
   %ul.list-group.list-group-flush
     - columns.each do |col|

@@ -20,7 +20,7 @@ widgets.define('table-sort-header', (options) => (el) => {
 
   const btn = document.createElement('button');
   btn.name = 'o';
-  btn.className = 'btn btn-outline-secondary btn-sm pull-right';
+  btn.className = 'btn btn-outline-secondary btn-sm float-end';
   btn.title = title;
   btn.value = value;
   btn.innerHTML = icon;
