@@ -1,4 +1,5 @@
-@import 'bootstrap/variables'
+@import "bootstrap/functions";
+@import 'bootstrap/variables';
 
 @import "mixins/boxes";
 @import "mixins/pseudo_elements";

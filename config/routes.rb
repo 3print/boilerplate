@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     passwords: 'passwords',
   }
 
-  resources :bp_tests # BOILERPLATE_ONLY
+  resources :bp_tests do # BOILERPLATE_ONLY
+    collection do        # BOILERPLATE_ONLY
+      get :mail          # BOILERPLATE_ONLY
+    end                  # BOILERPLATE_ONLY
+  end                    # BOILERPLATE_ONLY
   namespace :admin do
     root to: 'home#index'
 
