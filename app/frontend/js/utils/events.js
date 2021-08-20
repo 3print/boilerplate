@@ -36,15 +36,18 @@ export default class EventDelegate {
     }
     const eventsForObject = this.eventsMap.get(object);
     const disposablesForObject = this.disposablesMap.get(object);
+
     eachPair(events, (event, callback) => {
-      if (eventsForObject[event] == null) {
-        eventsForObject[event] = {};
-        disposablesForObject[event] = this.createEventListener(object, event);
+      if (eventsForObject[selector] == null) {
+        eventsForObject[selector] = {};
+        disposablesForObject[selector] = {};
       }
-      return eventsForObject[event][selector] = callback;
+      disposablesForObject[selector][event] = this.createEventListener(object, event);
+      eventsForObject[selector][event] = callback;
     });
+
     return new Disposable(() => {
-      return this.unsubscribeFrom(object, selector, events);
+      this.unsubscribeFrom(object, selector, events);
     });
   }
 
@@ -99,7 +102,7 @@ export default class EventDelegate {
       if (event.isPropagationStopped) {
         return;
       }
-      return this.eachSelector(eventsForObject, (selector, callback) => {
+      return this.eachSelector(eventsForObject, event, (selector, callback) => {
         var matched;
         matched = this.targetMatch(node, selector);
         if (event.isImmediatePropagationStopped || !matched) {
@@ -110,18 +113,20 @@ export default class EventDelegate {
     });
   }
 
-  eachSelector(eventsForObject, callback) {
-    var i, key, keys, len;
-    keys = Object.keys(eventsForObject);
+  eachSelector(eventsForObject, event, callback) {
+    const keys = Object.keys(eventsForObject);
+
     if (keys.indexOf(NO_SELECTOR) !== -1) {
       keys.splice(keys.indexOf(NO_SELECTOR), 1);
     }
+
     keys.sort(function(a, b) {
       return b.split(' ').length - a.split(' ').length;
     });
-    for (i = 0, len = keys.length; i < len; i++) {
-      key = keys[i];
-      if (callback(key, eventsForObject[key])) {
+
+    for (let i = 0, len = keys.length; i < len; i++) {
+      const key = keys[i];
+      if (callback(key, eventsForObject[key][event.type])) {
         return true;
       }
     }
@@ -156,16 +161,23 @@ export default class EventDelegate {
   }
 
   decorateEvent(e) {
-    var overriddenStop, overriddenStopImmediate;
-    overriddenStop = Event.prototype.stopPropagation;
+    const overriddenStop = Event.prototype.stopPropagation;
+    const overriddenStopImmediate = Event.prototype.stopImmediatePropagation;
+    const overriddenPrevent = Event.prototype.preventDefault;
+
     e.stopPropagation = function() {
       this.isPropagationStopped = true;
-      return overriddenStop.apply(this, arguments);
+      overriddenStop.apply(this, arguments);
     };
-    overriddenStopImmediate = Event.prototype.stopImmediatePropagation;
-    return e.stopImmediatePropagation = function() {
-      this.isImmediatePropagationStopped = true;
-      return overriddenStopImmediate.apply(this, arguments);
+
+    e.stopPropagation = function() {
+      this.isPropagationStopped = true;
+      overriddenStop.apply(this, arguments);
+    };
+
+    e.preventDefault = function() {
+      this.isDefalutPrevented = true;
+      overriddenPrevent.apply(this, arguments);
     };
   }
 
