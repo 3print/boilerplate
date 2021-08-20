@@ -8,12 +8,12 @@ module WickedPdfHelper
 
   def wicked_pdf_image_path(img, options={})
     asset = Rails.application.assets.find_asset(img)
-    "file://#{asset.pathname.to_s}"
+    "file://#{asset.filename.to_s}"
   end
 
   def wicked_pdf_image_tag(img, options={})
     asset = Rails.application.assets.find_asset(img)
-    image_tag "file://#{asset.pathname.to_s}", options
+    image_tag "file://#{asset.filename.to_s}", options
   end
 
   def wicked_pdf_font_path(font, options={})
@@ -21,13 +21,13 @@ module WickedPdfHelper
     if options[:url]
       "#{Rails.application.config.action_mailer.asset_host}/assets/#{font}"
     else
-      "file://#{asset.pathname.to_s}"
+      "file://#{asset.filename.to_s}"
     end
   end
 
   def wicked_pdf_javascript_src_tag(jsfile, options={})
     asset = Rails.application.assets.find_asset(jsfile)
-    javascript_include_tag "file://#{asset.pathname.to_s}", options
+    javascript_include_tag "file://#{asset.filename.to_s}", options
   end
 
   def wicked_pdf_javascript_include_tag(*sources)
