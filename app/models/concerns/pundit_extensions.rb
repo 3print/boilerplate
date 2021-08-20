@@ -1,4 +1,4 @@
-module Concerns::PunditExtensions
+module PunditExtensions
   extend ActiveSupport::Concern
 
   included do
@@ -6,11 +6,13 @@ module Concerns::PunditExtensions
       *namespaces, class_name = self.name.split('::')
       namespace = namespaces.empty? ? Object : namespaces.join('::').constantize
 
-      policy_class_name = "#{class_name}Policy"
-      policy_class = Class.new(policy)
+      unless namespace.const_defined? "#{class_name}Policy"
+        policy_class_name = "#{class_name}Policy"
+        policy_class = Class.new(policy)
 
-      namespace.const_set(policy_class_name, policy_class)
-      policy_class.class_eval(&blk) if block_given?
+        namespace.const_set(policy_class_name, policy_class)
+        policy_class.class_eval(&blk) if block_given?
+      end
     end
   end
 end

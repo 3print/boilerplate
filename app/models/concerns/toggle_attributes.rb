@@ -1,4 +1,4 @@
-module Concerns::ToggleAttributes
+module ToggleAttributes
   extend ActiveSupport::Concern
 
   included do

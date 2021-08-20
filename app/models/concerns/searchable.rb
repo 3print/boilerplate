@@ -1,4 +1,4 @@
-module Concerns::Searchable
+module Searchable
 
   def self.extended(base)
     base.class_eval do

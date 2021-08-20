@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module PDFController
+module PdfController
   extend ActiveSupport::Concern
 
   included do

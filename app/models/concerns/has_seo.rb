@@ -1,4 +1,4 @@
-module Concerns::HasSeo
+module HasSeo
   extend ActiveSupport::Concern
 
   def self.included(base = nil, &block)

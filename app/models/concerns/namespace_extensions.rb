@@ -1,4 +1,4 @@
-module Concerns::NamespaceExtensions
+module NamespaceExtensions
   extend ActiveSupport::Concern
 
   included do

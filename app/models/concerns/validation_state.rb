@@ -1,4 +1,4 @@
-module Concerns::ValidationState
+module ValidationState
   extend ActiveSupport::Concern
 
   included do

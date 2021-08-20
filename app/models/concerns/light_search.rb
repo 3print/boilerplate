@@ -1,4 +1,4 @@
-module Concerns::LightSearch
+module LightSearch
 
   def light_search_by(*columns, &block)
     scope :with_text, -> (q) {

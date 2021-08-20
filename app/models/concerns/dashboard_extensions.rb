@@ -1,4 +1,4 @@
-module Concerns::DashboardExtensions
+module DashboardExtensions
   extend ActiveSupport::Concern
 
   included do

@@ -1,4 +1,4 @@
-module Concerns::NameInUrl
+module NameInUrl
   extend ActiveSupport::Concern
 
   included do

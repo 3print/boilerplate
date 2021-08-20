@@ -1,10 +1,12 @@
-CLASSNAME_BY_ACTION = {
-  index: 'secondary',
-  destroy: 'danger',
-  show: 'secondary',
-  new: 'success',
-  masquerade: 'warning'
-}
+unless defined?(CLASSNAME_BY_ACTION)
+  CLASSNAME_BY_ACTION = {
+    index: 'secondary',
+    destroy: 'danger',
+    show: 'secondary',
+    new: 'success',
+    masquerade: 'warning'
+  }
+end
 
 module ActionsHelper
   def classname_for_action(action)

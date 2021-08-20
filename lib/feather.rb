@@ -16,15 +16,15 @@ module Feather
 
     def icon_name_for(resource)
       name = @icons[resource] || @default_icon
-      name = @default_icon if !exists?(name)
+      name = @default_icon unless exists?(name)
       name
     end
 
     def get_icon(resource)
       name = @icons[resource] || @default_icon
-      name = @default_icon if !exists?(name)
+      name = @default_icon unless exists?(name)
 
-      transform_svg(name, FEATHER_SVGS[name])
+      transform_svg(name, FeatherSvgs[name])
     end
 
     def transform_svg(name, src)
@@ -37,11 +37,11 @@ module Feather
 
     def [] (name)
       name = @default_icon if !exists?(name)
-      transform_svg(name, FEATHER_SVGS[name])
+      transform_svg(name, FeatherSvgs[name])
     end
 
     def exists?(icon)
-      FEATHER_SVGS.has_key?(icon)
+      FeatherSvgs.has_key?(icon)
     end
   end
 end

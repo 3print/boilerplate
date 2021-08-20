@@ -23,9 +23,9 @@
 #
 
 class BpTest < ApplicationRecord
-  include Concerns::HasSeo
-  extend Concerns::Orderable
-  extend Concerns::ImageGravity
+  include HasSeo
+  extend Orderable
+  extend ImageGravity
 
   mount_uploader :image, ImageUploader
   mount_uploader :visual, ImageUploader

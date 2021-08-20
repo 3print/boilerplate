@@ -1,4 +1,4 @@
-module Concerns::Orderable
+module Orderable
 
   def update_items_sequences(sequences)
     values = sequences.map do |k,v|

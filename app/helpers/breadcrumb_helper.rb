@@ -62,8 +62,7 @@ module BreadcrumbHelper
 
         li_class = path[2].delete(:class) if path[2]
 
-        concat content_tag(:li, caption, class: li_class, itemprop: "itemListElement", itemscope: true,
-        itemtype: "http://schema.org/ListItem", class: "breadcrumb-item #{i == items_count ? 'active' : ''}")
+        concat content_tag(:li, caption, itemprop: "itemListElement", itemscope: true, itemtype: "http://schema.org/ListItem", class: "#{li_class}breadcrumb-item #{i == items_count ? 'active' : ''}")
       end
     end
   end

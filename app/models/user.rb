@@ -27,8 +27,8 @@
 #
 
 class User < ApplicationRecord
-  extend Concerns::LightSearch
-  extend Concerns::ImageGravity
+  extend LightSearch
+  extend ImageGravity
   include ActiveModel::Validations
 
   enum role: %w(user admin).freeze

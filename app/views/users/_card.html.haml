@@ -6,7 +6,7 @@
   = user.name
 
 = "(#{user.email})"
-- if !user.user?
+- unless user.user?
   .details
     - if user.role == 'admin'
       .badge.bg-warning= "enums.user.role.#{user.role}".t

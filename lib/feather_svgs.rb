@@ -1,4 +1,4 @@
-FEATHER_SVGS = {
+FeatherSvgs = {
   'activity' => '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>',
   'airplay' => '<path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon>',
   'alert-circle' => '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>',

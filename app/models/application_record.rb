@@ -1,5 +1,5 @@
 class ApplicationRecord < ActiveRecord::Base
-  include Concerns::CommonExtensions
+  include CommonExtensions
 
   self.abstract_class = true
 end

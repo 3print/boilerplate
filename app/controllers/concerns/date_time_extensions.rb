@@ -6,7 +6,6 @@ module DateTimeExtensions
   included do
     def self.process_date_params
       before_action do
-        p 'here'
         self.process_date_params params
       end
     end
@@ -14,7 +13,6 @@ module DateTimeExtensions
   end
 
   def process_date_params(params)
-    p params.keys
     params.keys.each do |key|
       if /__date$/ =~ key.to_s
         attr_name = key.to_s.gsub(/__date$/, '')
