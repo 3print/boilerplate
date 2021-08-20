@@ -14,7 +14,12 @@
 
       if opts[:scope].present?
         scope = opts[:scope]
-        scope = scope.is_a?(Array) ? klass.send(scope[0], instance_exec(&scope[1])) : klass.send(scope)
+        if scope.is_a?(Array)
+          scope_arg = scope[1]
+          scope = klass.send(scope[0], instance_exec(&scope_arg))
+        else
+          klass.send(scope)
+        end
       else
         scope = klass
       end
@@ -22,6 +27,8 @@
       scope = opts[:order].present? ? scope.order(opts[:order]) : scope.order('created_at DESC')
       scope_counter = collection_counter(scope)
       scope = opts[:limit].present? ? scope.limit(opts[:limit]) : scope.limit(5)
+
+      has_create_button = (opts[:create_action].nil? || opts[:create_action]) && can?(:create, klass) && (new_url = url_for([:new, :admin, klass.namespaced_name.to_sym].compact) rescue nil)
 
     %div{class: "col-md-#{size*6}"}
       - title_content = opts[:title] || "models.dashboard.#{klass.table_name}".t(default: render_partial_for_user('index_panel_header', locals: {resource_class: klass}))
@@ -38,7 +45,8 @@
             try(:"admin_resource_#{c}_proc", *args) ||
             try(:"resource_#{c}_proc", *args) ||
             try(:"#{c}_proc", *args) ||
-            try(c, *args)
+            try(c, *args) ||
+            generic_resource_proc(c, *args)
           end
 
           options = {
@@ -54,7 +62,6 @@
             }.flatten.compact,
           }.reverse_merge(opts)
 
-
         .card{class: size == 1 && 'short-actions'}
           .card-header
             = scope_counter
@@ -63,7 +70,8 @@
               = link_to title_content, url
 
           = models_list scope, options
-          - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.namespaced_name.to_sym].compact) rescue nil)
+
+          - if has_create_button
             .card-footer
               = link_to new_url, class: 'btn btn-outline-success' do
                 = icon_for(:create)
@@ -72,7 +80,7 @@
       - else
         = widget_box title, class: "#{size == 1 && 'short-actions'}", before_title: collection_counter(klass.where(nil)) do
           = collection scope, resource_class: klass, no_pagination: true
-          - if can?(:create, klass) && (new_url = url_for([:new, :admin, klass.namespaced_name.to_sym].compact) rescue nil)
+          - if has_create_button
             .card-footer
               = link_to new_url, class: 'btn btn-outline-success' do
                 = icon_for(:create)

@@ -99,9 +99,29 @@ module ResourceProcHelper
     end
   end
 
+  def resource_total_price_proc
+    resource_field_proc :total_price do |item|
+      number_to_currency(item.total_price)
+    end
+  end
+
   def resource_user_card_proc
     resource_field_proc :user_card do |item|
       render partial: 'users/card', locals: {user: item}
     end
+  end
+
+  def generic_resource_proc(col)
+
+    resource_field_proc col do |item|
+      value = item.try(col)
+
+      case value
+      when DateTime then value.l(:long)
+      when ActiveSupport::TimeWithZone then value.l(format: :long)
+      else value
+      end
+    end
+
   end
 end
