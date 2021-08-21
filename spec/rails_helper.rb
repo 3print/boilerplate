@@ -91,7 +91,7 @@ RSpec.configure do |config|
 
   Dir[root.join("spec/support/helpers/*.rb")].each do |f|
     const = f.split("/").last.split(".").first.classify.constantize
-    RSpec::Core::ExampleGroup.send :include, const
+    config.include const
   end
 
   TPrint.log_level = 2

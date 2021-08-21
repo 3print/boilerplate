@@ -21,11 +21,14 @@
 #  visual         :string
 #  visual_regions :json
 #
+include FixturesHelper::ExampleMethods
 
 FactoryBot.define do
+
   factory :bp_test do
-    image { fixture_file_upload('/files/sumo.png') }
-    pdf { fixture_file_upload('/files/sumo.pdf') }
+
+    image { fixture_file_upload('sumo.png') }
+    pdf { fixture_file_upload('sumo.pdf') }
     int { rand(10) }
     json { JSON.dump({"string": Faker::Lorem.sentence}) }
     markdown { Faker::Lorem.paragraph }

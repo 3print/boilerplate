@@ -1,10 +1,10 @@
 module BaseHelper
   def included(receiver)
-    if const_defined? :ExampleGroupMethods
+    if self.const_defined? :ExampleGroupMethods
       receiver.extend self::ExampleGroupMethods
     end
 
-    if const_defined? :ExampleMethods
+    if self.const_defined? :ExampleMethods
       receiver.send :include, self::ExampleMethods
     end
   end
