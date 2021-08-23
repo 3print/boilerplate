@@ -26,6 +26,7 @@ class BpTest < ApplicationRecord
   include HasSeo
   extend Orderable
   extend ImageGravity
+  include ImageVersions
 
   mount_uploader :image, ImageUploader
   mount_uploader :visual, ImageUploader
@@ -37,6 +38,9 @@ class BpTest < ApplicationRecord
   markdown_attr :markdown
 
   gravity_enum :image
+  expose_versions_for :visual, {
+    thumb: [60, 60],
+  }
 
   add_to_dashboard weight: 0, size: 2
   set_shared_policy PublicSourceModelPolicy

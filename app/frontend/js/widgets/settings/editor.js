@@ -144,7 +144,6 @@ export default class SettingsEditor {
   }
 
   registerRowEvents(row) {
-    console.log(row.innerHTML);
     const hidden = row.querySelector('input[type="hidden"]');
     const input = row.querySelector('input[type="text"]');
     const select = row.querySelector('select');

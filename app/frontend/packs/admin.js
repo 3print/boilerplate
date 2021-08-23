@@ -2,7 +2,7 @@ import I18n from '../js/utils/i18n';
 I18n.attachToWindow();
 
 import widgets from 'widjet';
-import {parent, getNode} from 'widjet-utils';
+import {asArray, asPair, parent, getNode} from 'widjet-utils';
 import {getTextPreview, getPDFPreview} from 'widjet-file-upload';
 import 'nested_form';
 
@@ -151,6 +151,56 @@ const VALIDATION_OPTIONS = {
 
 widgets('live-validation', '[required]', VALIDATION_OPTIONS);
 widgets('form-validation', 'form', VALIDATION_OPTIONS);
+
+const versionSiblings = (el) =>
+  asArray(parent(el, '.controls').querySelectorAll('input[data-size]'));
+
+const jsonReducer = (attr) => (m, i) => {
+  m[i.getAttribute('data-version-name')] = JSON.parse(i.getAttribute(attr));
+  return m;
+}
+
+const versionsProvider = (el) =>
+  versionSiblings(el).reduce(jsonReducer('data-size'), {});
+
+const versionBoxesProvider = (el) =>
+  versionSiblings(el).reduce(jsonReducer('value'), {});
+
+const onVersionsChange = (el, versions) => {
+  const container = parent(el, '.controls');
+  asPair(versions).forEach(([name, box]) => {
+    if (box) {
+      container.querySelector(`input[data-version-name="${name}"]`).value = JSON.stringify(box);
+    }
+  });
+}
+
+const getVersion = ((img, version) => {
+  const canvas = version.getVersion(img);
+  const div = getNode(`
+    <div class="version">
+      <button type="button" tabindex="-1" class="btn btn-outline-primary"><span>${'actions.edit'.t()}</span></button>
+      <div class="version-meta">
+        <span class="version-name">${version.name}</span>
+        <span class="version-size">${version.size.join('x')}</span>
+      </div>
+    </div>
+  `);
+  div.appendChild(canvas, div.firstChild);
+  return div;
+});
+
+widgets('file-versions', '.with-regions input[type="file"]', {
+  on: 'load',
+  containerSelector: '.form-group.file',
+  initialValueSelector: '.current-value img',
+  previewSelector: '.new-value img',
+  versionsProvider,
+  versionBoxesProvider,
+  onVersionsChange,
+  getVersion,
+});
+
 widgets('file-preview', 'input[type="file"]', {
   on: DEFAULT_EVENTS,
   previewers: [

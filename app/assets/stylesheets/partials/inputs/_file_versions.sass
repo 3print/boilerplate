@@ -1,0 +1,152 @@
+.file .versions
+  display: flex
+  flex-direction: row
+  width: auto
+  margin-top: 6px
+  margin-left: -6px
+  margin-right: -6px
+
+  .version
+    position: relative
+    padding: 6px
+    flex: 1 1 33.33%
+
+    .version-meta
+      margin-bottom: 6px
+      .version-size
+        color: $gray-500
+        margin-left: 6px
+
+        &:before
+          content: '('
+
+        &:after
+          content: ')'
+
+    canvas
+      margin-top: 6px
+      max-width: 100%
+
+    button
+      float: right
+
+.version-editor
+  background: $gray-100
+  border: 1px solid $input-border-color
+  box-shadow: 0 2px 4px 2px rgba(0,0,0,0.1)
+  padding: 12px
+  text-align: center
+  max-width: 80vw
+  z-index: 10
+  position: fixed
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+  .version-preview
+    position: relative
+    overflow: hidden
+    // display: inline-block
+
+    img
+      display: block
+      max-width: 100%
+      max-height: 60vh
+      cursor: crosshair
+
+    .version-box
+      position: absolute
+      border: 1px solid $blue
+      box-shadow: 0 0 0 1000px rgba(0,0,0,0.3)
+
+      &.upsampling
+        border-color: $orange
+
+        .top-handle,
+        .left-handle,
+        .bottom-handle,
+        .right-handle,
+        .top-left-handle,
+        .top-right-handle,
+        .bottom-right-handle,
+        .bottom-left-handle
+          background: $orange
+
+      &:before
+        content: ''
+        pointer-events: none
+        border-top: 1px dotted $gray-500
+        border-bottom: 1px dotted $gray-500
+        +absolute(33%, 0, 33%, 0)
+
+      &:after
+        content: ''
+        pointer-events: none
+        border-left: 1px dotted $gray-500
+        border-right: 1px dotted $gray-500
+        +absolute(0, 33%, 0, 33%)
+
+      .drag-box
+        cursor: grab
+        +absolute(0,0,0,0)
+
+        &:active
+          cursor: grabbing
+
+      .top-handle,
+      .left-handle,
+      .bottom-handle,
+      .right-handle,
+      .top-left-handle,
+      .top-right-handle,
+      .bottom-right-handle,
+      .bottom-left-handle
+        background: $blue
+        +box(4px)
+        +absolute
+
+        &:before
+          content: ''
+          +box(12px)
+          +absolute(-4px, -4px)
+
+      .top-left-handle, .top-right-handle, .top-handle
+        top: -2px
+
+      .bottom-left-handle, .bottom-right-handle, .bottom-handle
+        bottom: -2px
+
+      .top-left-handle, .bottom-left-handle, .left-handle
+        left: -2px
+
+      .top-right-handle, .bottom-right-handle, .right-handle
+        right: -2px
+
+      .top-handle, .bottom-handle
+        cursor: ns-resize
+        left: 50%
+        margin-left: -2px
+
+      .left-handle, .right-handle
+        cursor: ew-resize
+        top: 50%
+        margin-top: -2px
+
+      .top-left-handle, .bottom-right-handle
+        cursor: nwse-resize
+
+      .top-right-handle, .bottom-left-handle
+        cursor: nesw-resize
+
+  .actions
+    @extend .btn-group
+    margin-top: 12px
+
+    button
+      @extend .btn
+
+      &.cancel
+        @extend .btn-outline-danger
+
+      &.save
+        @extend .btn-outline-success

@@ -4,12 +4,17 @@ class FileInput < SimpleForm::Inputs::FileInput
   include ActionView::Helpers::FormOptionsHelper
 
   def input(wrapper_options = nil)
-    buffer = "<div class='controls'><div class='file-content form-control #{object.try("#{attribute_name}?") ? 'with-value' : '' }'>"
+    has_versions = object.respond_to?(:"exposed_versions_for_#{attribute_name}")
+    has_gravity = object.respond_to?(:"#{attribute_name}_gravity")
+    has_alt_text = object.respond_to?(:"#{attribute_name}_alt_text")
+
+    buffer = "<div class='controls'><div class='file-content form-control #{object.try("#{attribute_name}?") ? 'with-value' : '' } #{has_versions ? 'with-regions' : '' }'>"
 
     buffer << preview
 
-    opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
+    wrapper_options[:class] += 'file-input'
 
+    # opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
     # if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::AWS
     #   if object.respond_to?(:"#{attribute_name}_tmp")
     #     buffer << @builder.hidden_field(:"#{attribute_name}_tmp", opts)
@@ -22,11 +27,21 @@ class FileInput < SimpleForm::Inputs::FileInput
     # end
 
     buffer << super
-
     buffer << '</div>'
 
-    has_gravity = object.respond_to?(:"#{attribute_name}_gravity")
-    has_alt_text = object.respond_to?(:"#{attribute_name}_alt_text")
+    if has_versions
+      versions = object.send(:"exposed_versions_for_#{attribute_name}")
+      regions = object.send(:"#{attribute_name}_regions")
+      versions.each_pair do |k,v|
+        buffer << '<input type="hidden" '
+        buffer << "name='#{object_name}[#{attribute_name}_regions][#{k}]' "
+        if regions.present? && regions[k.to_s].present?
+          buffer << "value='#{regions[k.to_s].to_json}' "
+        end
+        buffer << "data-size='#{v.to_json}' "
+        buffer << "data-version-name='#{k}'>"
+      end
+    end
 
     if has_gravity
       input_html_classes << "with-crop-settings"

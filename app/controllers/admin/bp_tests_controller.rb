@@ -15,6 +15,12 @@ class Admin::BpTestsController < Admin::ApplicationController
       bp_params[:json] = arrayify(bp_params[:json])
     end
 
+    if bp_params[:visual_regions].present?
+      bp_params[:visual_regions].each_pair do |k,v|
+        bp_params[:visual_regions][k] = JSON.parse(v)
+      end
+    end
+
     bp_params
   end
 end
