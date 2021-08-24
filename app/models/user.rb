@@ -19,23 +19,27 @@
 #  last_name              :string
 #  role                   :integer
 #  avatar                 :string
-#  avatar_gravity         :integer
 #  password_changed_at    :datetime
 #  locked_at              :datetime
 #  failed_attempts        :integer
 #  unlock_token           :string
+#  avatar_regions         :json
 #
 
 class User < ApplicationRecord
   extend LightSearch
-  extend ImageGravity
+  include ImageVersions
   include ActiveModel::Validations
 
   enum role: %w(user admin).freeze
   after_initialize :set_default_role, if: -> { new_record? }
 
-  gravity_enum :avatar
   mount_uploader :avatar, AvatarUploader
+  expose_versions_for :avatar, {
+    thumb: [60, 60],
+    profile: [128, 128],
+    medium: [300, 300],
+  }
 
   light_search_by :name, :email
 

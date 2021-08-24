@@ -8,10 +8,11 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def resource_params
-    user_params = params.require(:user).permit(:first_name, :last_name, :email, :avatar, :role, :message, :remote_avatar_url, :password, :password_confirmation, :avatar_gravity)
+    user_params = params.require(:user).permit(:first_name, :last_name, :email, :avatar, :role, :message, :password, :password_confirmation, avatar_regions: {})
 
     user_params.delete(:password) if user_params[:password].blank?
     user_params.delete(:password_confirmation) if user_params[:password_confirmation].blank?
+
     user_params
   end
 end

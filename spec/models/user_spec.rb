@@ -19,11 +19,11 @@
 #  last_name              :string
 #  role                   :integer
 #  avatar                 :string
-#  avatar_gravity         :integer
 #  password_changed_at    :datetime
 #  locked_at              :datetime
 #  failed_attempts        :integer
 #  unlock_token           :string
+#  avatar_regions         :json
 #
 
 describe User do

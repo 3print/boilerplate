@@ -17,14 +17,17 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   version :medium do
+    process crop: :medium
     process resize_to_fill: [300, 300]
   end
 
   version :profile do
+    process crop: :profile
     process resize_to_fill: [128, 128]
   end
 
   version :thumb do
+    process crop: :thumb
     process resize_to_fill: [60, 60]
   end
 
@@ -37,5 +40,15 @@ class AvatarUploader < CarrierWave::Uploader::Base
     end
 
     super(*args)
+  end
+
+  def crop(version)
+    regions_key = :"#{mounted_as}_regions"
+    if model.respond_to?(regions_key) && model.send(regions_key)[version.to_s].present?
+      manipulate! do |img|
+        x, y, w, h = model.send(regions_key)[version.to_s]
+        img.crop!(x, y, w, h)
+      end
+    end
   end
 end
