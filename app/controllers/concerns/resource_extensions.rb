@@ -67,11 +67,15 @@ module ResourceExtensions
 
     def self.paginate_resource(options={})
       options[:only] = :index if options.empty?
+      per = options.delete(:per)
 
       before_action options do
         key = :"@#{resource_name}"
         resource
-        set_resource(key, instance_variable_get(key).page(params[:page] || 1))
+
+        paginated_resource = instance_variable_get(key).page(params[:page] || 1)
+        paginated_resource = paginated_resource.per(per) if per.present?
+        set_resource(key, paginated_resource)
       end
     end
 
