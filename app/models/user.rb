@@ -50,8 +50,13 @@ class User < ApplicationRecord
 
   paginates_per 10
 
-  add_to_dashboard size: 1, weight: 2, columns: [:user_card, actions: [:edit,
-   destroy: {method: :delete}]]
+  add_to_dashboard size: 1, weight: 2, columns: [
+    :user_card,
+    actions: [
+      :edit,
+      destroy: {method: :delete}
+    ]
+  ]
 
   validates :email, presence: true, 'valid_email_2/email': true
   validates :first_name, :last_name, presence: true
