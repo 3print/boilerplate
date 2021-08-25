@@ -1,8 +1,10 @@
+import '@rails/ujs';
+
 import I18n from '../js/utils/i18n';
 I18n.attachToWindow();
 
 import widgets from 'widjet';
-import {asArray, asPair, parent, getNode} from 'widjet-utils';
+import {asArray, asPair, parent, getNode, merge} from 'widjet-utils';
 import {getTextPreview, getPDFPreview} from 'widjet-file-upload';
 import 'nested_form';
 
@@ -12,6 +14,7 @@ import 'widjet-select-multiple';
 import 'widjet-file-upload';
 import {Markdown} from 'widjet-text-editor'
 
+import VALIDATION_OPTIONS from '../js/widgets/validation';
 import '../js/widgets/auto-resize';
 import '../js/widgets/collapse';
 import '../js/widgets/field-limit';
@@ -21,6 +24,7 @@ import '../js/widgets/propagate-input-value';
 import '../js/widgets/select';
 import '../js/widgets/settings-editor';
 import '../js/widgets/table-sort-header';
+
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY';
@@ -121,36 +125,14 @@ widgets('propagate-input-value', 'input:not(.select2-offscreen):not(.select2-inp
 
 widgets('field-limit', '[data-limit]', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
-const VALIDATION_OPTIONS = {
+widgets('live-validation', 'input, select, textarea', merge({
   on: DEFAULT_EVENTS,
   unless: isInTemplate,
-  clean(input) {
-    const group = parent(input, '.form-group');
-    if(group) {
-      group.classList.remove('is-valid');
-      group.classList.remove('is-invalid');
-    }
-    input.classList.remove('is-valid');
-    input.classList.remove('is-invalid');
-  },
-  onSuccess(input) {
-    const group = parent(input, '.form-group');
-    if(group) {
-      group.classList.add('is-valid');
-    }
-    input.classList.add('is-valid');
-  },
-  onError(input) {
-    const group = parent(input, '.form-group');
-    if(group) {
-      group.classList.add('is-invalid');
-    }
-    input.classList.add('is-invalid');
-  }
-}
-
-widgets('live-validation', '[required]', VALIDATION_OPTIONS);
-widgets('form-validation', 'form', VALIDATION_OPTIONS);
+}, VALIDATION_OPTIONS));
+widgets('form-validation', 'form', merge({
+  on: DEFAULT_EVENTS,
+  unless: isInTemplate,
+}, VALIDATION_OPTIONS));
 
 const versionSiblings = (el) =>
   asArray(parent(el, '.controls').querySelectorAll('input[data-size]'));
@@ -192,7 +174,7 @@ const getVersion = ((img, version) => {
 
 widgets('file-versions', '.with-regions input[type="file"]', {
   on: 'load',
-  containerSelector: '.form-group.file',
+  containerSelector: '.file-input-container',
   initialValueSelector: '.current-value img',
   previewSelector: '.new-value img',
   versionsProvider,

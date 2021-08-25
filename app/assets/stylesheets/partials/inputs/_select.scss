@@ -29,6 +29,14 @@
       @include absolute(50%, initial, initial, 1.6em);
     }
   }
+
+  .is-valid & {
+    border-color: $success;
+  }
+
+  .is-invalid & {
+    border-color: $danger;
+  }
 }
 
 .select-multiple {
@@ -49,6 +57,14 @@
     cursor: pointer;
 
     @include absolute(0, 0, 0, 0);
+  }
+
+  .is-valid & {
+    border-color: $success;
+  }
+
+  .is-invalid & {
+    border-color: $danger;
   }
 
   .values {

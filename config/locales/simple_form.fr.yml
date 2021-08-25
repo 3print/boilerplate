@@ -18,7 +18,8 @@ fr:
     labels:
       <<: *fields
 
-      crop_settings: 'Partie à converser lors du recadrage :'
+      crop_settings: Partie à converser lors du recadrage
+      alt_text: Texte de remplacement
 
     placeholders:
       file: 'Choisissez un fichier'

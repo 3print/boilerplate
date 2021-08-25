@@ -86,7 +86,7 @@ SimpleForm.setup do |config|
   end
 
   # vertical file input
-  config.wrappers :vertical_file, tag: 'div', class: 'form-group', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+  config.wrappers :vertical_file, tag: 'div', class: 'file-input-container', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength

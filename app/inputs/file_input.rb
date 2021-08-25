@@ -8,28 +8,23 @@ class FileInput < SimpleForm::Inputs::FileInput
     has_gravity = object.respond_to?(:"#{attribute_name}_gravity")
     has_alt_text = object.respond_to?(:"#{attribute_name}_alt_text")
 
-    buffer = "<div class='controls'><div class='file-content form-control #{object.try("#{attribute_name}?") ? 'with-value' : '' } #{has_versions ? 'with-regions' : '' }'>"
+    buffer = ''
+
+    buffer << '<div class="form-group">'
+    buffer << "<div class='controls'>"
+    buffer << "<div class='file-content form-control #{object.try("#{attribute_name}?") ? 'with-value' : '' } #{has_versions ? 'with-regions' : '' }'>"
 
     buffer << preview
 
     wrapper_options[:class] += 'file-input'
 
-    # opts = input_html_options.merge(id: hidden_dom_id, class: 'url')
-    # if CarrierWave::Uploader::Base.storage == CarrierWave::Storage::AWS
-    #   if object.respond_to?(:"#{attribute_name}_tmp")
-    #     buffer << @builder.hidden_field(:"#{attribute_name}_tmp", opts)
-    #   else
-    #     buffer << @builder.hidden_field(:"remote_#{attribute_name}_url", opts)
-    #   end
-    #   buffer << @builder.hidden_field(:"remove_#{attribute_name}", input_html_options.merge(id: "remove_#{hidden_dom_id}"))
-    # else
-    #  buffer << super
-    # end
-
     buffer << super
+    buffer << '</div>'
+    buffer << '</div>'
     buffer << '</div>'
 
     if has_versions
+      buffer << '<div class="form-group">'
       versions = object.send(:"exposed_versions_for_#{attribute_name}")
       regions = object.send(:"#{attribute_name}_regions")
       versions.each_pair do |k,v|
@@ -41,9 +36,11 @@ class FileInput < SimpleForm::Inputs::FileInput
         buffer << "data-size='#{v.to_json}' "
         buffer << "data-version-name='#{k}'>"
       end
+      buffer << '</div>'
     end
 
     if has_gravity
+      buffer << '<div class="form-group">'
       input_html_classes << "with-crop-settings"
       buffer << '<div class="crop-settings">'
       buffer << @builder.label('simple_form.labels.crop_settings'.t)
@@ -57,18 +54,24 @@ class FileInput < SimpleForm::Inputs::FileInput
         class: 'form-control',
       )
       buffer << '</div>'
+      buffer << '</div>'
     end
 
     if has_alt_text
+      buffer << '<div class="form-group">'
+      buffer << @builder.label('simple_form.labels.alt_text'.t)
       buffer << text_field_tag(
         "#{object_name}[#{attribute_name}_alt_text]",
         object.send(:"#{attribute_name}_alt_text"),
         placeholder: 'simple_form.placeholders.alt_text'.t,
         class: 'string form-control file_alt_text'
       )
+      buffer << '</div>'
     end
 
-    # rubocop:disable Lint/NestedMethodDefinition
+    buffer.html_safe
+  end
+
     def input_html_options
       super.merge(required: required?)
     end
@@ -76,11 +79,6 @@ class FileInput < SimpleForm::Inputs::FileInput
     def required?
       required_by_validators? && object.send(attribute_name).blank?
     end
-    # rubocop:enable Lint/NestedMethodDefinition
-    buffer << '</div>'
-
-    buffer.html_safe
-  end
 
   def hidden_dom_id
     dup = self.dup

@@ -1,4 +1,4 @@
-.form-group.file {
+.file-input-container {
 
   progress {
     width: 100%;
@@ -130,13 +130,13 @@
   }
 
 
-  &.is-valid {
+  .form-group.is-valid {
     & .controls > .form-control {
       border-color: $success;
     }
   }
 
-  &.is-invalid {
+  .form-group.is-invalid {
     & .controls > .form-control {
       border-color: $danger;
     }

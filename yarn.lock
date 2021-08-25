@@ -898,6 +898,11 @@
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.9.3.tgz"
   "version" "2.9.3"
 
+"@rails/ujs@^6.1.4-1":
+  "integrity" "sha512-Fewm2wHk1n6Kf4E86dzzHDJOFg4EWcSHH3FsMEGs59bTdmf7099mjkOssOQtBqju4R39iaAOQNui7r8P+Q5Dgg=="
+  "resolved" "https://registry.npmjs.org/@rails/ujs/-/ujs-6.1.4-1.tgz"
+  "version" "6.1.4-1"
+
 "@rails/webpacker@5.4.0":
   "integrity" "sha512-J973mzTUJbkbBu+sMwKgWRahoSfwdp5uHT80iDWr6hi8YAC7kj47HapQnn2SGPmv/onTT8WC3jFM62Hkh213yQ=="
   "resolved" "https://registry.npmjs.org/@rails/webpacker/-/webpacker-5.4.0.tgz"

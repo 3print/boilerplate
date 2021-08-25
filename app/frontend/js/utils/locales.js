@@ -110,6 +110,7 @@ export const LOCALES = {
       },
       validation: {
         blank: 'Ce champ ne peut être vide',
+        value_missing: 'Ce champ ne peut être vide',
         invalid_email: 'Saisissez une adresse email valide',
       },
       field_limit: {
