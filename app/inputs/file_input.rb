@@ -20,11 +20,8 @@ class FileInput < SimpleForm::Inputs::FileInput
 
     buffer << super
     buffer << '</div>'
-    buffer << '</div>'
-    buffer << '</div>'
 
     if has_versions
-      buffer << '<div class="form-group">'
       versions = object.send(:"exposed_versions_for_#{attribute_name}")
       regions = object.send(:"#{attribute_name}_regions")
       versions.each_pair do |k,v|
@@ -36,8 +33,10 @@ class FileInput < SimpleForm::Inputs::FileInput
         buffer << "data-size='#{v.to_json}' "
         buffer << "data-version-name='#{k}'>"
       end
-      buffer << '</div>'
     end
+
+    buffer << '</div>'
+    buffer << '</div>'
 
     if has_gravity
       buffer << '<div class="form-group">'
