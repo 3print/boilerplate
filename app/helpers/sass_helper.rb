@@ -1,6 +1,6 @@
 
 module SassHelper
-  require 'sass/utils'
+  require 'sass_utils'
   require 'tempfile'
 
   def inline_css(path)

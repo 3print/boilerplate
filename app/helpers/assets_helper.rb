@@ -1,6 +1,6 @@
 
 module AssetsHelper
-  require 'sass/utils'
+  require 'sass_utils'
 
   def inline_file(path)
     if assets = Rails.application.assets
