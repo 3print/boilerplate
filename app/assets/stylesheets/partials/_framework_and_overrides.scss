@@ -14,6 +14,12 @@
   @extend .form-label;
 }
 
+// Pagination
+
+ul.pagination {
+  margin: 0;
+}
+
 // Buttons
 .pills {
   margin-top: -10px;
