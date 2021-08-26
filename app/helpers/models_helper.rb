@@ -18,7 +18,10 @@ module ModelsHelper
     :avatar_tmp, :image_tmp,
 
     # Syncables
-    :uuid
+    :uuid,
+
+    # Nested sets
+    :lft, :rgt, :depth,
   ].freeze
 
   def default_columns_for_object(model)
@@ -75,7 +78,14 @@ module ModelsHelper
 
     type_partial = "show_#{type}_field"
 
-    locals = { value: out, type: type, column: col, resource: res, resource_name: resource_name, options: options }
+    locals = {
+      value: out,
+      type: type,
+      column: col,
+      resource: res,
+      resource_name: resource_name,
+      options: options,
+    }
 
     if partial_exist?(type_partial)
       render partial: type_partial, locals: locals
@@ -127,7 +137,7 @@ module ModelsHelper
     end
 
     if collection.empty?
-      raw "<div class='row panel-body'><em class='col-md-12'>#{:no_data_no_creation.t}</em></div>"
+      raw "<div class='row card-body'><em class='col-md-12'>#{:no_data_no_creation.t}</em></div>"
     else
       content_tag :table, class: "table #{resource_name} #{options[:class]}" do
         concat(content_tag(:thead) do
@@ -182,24 +192,14 @@ module ModelsHelper
         concat raw "<em>#{message}</em>"
       end
     else
-      if options[:partial].present?
-        html = render partial: options[:partial], locals: { collection: collection, collection_class: collection_class }
-      else
-        html = contextual_partial 'list', locals:{ collection: collection, collection_class: collection_class }, resource_class: collection_class
-      end
-
       pagination = paginate(collection, param_name: page_param)
-
-      res = ''
-      # res += pagination if pagination.present?
-      res += html
-      if pagination.present?
-        res += content_tag :div, class: 'panel-footer' do
-          concat(pagination)
-        end
+      if options[:partial].present?
+        html = render partial: options[:partial], locals: { collection: collection, collection_class: collection_class, pagination: pagination }
+      else
+        html = contextual_partial 'list', locals:{ collection: collection, collection_class: collection_class, pagination: pagination }, resource_class: collection_class
       end
 
-      res.html_safe
+      html.html_safe
     end
   end
 end
