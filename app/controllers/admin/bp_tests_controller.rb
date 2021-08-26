@@ -3,7 +3,7 @@ class Admin::BpTestsController < Admin::ApplicationController
   include JsonExtensions
 
   load_resource
-  sort_resource by: 'sequence ASC'
+  sort_resource by: 'sequence ASC', only: %w(index save_sequence)
 
   toggle_actions :approve, off: :revocate
   toggle_actions :validate

@@ -1,0 +1,7 @@
+%th.compact
+= contextual_partial 'list_header_before_name', locals: local_assigns
+%th= resource_name
+= contextual_partial 'list_header_after_name', locals: local_assigns
+
+- in_admin do
+  %th.nowrap.compact= 'tables.columns.actions'.t

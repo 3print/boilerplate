@@ -236,6 +236,17 @@
   .card-title a {
     color: inherit;
   }
+
+  > .d-flex .table {
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    margin-bottom: 0;
+
+    & :last-child tr:last-child td {
+      border-bottom: 0;
+    }
+  }
 }
 
 // Tables
@@ -251,6 +262,20 @@ th, td {
   &.compact {
     width: 0;
   }
+}
+
+.table.dragged {
+  pointer-events: none;
+  background: white;
+  opacity: 0.5;
+}
+
+.dnd-placeholder {
+  background: $gray-200;
+}
+
+.drag-handle {
+  cursor: move;
 }
 
 .no-action-labels .table,

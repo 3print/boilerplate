@@ -39,11 +39,11 @@ module ResourceExtensions
     def self.sort_resource(options={})
       sort = options.delete(:by)
 
-      options[:only] = :index if options.empty?
+      options[:only] = :index if options[:only].nil?
 
       before_action options do
         key = :"@#{resource_name}"
-        instance_variable_set(key, instance_variable_get(key).order(sort))
+        set_resource(key, instance_variable_get(key).order(sort))
       end
     end
 

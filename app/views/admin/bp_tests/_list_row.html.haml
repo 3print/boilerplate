@@ -1,0 +1,9 @@
+%td.compact
+  .drag-handle= icon('more-vertical')
+= contextual_partial 'list_row_before_name', locals: local_assigns
+%td.item= contextual_partial 'list_item', locals: local_assigns
+= contextual_partial 'list_row_after_name', locals: local_assigns
+- in_admin do
+  %td.actions.nowrap.compact
+    .btn-group
+      = contextual_partial 'list_item_actions', locals: local_assigns

@@ -5,7 +5,7 @@ module OrderableExtensions
 
   def save_sequence
     begin
-      sequences = params[resource_name]
+      sequences = params.require(resource_name).permit!
 
       resource_class.update_items_sequences(sequences)
 

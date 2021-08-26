@@ -1,9 +1,11 @@
 module Orderable
 
   def update_items_sequences(sequences)
-    values = sequences.map do |k,v|
-      "(#{k},#{v['sequence'].present? ? v['sequence'] : 0})"
+    values = []
+    sequences.each_pair do |k,v|
+      values << "(#{k},#{v['sequence'].present? ? v['sequence'] : 0})"
     end
+
     query = """
     UPDATE #{self.table_name} AS s SET
       sequence = c.sequence

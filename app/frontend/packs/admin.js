@@ -24,6 +24,7 @@ import '../js/widgets/propagate-input-value';
 import '../js/widgets/select';
 import '../js/widgets/settings-editor';
 import '../js/widgets/table-sort-header';
+import '../js/widgets/order-table';
 
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
@@ -90,7 +91,9 @@ widgets('select-multiple', 'select[multiple]', {
 
     return div;
   }
-});
+})
+
+widgets('order-table', '.sortable', {on: DEFAULT_EVENTS});
 
 widgets('table-sort-header', '[data-sort]', {
   on: DEFAULT_EVENTS,
