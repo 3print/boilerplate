@@ -168,7 +168,7 @@ module ResourceExtensions
     []
   end
 
-  def resource_path_for res, action=nil, namespace=[]
+  def resource_path_for res, action=nil, namespace=[], options=nil
     plural = resource_name.to_sym
     singular = resource_name.singularize.to_sym
 
@@ -179,17 +179,17 @@ module ResourceExtensions
     end
 
     case action
-    when 'update' then controller_namespace + namespace + [res]
-    when 'create' then controller_namespace + namespace + [plural]
-    when 'index' then controller_namespace + namespace + [plural]
-    when 'destroy' then controller_namespace + namespace + [res]
-    when 'show' then controller_namespace + namespace + [res]
-    when 'new' then [:new] + controller_namespace + namespace + [singular]
+    when 'update' then controller_namespace + namespace + [res] + [options]
+    when 'create' then controller_namespace + namespace + [plural] + [options]
+    when 'index' then controller_namespace + namespace + [plural] + [options]
+    when 'destroy' then controller_namespace + namespace + [res] + [options]
+    when 'show' then controller_namespace + namespace + [res] + [options]
+    when 'new' then [:new] + controller_namespace + namespace + [singular] + [options]
     else
       if res.is_a?(ActiveRecord::Relation)
-        [action.to_sym] + controller_namespace + namespace + [plural]
+        [action.to_sym] + controller_namespace + namespace + [plural] + [options]
       else
-        [action.to_sym] + controller_namespace + namespace + [res]
+        [action.to_sym] + controller_namespace + namespace + [res] + [options]
       end
     end
   end
