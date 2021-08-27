@@ -3,11 +3,15 @@
   - resource_plural_name = resource_class.t
   - title_content = render_partial_for_user 'index_panel_header'
 
-  .row
-    .col-md-12
-      = widget_box title_content, before_title: collection_counter(resource_collection, controller) do
-        .d-flex.flex-row
+  = contextual_partial 'index_form' do
+    .row
+      .col-md-12
+        = widget_box title_content, before_title: collection_counter(resource_collection, controller) do
           = contextual_partial 'index_before_collection'
-          = collection resource_collection
 
-        = contextual_partial 'index_after_collection'
+          .d-flex.flex-row
+            = contextual_partial 'index_left_collection'
+            = collection resource_collection
+            = contextual_partial 'index_right_collection'
+
+          = contextual_partial 'index_after_collection'

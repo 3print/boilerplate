@@ -1,0 +1,18 @@
+.card-body.bg-light
+  .form-group
+    = label_tag(:q, 'labels.search'.t, class: 'control-label')
+    .controls
+      = text_field_tag(:q, params[:q], class: 'form-control')
+
+  .form-group
+    = label_tag(:r, 'user.role'.tmf, class: 'control-label')
+    .controls
+      - options = "<option></option>" + options_for_select(User.roles.map{|r| ["enums.user.role.#{r[0]}".t, r[0].pluralize]}, params[:r])
+      = select_tag(:r, options.html_safe, placeholder: 'Rôle', style: 'width: 100%', class: 'form-control')
+
+  .btn-group.float-end.mt-4.text-nowrap
+    = link_to admin_users_path, class: 'btn btn-outline-secondary' do
+      = 'actions.reset'.t
+
+    %button.btn.btn-outline-success{type: :submit}
+      = 'actions.validate'.t
