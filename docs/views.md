@@ -15,7 +15,7 @@ The header partial will then creates the page title, the pills and breadcrumb fo
 
 The content partial will then create the actual content of the page as follow:
 
-- In the `index` view, a list of the models in `resource` is created as a table with the id of the resource, a link to the resource `show` page with the model's caption as text content and a button group with actions for each model. The list itself is rendered using several partials that the same kind of before/after sub-partials (more on that below). The list is wrapped into a panel and you can use the `_index_(before|after)_collection` partials to add content around the table.
+- In the `index` view, a list of the models in `resource` is created as a table with the id of the resource, a link to the resource `show` page with the model's caption as text content and a button group with actions for each model. The list itself is rendered using several partials that the same kind of before/after sub-partials (more on that below). The list is wrapped into a panel and you can use the `_index_(before|after|left|right)_collection` partials to add content around the table.
 - The `new` and `edit` view will render the default form for the model (see the [Forms documentation](./forms.md) for details about the default form generation).
 - In the `show` view, a list of the model's attributes is created using the `default_columns_for_object` and `show_field` helpers (more on that below). It's content can be extended using the `_show_(before|after)_fields` and `_show_extra_fields` partials.
 
