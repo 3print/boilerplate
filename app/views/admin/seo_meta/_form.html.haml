@@ -2,7 +2,7 @@
   col = (Concerns::HasSeo.instance_variable_get("@_consumers") || []).select {|cls| cls.seo_meta.nil? }.map {|cls| [cls.t, cls.name] } + [["Page d'accueil", 'Home']]
   static_actions = %w().map {|a| ["static.#{a}".t,a] }
 
-= simple_nested_form_for resource, url: controller.controller_namespace + [resource] do |f|
+= simple_form_for resource, url: controller.controller_namespace + [resource] do |f|
   %fieldset.inputs.panel-body
     = f.input :title, input_html: {data: {limit: 65}}
     = f.input :description, input_html: {data: {limit: 156}}

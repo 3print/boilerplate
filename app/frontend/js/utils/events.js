@@ -108,7 +108,7 @@ export default class EventDelegate {
         if (event.isImmediatePropagationStopped || !matched) {
           return;
         }
-        return callback(event);
+        return callback(event, matched);
       });
     });
   }
@@ -136,16 +136,16 @@ export default class EventDelegate {
   targetMatch(target, selector) {
     var parent;
     if (target.matches(selector)) {
-      return true;
+      return target;
     }
     parent = target.parentNode;
     while ((parent != null) && (parent.matches != null)) {
       if (parent.matches(selector)) {
-        return true;
+        return parent;
       }
       parent = parent.parentNode;
     }
-    return false;
+    return null;
   }
 
   nodeAndItsAncestors(node, callback) {

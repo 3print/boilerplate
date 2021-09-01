@@ -20,7 +20,7 @@ gem 'pg'
 # Views
 gem 'haml-rails'
 gem 'simple_form'
-gem 'nested_form'
+gem 'nested_form_fields'
 gem 'enum_help'
 gem 'redcarpet'
 

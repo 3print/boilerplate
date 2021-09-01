@@ -1,96 +1,86 @@
-import {parent, getNode} from 'widjet-utils';
+import {parent, getNode, asArray} from 'widjet-utils';
 import widgets from 'widjet';
 import {DisposableEvent, CompositeDisposable} from 'widjet-disposables';
 import EventDelegate from 'js/utils/events';
 
 export default class NestedFormEvents {
-  addFields(e) {
+  addFields(e, link) {
+    e.preventDefault();
+
     // Setup
-    const link      = e.currentTarget;
-    const assoc     = link.dataset.association;
-    const blueprint = document.querySelector(`#${link.dataset['blueprint-id']}`);
-    let content   = blueprint.dataset.blueprint;
+    const assoc = link.dataset.associationPath;
 
-    // Make the context correct by replacing <parents> with the generated ID
-    // of each of the parent objects
-    const context = (parent(link, '.fields').querySelector('input, textarea, select').getAttribute('name') || '').replace(new RegExp('\[[a-z_]+\]$'), '');
+    const container = link.dataset.insertInto
+      ? document.getElementById(link.dataset.insertInto)
+      : parent(link);
 
-    // context will be something like this for a brand new form:
-    // project[tasks_attributes][1255929127459][assignments_attributes][1255929128105]
-    // or for an edit form:
-    // project[tasks_attributes][0][assignments_attributes][1]
-    if (context !== '') {
-      const parentNames = context.match(/[a-z_]+_attributes(?=\]\[(new_)?\d+\])/g) || [];
-      const parentIds   = context.match(/[0-9]+/g) || [];
+    const blueprint = container.querySelector(`script`).textContent;
+    const addedIndex = container.querySelectorAll(`.nested_${assoc}`).length;
+    const indexPlaceholder = `__${assoc}_index__`;
 
-      for(let i = 0; i < parentNames.length; i++) {
-        if(parentIds[i]) {
-          content = content.replace(
-            new RegExp('(_' + parentNames[i] + ')_.+?_', 'g'),
-            '$1_' + parentIds[i] + '_');
+    const content = blueprint.replace(new RegExp(indexPlaceholder, 'g'), addedIndex).replace(/^\s+|\s+$/gm, '');
 
-          content = content.replace(
-            new RegExp('(\\[' + parentNames[i] + '\\])\\[.+?\\]', 'g'),
-            '$1[' + parentIds[i] + ']');
-        }
-      }
-    }
-
-    // Make a unique ID for the new child
-    const regexp = new RegExp('new_' + assoc, 'g');
-    const new_id = this.newId();
-
-    content = content.replace(regexp, new_id).replace(/^\s+|\s+$/gm, '');
-
-    const field = this.insertFields(content, assoc, link);
+    const field = this.insertFields(content, assoc, link, container);
     // bubble up event upto document (through form)
-    field
-      .trigger({ type: 'nested:fieldAdded', field: field })
-      .trigger({ type: 'nested:fieldAdded:' + assoc, field: field });
+    widgets.dispatch(field, 'nested:fieldAdded', {field});
+    widgets.dispatch(field, `nested:fieldAdded:${assoc}`, {field});
     return false;
   }
   newId() {
     return new Date().getTime();
   }
-  insertFields(content, assoc, link) {
-    const node = getNode(content);
+  insertFields(content, assoc, link, container) {
+    const node = getNode(content, container.nodeName);
+
     if (content.indexOf('<tr') !== -1) {
       const tr = parent(link, 'tr');
-      return tr.parentNode.insertBefore(node, tr);
+      tr.parentNode.insertBefore(node, tr);
     } else if (content.indexOf('<li') !== -1) {
       const li = parent(link, 'li');
-      return li.parentNode.insertBefore(node, li);
+      li.parentNode.insertBefore(node, li);
     } else {
       const target = link.dataset.target;
       if (target) {
-        return target.appendChild(node);
+        target.appendChild(node);
       } else {
-        return link.parentNode.insertBefore(node, link);
+        link.parentNode.insertBefore(node, link);
       }
     }
+    return node;
   }
-  removeFields(e) {
-    const link = e.currentTarget;
-    const assoc = link.dataset.association; // Name of child to be removed
+  removeFields(e, link) {
+    e.preventDefault();
 
-    const field = parent(link,'.fields');
-    const hiddenField = field.querySelector('input[type=hidden]');
+    const objectClass = link.dataset.objectClass;
+    const deleteAssociationFieldName = link.dataset.deleteAssociationFieldName;
+    const removedIndex = parseInt(deleteAssociationFieldName.match('(\\d+\\]\\[_destroy])')[0].match('\\d+')[0]);
 
-    hiddenField.value = '1';
+    const field = parent(link, '.nested_fields');
+    const deleteField = field.querySelector(`input[type='hidden'][name='${deleteAssociationFieldName}']`);
+
+    if (deleteField != null) {
+      deleteField.value = '1';
+    } else {
+      const node = getNode(`<input type='hidden' name='${deleteAssociationFieldName}' value='1' />`);
+      field.parentNode.insertBefore(node, field);
+    }
+
     field.style.display = 'none';
+    asArray(field.querySelectorAll('input[required], select[required], textarea[required]')).forEach((n) => {
+      n.removeAttribute('required');
+    });
 
     widgets.dispatch(field, 'nested:fieldRemoved', {field});
-    widgets.dispatch(field, `nested:fieldRemoved:${assoc}`, {field});
     return false;
   }
 }
 
 window.nestedFormEvents = new NestedFormEvents();
 const delegates = [
-  new EventDelegate(document, 'form a.add_nested_fields', {
-    'click': nestedFormEvents.addFields,
+  new EventDelegate(document, 'form a.add_nested_fields_link', {
+    'click': (e, el) => nestedFormEvents.addFields(e, el),
   }),
-  new EventDelegate(document, 'form a.remove_nested_fields', {
-    'click': nestedFormEvents.removeFields,
+  new EventDelegate(document, 'form a.remove_nested_fields_link', {
+    'click': (e, el) => nestedFormEvents.removeFields(e, el),
   }),
 ];

@@ -300,7 +300,10 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     nenv (0.3.0)
-    nested_form (0.3.2)
+    nested_form_fields (0.8.4)
+      coffee-rails (>= 3.2.1)
+      jquery-rails
+      rails (>= 3.2.0)
     nio4r (2.5.8)
     nokogiri (1.12.3)
       mini_portile2 (~> 2.6.1)
@@ -508,7 +511,7 @@ DEPENDENCIES
   launchy
   letter_opener
   listen
-  nested_form
+  nested_form_fields
   pg
   pry-rails
   pry-rescue
