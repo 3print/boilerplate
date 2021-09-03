@@ -1,5 +1,5 @@
 - controller_breadcrumb
-- breadcrumb resource_class.t, controller.resource_path(:index)
+- breadcrumb resource_class.t, can?(:index, resource_class) ? controller.resource_path(:index) : nil
 - breadcrumb 'admin.actions.create'.t
 
 - content_for :pills do

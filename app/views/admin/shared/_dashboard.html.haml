@@ -3,11 +3,11 @@
   - Dashboard.weighed_items.each do |klass, opts|
     :ruby
       unless_clause = opts[:unless]
-      if unless_clause
+      if unless_clause.present?
         next if instance_exec(&unless_clause)
       end
       if_clause = opts[:if]
-      if if_clause
+      if if_clause.present?
         next unless instance_exec(&if_clause)
       end
       size = opts[:size] || 1
@@ -17,6 +17,8 @@
         if scope.is_a?(Array)
           scope_arg = scope[1]
           scope = klass.send(scope[0], instance_exec(&scope_arg))
+        elsif scope.is_a?(Proc)
+          scope = instance_exec(klass, &scope)
         else
           klass.send(scope)
         end

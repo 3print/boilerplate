@@ -25,7 +25,8 @@ import '../js/widgets/select';
 import '../js/widgets/settings-editor';
 import '../js/widgets/table-sort-header';
 import '../js/widgets/order-table';
-
+import '../js/widgets/submit-on-change';
+import '../js/widgets/confirm-action';
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY';
@@ -41,7 +42,8 @@ const isInTemplate = el => parent(el, '.tpl') != null;
 const isMobileOrInTemplate = el => isMobile() || isInTemplate(el);
 
 widgets('admin-navigation-highlight', '.sidebar-nav', {on: DEFAULT_EVENTS});
-
+widgets('confirm-action', '[data-confirm', {on: DEFAULT_EVENTS, unless: isInTemplate});
+widgets('submit-on-change', '.submit-on-change', {on: DEFAULT_EVENTS})
 widgets('popover', '[data-toggle=popover]', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
 widgets('auto-resize', 'textarea', {on: DEFAULT_EVENTS, unless: isInTemplate});

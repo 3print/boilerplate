@@ -9,8 +9,8 @@
 
 - controller_breadcrumb
 
-- breadcrumb resource_class.t, controller.resource_location(:index)
-- breadcrumb resource_label, controller.resource_path_for(resource, :show)
+- breadcrumb resource_class.t, can?(:index, resource_class) ? controller.resource_location(:index) : nil
+- breadcrumb resource_label, can?(:show, resource) ? controller.resource_path_for(resource, :show) : nil
 - breadcrumb 'admin.actions.edit'.t
 
 - content_for :pills do

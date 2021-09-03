@@ -51,21 +51,32 @@ module ResourceProcHelper
         if a.is_a?(Hash)
           a.map do |k,v|
             if can? k, item
-              label = icon_and_text("actions.#{k}".t, icon_name_for(k))
+              title = "actions.#{k}".t
+              label = icon_and_text(title, icon_name_for(k))
 
               if v.is_a?(Hash)
-                link_to label, resolve_url(k, item), {class: "btn btn-outline-#{classname_for_action(k)}"}.merge(v)
+                unless_clause = v.delete(:unless)
+                if unless_clause.present?
+                  next if instance_exec(&unless_clause)
+                end
+                if_clause = v.delete(:if)
+                if if_clause.present?
+                  next unless instance_exec(&if_clause)
+                end
+
+                link_to label, resolve_url(k, item), {class: button_class_for_action(k), title: title}.merge(v)
               elsif v.is_a?(Symbol)
-                link_to label, send(v, item), {class: "btn btn-ouline-#{classname_for_action(k)}"}
+                link_to label, send(v, item), {class: button_class_for_action(k), title: title}
               else
-                link_to label, v, {class: "btn btn-outline-#{classname_for_action(k)}"}
+                link_to label, v, {class: button_class_for_action(k), title: title}
               end
             end
           end
         else
           if can? a, item
-            label = icon_and_text("actions.#{a}".t, icon_name_for(a))
-            link_to label, resolve_url(a, item), class: "btn btn-outline-#{classname_for_action(a)}"
+            title = "actions.#{a}".t
+            label = icon_and_text(title, icon_name_for(a))
+            link_to label, resolve_url(a, item), class: button_class_for_action(a), title: title
           end
         end
       end.flatten.compact.join
@@ -91,6 +102,10 @@ module ResourceProcHelper
 
   def resource_email_proc
     resource_field_proc :email do |item| mail_to item.email end
+  end
+
+  def resource_created_at_proc
+    resource_field_proc :created_at do |item| distance_of_time_in_words Time.now, item.created_at end
   end
 
   def resource_phone_proc

@@ -4,12 +4,12 @@
 = contextual_partial 'list_item_before_actions', locals: local_assigns
 
 - if can?(:edit, item) && controller.route_exists_for?(:edit, item)
-  = link_to edit_url, class: 'btn btn-outline-secondary' do
+  = link_to edit_url, class: button_class_for_action(:edit) do
     = icon_for(:edit)
     %span.text= 'admin.actions.edit'.t
 
 - if can?(:destroy, item) && controller.route_exists_for?(:destroy, item)
-  = link_to destroy_url, method: :delete, class: 'btn btn-outline-danger', data: {confirm: 'confirmations.destroy'.t} do
+  = link_to destroy_url, method: :delete, class: button_class_for_action(:destroy), data: {confirm: 'confirmations.destroy'.t} do
     = icon_for(:destroy)
     %span.text= 'admin.actions.destroy'.t
 
