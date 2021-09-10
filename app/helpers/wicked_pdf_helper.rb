@@ -1,37 +1,50 @@
 
 module WickedPdfHelper
+  def find_asset(asset_name)
+    if Rails.env.development?
+      Rails.application.assets.find_asset(asset_name).filename
+    else
+      "#{Rails.application.assets_manifest.directory}/#{Rails.application.assets_manifest.assets[asset_name]}"
+    end
+  end
+
+  def read_asset(asset_name)
+    if Rails.env.development?
+      Rails.application.assets.find_asset(asset_name)
+    else
+      File.read(find_asset asset_name)
+    end
+  end
+
   def wicked_pdf_stylesheet_link_tag(*sources)
     sources.collect { |source|
-      "<style type='text/css'>#{Rails.application.assets.find_asset(source+".css")}</style>"
+      "<style type='text/css'>#{read_asset source + ".css"}</style>"
     }.join("\n").html_safe
   end
 
   def wicked_pdf_image_path(img, options={})
-    asset = Rails.application.assets.find_asset(img)
-    "file://#{asset.filename.to_s}"
+    "file://#{find_asset img}"
   end
 
   def wicked_pdf_image_tag(img, options={})
-    asset = Rails.application.assets.find_asset(img)
-    image_tag "file://#{asset.filename.to_s}", options
+    image_tag "file://#{find_asset img}", options
   end
 
   def wicked_pdf_font_path(font, options={})
-    asset = Rails.application.assets.find_asset(font)
     if options[:url]
       "#{Rails.application.config.action_mailer.asset_host}/assets/#{font}"
     else
-      "file://#{asset.filename.to_s}"
+      "file://#{find_asset font}"
     end
   end
 
   def wicked_pdf_javascript_src_tag(jsfile, options={})
-    asset = Rails.application.assets.find_asset(jsfile)
-    javascript_include_tag "file://#{asset.filename.to_s}", options
+
+    javascript_include_tag "file://#{find_asset jsfile}", options
   end
 
   def wicked_pdf_javascript_include_tag(*sources)
-    sources.collect{ |source| "<script type='text/javascript'>#{Rails.application.assets.find_asset(source+".js")}</script>" }.join("\n").html_safe
+    sources.collect{ |source| "<script type='text/javascript'>#{read_asset source + ".js"}</script>" }.join("\n").html_safe
   end
 
   def pdf_stylesheet_link_tag(*sources)
