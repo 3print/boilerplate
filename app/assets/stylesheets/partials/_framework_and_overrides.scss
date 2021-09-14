@@ -1,6 +1,12 @@
 @import "adminkit/1-variables/app";
 @import "bootstrap/variables";
 
+.expander, .collapser {
+  * {
+    pointer-events: none;
+  }
+}
+
 // Feather
 .feather {
   vertical-align: sub;
@@ -100,6 +106,10 @@ ul.pagination {
   [aria-expanded=true]:after,
   [data-bs-toggle=collapse]:not(.collapsed):after {
     top:1.2rem;
+  }
+
+  .sidebar-item .sidebar-link {
+    padding-left: 3rem;
   }
 
   .sidebar-item .sidebar-link:hover {
@@ -258,6 +268,16 @@ ul.pagination {
 // Tables
 th, .table th {
   white-space: nowrap;
+
+  &.with-sort {
+    padding-right: 20px;
+    position: relative;
+
+    .btn {
+      position: absolute;
+      right: 0;
+    }
+  }
 }
 
 th, td {
@@ -267,6 +287,10 @@ th, td {
 
   &.compact {
     width: 0;
+  }
+
+  img {
+    max-width: 100%;
   }
 }
 
@@ -284,8 +308,7 @@ th, td {
   cursor: move;
 }
 
-.no-action-labels .table,
-.table.no-action-labels {
+.no-action-labels {
   .btn {
     .text {
       display: none;

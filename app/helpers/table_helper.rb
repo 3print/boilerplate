@@ -24,11 +24,10 @@ module TableHelper
     content_tag(:div, options) do
       concat(content_tag(:div, title_options) do
         concat(before_title) if before_title
-        concat(content_tag(:h5, class: 'card-title') do
+        concat(content_tag(:h5, class: 'card-title mb-0') do
           if ico
-            concat(content_tag(:span, class: 'icon') do
-              concat(icon(ico))
-            end)
+            concat(icon(ico))
+            concat(' ')
           end
 
           concat(title)

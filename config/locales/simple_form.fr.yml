@@ -44,4 +44,4 @@ fr:
 
     hints:
       user:
-        password: Le mot de passe doit contenir 8 caractères minimum
+        password: Le mot de passe doit contenir 8 caractères minimum, 1 majuscule, 1 minuscule, 1 chiffre et 1 symbole au minimum
