@@ -1,7 +1,7 @@
 - flash_type_map = { notice: 'success', alert: 'danger', error: 'danger' }
 
 - if flash.present? && flash.any?
-  .container
+  .container-fluid.p-0
     - flash.each do |name, msg|
       - if msg.is_a?(String)
         .alert.alert-dismissible{ class: "alert-#{flash_type_map[name.intern] || name}" }
