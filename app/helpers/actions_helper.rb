@@ -1,10 +1,11 @@
+
 unless defined?(CLASSNAME_BY_ACTION)
   CLASSNAME_BY_ACTION = {
     index: 'secondary',
     destroy: 'danger',
     show: 'primary',
     new: 'success',
-    masquerade: 'warning'
+    masquerade: 'warning',
     edit: 'primary',
     pdf: 'primary',
   }
