@@ -1,5 +1,6 @@
-%td.compact
-  .drag-handle= icon('more-vertical')
+- if controller.resource_class == BpTest
+  %td.compact
+    .drag-handle= icon('more-vertical')
 = contextual_partial 'list_row_before_name', locals: local_assigns
 %td.item= contextual_partial 'list_item', locals: local_assigns
 = contextual_partial 'list_row_after_name', locals: local_assigns
