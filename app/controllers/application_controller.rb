@@ -5,14 +5,11 @@ class ApplicationController < ActionController::Base
   include DeviseExtensions
   include CustomsExtensions
   include ToggleExtensions
-  include DateTimeExtensions
   include RegionsExtensions
   include NotificationExtensions
   include Pundit
 
   protect_from_forgery with: :exception
-
-  process_date_params
   process_regions_params
 
   rescue_from Pundit::NotAuthorizedError, with: :access_denied

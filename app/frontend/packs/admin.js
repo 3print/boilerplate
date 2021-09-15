@@ -27,6 +27,7 @@ import '../js/widgets/table-sort-header';
 import '../js/widgets/order-table';
 import '../js/widgets/submit-on-change';
 import '../js/widgets/confirm-action';
+import '../js/widgets/flatpickr';
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY';
@@ -59,18 +60,6 @@ widgets('collapse', '[data-bs-toggle="collapse"]', {
   on: DEFAULT_EVENTS,
   unless: isInTemplate
 });
-
-// widgets('collapse_toggle', '.open-settings', {on: DEFAULT_EVENTS, unless: isInTemplate});
-// widgets('collapse', '.collapse', {on: DEFAULT_EVENTS, unless: isInTemplate});
-
-// widgets('blueprint_button', 'button[data-blueprint]', {on: DEFAULT_EVENTS, unless: isInTemplate});
-// widgets('blueprint_remove_button', 'button[data-remove]', {on: DEFAULT_EVENTS, unless: isInTemplate});
-
-// widgets('drag_source', '[data-transferable]', {on: DEFAULT_EVENTS, unless: isInTemplate});
-// widgets('drop_target', '[data-drop]', {on: DEFAULT_EVENTS, unless: isInTemplate});
-
-// widgets('order_list', '.sortable-list', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
-// widgets('order_table', '.sortable', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
 
 widgets('select', 'select.form-control:not([multiple])', {on: DEFAULT_EVENTS})
 widgets('select-multiple', 'select[multiple]', {
@@ -105,14 +94,15 @@ widgets('table-sort-header', '[data-sort]', {
 });
 widgets('settings-editor', '.settings_editor', {on: DEFAULT_EVENTS});
 widgets('settings-form', '[data-settings]', {on: DEFAULT_EVENTS});
-// widgets('settings_image_uploader', '[data-settings] .file', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
-// widgets('color_button', '.color-icon-wrapper[data-url]', {on: DEFAULT_EVENTS, unless: isInTemplate});
-// widgets('datepicker-mobile', '.datepicker, .datetimepicker, .timepicker', {on: DEFAULT_EVENTS, if: isMobile, unless: isInTemplate});
-// widgets('datepicker', '.datepicker', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
-// widgets('datetimepicker', '.datetimepicker', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
-// widgets('timepicker', '.timepicker', {on: DEFAULT_EVENTS, unless: isMobileOrInTemplate});
-// widgets('filepicker', '.form-group.file', {on: DEFAULT_EVENTS, unless: isInTemplate});
+widgets('flatpickr', '.datetimepicker', {
+  on: DEFAULT_EVENTS,
+  enableTime: true,
+  altInput: true,
+  altFormat: 'l d F Y à H:i',
+  dateFormat: 'Z',
+});
+
 widgets('text-editor', '.form-group.markdown', {
   on: DEFAULT_EVENTS,
   unless: isMobileOrInTemplate,
