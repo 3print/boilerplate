@@ -16,8 +16,6 @@ class FileInput < SimpleForm::Inputs::FileInput
 
     buffer << preview
 
-    wrapper_options[:class] += 'file-input'
-
     buffer << super
     buffer << '</div>'
 
