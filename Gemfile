@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.7.4'
 gem 'rails', '~> 6.1'
-gem 'puma', '~> 3.11'
+gem 'puma', '>= 4.3.8'
 gem 'settingslogic'
 gem 'sendgrid'
 
@@ -80,7 +80,6 @@ group :development do
   gem 'spork'#, '1.0.0rc3'
 
   gem 'annotate'
-  gem 'sdoc', '~> 0.4.0'
 
   gem "web-console"
   gem "rack-mini-profiler", "~> 2.0"
