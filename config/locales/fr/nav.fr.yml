@@ -1,5 +1,5 @@
 fr:
-  <%= YAML::include("models.fr.yml") %>
+  <%= YAML::include("fr/models.fr.yml") %>
 
   root: &root Accueil
 
