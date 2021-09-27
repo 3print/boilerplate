@@ -8,6 +8,7 @@ module NavigationHelper
     group_li_class: '',
     group_toggle_class: '',
     group_class: 'sidebar-dropdown list-unstyled collapse show',
+    badge_class: 'sidebar-badge badge bg-primary',
   }
   NAVBAR = {
     li_class: 'nav-item',
@@ -16,6 +17,7 @@ module NavigationHelper
     group_li_class: 'dropdown',
     group_toggle_class: 'dropdown-toggle',
     group_class: 'dropdown',
+    badge_class: 'badge bg-primary',
   }
 
   CONTEXTS = {
@@ -28,25 +30,23 @@ module NavigationHelper
     capture_haml(&block)
   end
 
-  def admin_nav_link_to(url, label = nil, controller_name = nil, ico = nil, options = {}, &block)
+  def admin_nav_link_to(url, options = {}, &block)
+    cls = nil
     if url.is_a?(Class)
       cls = url
-      options = label if label.is_a?(Hash)
     elsif url.is_a?(ApplicationRecord)
       cls = url
-      options = label if label.is_a?(Hash)
     end
 
     return if !block_given? && cls.present? && cannot?(:edit, cls)
 
-    nav_link_to(url, label, controller_name, ico, options, &block)
+    nav_link_to(url, options, &block)
   end
 
-  def nav_link_to(url, label = nil, controller_name = nil, ico = nil, options = {}, &block)
+  def nav_link_to(url, options = {}, &block)
 
     if url.is_a?(Class)
       cls = url
-      options = label if label.is_a?(Hash)
       url = [controller.controller_namespace[0]] + [cls]
       label = cls.t
       controller_name = cls.name.pluralize.underscore
@@ -58,19 +58,15 @@ module NavigationHelper
       label = resource_label_for(cls)
       controller_name = cls.class.name.pluralize.underscore
       ico = icon_name_for(cls.class)
+    else
+      label = options[:label]
+      ico = options[:icon]
+      controller_name = options[:controller_name] || :home
     end
 
-    url = options.delete(:url) if options[:url].present?
-    label = options.delete(:label) if options[:label].present?
-    ico = options.delete(:ico) if options[:ico].present?
     # rubocop:disable Lint/UselessAssignment
     resource_class = controller_name == :home ? nil : controller_name.to_s.singularize.camelize.constantize rescue nil
     # rubocop:enable Lint/UselessAssignment
-
-    if ico.is_a?(Hash)
-      options = ico
-      ico = nil
-    end
 
     li_class = "#{context[:li_class]} #{controller_name.to_s}"
 
@@ -87,7 +83,7 @@ module NavigationHelper
         concat(link_to(url, opts) do
           concat(icon(ico)) if ico.present?
           concat(content_tag(:span, label))
-          concat(get_badge(options[:badge])) if options[:badge].present?
+          concat(get_badge(options[:badge], options[:badge_tooltip])) if options[:badge].present?
         end)
 
         concat(content_tag(:ul, class: context[:group_class]) do
@@ -102,9 +98,15 @@ module NavigationHelper
         concat(link_to(url, opts) do
           concat(icon(ico)) if ico.present?
           concat(content_tag(:span, label))
-          concat(get_badge(options[:badge])) if options[:badge].present?
+          concat(get_badge(options[:badge], options[:badge_tooltip])) if options[:badge].present?
         end)
       end
+    end
+  end
+
+  def get_badge(label, tooltip=nil)
+    content_tag :span, class: context[:badge_class], title: tooltip do
+      concat(label)
     end
   end
 end

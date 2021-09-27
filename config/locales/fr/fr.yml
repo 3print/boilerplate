@@ -56,6 +56,7 @@ fr:
     personal_data: Information personnelles
     login_activity: Historique de connexions
     login_success: Connexion réussie
+    validated_models: Modèles validés
 
     states:
       published: Publié
