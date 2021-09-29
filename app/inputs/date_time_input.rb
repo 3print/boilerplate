@@ -13,7 +13,11 @@ class DateTimeInput < SimpleForm::Inputs::DateTimeInput
     end
     options.delete(:type)
     input_html_options[:type] = 'text'
-    input_html_options[:value] = object.send(attribute_name).to_formatted_s(:iso8601)
+
+    value = object.send(attribute_name)
+    if value.present?
+      input_html_options[:value] = value.to_formatted_s(:iso8601)
+    end
 
     s = "<div class='input-group'>"
     s << "<label class='input-group-text' for='#{object_name}_#{attribute_name}'>#{Feather[:calendar]}</label>"
