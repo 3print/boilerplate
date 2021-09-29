@@ -12,6 +12,8 @@ fr:
   reverse_masquerade: 'Quitter le mode mascarade'
 
   errors:
+    title: Une erreur est survenue
+    subtitle: Une erreur est survenue
     toggle: Impossible de réaliser l'action demandée
     messages:
       accepted: doit être accepté(e)
