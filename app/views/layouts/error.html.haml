@@ -25,46 +25,25 @@
     = stylesheet_link_tag 'application', media: 'all'
     %link{href: "https://fonts.googleapis.com/css?family=Raleway:400,300,600", rel: "stylesheet", type: "text/css"}/
     = yield :styles
-    = javascript_include_tag 'critical'
     = csrf_meta_tags
 
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
-    %nav.navbar{role: :navigation}
+    %main.d-flex.w-100.h-100
+      .container.d-flex.flex-column
+        .row.vh-100
+          .col-sm-10.col-md-8.col-lg-6.mx-auto.d-table.h-100
+            .d-table-cell.align-middle
+              .text-center.mt-4
+                %h1.h2= yield :page_title
+                %p.lead= yield :sub_title
+              .card
+                .card-body
+                  .m-sm-4
+                    .text-center
+                      .avatar.default.devise= icon('alert-triangle')
 
-      .container-fluid
-        .navbar-header
-          %button.navbar-toggle{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
-            %span.sr-only Toggle navigation
-            %i.fa.fa-navicon
-          %a.navbar-brand{href: "/"}
-            = icon :flag
-            %span.text= 'app_name'.t
+                    = yield
 
-    .scroll-wrapper
-      .inner-scroll-wrapper
-        - if content_for?(:content_header)
-          - content_header_class = yield :content_header_class
-          - content_header_style = yield :content_header_style
-          .content-header{class: content_header_class, style: content_header_style}
-            .container-fluid= yield :content_header
-
-        - content_class = yield :extra_content_class
-        #content{class: content_class}
-          .container-fluid
-            #content-header
-              = yield :content_header
-
-            = yield
-
-
-    <!--[if IE 8]>
-    = javascript_include_tag 'shame'
-    <![endif]-->
-
-    <!--[if IE 9]>
-    = javascript_include_tag 'shame'
-    <![endif]-->
-
-    = javascript_include_tag "application"
+    = javascript_pack_tag "application"
     = yield :scripts
