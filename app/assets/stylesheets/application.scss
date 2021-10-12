@@ -1,6 +1,8 @@
 @import "bootstrap";
 @import "bootstrap/variables";
 
+@import 'gdpr/cookie_consent';
+
 @import "partials/mixins";
 @import "partials/responsive";
 @import "partials/framework_and_overrides";

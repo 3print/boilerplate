@@ -17,6 +17,7 @@
     "bootstrap": "^5.0.0-beta3",
     "ejs-compiled-loader": "^3.1.0",
     "flatpickr": "^4.6.9",
+    "js.cookie": "^0.0.4",
     "moment": "^2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
