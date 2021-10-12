@@ -35,5 +35,6 @@
 
     .dropdown-divider
     = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do
+      = icon_for(:sign_out)
       %span.text= 'actions.sign_out'.t
 

@@ -5,7 +5,8 @@ Feather.config do |i|
   i.set_icon :edit, :edit
   i.set_icon :destroy, :trash
   i.set_icon :email, :mail
-  i.set_icon :sign_out, 'sign-out'
+  i.set_icon :sign_out, 'log-out'
+  i.set_icon :sign_in, 'log-in'
   i.set_icon :profile, :settings
 
   i.set_icon :dashboard, :sliders
