@@ -3,12 +3,25 @@
   background: #fff;
 }
 
+.flatpickr-calendar {
+  .flatpickr-weekday,
+  .flatpickr-weekdays {
+    background: white;
+  }
+}
+
 .flatpickr-calendar.inline {
   background: transparent;
   box-shadow: none;
   width: 100%;
+
+  .flatpickr-innerContainer {
+    border: none;
+  }
+
   .flatpickr-days {
     width: 100%;
+    border: none;
   }
   .dayContainer {
     width: 100%;
@@ -60,10 +73,12 @@
   }
   .flatpickr-weekdays {
     height: 45px;
+    background: white;
   }
   .flatpickr-weekday {
     height: 45px;
     line-height: 45px;
+    background: white;
   }
   .flatpickr-months {
     .flatpickr-month {
@@ -187,6 +202,7 @@
   .flatpickr-month {
     color: rgba(0,0,0,.9);
     fill: rgba(0,0,0,.9);
+    background: white;
   }
   .flatpickr-next-month {
     color: rgba(0,0,0,.9);
@@ -263,6 +279,7 @@
     }
   }
   .flatpickr-monthDropdown-months {
+    background: white;
     &:hover {
       background: rgba(0,0,0,.05);
     }
