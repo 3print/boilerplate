@@ -6,7 +6,7 @@ class Admin::BpTestsController < Admin::ApplicationController
   sort_resource by: 'sequence ASC', only: %w(index save_sequence)
 
   toggle_actions :approve, off: :revocate
-  toggle_actions :validate
+  toggle_actions :validate, off: :invalidate
 
   def resource_params
     bp_params = params.require(:bp_test).permit!

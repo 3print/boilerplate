@@ -6,4 +6,4 @@ fr:
       approve: "Souhaitez-vous approuver cet utilisateur ?"    # BOILERPLATE_ONLY
       revocate: "Souhaitez-vous approuver cet utilisateur ?"   # BOILERPLATE_ONLY
       validate: "Souhaitez-vous valider cet utilisateur ?"     # BOILERPLATE_ONLY
-      unvalidate: "Souhaitez-vous invalider cet utilisateur ?" # BOILERPLATE_ONLY
+      invalidate: "Souhaitez-vous invalider cet utilisateur ?" # BOILERPLATE_ONLY

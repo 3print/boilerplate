@@ -20,6 +20,7 @@ fr:
     filter: Filtrer
     handle: Traiter
     import: Importer
+    invalidate: Invalider
     learn_more: 'En savoir plus'
     mark_as_read: Marquer comme lu
     masquerade: Mascarade
@@ -46,7 +47,6 @@ fr:
     unfeature: Désactiver
     unhandle: Ré-ouvrir le traitement
     unpublish: Dépublier
-    unvalidate: Invalider
     update: Enregistrer
     validate: Valider
     view_all: Voir tout

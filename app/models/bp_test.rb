@@ -52,5 +52,5 @@ class BpTest < ApplicationRecord
   end
 
   attr_toggle :approve, off: :revocate
-  attr_toggle :validate
+  attr_toggle :validate, off: :invalidate
 end

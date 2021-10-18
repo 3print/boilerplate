@@ -6,10 +6,10 @@
     = icon 'check-square'
     %span.text= 'actions.approve'.t
 
-= toggle_action item, :validate do |on|
+= toggle_action item, :validate, off: :invalidate do |on|
   - if on
     = icon 'x-square'
-    %span.text= 'admin.actions.unvalidate'.t
+    %span.text= 'admin.actions.invalidate'.t
   - else
     = icon 'check-square'
     %span.text= 'admin.actions.validate'.t

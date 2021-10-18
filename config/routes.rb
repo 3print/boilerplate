@@ -25,7 +25,7 @@ Rails.application.routes.draw do
         put :approve          # BOILERPLATE_ONLY
         put :revocate         # BOILERPLATE_ONLY
         put :validate         # BOILERPLATE_ONLY
-        put :unvalidate       # BOILERPLATE_ONLY
+        put :invalidate       # BOILERPLATE_ONLY
       end                     # BOILERPLATE_ONLY
     end                       # BOILERPLATE_ONLY
 

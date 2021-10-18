@@ -6,10 +6,10 @@
     = icon(:check)
     %span.text= 'admin.actions.approve'.t
 
-- toggle_pill resource, :validate do |on|
+- toggle_pill resource, :validate, off: :invalidate do |on|
   - if on
     = icon('x')
-    %span.text= 'admin.actions.unvalidate'.t
+    %span.text= 'admin.actions.invalidate'.t
   - else
     = icon(:check)
     %span.text= 'admin.actions.validate'.t
