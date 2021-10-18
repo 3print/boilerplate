@@ -1,0 +1,9 @@
+en:
+  confirmations:
+    default: "Do you want to proceed with this action?"
+    destroy: "Do you want to definitely delete this entry?"
+    bp_test:                                                   # BOILERPLATE_ONLY
+      approve: "Do you want to approve this entry?"    # BOILERPLATE_ONLY
+      revocate: "Do you want to revocate this entry?"   # BOILERPLATE_ONLY
+      validate: "Do you want to validate this entry?"     # BOILERPLATE_ONLY
+      invalidate: "Do you want to invalidate this entry?" # BOILERPLATE_ONLY

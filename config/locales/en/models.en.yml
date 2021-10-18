@@ -1,0 +1,17 @@
+en:
+  collections: &collections
+    users: Users
+    bp_tests: Tests # BOILERPLATE_ONLY
+    seo_meta: SEO
+
+  models: &models
+    <<: *collections
+
+    user: User
+    bp_test: Test # BOILERPLATE_ONLY
+    dashboard:
+      <<: *collections
+
+  admin:
+    collections: *collections
+    models: *models

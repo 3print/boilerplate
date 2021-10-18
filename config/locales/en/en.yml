@@ -1,3 +1,99 @@
-
 en:
-  hello: "Hello world"
+  app_name: 'Boilerplate'
+  admin_app_name: 'Boilerplate Admin'
+  no_data: 'No data yet, click on New to start'
+  no_data_no_creation: 'No data yet'
+  welcome: 'Welcome %{user}'
+  label_with_colon: "%{label} : "
+  'yes': 'Yes'
+  'no': 'No'
+  user_name: '%{first_name} %{last_name}'
+  masqueraded: '<small>Logged in as </small><br/><span>%{user}</span>'
+  reverse_masquerade: 'Leave masquerade mode'
+
+  errors:
+    title: An error occured
+    subtitle: An error occured
+    toggle: Can't perform the requested action
+    messages:
+      accepted: must be accepted
+      blank: must be filled
+      present: must be left empty
+      confirmation: doesn't match %{attribute}
+      empty: must be filled
+      equal_to: must be equal to %{count}
+      even: must be event
+      exclusion: isn't available
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: isn't present in the list
+      invalid: isn't valid
+      less_than: must be lower than %{count}
+      less_than_or_equal_to: must be lower than or equal to %{count}
+      model_invalid: "Validation failed: %{errors}"
+      not_a_number: iesn't a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      required: must exist
+      taken: isn't available
+      extension_whitelist_error: "The file type %{extension} isn't allowed for this field, allowed types: %{allowed_types}"
+    not_found:
+      title: "404 Error"
+      content: "The requested page doesn't exist"
+    value:
+      undefined: Undefined
+
+  labels:
+    informations: Informations
+    more_informations: more informations
+    breadcrumb: 'Your are ere'
+    approved: Approved
+    not_approved: Pending
+    latest_news: Last news
+    published_at: "Published the %{date}"
+    search: Search
+    waiting_publication: "Pending"
+    video_published_at: "published the %{date}"
+    video_waiting_publication: "Pending"
+    personal_data: Personal data
+    login_activity: Connection history
+    login_success: Login success
+    validated_models: Validated models
+
+    states:
+      published: Published
+      not_published: Pending
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " and "
+      last_word_connector: " and "
+
+  number:
+    currency:
+      format:
+        unit: '€'
+        delimiter: '&nbsp;'
+        separator: ','
+        precision: 2
+        format: '%n&nbsp;%u'
+
+  tips:
+    models_count:
+      zero: "0 %{plural} tota"
+      one: "1 %{singular} total"
+      other: "%{count} %{plural} total"
+
+  views:
+    pagination:
+      first: First
+      next: Next
+      last: Last
+      previous: Previous
+      truncate: ...
+
+    sign_in:
+      title: Log in
+      lead: Log in to continue
+

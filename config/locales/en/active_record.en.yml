@@ -1,0 +1,24 @@
+en:
+  identified: &identified
+    first_name:
+      blank: First name is required
+    last_name:
+      blank: Last name is required
+    email:
+      blank: Email is required
+      taken: The provided email has already been used
+
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'Validation failed : %{errors}'
+      models:
+        user:
+          attributes:
+            <<: *identified
+            password:
+              blank: Password is required
+              too_short: Password is too short
+            password_confirmation:
+              blank: Password confirmation is required
+              confirmation: Password confirmation does not match the password

@@ -1,0 +1,5 @@
+en:
+  prefix:
+    models:
+      user: "The %{label}"
+      bp_test: "The %{label}" # BOILERPLATE_ONLY

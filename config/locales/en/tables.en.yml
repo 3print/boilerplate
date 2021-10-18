@@ -1,0 +1,35 @@
+en:
+  <%= YAML::include("en/models.en.yml") %>
+  tables:
+    columns:
+      <<: *models
+
+      id: ID
+      actions: Actions
+      preview: Preview
+      resource_label: Name
+      email: Email
+      field: Field
+      type: Type
+      name: Name
+      slug: Permalink
+      image: Image
+      extension: Extensions
+      name: Name
+      checked: Verified
+      price: Proces
+      key: Key
+      value: Value
+      start_on: Start date
+      end_on: End date
+      tokens: Tokens
+      dates: Dates
+      index: Index
+      published: Published
+      order: Order
+      masquerade: Masquerade
+      user_card: User
+      login_date: Date
+      login_success: Result
+      login_ip: IP
+      login_geo: Coordinates

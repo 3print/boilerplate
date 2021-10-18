@@ -1,0 +1,47 @@
+en:
+  markdown: &markdown "The text can be decorated using the <a href='http://en.wikipedia.org/wiki/Markdown'>Markdown</a> syntax."
+  <%= YAML::include("en/models_fields.en.yml") %>
+
+  date:
+    order:
+    - day
+    - month
+    - year
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+
+    required:
+      text: 'required'
+      mark: '*'
+
+    labels:
+      <<: *fields
+
+      crop_settings: Part to keep when cropping
+      alt_text: Alternative text
+
+    placeholders:
+      file: 'Pick a file'
+      string: 'Type your text here'
+      number: 'Insert number here'
+      datetime: 'MM-DD-AAAA HH:MM'
+      date: 'MM-DD-AAAA'
+      time: 'HH:MM'
+      email: 'for instance: first_name.last_name@company.com'
+      enum: 'Pick an option'
+      text: 'Type your text here'
+      markdown: 'Type your text here'
+      password: '••••••••'
+      tel: 'for instance: 555 012 345'
+      integer: 'Pick a value'
+      type: 'Pick an option'
+      select: 'Pick an option'
+      crop_settings: 'Pick an option'
+      float: '0.000'
+      url: http://my-domain.com
+      alt_text: Alternative text
+
+    hints:
+      user:
+        password: Password must be at least eight characters long and includes at least 1 lowercase character, 1 uppercase character, 1 number and 1 symbol

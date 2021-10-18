@@ -1,0 +1,53 @@
+en:
+  identified: &identified
+    civility: Civility
+    email: Email
+    first_name: First name
+    last_name: Last name
+
+  contactable: &contactable
+    phone: Phone
+    address: Address
+    zipcode: Zipcode
+    zip_code: Zipcode
+    city: City
+
+  common: &common
+    image: image
+    pdf: pdf
+
+  sortable: &sortable
+    sequence: Sequence
+
+  manageable: &manageable
+    handled_at: Handled at
+
+  models:
+    fields: &fields
+      common:
+        <<: *common
+
+      user:
+        <<: *identified
+        password: Password
+        password_confirmation: Password confirmation
+        role: Role
+        remember_me: Remember me
+
+      bp_test:                               # BOILERPLATE_ONLY
+        int: Integer                         # BOILERPLATE_ONLY
+        json: Configuration                  # BOILERPLATE_ONLY
+        markdown: Markdown                   # BOILERPLATE_ONLY
+        text: Text                           # BOILERPLATE_ONLY
+        enum: Enumeration                    # BOILERPLATE_ONLY
+        multiple_enum: Multiple Enumeration  # BOILERPLATE_ONLY
+        validated_at: Validation date        # BOILERPLATE_ONLY
+        visual: visual                       # BOILERPLATE_ONLY
+
+      seo_meta:
+        title: Page title
+        description: Description
+        meta_owner_id: Target resource id (leave blank for index)
+        meta_owner_type: Target resource type
+        static_mode: For a static page
+        static_action: Page
