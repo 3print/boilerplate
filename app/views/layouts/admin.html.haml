@@ -44,6 +44,8 @@
 
           .navbar-collapse.collapse
             .navbar-nav.navbar-align.align-items-center
+              / If your project doesn't require multiple locales you can just
+              / remove the following line.
               = render partial: 'admin/shared/locales', locals: {context: :navbar}
               = render partial: 'admin/shared/session', locals: {context: :navbar}
 
