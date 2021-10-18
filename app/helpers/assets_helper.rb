@@ -22,15 +22,14 @@ module AssetsHelper
 
   def compile(item)
     if item.is_a? Symbol
-      txt = "+#{item}"
+      txt = "@include #{item};"
     elsif item.is_a? String
       txt = item
     elsif item.is_a? Hash
       txt = item.keys.inject([]){|mem, k| mem << "#{k.to_s.gsub('_', '-')}: #{item[k]}"; mem}.compact.join("; ")
     end
-    sass = "@import partials/mail_common\n\nfoo\n\t"
-    sass << txt.gsub(/\s*;\s*/, "\n\t")
-    SassUtils.compile(sass).gsub(/foo\s*\{\s*/, '').gsub(/\s*\}$/, '').gsub(/\s+/, ' ')
+    scss = "@import 'partials/mail_common';foo {#{txt}}"
+    SassUtils.compile(scss).gsub(/foo\s*\{\s*/, '').gsub(/\s*\}$/, '').gsub(/\s+/, ' ')
   end
 
   def styles *items
