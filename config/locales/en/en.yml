@@ -11,6 +11,10 @@ en:
   masqueraded: '<small>Logged in as </small><br/><span>%{user}</span>'
   reverse_masquerade: 'Leave masquerade mode'
 
+  locales:
+    fr: Français
+    en: English
+
   errors:
     title: An error occured
     subtitle: An error occured
@@ -31,7 +35,7 @@ en:
       less_than: must be lower than %{count}
       less_than_or_equal_to: must be lower than or equal to %{count}
       model_invalid: "Validation failed: %{errors}"
-      not_a_number: iesn't a number
+      not_a_number: isn't a number
       not_an_integer: must be an integer
       odd: must be odd
       required: must exist
