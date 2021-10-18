@@ -43,7 +43,8 @@
           = render_partial_for_user 'admin/shared/nav'
 
           .navbar-collapse.collapse
-            .navbar-nav.navbar-align
+            .navbar-nav.navbar-align.align-items-center
+              = render partial: 'admin/shared/nav_session', locals: {context: :navbar}
               = render partial: 'admin/shared/session', locals: {context: :navbar}
 
         %main.content

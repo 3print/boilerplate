@@ -1,4 +1,6 @@
 class Admin::ApplicationController < ApplicationController
+  include LocalesExtensions
+
   if Rails.env.dev?
     after_action :verify_authorized, except: :index
     after_action :verify_policy_scoped, only: :index
@@ -7,6 +9,7 @@ class Admin::ApplicationController < ApplicationController
   layout 'admin'
 
   before_action :reject_unauthorized_user!
+  before_action :set_locale!
 
   load_and_authorize_resource
 

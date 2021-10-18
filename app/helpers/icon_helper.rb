@@ -51,4 +51,7 @@ module IconHelper
     Feather.get_icon(o)
   end
 
+  def flag(name, attrs={})
+    image_tag(asset_path("flags/#{name}.svg"),  attrs).html_safe
+  end
 end
