@@ -1,4 +1,5 @@
-import '@rails/ujs';
+import Rails from '@rails/ujs';
+Rails.start();
 
 import I18n from '../js/utils/i18n';
 I18n.attachToWindow();
@@ -26,7 +27,6 @@ import '../js/widgets/settings-editor';
 import '../js/widgets/table-sort-header';
 import '../js/widgets/order-table';
 import '../js/widgets/submit-on-change';
-import '../js/widgets/confirm-action';
 import '../js/widgets/flatpickr';
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
@@ -43,7 +43,6 @@ const isInTemplate = el => parent(el, '.tpl') != null;
 const isMobileOrInTemplate = el => isMobile() || isInTemplate(el);
 
 widgets('admin-navigation-highlight', '.sidebar-nav', {on: DEFAULT_EVENTS});
-widgets('confirm-action', '[data-confirm', {on: DEFAULT_EVENTS, unless: isInTemplate});
 widgets('submit-on-change', '.submit-on-change', {on: DEFAULT_EVENTS})
 widgets('popover', '[data-toggle=popover]', {on: DEFAULT_EVENTS, unless: isInTemplate});
 

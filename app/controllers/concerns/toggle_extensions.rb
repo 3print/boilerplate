@@ -21,7 +21,7 @@ module ToggleExtensions
             send "#{base}_response" if respond_to?("#{base}_response")
             redirect_to referer
           else
-            TPrint.debug resource, resource.errors
+            p resource, resource.errors
             flash[:error] = 'errors.toggle'.t
             redirect_to referer
           end
@@ -40,7 +40,7 @@ module ToggleExtensions
             send "#{off}_response" if respond_to?("#{off}_response")
             redirect_to referer
           else
-            TPrint.debug resource, resource.errors
+            p resource, resource.errors
             flash[:error] = 'errors.toggle'.t
             redirect_to referer
           end

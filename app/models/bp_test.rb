@@ -45,7 +45,7 @@ class BpTest < ApplicationRecord
   add_to_dashboard weight: 0, size: 2
   set_shared_policy PublicSourceModelPolicy
 
-  validates :image, :int, :json, :markdown, :text, :enum, :validated_at, presence: true
+  validates :image, :int, :json, :markdown, :text, :enum, presence: true
 
   def caption
     "Test ##{id}"
