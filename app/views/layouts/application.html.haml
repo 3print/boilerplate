@@ -55,13 +55,8 @@
 
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
-    = render 'gdpr/cookie_consent'
-
-    %template.tpl.icon-asc= icon('chevron-down')
-    %template.tpl.icon-desc= icon('chevron-up')
-    %template.tpl.icon-reset= icon('x')
-    %template.tpl.icon-close= icon('x')
-    %template.tpl.icon-upload= icon('upload')
+    = render partial: 'gdpr/cookie_consent'
+    = render partial: 'shared/html_templates'
 
     %nav.navbar.navbar-expand-lg.navbar-light.bg-light{role: :navigation}
       .container
