@@ -38,6 +38,17 @@ ul.pagination {
   margin-right: 0.5em;
 }
 
+.btn-xs, .btn-group-xs > .btn {
+  padding: 0.1rem 0.25rem;
+  font-size: 0.6rem;
+  border-radius: 0.1rem;
+
+  .feather {
+    width: 14px;
+    height: 14px;
+  }
+}
+
 .btn-sm .feather {
   width: 14px;
   height: 14px;
