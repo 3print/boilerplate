@@ -63,6 +63,16 @@ ul.pagination {
   }
 }
 
+.dropdown-toggle.no-caret {
+  &::after {
+    content: none;
+  }
+}
+
+.dropdown-item .feather {
+  margin-right: 0.4em;
+}
+
 // Sidebar
 .sidebar-brand {
   img {

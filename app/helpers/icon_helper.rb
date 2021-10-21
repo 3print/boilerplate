@@ -8,6 +8,10 @@ Feather.config do |i|
   i.set_icon :sign_out, 'log-out'
   i.set_icon :sign_in, 'log-in'
   i.set_icon :profile, :settings
+  i.set_icon :pdf, :download
+  i.set_icon :address, 'map-pin'
+  i.set_icon :phone, :phone
+  i.set_icon :more, 'more-horizontal'
 
   i.set_icon :dashboard, :sliders
   i.set_icon :resources, :database

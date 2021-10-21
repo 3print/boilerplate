@@ -32,55 +32,8 @@ module ResourceProcHelper
   end
 
   def resource_actions_proc(*actions)
-    def resolve_url(action, item)
-      base = controller.is_admin? ? [:admin] : []
-      case action.to_s
-      when 'update' then base + [item]
-      when 'create' then base + [item.class]
-      when 'index' then base + [item.class]
-      when 'destroy' then base + [item]
-      when 'show' then base + [item]
-      when 'new' then [:new] + base + [singular]
-      else
-        [action.to_sym] + base + [item]
-      end
-    end
-
     resource_field_proc :actions do |item|
-      "<div class='btn-group'>#{actions.map do |a|
-        if a.is_a?(Hash)
-          a.map do |k,v|
-            if can? k, item
-              title = "actions.#{k}".t
-              label = icon_and_text(title, icon_name_for(k))
-
-              if v.is_a?(Hash)
-                unless_clause = v.delete(:unless)
-                if unless_clause.present?
-                  next if instance_exec(&unless_clause)
-                end
-                if_clause = v.delete(:if)
-                if if_clause.present?
-                  next unless instance_exec(&if_clause)
-                end
-
-                link_to label, resolve_url(k, item), {class: button_class_for_action(k), title: title}.merge(v)
-              elsif v.is_a?(Symbol)
-                link_to label, send(v, item), {class: button_class_for_action(k), title: title}
-              else
-                link_to label, v, {class: button_class_for_action(k), title: title}
-              end
-            end
-          end
-        else
-          if can? a, item
-            title = "actions.#{a}".t
-            label = icon_and_text(title, icon_name_for(a))
-            link_to label, resolve_url(a, item), class: button_class_for_action(a), title: title
-          end
-        end
-      end.flatten.compact.join
-      }</div>".html_safe
+      "<div class='btn-group'>#{actions_buttons(actions, item).join}</div>".html_safe
     end
   end
 
