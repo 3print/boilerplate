@@ -10,6 +10,7 @@ task :clone, [:name] do |t, args|
     "app/views/bp_*",
     "bp-gemfile.rb",
     "db/migrate/*_bp_*",
+    "db/seeds/bp_*",
     "lib/tasks/clone.rake",
     "spec/controllers/bp_*",
     "spec/factories/bp_*",
