@@ -1,0 +1,31 @@
+.password-validation-criterium {
+  columns: 2;
+  padding: 0;
+
+  li {
+    list-style: none;
+    padding-left: 16px;
+    position: relative;
+
+    &::before {
+      content: '•';
+      display: block;
+      position: absolute;
+      line-height: 16px;
+      left: 0;
+      font-size: 18px;
+    }
+
+    &.is-invalid::before {
+      content: '×';
+      line-height: 12px;
+      color: $danger;
+    }
+
+    &.is-valid::before {
+      content: '✓';
+      line-height: 14px;
+      color: $success;
+    }
+  }
+}

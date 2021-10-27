@@ -1,0 +1,13 @@
+
+- if alert.present?
+  .alert.alert-danger= alert
+
+= simple_form_for(sign_up_model, url: registration_path(:user), html: { role: 'form', class: 'sign_up'}) do |f|
+  .mb-3= f.input :email, autofocus: true
+  .mb-3
+    = f.input :password, required: true
+    = f.input :password_confirmation, required: true
+
+  = hidden_field_tag :redirect, params[:redirect]
+
+  .text-center.mt-3= f.submit 'actions.sign_up'.t, class: 'btn btn-outline-primary btn-block'

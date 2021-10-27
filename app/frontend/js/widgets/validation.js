@@ -43,7 +43,7 @@ export default {
       if (prevError) { detachNode(prevError); }
 
       const error = getNode(`<div class='invalid-feedback d-block'>${`widgets.validation.${res}`.t()}</div>`);
-      group.appendChild(error);
+      group.insertBefore(error, input.nextSibling);
     }
     input.classList.add('is-invalid');
   }

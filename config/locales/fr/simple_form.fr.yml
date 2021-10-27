@@ -44,4 +44,12 @@ fr:
 
     hints:
       user:
-        password: Le mot de passe doit contenir 8 caractères minimum, 1 majuscule, 1 minuscule, 1 chiffre et 1 symbole au minimum
+        password: >
+          Le mot de passe doit contenir:
+          <ul class="password-validation-criterium">
+            <li>8 caractères minimum</li>
+            <li>1 majuscule</li>
+            <li>1 minuscule</li>
+            <li>1 chiffre</li>
+            <li>1 symbole au minimum</li>
+          </ul>

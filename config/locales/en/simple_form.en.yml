@@ -44,4 +44,12 @@ en:
 
     hints:
       user:
-        password: Password must be at least eight characters long and includes at least 1 lowercase character, 1 uppercase character, 1 number and 1 symbol
+        password: >
+          Password must contains:
+            <ul class="password-validation-criterium">
+              <li>at least eight characters long</li>
+              <li>1 lowercase character</li>
+              <li>1 uppercase character</li>
+              <li>1 number</li>
+              <li>1 symbol</li>
+            </ul>

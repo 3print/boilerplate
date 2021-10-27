@@ -14,7 +14,9 @@ export const LOCALES = {
       },
       validation: {
         blank: "This field cannot be blank",
-        invalid_email: 'Please fill a valid email address'
+        value_missing: "This field cannot be blank",
+        invalid_email: 'Please fill a valid email address',
+        password_confirmation_doesnt_match: 'Confirmation does not match password',
       },
       field_limit: {
         remaining: "Remaining characters: #{count}"
@@ -112,6 +114,7 @@ export const LOCALES = {
         blank: 'Ce champ ne peut être vide',
         value_missing: 'Ce champ ne peut être vide',
         invalid_email: 'Saisissez une adresse email valide',
+        password_confirmation_doesnt_match: 'La confirmation ne correspond pas au mot de passe saisi',
       },
       field_limit: {
         remaining: "Caractères restants : #{count}",
