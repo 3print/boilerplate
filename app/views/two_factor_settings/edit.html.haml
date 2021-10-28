@@ -1,0 +1,12 @@
+%h3= '2fa.views.edit.title'.t
+%p= '2fa.views.edit.codes_notice'.t
+
+- @backup_codes.each_slice(2) do |(code1, code2)|
+  .row
+    .col-md-6.font-monospace=code1
+    .col-md-6.font-monospace=code2
+
+%h4.mt-4= '2fa.views.edit.setup_complete'.t
+%p= '2fa.views.edit.setup_complete_p'.t
+
+.text-center= link_to('2fa.views.edit.back'.t, edit_user_registration_path, class: 'btn btn-outline-primary')

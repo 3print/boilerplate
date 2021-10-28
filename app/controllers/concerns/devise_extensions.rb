@@ -12,6 +12,7 @@ module DeviseExtensions
   end
 
   def after_sign_up_path_for(resource)
+    p "here"
     if current_user.user?
       super
     else

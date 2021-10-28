@@ -1,0 +1,40 @@
+en:
+  2fa:
+    activate_2fa_first: Please enable two factor authentication first.
+    already_enabled: Two Factor Authentication is already enabled.
+    backup_codes: Successfully enabled two factor authentication, please make note of your backup codes.
+    backup_codes_seen: You have already seen your backup codes.
+    confirm_disable: Are you sure you want to disable two factor authentication?
+    couldnt_disable: Could not disable two factor authentication.
+    disable: Disable Two Factor Authentication
+    disabled: Successfully disabled two factor authentication.
+    enable: Enable Two Factor Authentication
+    incorrect_code: Incorrect Code
+    incorrect_password: Incorrect password
+
+    views:
+      new:
+        password: Enter your current password
+        confirm: Confirm and Enable Two Factor
+        step1:
+          title: 1. Scan QR Code
+          content: Please scan the below QR code using an OTP compatible app (such as Google Authenticator or Authy
+          code_notice: 'If you cannot scan, please enter the following code manually:'
+        step2:
+          title: 2. Confirm OTP Code
+          content: Please confirm that your authentication application is working by entering a generated code below.
+
+      edit:
+        title: Backup Codes
+        codes_notice: 'Keep these backup codes safe in case you lose access to your authenticator app:'
+        setup_complete: Two Factor Setup Complete
+        setup_complete_p: Two factor authentication has been successfully enabled.
+        back: Return to account settings
+
+      sign_in:
+        title: Two Factor Authentication
+        otp: OTP
+
+
+
+

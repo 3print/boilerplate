@@ -1,0 +1,8 @@
+- content_for :page_title do
+  = '2fa.views.sign_in.title'.t
+
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name), method: :post) do |f|
+  = f.input :otp_attempt, label: '2fa.views.sign_in.otp'.t
+  = hidden_field_tag :redirect, params[:redirect]
+
+  .text-center.mt-3= f.submit 'actions.connect'.t, class: 'btn btn-outline-primary btn-block'

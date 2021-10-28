@@ -33,6 +33,7 @@ fr:
         password_confirmation: Confirmation du mot de passe
         role: Role
         remember_me: Se souvenir de moi
+        otp_required_for_login: Activer la double authentification
 
       bp_test:                               # BOILERPLATE_ONLY
         int: Entier                          # BOILERPLATE_ONLY

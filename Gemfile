@@ -8,6 +8,8 @@ gem 'sendgrid'
 # Auth
 gem 'devise'
 gem 'devise-security'
+gem 'devise-two-factor'
+gem 'rqrcode'
 gem "valid_email2"
 gem 'devise-i18n'
 gem 'pundit'

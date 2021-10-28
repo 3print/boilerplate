@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     sessions: "sessions",
     passwords: 'passwords',
   }
+  resource :two_factor_settings, except: [:index, :show]
 
   resources :bp_tests do # BOILERPLATE_ONLY
     collection do        # BOILERPLATE_ONLY

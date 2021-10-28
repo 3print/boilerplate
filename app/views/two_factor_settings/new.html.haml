@@ -1,0 +1,19 @@
+- if alert.present?
+  .alert.alert-danger= alert
+
+%h3= '2fa.views.new.step1.title'.t
+%p= '2fa.views.new.step1.content'.t
+
+.text-center= qr_code_as_svg(current_user.two_factor_qr_code_uri)
+
+%p.mt-3
+  = '2fa.views.new.step1.code_notice'.t
+  %code= current_user.otp_secret
+
+%h3= '2fa.views.new.step2.title'.t
+%p= '2fa.views.new.step2.content'.t
+
+= simple_form_for(:two_fa, url: two_factor_settings_path, method: :post) do |f|
+  = f.input :code, placeholder: ''
+  = f.input :password, label: '2fa.views.new.password'.t, placeholder: ''
+  .text-center.mt-3= f.submit '2fa.views.new.confirm'.t, class: 'btn btn-outline-primary'
