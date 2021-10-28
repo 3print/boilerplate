@@ -21,7 +21,10 @@
     %main.d-flex.w-100.h-100
       .container.d-flex.flex-column
         .row.vh-100
-          .col-sm-10.col-md-8.col-lg-6.mx-auto.d-table.h-100
+          :ruby
+            container_class = content_for?(:container_class) ? yield( :container_class) : 'col-sm-10 col-md-8 col-lg-6'
+
+          .mx-auto.d-table.h-100{class: container_class}
             .d-table-cell.align-middle
               .text-center.mt-4
                 %h1.h2= yield :page_title

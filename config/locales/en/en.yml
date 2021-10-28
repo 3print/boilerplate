@@ -49,6 +49,7 @@ en:
 
   labels:
     informations: Informations
+    account: My account
     more_informations: more informations
     breadcrumb: 'Your are ere'
     approved: Approved

@@ -49,6 +49,7 @@ fr:
 
   labels:
     informations: Informations
+    account: Mon compte
     more_informations: plus d'informations
     breadcrumb: 'Vous êtes ici'
     approved: Approuvé

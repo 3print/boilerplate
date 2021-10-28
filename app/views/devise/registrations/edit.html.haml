@@ -1,0 +1,36 @@
+- content_for :page_title, 'labels.account'.t
+- content_for :container_class, 'col-sm-12'
+
+= simple_form_for resource, url: edit_registration_path(:user) do |f|
+  %fieldset.inputs.card-body
+    .row
+      .col-lg-6
+        .row
+          - if current_user.admin?
+            .col-md-6= f.input :email
+            .col-md-6= f.input :role
+          - else
+            .col-md-12= f.input :email
+
+        .row
+          .col-md-6= f.input :first_name
+          .col-md-6= f.input :last_name
+
+        .row
+          .col-md-6= f.input :password, required: params[:action] == 'new'
+          .col-md-6
+            = f.input :password_confirmation, required: params[:action] == 'new'
+
+        .mt-3
+          - if current_user.otp_required_for_login
+            = link_to('2fa.disable'.t, two_factor_settings_path, class: 'btn btn-outline-danger', method: 'delete', data: {confirm: '2fa.confirm_disable'.t})
+          - else
+            = link_to('2fa.enable'.t, new_two_factor_settings_path, class: 'btn btn-outline-primary')
+
+        = render_partial_for_user 'form_extra_fields', locals: {form: f}
+
+      .col-lg-6= f.input :avatar
+
+
+
+  = default_actions
