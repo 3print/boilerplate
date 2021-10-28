@@ -2,7 +2,7 @@
 - if alert.present?
   .alert.alert-danger= alert
 
-= simple_form_for(sign_in_model, url: session_path(:user), html: { role: 'form'}) do |f|
+= simple_form_for(sign_in_model, url: session_path(:user), html: { role: 'form', class: 'sign_in'}) do |f|
   .mb-3= f.input :email, autofocus: true
   .mb-3
     = f.input :password, hint: false, required: true

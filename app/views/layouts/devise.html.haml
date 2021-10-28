@@ -12,10 +12,12 @@
     = stylesheet_link_tag 'admin', media: 'all'
     = yield :stylesheets
 
-    = javascript_pack_tag 'devise', 'data-turbolinks-track': true, 'data-turbolinks-eval': false, cache: true, defer: "defer"
+    = javascript_pack_tag 'application', 'data-turbolinks-track': true, 'data-turbolinks-eval': false, cache: true, defer: "defer"
 
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
+    = render partial: 'gdpr/cookie_consent'
+    = render partial: 'shared/html_templates'
     %main.d-flex.w-100.h-100
       .container.d-flex.flex-column
         .row.vh-100

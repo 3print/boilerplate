@@ -18,5 +18,6 @@
 import Cookies from 'js.cookie';
 window.Cookies = Cookies;
 import 'gdpr/cookie_consent';
+
 import '../js/templates/index.js';
 import './admin';

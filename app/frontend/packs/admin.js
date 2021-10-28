@@ -122,6 +122,7 @@ widgets('field-limit', '[data-limit]', {on: DEFAULT_EVENTS, unless: isInTemplate
 widgets('live-validation', 'input, select, textarea', merge({
   on: DEFAULT_EVENTS,
   unless: isInTemplate,
+  events: 'input change blur',
 }, VALIDATION_OPTIONS));
 widgets('form-validation', 'form', merge({
   on: DEFAULT_EVENTS,
