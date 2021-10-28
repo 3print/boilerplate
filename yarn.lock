@@ -7263,10 +7263,10 @@ widjet-utils@^1.2.0, widjet-utils@^1.3:
   dependencies:
     widjet-disposables "^1.0.0"
 
-widjet-validation@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/widjet-validation/-/widjet-validation-1.4.1.tgz#9ddf94a1f0f605dbaca50615b3b236141f3aa41f"
-  integrity sha512-v27YduvoEaGS/8E92YANjSrPpvPrmED5sqKSaj0ZR+1abZswXo0psFrqPE3kPiGW2gl8TncJViU1NGsq0jSWPA==
+widjet-validation@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/widjet-validation/-/widjet-validation-1.5.2.tgz#d026f8406de38e3cbcf7badb4773c3bf7c101e3c"
+  integrity sha512-hEWN4p47xdtiU2wd9VyhpDj203M1LgNGKtd4da0pSmHUJ9966351DRVFR1MsF8TvKw82JEZAKT/2Dz5cBQMpFw==
 
 widjet@^1.2.0:
   version "1.3.0"

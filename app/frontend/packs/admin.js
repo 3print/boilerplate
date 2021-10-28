@@ -123,6 +123,7 @@ widgets('live-validation', 'input, select, textarea', merge({
   on: DEFAULT_EVENTS,
   unless: isInTemplate,
   events: 'input change blur',
+  inputBuffer: 500,
 }, VALIDATION_OPTIONS));
 widgets('form-validation', 'form', merge({
   on: DEFAULT_EVENTS,

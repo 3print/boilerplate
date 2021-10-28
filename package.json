@@ -30,6 +30,6 @@
     "widjet-text-editor": "^1.1.2",
     "widjet-transferable": "^1.5.0",
     "widjet-utils": "^1.3",
-    "widjet-validation": "^1.4.1"
+    "widjet-validation": "^1.5.2"
   }
 }
