@@ -11,13 +11,15 @@ const PUNCT_RE = /[ -#%-\x2A,-\/:;\x3F@\x5B-\x5D_\x7B}\u00A1\u00A7\u00AB\u00B6\u
 const passwordPredicate = (i) =>
   i.type == 'password'
   && /password\]$/.test(i.name)
-  && i.matches('.sign_up input, .new_user input')
+  && i.matches('.sign_up input, .new_user input, .edit_user input')
 const passwordConfirmationPredicate = (i) =>
   i.type == 'password'
   && /password_confirmation\]$/.test(i.name)
 
 function validatePassword(i18n, value, input) {
-  if(!input.value) { return validatePresence(i18n, value, input); }
+  if(!input.value && input.required) {
+    return validatePresence(i18n, value, input);
+  }
 
   const res = [];
 
