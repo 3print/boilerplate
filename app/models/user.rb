@@ -121,7 +121,7 @@ class User < ApplicationRecord
   # URI for OTP two-factor QR code
   def two_factor_qr_code_uri
     issuer = ENV['OTP_2FA_ISSUER_NAME']
-    label = [issuer, email].join(':')
+    label = ['app_name'.t, email].join(':')
 
     otp_provisioning_uri(label, issuer: issuer)
   end
