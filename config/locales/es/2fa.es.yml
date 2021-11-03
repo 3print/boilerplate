@@ -1,0 +1,36 @@
+es:
+  2fa:
+    activate_2fa_first: Por favor, en primer lugar, active la autenticación con dos factores.
+    already_enabled: La autenticación con dos factores ya está activada.
+    backup_codes: La autenticación con dos factores ha sido activada. Por favor, anote sus códigos de recuperación.
+    backup_codes_seen: Ya ha visto sus códigos de recuperación.
+    couldnt_disable: No se puede desactivar la autenticación con dos factores ha sido activada.
+    disabled: La autenticación con dos factores ha sido desactivada.
+    incorrect_code: Código incorrecto.
+    incorrect_password: Contraseña incorrecta.
+    enable: Activar la autenticación con dos factores
+    disable: Desactivar La autenticación con dos factores
+    confirm_disable: ¿ Desea desactivar la autenticación con dos factores ?
+
+    views:
+      new:
+        password: Introduce su contraseña
+        confirm: Confirmar y activar la autenticación con dos factores
+        step1:
+          title: 1. Escanea el código QR
+          content: Por favor, escanea el código QR abajo utilizando una aplicación compatible con OTP (como Google Authenticator o Authy)
+          code_notice: 'Si no puede escanear el código QR, por favor introduce el siguiente código :'
+        step2:
+          title: 2. Confirmar el código OTP
+          content: Por favor, confirme que la aplicación de autenticación funciona correctamente introduciendo el código generado abajo.
+
+      edit:
+        title: Códigos de recuperación
+        codes_notice: "Por favor, guarde estos códigos por si acaso se pierde el acceso a la aplicación de autenticación :"
+        setup_complete: La configuración de la autenticación con dos factores está terminada.
+        setup_complete_p: La autenticación con dos factores ha sido activada correctamente.
+        back: Regresar a su cuenta
+
+      sign_in:
+        title: Autenticación con dos factores
+        otp: Código
