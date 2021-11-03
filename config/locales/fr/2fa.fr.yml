@@ -1,21 +1,21 @@
 fr:
   2fa:
-    activate_2fa_first: Veuillez d'abord activer la double authentification.
-    already_enabled: La double authentification est déjà activée.
-    backup_codes: La double authentification a été activé, veuillez noter vos codes de récupération.
+    activate_2fa_first: Veuillez d'abord activer l'authentification à deux facteurs.
+    already_enabled: L'authentification à deux facteurs est déjà activée.
+    backup_codes: L'authentification à deux facteurs a été activé, veuillez noter vos codes de récupération.
     backup_codes_seen: Vous avez déjà vu vos codes de récupération.
-    couldnt_disable: Impossible de désactiver la double authentification.
-    disabled: La double authentification a été désactivé.
+    couldnt_disable: Impossible de désactiver l'authentification à deux facteurs.
+    disabled: L'authentification à deux facteurs a été désactivé.
     incorrect_code: Code incorrect.
     incorrect_password: Mot de passe incorrect.
-    enable: Activer la double authentification
-    disable: Désactiver la double authentification
-    confirm_disable: Êtes vous sûr de vouloir désactiver la double authentification ?
+    enable: Activer l'authentification à deux facteurs
+    disable: Désactiver l'authentification à deux facteurs
+    confirm_disable: Êtes vous sûr de vouloir désactiver l'authentification à deux facteurs ?
 
     views:
       new:
         password: Saisissez votre mot de passe
-        confirm: Confirmer et activer la double authentification
+        confirm: Confirmer et activer l'authentification à deux facteurs
         step1:
           title: 1. Scannez le QR Code
           content: Veuillez scanner le QR code ci-dessous en utilisant une application compatible avec OTP (tel que Google Authenticator ou Authy)
@@ -27,8 +27,8 @@ fr:
       edit:
         title: Codes de récupération
         codes_notice: "Veuillez conserver à l'abri ces codes pour le cas où vous perdriez l'accès à l'application d'authentification :"
-        setup_complete: Configuration de la double authentification terminée
-        setup_complete_p: La double authentification a été activée avec succès.
+        setup_complete: Configuration de l'authentification à deux facteurs terminée
+        setup_complete_p: L'authentification à deux facteurs a été activée avec succès.
         back: Revenir à votre compte
 
       sign_in:
