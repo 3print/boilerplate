@@ -1,0 +1,17 @@
+es:
+  collections: &collections
+    users: Usuarios
+
+    seo_meta: SEO
+
+  models: &models
+    <<: *collections
+
+    user: Usuario
+
+    dashboard:
+      <<: *collections
+
+  admin:
+    collections: *collections
+    models: *models

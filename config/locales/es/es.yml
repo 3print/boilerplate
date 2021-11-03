@@ -1,0 +1,103 @@
+es:
+  app_name: 'Boilerplate'
+  admin_app_name: 'Boilerplate Admin'
+  no_data: 'No hay datos, haga un clic en "Nuevo" para empezar'
+  no_data_no_creation: 'No hay datos.'
+  welcome: 'Bienvenido %{user}'
+  label_with_colon: "%{label} : "
+  'yes': Si
+  'no': No
+  user_name: '%{first_name} %{last_name}'
+  masqueraded: '<small>Conectado como</small><br/><span>%{user}</span>'
+  reverse_masquerade: 'Salir del modo Mascarade'
+
+  locales:
+    fr: Francés
+    en: Inglés
+    es: Español
+
+  errors:
+    title: Ha ocurrido un error
+    subtitle: Ha ocurrido un error
+    toggle: No se puede realizar la acción solicitada
+    messages:
+      accepted: debe ser aceptado(a)
+      blank: debe ser completado(a)
+      present: debe estar vacío
+      confirmation: no coincide con %{attribute}
+      empty: debe ser completado
+      equal_to: debe ser igual a %{count}
+      even: debe ser un número par
+      exclusion: no está disponible
+      greater_than: debe ser mayor que %{count}
+      greater_than_or_equal_to: debe ser mayor o igual que %{count}
+      inclusion: no está incluido(a) en la lista
+      invalid: no es válido
+      less_than: debe ser menor que %{count}
+      less_than_or_equal_to: debe ser menor o igual que %{count}
+      model_invalid: "Fallo en la validación : %{errors}"
+      not_a_number: no es un número
+      not_an_integer: debe ser un número entero
+      odd: debe ser un número impar
+      required: necesario
+      taken: no está disponible
+      extension_whitelist_error: "El tipo de archivo %{extension} no es compatible con este campo. Están autorizados : %{allowed_types}"
+    not_found:
+      title: "Error 404"
+      content: "La página solicitada no existe"
+    value:
+      undefined: Indefinido
+
+  labels:
+    informations: Informaciones
+    more_informations: Más información
+    breadcrumb: 'Está aquí'
+    approved: Aprobado
+    not_approved: En espera
+    latest_news: Últimas noticias
+    published_at: "Artículo publicado el %{date}"
+    search: Buscar
+    waiting_publication: "Esperando la publicación"
+    video_published_at: "Vídeo publicado el %{date}"
+    video_waiting_publication: "Esperando la publicación del vídeo"
+    personal_data: Datos personales
+    login_activity: Actividad de acceso
+    login_success: Éxito de la conexión
+    validated_models: Modelos aprobados
+
+    states:
+      published: Publicado
+      not_published: No publicado
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " y "
+      last_word_connector: " y "
+
+  number:
+    currency:
+      format:
+        unit: '€'
+        delimiter: '&nbsp;'
+        separator: ','
+        precision: 2
+        format: '%n&nbsp;%u'
+
+  tips:
+    models_count:
+      zero: "0 %{plural} en total"
+      one: "1 %{singular} en total"
+      other: "%{count} %{plural} en total"
+
+  views:
+    pagination:
+      first: Primero
+      next: Siguiente
+      last: Ùltimo
+      previous: Anterior
+      truncate: ...
+
+    sign_in:
+      title: Conexión
+      lead: Inicie sesión para continuar

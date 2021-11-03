@@ -1,0 +1,78 @@
+es:
+  time: &time
+    formats:
+      default: '%d/%m/%Y %H:%M:%S'
+      short: '%H:%M:%S'
+
+  date: &date
+    formats:
+      default: '%d/%m/%Y'
+      short: '%d/%m/%Y'
+      medium: '%e %B %Y'
+      month: '%B %Y'
+      long: '%d/%m/%Y %H:%M'
+      time: '%H:%M'
+
+    month_names:
+      -
+      - enero
+      - febrero
+      - marzo
+      - abril
+      - mayo
+      - junio
+      - julio
+      - agosto
+      - septiembre
+      - octubre
+      - noviembre
+      - diciembre
+
+  time:
+    <<: *date
+
+  timedelta:
+    same_day: "El %{date} de %{start_time} hasta %{end_time}"
+    differents_day: "Desde %{start_date} a %{start_time} hasta %{end_date} a %{end_time}"
+
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: aproximadamente una hora
+        other: aproximadamente %{count} horas
+      about_x_months:
+        one: aproximadamente un mes
+        other: aproximadamente %{count} meses
+      about_x_years:
+        one: aproximadamente un año
+        other: aproximadamente %{count} años
+      almost_x_years:
+        one: casi un año
+        other: casi %{count} años
+      half_a_minute: un medio minuto
+      less_than_x_seconds:
+        zero: menos de un segundo
+        one: menos de un segundo
+        other: menos de %{count} segundos
+      less_than_x_minutes:
+        zero: menos de un minuto
+        one: menos de un minuto
+        other: menos de %{count} minutos
+      over_x_years:
+        one: más de un año
+        other: más de %{count} años
+      x_seconds:
+        one: 1 segundo
+        other: "%{count} segundos"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_days:
+        one: 1 día
+        other: "%{count} días"
+      x_months:
+        one: 1 mes
+        other: "%{count} meses"
+      x_years:
+        one: 1 año
+        other: "%{count} años"

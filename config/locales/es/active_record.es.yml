@@ -1,0 +1,24 @@
+es:
+  identified: &identified
+    first_name:
+      blank: El nombre es necesario
+    last_name:
+      blank: El apellido es necesario
+    email:
+      blank: El email no puede estar vacío
+      taken: El email introducido ya ha sido registrado 
+
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'Falló la validación: %{error}'
+      models:
+        user:
+          attributes:
+            <<: *identificado
+            password:
+              blank: Introduce una contraseña
+              too_short: Se requiere nueva contraseña
+            password_confirmation:
+              blank: Repetir contraseña es necesario
+              confirmation: La confirmación de contraseña no coincide con la contraseña

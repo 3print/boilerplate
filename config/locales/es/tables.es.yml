@@ -1,0 +1,35 @@
+es:
+  <%= YAML::include("es/models.es.yml") %>
+  tables:
+    columns:
+      <<: *models
+
+      id: ID
+      actions: Acciones
+      preview: Vista previa
+      resource_label: Nombre
+      email: Email
+      field: Campo
+      type: Tipo
+      name: Nombre
+      slug: Permalien
+      image: Imagen
+      extension: Extensiones
+      name: Nombre
+      checked: Comprobado
+      price: Precio
+      key: Clave
+      value: Valor
+      start_on: Inicio
+      end_on: Fin
+      tokens: Tokens
+      dates: Fechas
+      index: índice
+      published: Publicado
+      order: Orden
+      masquerade: Mascarade
+      user_card: Usuario
+      login_date: Fecha
+      login_success: Conectado
+      login_ip: IP
+      login_geo: Coordenadas

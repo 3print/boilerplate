@@ -1,0 +1,47 @@
+es:
+  markdown: &markdown "El texto puede ser formateado según las reglas de sintaxis <a href='http://fr.wikipedia.org/wiki/Markdown'>Markdown</a>."
+  <%= YAML::include("es/models_fields.es.yml") %>
+
+  date:
+    order:
+    - día
+    - mes
+    - año
+  simple_form:
+    "yes": 'Sí'
+    "no": 'No'
+
+    required:
+      text: 'necesario'
+      mark: '*'
+
+    labels:
+      <<: *campos
+
+      crop_settings: Parte que se perservará durante el reencuadre
+      alt_text: Texto alternativo
+
+    placeholders:
+      file: 'Elige un archivo'
+      string: 'Introduce su texto aquí '
+      number: 'Introduce un número aquí'
+      datetime: 'JJ/MM/AAAA HH:MM'
+      date: 'JJ/MM/AAAA'
+      time: 'HH:MM'
+      email: 'por ejemplo : nombre.apellido@empresa.com'
+      enum: 'Elige una opcion'
+      text: 'Introduce su texto'
+      markdown: 'Introduce su texto'
+      password: '••••••••'
+      tel: 'por ejemplo : (+34) 600 000 000'
+      integer: 'Introduce un dato'
+      type: 'Elige una opción'
+      select: 'Elige una opción'
+      crop_settings: 'Elige una opción'
+      float: '0.000'
+      url: http://nombre-de-dominio.es
+      alt_text: Texto alternativo
+
+    hints:
+      user:
+        password: La contraseña debe contener como mínimo 8 caracteres, 1 mayúscula, 1 minúscula, 1 número y 1 símbolo

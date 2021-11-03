@@ -1,0 +1,5 @@
+es:
+  prefix:
+    models:
+      user: "El %{label}"
+

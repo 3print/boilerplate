@@ -1,0 +1,18 @@
+es:
+  <%= YAML::include("es/models.es.yml") %>
+
+  root: &root Inicio
+
+  admin:
+    root: *root
+
+  nav:
+    root: *root
+    account: Cuenta
+    <<: *models
+
+    admin:
+      <<: *models
+      root: Admin
+      resources: Recursos
+      dashboard: Dashboard

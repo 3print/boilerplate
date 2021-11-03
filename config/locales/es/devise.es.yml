@@ -1,0 +1,84 @@
+es:
+  devise:
+    failure:
+      user:
+        not_found_in_database: Usuario o contraseña incorrecta
+        invalid: Usuario o contraseña incorrecta
+
+    confirmations:
+      confirmed: 'Gracias por registrarte'
+      send_instructions: 'En unos minutos recibirá instrucciones para confirmar su cuenta.'
+      send_paranoid_instructions: 'Si su correo electrónico ya existe en nuestra base de datos, recibirá pronto un email con instrucciones para confirmar su cuenta.'
+      failure:
+      already_authenticated: "Ya está conectado!"
+      inactive: "Su cuenta aún no está activada."
+      invalid: "Email o contraseña incorrectos."
+      invalid_token: "Token de autenticación incorrecto."
+      locked: "Su cuenta está bloqueada."
+      not_found_in_database: "Email o contraseña inválidos"
+      timeout: "Su sesión ha expirado. Por favor, inicie una nueva sesión para continuar.."
+      unauthenticated: "Debe iniciar sesión o registrarse para continuar."
+      unconfirmed: "Debe validar su cuenta para continuar."
+    mailer:
+      confirmation_instructions:
+        action: Confirmar mi email
+        greeting: Bienvenido %{recipient}!
+        instruction: 'Puede confirmar su correo electrónico con el siguiente enlace :'
+        subject: Instrucciones de confirmación
+      password_change:
+        greeting: Buenos días %{recipient}!
+        message: Enviamos este mensaje para notificarle que su contraseña ha sido cambiada.
+        subject: Tu contraseña ha sido modificada correctamente.
+      reset_password_instructions:
+        action: Cambiar contraseña
+        greeting: Buenos días %{recipient}!
+        instruction: 'Alguien pidió un enlace para cambiar su contraseña, aquí está el enlace :'
+        instruction_2: Si no ha realizado esta solicitud, ignore este correo.
+        instruction_3: Vuestra contraseña no cambiará hasta que haga un clic en este enlace e introduzca una nueva contraseña.
+        subject: Instrucciones para cambiar la contraseña
+    passwords:
+      no_token: "No puede acceder a esta página sin pasar por un correo electrónico de restablecimiento de contraseña. Si ha pasado por un email de este tipo, asegúrese de utilizar la URL completa."
+      send_instructions: 'Recibirá las instrucciones para restablecer la contraseña en unos momentos'
+      send_paranoid_instructions: "Si su email ya existe en nuestra base de datos, recibirá un enlace de restablecimiento por correo electrónico"
+      updated: 'Su contraseña ha sido editada con éxito, ahora está conectado'
+      updated_not_active: 'Tu contraseña ha sido modificada correctamente.'
+      forgotten_password:
+        title: ¿Olvidaste la contraseña?
+        instructions: Vamos a enviar instrucciones sobre cómo cambiar su contraseña.
+        error: No se puede encontrar este correo electrónico.
+      new_password:
+        title: Cambio de contraseña
+        new_password: Nueva contraseña
+        new_password_confirmation: Confirmación de la nueva contraseña
+        submit: Cambiar mi contraseña
+        error: Contraseña inválida
+
+    registrations:
+      user:
+        destroyed: 'Su cuenta ha sido eliminada con éxito. Esperamos verle pronto.'
+        signed_up: 'Bienvenido, está conectado'
+        signed_up_but_inactive: "Estás registrado. Sin embargo, no puede conectarse porque su cuenta aún no está activada."
+        signed_up_but_locked: "Estás registrado. Sin embargo, no puede conectarse porque su cuenta está bloqueada."
+        signed_up_but_unconfirmed: 'Acabamos de enviar un correo con un enlace. Abra este enlace para activar su cuenta.'
+        update_needs_confirmation: "Su cuenta ha sido actualizada correctamente pero necesitamos verificar su nueva dirección de correo electrónico. Compruebe sus correos y haga un clic en el enlace de confirmación para finalizar la validación de su nueva dirección."
+        updated: 'Su cuenta ha sido modificada con éxito.'
+
+    sessions:
+      signed_in: "Conectado."
+      signed_out: "Desconectado."
+
+    unlocks:
+      send_instructions: 'Recibirá instrucciones para desbloquear su cuenta en unos momentos'
+      send_paranoid_instructions: 'Si su cuenta existe, pronto recibirá un email con instrucciones para desbloquearla.'
+      unlocked: 'Su cuenta ha sido desbloqueada con éxito, ahora está conectado.'
+
+  errors:
+    messages:
+      already_confirmed: "ya ha sido validado(a)"
+      confirmation_period_expired: "El período de confirmación ha expirado %{período}, por favor, renueva su petición"
+      expired: "ha expirado. Por favor, renueva su petición"
+      not_found: "no fue encontrado(a)"
+      not_locked: "no estaba bloqueado(a)"
+      not_saved:
+        one: "1 error ha impedido la salvaguardia de este %{resource} :"
+        other: "%{count} errores impidieron la salvaguardia de este %{resource} :"

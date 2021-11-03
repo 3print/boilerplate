@@ -1,0 +1,9 @@
+es:
+  confirmations:
+    default: "¿Desea seguir con esta acción?"
+    destroy: "¿Desea eliminar esta entrada de forma permanente?"
+
+
+
+
+

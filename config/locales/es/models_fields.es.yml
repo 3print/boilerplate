@@ -1,0 +1,43 @@
+es:
+  identified: &identified
+    civility: Género
+    email: Email
+    first_name: Nombre
+    last_name: Apellido
+
+  contactable: &contactable
+    phone: Teléfono
+    address: Dirección postal
+    zipcode: Código postal
+    zip_code: Código postal
+    city: Ciudad
+
+  common: &common
+    image: imagen
+    pdf: PDF
+
+  sortable: &sortable
+    sequence: Orden
+
+  manageable: &manageable
+    handled_at: Tratado
+
+  models:
+    fields: &fields
+      common:
+        <<: *common
+
+      user:
+        <<: *identified
+        password: Contraseña
+        password_confirmation: Confirmación de la contraseña
+        role: Función
+        remember_me: Recordar mis datos
+
+      seo_meta:
+        title: Título de la página
+        description: Descripción
+        meta_owner_id: Id del modelo afectado (dejar vacío para el índice)
+        meta_owner_type: Nombre del modelo afectado
+        static_mode: Para una página estática
+        static_action: Página
