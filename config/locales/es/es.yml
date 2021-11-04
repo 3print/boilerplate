@@ -12,8 +12,8 @@ es:
   reverse_masquerade: 'Salir del modo Mascarade'
 
   locales:
-    fr: Francés
-    en: Inglés
+    fr: Français
+    en: English
     es: Español
 
   errors:

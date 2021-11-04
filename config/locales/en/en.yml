@@ -14,6 +14,7 @@ en:
   locales:
     fr: Français
     en: English
+    es: Español
 
   errors:
     title: An error occured
