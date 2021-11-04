@@ -15,7 +15,7 @@ es:
       models:
         user:
           attributes:
-            <<: *identificado
+            <<: *identified
             password:
               blank: Introduce una contraseña
               too_short: Se requiere nueva contraseña

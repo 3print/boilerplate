@@ -16,7 +16,7 @@ es:
       mark: '*'
 
     labels:
-      <<: *campos
+      <<: *fields
 
       crop_settings: Parte que se perservará durante el reencuadre
       alt_text: Texto alternativo

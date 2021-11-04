@@ -53,4 +53,4 @@ es:
     view_all: Ver todo
 
   admin:
-    actions: *acciones
+    actions: *actions
