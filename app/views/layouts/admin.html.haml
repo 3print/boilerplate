@@ -24,7 +24,7 @@
       #sidebar.sidebar{role: :navigation}
         .sidebar-content
           %a.sidebar-brand{href: "/"}
-            = image_tag asset_path('logo.png'), alt: 'Logo'
+            = image_tag asset_path('logo.svg'), alt: 'Logo'
             %span.text= 'app_name'.t
 
           .sidebar-user= render partial: 'admin/shared/session', locals: {context: :sidebar}
