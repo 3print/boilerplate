@@ -1,14 +1,14 @@
 es:
   collections: &collections
     users: Usuarios
-
+    bp_tests: Tests # BOILERPLATE_ONLY
     seo_meta: SEO
 
   models: &models
     <<: *collections
 
     user: Usuario
-
+    bp_test: Test # BOILERPLATE_ONLY
     dashboard:
       <<: *collections
 

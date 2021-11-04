@@ -34,6 +34,16 @@ es:
         role: Función
         remember_me: Recordar mis datos
 
+      bp_test:                               # BOILERPLATE_ONLY
+        int: Integer                         # BOILERPLATE_ONLY
+        json: Configuration                  # BOILERPLATE_ONLY
+        markdown: Markdown                   # BOILERPLATE_ONLY
+        text: Text                           # BOILERPLATE_ONLY
+        enum: Enumeration                    # BOILERPLATE_ONLY
+        multiple_enum: Multiple Enumeration  # BOILERPLATE_ONLY
+        validated_at: Validation date        # BOILERPLATE_ONLY
+        visual: visual                       # BOILERPLATE_ONLY
+
       seo_meta:
         title: Título de la página
         description: Descripción

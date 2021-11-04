@@ -2,7 +2,11 @@ es:
   confirmations:
     default: "¿Desea seguir con esta acción?"
     destroy: "¿Desea eliminar esta entrada de forma permanente?"
-
+    bp_test:                                                   # BOILERPLATE_ONLY
+      approve: "¿Quieres aprobar esta entrada? "      # BOILERPLATE_ONLY
+      revocate: "¿Quieres revocar esta entrada? "     # BOILERPLATE_ONLY
+      validate: "¿Quieres validar esta entrada? "     # BOILERPLATE_ONLY
+      invalidate: "¿Quieres invalidar esta entrada? " # BOILERPLATE_ONLY
 
 
 
