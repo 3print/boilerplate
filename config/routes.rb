@@ -30,6 +30,13 @@ Rails.application.routes.draw do
       end                     # BOILERPLATE_ONLY
     end                       # BOILERPLATE_ONLY
 
+    if Rails.env.development?
+      get '/styleguide', to: 'static#styleguide'
+    end
+  end
+
+  if Rails.env.development?
+    get '/styleguide', to: 'static#styleguide'
   end
 
   get "/404", to: "errors#routing"
