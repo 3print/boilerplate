@@ -2,7 +2,9 @@ module BootstrapHelper
   attr_accessor :current_accordion_id,
                 :current_accordion_item_id,
                 :current_dropdown_id,
-                :current_tab_id
+                :current_tab_id,
+                :current_carousel_id,
+                :current_carousel_slide_index
 
   def dropdown(label, options={}, &block)
     self.current_dropdown_id = options.delete(:id) || "dropdown_#{next_dropdown_id}"
@@ -63,6 +65,11 @@ module BootstrapHelper
   def tabs(options={}, &block)
     tabs_options = options.delete(:tabs) || {}
     tabs_content_options = options.delete(:tabs_content) || {}
+
+    # Makes sure we don't have any content from
+    # a previous tabs call.
+    @view_flow.set(:tab, '')
+    @view_flow.set(:tab_content, '')
 
     instance_exec(&block)
 
@@ -193,7 +200,111 @@ module BootstrapHelper
     end
   end
 
-  %w(accordion accordion_item dropdown tab).each do |k|
+  def carousel(options={}, &block)
+    self.current_carousel_slide_index = 0
+    self.current_carousel_id = options.delete(:id) || "carousel_#{next_carousel_id}"
+    with_indicators = options.delete(:with_indicators) || false
+
+    wrapper_options = options.delete(:wrapper) || {}
+    indicators_options = options.delete(:indicators) || {}
+    slides_options = options.delete(:slides) || {}
+
+    # Makes sure we don't have any content from
+    # a previous carousel call.
+    @view_flow.set(:slide, '')
+    @view_flow.set(:slide_indicator, '')
+
+    instance_exec(&block)
+
+    slides = @view_flow.get(:slide)
+    slides_indicator = @view_flow.get(:slide_indicator)
+
+    content_tag(:div, wrapper_options.reverse_merge({
+      id: current_carousel_id,
+      class: 'carousel slide',
+      'data-bs-ride': 'carousel',
+    })) do
+      if with_indicators
+        concat(content_tag(:div, slides_indicator, indicators_options.reverse_merge({
+          class: 'carousel-indicators',
+        })))
+      end
+
+      concat(content_tag(:div, slides, slides_options.reverse_merge({
+        class: 'carousel-inner',
+      })))
+
+      concat(content_tag(:button, {
+        class: 'carousel-control-prev',
+        type: :button,
+        data: {
+          bs_target: "##{current_carousel_id}",
+          bs_slide: :prev,
+        },
+      }) do
+        concat(content_tag(:span, '', {
+          class: 'carousel-control-prev-icon',
+          'aria-hidden': true,
+        }))
+        concat(content_tag(:span, 'actions.previous'.t, {
+          class: 'visually-hidden',
+          'aria-hidden': true,
+        }))
+      end)
+
+      concat(content_tag(:button, {
+        class: 'carousel-control-next',
+        type: :button,
+        data: {
+          bs_target: "##{current_carousel_id}",
+          bs_slide: :next,
+        },
+      }) do
+        concat(content_tag(:span, '', {
+          class: 'carousel-control-next-icon',
+          'aria-hidden': true,
+        }))
+        concat(content_tag(:span, 'actions.next'.t, {
+          class: 'visually-hidden',
+          'aria-hidden': true,
+        }))
+      end)
+    end
+  end
+
+  def carousel_item(label, options={}, &block)
+    slide_options = options.delete(:slide) || {}
+    indicators_options = options.delete(:indicator) || {}
+    active = current_carousel_slide_index == 0
+
+    slide = capture_haml do
+      concat(content_tag(:div, slide_options.reverse_merge({
+        class: "carousel-item#{active ? ' active' : ''}"
+      }), &block))
+    end
+    slide_indicator = capture_haml do
+      concat(content_tag(:button, '', indicators_options.reverse_merge({
+        type: :button,
+        class: active ? 'active' : '',
+        data: {
+          bs_target: "##{current_carousel_id}",
+          bs_slide_to: current_carousel_slide_index,
+        },
+        aria: {
+          current: active ? 'true' : nil,
+          label: label,
+        }
+      })))
+    end
+
+    @view_flow.append(:slide, slide)
+    @view_flow.append(:slide_indicator, slide_indicator)
+
+    self.current_carousel_slide_index += 1
+    nil
+  end
+
+  %w(accordion accordion_item dropdown tab carousel).each do |k|
     name = "next_#{k}_id"
     var_name = "@#{name}"
     define_method name do

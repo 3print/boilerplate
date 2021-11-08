@@ -1,0 +1,66 @@
+.row
+  .col-md-6
+    = card 'Carousels' do
+      %pre.mb-0
+        %code.language-haml
+          \= carousel do
+          \  = carousel_item 'Aria label' do
+          \    = image_tag 'image-url.jpg'
+
+      %table.table
+        %tr
+          %th{colspan: 2} Carousel Options
+
+        %tr
+          %td
+            %code id
+          %td
+            Overrides the default carousel id attribute
+
+        %tr
+          %td
+            %code with_indicator
+          %td
+            A boolean of whether to display indicators or not
+
+        %tr
+          %td
+            %code wrapper
+          %td
+            A hash of attributes for the carousel wrapper node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code indicators
+          %td
+            A hash of attributes for the carousel indicators wrapper node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code slides
+          %td
+            A hash of attributes for the carousel slides wrapper node. Default attributes may be overriden through this
+
+      %table.table
+        %tr
+          %th{colspan: 2} Carousel Item Options
+
+        %tr
+          %td
+            %code slide
+          %td
+            A hash of attributes for the carousel slide node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code indicator
+          %td
+            A hash of attributes for the carousel slide's indicator node. Default attributes may be overriden through this
+
+
+
+  .col-md-6
+    = carousel with_indicators: true do
+      - 4.times do |i|
+        = carousel_item "Slide #{i+1}" do
+          = image_tag "https://picsum.photos/seed/#{i+1}/800/400"
