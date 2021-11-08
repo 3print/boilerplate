@@ -3,9 +3,12 @@
     = card 'Carousels' do
       %pre.mb-0
         %code.language-haml
-          \= carousel do
+          \= carousel with_controls: true, with_indicators: true do
           \  = carousel_item 'Aria label' do
-          \    = image_tag 'image-url.jpg'
+          \    = image_tag 'image-url.jpg', class: 'd-block w-100'
+          \    .carousel-caption.d-none.d-md-block
+          \      %h3 Slide Caption Title
+          \      %p Slide Caption Content
 
       %table.table
         %tr
@@ -16,6 +19,12 @@
             %code id
           %td
             Overrides the default carousel id attribute
+
+        %tr
+          %td
+            %code with_controls
+          %td
+            A boolean of whether to display previous/next controls or not
 
         %tr
           %td
@@ -60,7 +69,10 @@
 
 
   .col-md-6
-    = carousel with_indicators: true do
+    = carousel with_indicators: true, with_controls: true do
       - 4.times do |i|
         = carousel_item "Slide #{i+1}" do
-          = image_tag "https://picsum.photos/seed/#{i+1}/800/400"
+          = image_tag "https://picsum.photos/seed/#{i+2}/800/400", class: 'd-block w-100'
+          .carousel-caption.d-none.d-md-block
+            %h3= "Slide #{i+1}"
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

@@ -203,6 +203,7 @@ module BootstrapHelper
   def carousel(options={}, &block)
     self.current_carousel_slide_index = 0
     self.current_carousel_id = options.delete(:id) || "carousel_#{next_carousel_id}"
+    with_controls = options.delete(:with_controls) || false
     with_indicators = options.delete(:with_indicators) || false
 
     wrapper_options = options.delete(:wrapper) || {}
@@ -234,41 +235,43 @@ module BootstrapHelper
         class: 'carousel-inner',
       })))
 
-      concat(content_tag(:button, {
-        class: 'carousel-control-prev',
-        type: :button,
-        data: {
-          bs_target: "##{current_carousel_id}",
-          bs_slide: :prev,
-        },
-      }) do
-        concat(content_tag(:span, '', {
-          class: 'carousel-control-prev-icon',
-          'aria-hidden': true,
-        }))
-        concat(content_tag(:span, 'actions.previous'.t, {
-          class: 'visually-hidden',
-          'aria-hidden': true,
-        }))
-      end)
+      if with_controls
+        concat(content_tag(:button, {
+          class: 'carousel-control-prev',
+          type: :button,
+          data: {
+            bs_target: "##{current_carousel_id}",
+            bs_slide: :prev,
+          },
+        }) do
+          concat(content_tag(:span, '', {
+            class: 'carousel-control-prev-icon',
+            'aria-hidden': true,
+          }))
+          concat(content_tag(:span, 'actions.previous'.t, {
+            class: 'visually-hidden',
+            'aria-hidden': true,
+          }))
+        end)
 
-      concat(content_tag(:button, {
-        class: 'carousel-control-next',
-        type: :button,
-        data: {
-          bs_target: "##{current_carousel_id}",
-          bs_slide: :next,
-        },
-      }) do
-        concat(content_tag(:span, '', {
-          class: 'carousel-control-next-icon',
-          'aria-hidden': true,
-        }))
-        concat(content_tag(:span, 'actions.next'.t, {
-          class: 'visually-hidden',
-          'aria-hidden': true,
-        }))
-      end)
+        concat(content_tag(:button, {
+          class: 'carousel-control-next',
+          type: :button,
+          data: {
+            bs_target: "##{current_carousel_id}",
+            bs_slide: :next,
+          },
+        }) do
+          concat(content_tag(:span, '', {
+            class: 'carousel-control-next-icon',
+            'aria-hidden': true,
+          }))
+          concat(content_tag(:span, 'actions.next'.t, {
+            class: 'visually-hidden',
+            'aria-hidden': true,
+          }))
+        end)
+      end
     end
   end
 
