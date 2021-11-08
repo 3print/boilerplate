@@ -9,7 +9,10 @@ import {asArray, asPair, parent, getNode, merge} from 'widjet-utils';
 import {getTextPreview, getPDFPreview} from 'widjet-file-upload';
 import 'nested_form';
 
-import 'bootstrap';
+// Importing 'bootstrap' in the context of webpack will lead
+// to include the esm version, which does not initialize
+// bootstrap's components. Importing this version will do.
+import 'bootstrap/dist/js/bootstrap.js';
 import 'widjet-validation';
 import 'widjet-select-multiple';
 import 'widjet-file-upload';
@@ -49,13 +52,6 @@ widgets('popover', '[data-toggle=popover]', {on: DEFAULT_EVENTS, unless: isInTem
 widgets('auto-resize', 'textarea', {on: DEFAULT_EVENTS, unless: isInTemplate});
 widgets('collapse-toggle', '[data-collapse]', {
   collapseClass: 'collapsed',
-  on: DEFAULT_EVENTS,
-  unless: isInTemplate
-});
-widgets('collapse', '[data-bs-toggle="collapse"]', {
-  triggerClass: 'collapsed',
-  collapseClass: 'show',
-  collapsable: '.collapse',
   on: DEFAULT_EVENTS,
   unless: isInTemplate
 });

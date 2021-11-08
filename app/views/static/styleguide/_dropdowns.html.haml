@@ -1,0 +1,97 @@
+.row
+  .col-md-6
+    = card 'Dropdowns' do
+      %pre.mb-0
+        %code.language-haml
+          \= dropdown 'Label' do
+          \  = dropdown_item('item label', action)
+          \  = dropdown_item(action) do
+          \    = icon('icon')
+          \    item label
+
+      %table.table
+        %tr
+          %th{colspan: 2} Dropdown Options
+
+        %tr
+          %td
+            %code id
+          %td
+            Overrides the default dropdown id attribute
+
+        %tr
+          %td
+            %code no_wrapper
+          %td
+            Whether to pu the dropdown in a <code>btn-group</code> wrapper or not. Use that option for split dropdown for instance.
+
+        %tr
+          %td
+            %code icon
+          %td
+            The dropdown button's icon
+
+        %tr
+          %td
+            %code dropdown
+          %td
+            A hash of attributes for the dropdown wrapper node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code button
+          %td
+            A hash of attributes for the dropdown button. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code menu
+          %td
+            A hash of attributes for the dropdown menu node. Default attributes may be overriden through this
+
+      %table.table
+        %tr
+          %th{colspan: 2} Dropdown Item Options
+
+        %tr
+          %td
+            %code item
+          %td
+            A hash of attributes for the dropdown item wrapper node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code link
+          %td
+            A hash of attributes for the dropdown item link node. Default attributes may be overriden through this
+
+  .col-md-6
+    = dropdown 'Dropdown', icon: icon(:users) do
+      = dropdown_item 'Some item', '#'
+      = dropdown_separator
+      = dropdown_item '#' do
+        = icon(:users)
+        Some other item
+
+
+    - %w(dropstart dropup dropend).each do |dir|
+
+      %p
+
+      = dropdown dir.capitalize, dropdown: { class: "btn-group #{dir}"} do
+        = dropdown_item 'Some item', '#'
+        = dropdown_separator
+        = dropdown_item '#' do
+          = icon(:users)
+          Some other item
+
+    %p
+
+    .btn-group
+      %button.btn.btn-outline-secondary Split dropdown
+      = dropdown '', no_wrapper: true, button: {class: 'btn btn-outline-secondary dropdown-toggle dropdown-toggle-split' } do
+        = dropdown_item 'Some item', '#'
+        = dropdown_separator
+        = dropdown_item '#' do
+          = icon(:users)
+          Some other item

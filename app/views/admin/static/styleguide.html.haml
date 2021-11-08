@@ -1,0 +1,20 @@
+- content_for :stylesheets do
+  = stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/base16/edge-light.min.css'
+
+- content_for :scripts do
+  = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js'
+  = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/languages/haml.min.js'
+
+- content_for :inline_scripts do
+  :javascript
+    hljs.highlightAll();
+
+- content_for :page_title do
+  Admin Styleguide
+
+.text-muted.mb-4 Bootstrap Helpers
+
+= render partial: 'static/styleguide/cards'
+= render partial: 'static/styleguide/dropdowns'
+= render partial: 'static/styleguide/tabs'
+= render partial: 'static/styleguide/accordions'

@@ -1,0 +1,74 @@
+.row
+  .col-md-6
+    = card 'Tabs' do
+      %pre.mb-0
+        %code.language-haml
+          \= tabs do
+          \  = tab 'Tab Label 1', icon: icon('icon') do
+          \    Tab Content 1
+          \  = tab 'Tab Label 2' do
+          \    Tab Content 2
+
+      %table.table
+        %tr
+          %th{colspan: 2} Tabs Options
+
+        %tr
+          %td
+            %code tabs
+          %td
+            A hash of attributes for the tabs wrapper node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code tabs_content
+          %td
+            A hash of attributes for the tabs content wrapper node. Default attributes may be overriden through this
+
+      %table.table
+        %tr
+          %th{colspan: 2} Tab Options
+
+        %tr
+          %td
+            %code id
+          %td
+            Overrides the default tab id attribute
+
+        %tr
+          %td
+            %code icon
+          %td
+            The tab's icon
+
+        %tr
+          %td
+            %code active
+          %td
+            Whether this tab is active at start or not.
+
+        %tr
+          %td
+            %code tab
+          %td
+            A hash of attributes for the tab wrapper node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code tab_button
+          %td
+            A hash of attributes for the tab button node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code tab_content
+          %td
+            A hash of attributes for the tab content wrapper node. Default attributes may be overriden through this
+
+  .col-md-6
+    = tabs do
+      - 4.times do |i|
+        = tab "Tab Label #{i+1}", icon: icon(:users), active: i == 0 do
+          %h4.mt-2= "Tab Content #{i+1}"
+
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

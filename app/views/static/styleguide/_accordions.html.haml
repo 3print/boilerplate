@@ -1,0 +1,74 @@
+.row
+  .col-md-6
+    = card 'Accordions' do
+      %pre.mb-0
+        %code.language-haml
+          \= accordion do
+          \  = accordion_item 'Accordion Item Title', icon: icon('icon'), expanded: true|false do
+          \    Accordion Item Content
+
+      %table.table
+        %tr
+          %th{colspan: 2} Accordion Options
+
+        %tr
+          %td
+            %code id
+          %td
+            Overrides the default accordion id attribute
+
+      .card-body
+        All remaining options are passed as attributes for the accordion node.
+
+      %hr.my-0
+      %table.table
+        %tr
+          %th{colspan: 2} Accordion Item Options
+
+        %tr
+          %td
+            %code id
+          %td
+            Overrides the default accordion item id attribute
+
+        %tr
+          %td
+            %code icon
+          %td
+            The accordion item's icon
+
+        %tr
+          %td
+            %code expanded
+          %td
+            Whether this accordion item is expanded at start or not.
+
+        %tr
+          %td
+            %code item
+          %td
+            A hash of attributes for the accordion item node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code header
+          %td
+            A hash of attributes for the accordion item header node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code header_button
+          %td
+            A hash of attributes for the accordion item header button node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code content
+          %td
+            A hash of attributes for the accordion content node. Default attributes may be overriden through this
+
+  .col-md-6
+    = accordion do
+      - 4.times do |i|
+        = accordion_item "Accordion Item #{i+1}", expanded: i == 0, icon: icon('align-justify') do
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

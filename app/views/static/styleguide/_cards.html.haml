@@ -1,0 +1,41 @@
+.row
+  .col-md-6
+    = card 'Cards' do
+      %pre.mb-0
+        %code.language-haml
+          \= card 'Card Title', icon: icon('icon') do
+          \  %hr.my-0
+          \  .card-body Card Content
+          \  %hr.my-0
+          \  .card-footer Card Footer
+
+      %table.table
+        %tr
+          %th{colspan: 2} Options
+
+        %tr
+          %td
+            %code icon
+          %td
+            The card header icon
+
+        %tr
+          %td
+            %code card
+          %td
+            A hash of attributes for the card node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code header
+          %td
+            A hash of attributes for the card header node. Default attributes may be overriden through this
+
+  .col-md-6
+    = card 'Card Title', icon: icon('users') do
+      %hr.my-0
+      .card-body
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      %hr.my-0
+      .card-footer Card Footer

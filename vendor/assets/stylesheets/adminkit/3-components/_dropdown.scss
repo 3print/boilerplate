@@ -21,12 +21,27 @@
   }
 }
 
+.dropstart .dropdown-toggle:before,
+.dropend .dropdown-toggle:after,
+.dropup .dropdown-toggle:after,
 .dropdown-toggle:after {
   border: solid;
   border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 2px;
   transform: rotate(45deg);
+}
+
+.dropup .dropdown-toggle:after {
+  transform: rotate(-135deg);
+}
+
+.dropstart .dropdown-toggle:before {
+  transform: rotate(135deg);
+}
+
+.dropend .dropdown-toggle:after {
+  transform: rotate(-45deg);
 }
 
 .dropdown-item {
