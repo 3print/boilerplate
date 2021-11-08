@@ -6,9 +6,8 @@
           \= carousel with_controls: true, with_indicators: true do
           \  = carousel_item 'Aria label' do
           \    = image_tag 'image-url.jpg', class: 'd-block w-100'
-          \    .carousel-caption.d-none.d-md-block
-          \      %h3 Slide Caption Title
-          \      %p Slide Caption Content
+          \    = carousel_caption 'Slide Caption Title' do
+          \      Slide Caption Content
 
       %table.table
         %tr
@@ -66,6 +65,22 @@
           %td
             A hash of attributes for the carousel slide's indicator node. Default attributes may be overriden through this
 
+      %table.table
+        %tr
+          %th{colspan: 2} Carousel Caption Options
+
+        %tr
+          %td
+            %code caption
+          %td
+            A hash of attributes for the carousel caption node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code title_tag
+          %td
+            The node name to use for the title node. Defaults to <code>h5</code>
+
 
 
   .col-md-6
@@ -73,6 +88,5 @@
       - 4.times do |i|
         = carousel_item "Slide #{i+1}" do
           = image_tag "https://picsum.photos/seed/#{i+2}/800/400", class: 'd-block w-100'
-          .carousel-caption.d-none.d-md-block
-            %h3= "Slide #{i+1}"
-            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          = carousel_caption "Slide #{i+1}" do
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

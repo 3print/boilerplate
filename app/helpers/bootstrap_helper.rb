@@ -307,6 +307,17 @@ module BootstrapHelper
     nil
   end
 
+  def carousel_caption(title, options={}, &block)
+    caption_options = options.delete(:caption) || {}
+    title_tag = options.delete(:title_tag) || :h5
+    content_tag(:div, caption_options.reverse_merge({
+      class: 'carousel-caption d-none d-md-block',
+    })) do
+      concat(content_tag(title_tag, title)) if title.present?
+      concat(content_tag(:p, &block))
+    end
+  end
+
   %w(accordion accordion_item dropdown tab carousel).each do |k|
     name = "next_#{k}_id"
     var_name = "@#{name}"
