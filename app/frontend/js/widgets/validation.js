@@ -21,6 +21,10 @@ function validatePassword(i18n, value, input) {
     return validatePresence(i18n, value, input);
   }
 
+  if(!input.value && !input.required) {
+    return null;
+  }
+
   const res = [];
 
   if(value.length < 8) { res.push(0); }
@@ -34,7 +38,14 @@ function validatePassword(i18n, value, input) {
 
 function matchPassword(i18n, value, input) {
   const passwordInput = document.querySelector('input[name$="password]"]');
-  console.log(passwordInput.value, input.value);
+
+  if(!input.value && !passwordInput.value && !input.required) {
+    return null;
+  } else {
+    const presence = validatePresence(i18n, value, input);
+    if(presence) { return presence; }
+  }
+
   return passwordInput.value != input.value
     ? 'password_confirmation_doesnt_match'
     : null;
@@ -46,7 +57,6 @@ function resetPasswordCriterium() {
 
 function flagPasswordCriterium(flags) {
   getPasswordCriterium().forEach((li, i) => {
-    console.log(i, flags);
     if(flags.includes(i)) {
       li.classList.add('is-invalid');
     } else {
@@ -65,10 +75,7 @@ export default {
   ],
   validators: [
     [passwordPredicate, validatePassword],
-    [
-      passwordConfirmationPredicate,
-      (i18n,v,i) => validatePresence(i18n,v,i) || matchPassword(i18n,v,i)
-    ],
+    [passwordConfirmationPredicate, matchPassword],
     [compose(numberPredicate, requiredPredicate), validatePresence],
     [compose(filePredicate, requiredPredicate), validatePresence],
     [
