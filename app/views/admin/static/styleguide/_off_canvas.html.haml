@@ -1,0 +1,76 @@
+.row
+  .col-md-6
+    = card 'Off Canvas' do
+      %pre.mb-0
+        %code.language-haml
+          \ = off_canvas 'Offcanvas Title' do
+          \   - off_canvas_trigger do
+          \     Trigger Content
+          \
+          \   Canvas Content
+
+      %table.table
+        %tr
+          %th{colspan: 2} Off Canvas Options
+
+        %tr
+          %td
+            %code id
+          %td
+            Overrides the default offcanvas id attribute
+
+        %tr
+          %td
+            %code canvas
+          %td
+            A hash of attributes for the canvas wrapper node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code header
+          %td
+            A hash of attributes for the canvas header node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code title
+          %td
+            A hash of attributes for the canvas title node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code close
+          %td
+            A hash of attributes for the canvas close button node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code body
+          %td
+            A hash of attributes for the canvas body node. Default attributes may be overriden through this
+
+      %table.table
+        %tr
+          %th{colspan: 2} Off Canvas Trigger Options
+
+        %tr
+          %td
+            %code tag
+          %td
+            The node name to use for the trigger node. Defaults to <code>a</code>
+
+        %tr
+          %td
+            %code trigger
+          %td
+            A hash of attributes for the trigger node. Default attributes may be overriden through this
+
+
+  .col-md-6
+    = off_canvas 'Offcanvas Title' do
+      - off_canvas_trigger do
+        = icon(:sidebar)
+        Open Off Canvas
+
+      %p Some HTML Content
+

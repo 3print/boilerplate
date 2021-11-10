@@ -4,7 +4,8 @@ module BootstrapHelper
                 :current_dropdown_id,
                 :current_tab_id,
                 :current_carousel_id,
-                :current_carousel_slide_index
+                :current_carousel_slide_index,
+                :current_offcanvas_id
 
   def dropdown(label, options={}, &block)
     self.current_dropdown_id = options.delete(:id) || "dropdown_#{next_dropdown_id}"
@@ -182,6 +183,8 @@ module BootstrapHelper
   end
 
   def card(title=nil, options={}, &block)
+    title, options = [nil, title] if title.is_a?(Hash)
+
     icon = options.delete(:icon)
     card_options = options.delete(:card) || {}
     card_header_options = options.delete(:header) || {}
@@ -318,7 +321,69 @@ module BootstrapHelper
     end
   end
 
-  %w(accordion accordion_item dropdown tab carousel).each do |k|
+  def off_canvas(title=nil, options={}, &block)
+    title, options = [nil, title] if title.is_a?(Hash)
+
+    self.current_offcanvas_id = options.delete(:id) || "offcanvas_#{next_offcanvas_id}"
+    canvas_options = options.delete(:canvas) || {}
+    header_options = options.delete(:header) || {}
+    title_options = options.delete(:title) || {}
+    close_options = options.delete(:close) || {}
+    body_options = options.delete(:body) || {}
+
+    canvas_content = capture_haml(&block)
+
+    trigger = @view_flow.get(:offanvas_trigger)
+
+    capture_haml do
+      concat(trigger) if trigger.present?
+
+      concat(content_tag(:div, canvas_options.reverse_merge({
+        class: 'offcanvas offcanvas-start',
+        id: current_offcanvas_id,
+        tabindex: -1,
+        'aria-labelledby': "#{current_offcanvas_id}_trigger",
+      })) do
+        concat(content_tag(:div, header_options.reverse_merge({
+          class: 'offcanvas-header',
+        })) do
+          if title.present?
+            concat(content_tag(:h5, title, title_options.reverse_merge({
+              class: 'offcanvas-title',
+            })))
+          end
+          concat(content_tag(:button, '', close_options.reverse_merge({
+            class: 'btn-close text-reset',
+            type: :button,
+            'data-bs-dismiss': 'offcanvas',
+            'aria-label': 'actions.close'.t,
+          })))
+        end)
+        concat(content_tag(:div, canvas_content, body_options.reverse_merge({
+          class: 'offcanvas-body',
+        })))
+      end)
+    end
+  end
+
+  def off_canvas_trigger(options={}, &block)
+    trigger_tag = options.delete(:tag) || :a
+    trigger_options = options.delete(:trigger) || {}
+    @view_flow.set(:offanvas_trigger, content_tag(trigger_tag, trigger_options.reverse_merge({
+      class: 'btn btn-outline-primary',
+      role: :button,
+      id: "#{current_offcanvas_id}_trigger",
+      'aria-controls': current_offcanvas_id,
+      data: {
+        bs_toggle: 'offcanvas',
+        bs_target: "##{current_offcanvas_id}",
+      },
+    }), &block))
+
+    nil
+  end
+
+  %w(accordion accordion_item dropdown tab carousel offcanvas).each do |k|
     name = "next_#{k}_id"
     var_name = "@#{name}"
     define_method name do
