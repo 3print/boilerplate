@@ -7,14 +7,15 @@ fr:
     browse: Parcourir
     cancel: Annuler
     clone: Dupliquer
+    close: Fermer
     connect: Connexion
-    create_new: Nouveau
     create: Nouveau
+    create_new: Nouveau
     destroy: Supprimer
     download: Télécharger
+    edit: Editer
     edit_account: Profil
     edit_profile: Modifier mon profil
-    edit: Editer
     export: Exporter
     feature: Activer
     filter: Filtrer
@@ -26,7 +27,9 @@ fr:
     masquerade: Mascarade
     modify: Modifier
     more: Plus d'actions
+    next: Suivant
     preview: Aperçu
+    previous: Précédent
     print: Imprimer
     publish: Publier
     read_more: 'Lire la suite'
@@ -38,9 +41,9 @@ fr:
     revocate: Révoquer
     select_file: Choisissez une image
     send_password: Envoyer le mot de passe
+    show: Voir
     show_all: Voir tout
     show_profile: Voir mon profil
-    show: Voir
     sign_in: Identifiez-vous
     sign_out: Se déconnecter
     sign_up: S'inscrire

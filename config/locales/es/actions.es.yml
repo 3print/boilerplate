@@ -7,14 +7,15 @@ es:
     browse: Navegar
     cancel: Cancelar
     clone: Duplicar
+    close: Cerrar
     connect: Conexión
-    create_new: Nuevo
     create: Nuevo
+    create_new: Nuevo
     destroy: Borrar
     download: Descargar
+    edit: Revisar
     edit_account: Perfil
     edit_profile: Editar mi perfil
-    edit: Revisar
     export: Exportar
     feature: Activar
     filter: Filtrar
@@ -26,7 +27,9 @@ es:
     masquerade: Mascarade
     modify: Editar
     more: Más
+    next: Siguiente
     preview: Vista previa
+    previous: Anterior
     print: Imprimir
     publish: Publicar
     read_more: 'Leer más'
@@ -38,9 +41,9 @@ es:
     revocate: Revocar
     select_file: Elegir una imagen
     send_password: Enviar contraseña
+    show: Ver
     show_all: Ver todo
     show_profile: Ver mi perfil
-    show: Ver
     sign_in: Iniciar sesión
     sign_out: Desconectarse
     sign_up: Registrarse

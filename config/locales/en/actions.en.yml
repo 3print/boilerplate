@@ -7,14 +7,15 @@ en:
     browse: Browse
     cancel: Cancel
     clone: Clone
+    close: Close
     connect: Connect
-    create_new: New
     create: Create
+    create_new: New
     destroy: Delete
     download: Download
+    edit: Edit
     edit_account: Profile
     edit_profile: Edit my profile
-    edit: Edit
     export: Export
     feature: Feature
     filter: Filter
@@ -25,7 +26,9 @@ en:
     mark_as_read: Mark as read
     masquerade: Masquerade
     modify: Modify
+    next: Next
     preview: Preview
+    previous: Previous
     print: Print
     publish: Publish
     read_more: Read more
@@ -37,9 +40,9 @@ en:
     revocate: Revocate
     select_file: Pick a file
     send_password: Send password
+    show: Show
     show_all: Show all
     show_profile: Show my profile
-    show: Show
     sign_in: Sign in
     sign_out: Sign out
     sign_up: Sign up
