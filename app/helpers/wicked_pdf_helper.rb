@@ -22,6 +22,10 @@ module WickedPdfHelper
     }.join("\n").html_safe
   end
 
+  def wicked_pdf_image_base64(img)
+    "data:#{img.content_type};base64,#{Rack::Utils.escape(Base64.encode64(img.file.read))}"
+  end
+
   def wicked_pdf_image_path(img, options={})
     "file://#{find_asset img}"
   end
