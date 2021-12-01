@@ -9,6 +9,7 @@
     %meta{name: "description", content: "#{content_for?(:description) ? yield(:description) : 'admin_app_name'.t}"}
     = csrf_meta_tags
 
+    = favicon_link_tag 'logo.svg'
     = stylesheet_link_tag 'admin', media: 'all'
     = yield :stylesheets
 
@@ -24,7 +25,7 @@
       #sidebar.sidebar{role: :navigation}
         .sidebar-content
           %a.sidebar-brand{href: "/"}
-            = image_tag asset_path('logo.svg'), alt: 'Logo'
+            = image_tag asset_path('favicon.svg'), alt: 'Logo'
             %span.text= 'app_name'.t
 
           .sidebar-user= render partial: 'admin/shared/session', locals: {context: :sidebar}

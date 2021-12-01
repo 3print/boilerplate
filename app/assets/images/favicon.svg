@@ -3,10 +3,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="410" height="410" viewBox="0 0 410 410" xml:space="preserve">
 <style>
     .plain {
-      fill: white;
+      stroke-width: 0;
+      fill: rgb(50,50,50);
     }
     .gradient {
-      fill: url(#dark-theme);
+      fill: url(#light-theme);
+    }
+    @media (prefers-color-scheme: dark) {
+      .plain {
+        fill: white;
+      }
+      .gradient {
+        fill: url(#dark-theme);
+      }
     }
 </style>
 <defs>

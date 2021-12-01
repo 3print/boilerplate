@@ -9,6 +9,7 @@
     %meta{name: "description", content: "#{content_for?(:description) ? yield(:description) : 'admin_app_name'.t}"}
     = csrf_meta_tags
 
+    = favicon_link_tag 'favicon.svg'
     = stylesheet_link_tag 'admin', media: 'all'
     = yield :stylesheets
 
