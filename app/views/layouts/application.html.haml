@@ -33,17 +33,11 @@
   %head
     %title= title
 
-    %meta{name: "apple-mobile-web-app-capable", content: "yes"}/
-    %meta{name: "mobile-web-app-capable", content: "yes"}/
-    %meta{name: "apple-mobile-web-app-status-bar-style", content: "black"}/
     %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=no", name: "viewport"}/
     %meta{charset: "utf-8"}/
-    %meta{name: "apple-mobile-web-app-capable", content: "yes"}/
     %meta{name: "description", content: "#{description}"}/
     = yield :meta
     = csrf_meta_tags
-
-    %link{ rel: "apple-touch-icon", href:"/images/apple-touch-icon.png"}/
 
     = favicon_link_tag 'favicon.svg'
     = stylesheet_link_tag 'application', media: 'all'
