@@ -1,9 +1,10 @@
-.nav-item.dropdown
-  %a.nav-flag.dropdown-toggle#languageDropdown{href: '#', 'data-bs-toggle': "dropdown"}
-    = flag I18n.locale, title: "locales.#{I18n.locale}".t
-  .dropdown-menu.dropdown-menu-end
-    - (I18n.available_locales - [I18n.locale]).each do |l|
-      - link = "?locale=#{l}"
-      = link_to link, class: 'dropdown-item' do
-        = flag l, width: 20
-        = "locales.#{l}".t
+- if I18n.available_locales.size > 1
+  .nav-item.dropdown
+    %a.nav-flag.dropdown-toggle#languageDropdown{href: '#', 'data-bs-toggle': "dropdown"}
+      = flag I18n.locale, title: "locales.#{I18n.locale}".t
+    .dropdown-menu.dropdown-menu-end
+      - (I18n.available_locales - [I18n.locale]).each do |l|
+        - link = "?locale=#{l}"
+        = link_to link, class: 'dropdown-item' do
+          = flag l, width: 20
+          = "locales.#{l}".t
