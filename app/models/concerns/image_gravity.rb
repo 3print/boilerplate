@@ -17,11 +17,11 @@ module ImageGravity
         "#{key}_center",
       ]
       after_save do
-        gravity_changed_key = :"#{key}_gravity_changed?"
-        changed_key = :"#{key}_changed?"
+        gravity_changed_key = :"saved_change_to_#{key}_gravity?"
+        changed_key = :"saved_change_to_#{key}?"
 
         if (respond_to?(gravity_changed_key) && send(gravity_changed_key)) ||
-           (respond_to?(changed_key) && !send(changed_key)) && send(key).present?
+           (respond_to?(changed_key) && send(changed_key)) && send(key).present?
           send(key).try(:recreate_versions!)
         end
       end
