@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   include ToggleExtensions
   include RegionsExtensions
   include NotificationExtensions
-  include Pundit
+  include Pundit::Authorization
 
   protect_from_forgery with: :exception
   process_regions_params

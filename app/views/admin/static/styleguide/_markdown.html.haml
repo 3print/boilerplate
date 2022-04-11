@@ -1,0 +1,86 @@
+= card 'Custom Markdown' do
+  %table.table
+    %tr
+      %td
+        Buttons
+      %td
+        %pre.mb-0
+          %code.language-markdown
+            (_foo_=>#_bar_)
+
+      %td{style:"width: 50%"}
+        = markdown do
+          (_foo_=>#_bar_)
+
+    %tr
+      %td
+        Wells
+      %td
+        %pre.mb-0
+          %code.language-markdown
+            \%%Some _well_ content%%
+            \
+            \%%%Some _narrow well_ content%%%
+
+      %td
+        = markdown do
+          \%%Some _well_ content%%
+          \
+          \%%%Some _narrow well_ content%%%
+
+    %tr
+      %td
+        Text alignment
+      %td
+        %pre.mb-0
+          %code.language-markdown
+            \-->>Right _aligned_ content-->>
+            \
+            \<<--Left _aligned_ content<<--
+            \
+            \-><-Center _aligned_ content-><-
+
+      %td
+        = markdown do
+          \-->>Right _aligned_ content-->>
+          \
+          \<<--Left _aligned_ content<<--
+          \
+          \-><-Center _aligned_ content-><-
+
+    %tr
+      %td
+        Drop Caps
+      %td
+        %pre.mb-0
+          %code.language-markdown
+            \^Drop Cap _1_^
+            \
+            \^^Drop Cap _2_^^
+            \
+            \^^^Drop Cap _3_^^^
+            \
+            \^^^^Drop Cap _4_^^^^
+
+      %td
+        = markdown do
+          \^Drop Cap _1_^
+          \
+          \^^Drop Cap _2_^^
+          \
+          \^^^Drop Cap _3_^^^
+          \
+          \^^^^Drop Cap _4_^^^^
+
+    %tr
+      %td
+        Icons
+      %td
+        %pre.mb-0
+          %code.language-markdown
+            \%(phone)
+
+
+      %td
+        = markdown do
+          \%(phone)

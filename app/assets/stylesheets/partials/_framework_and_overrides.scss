@@ -376,3 +376,20 @@ th, td {
     color: black;
   }
 }
+
+.dropcap {
+  &.dc-1 {
+    font-size: 300%;
+  }
+
+  &.dc-2 {
+    font-size: 250%;
+  }
+
+  &.dc-3 {
+    font-size: 200%;
+  }
+  &.dc-4 {
+    font-size: 150%;
+  }
+}
