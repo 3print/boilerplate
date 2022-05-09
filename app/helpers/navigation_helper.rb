@@ -44,6 +44,7 @@ module NavigationHelper
   end
 
   def nav_link_to(url, options = {}, &block)
+    ul_id = url[1..-1] if url.is_a?(String) && /^#/ =~ url
 
     if url.is_a?(Class)
       cls = url
@@ -86,7 +87,7 @@ module NavigationHelper
           concat(get_badge(options[:badge], options[:badge_tooltip])) if options[:badge].present?
         end)
 
-        concat(content_tag(:ul, class: context[:group_class]) do
+        concat(content_tag(:ul, id: ul_id, class: context[:group_class]) do
           concat(capture_haml(&block))
         end)
       end

@@ -1,7 +1,7 @@
 %ul.sidebar-nav
   = with_nav_context :sidebar do
     = admin_nav_link_to admin_root_path, label: 'nav.admin.dashboard'.t, icon: icon_name_for(:dashboard)
-    = admin_nav_link_to '#', label: 'nav.admin.resources'.t, icon: icon_name_for(:resources) do
+    = admin_nav_link_to '#resources', label: 'nav.admin.resources'.t, icon: icon_name_for(:resources) do
       = admin_nav_link_to User
       = admin_nav_link_to BpTest, badge: BpTest.validated.size, badge_tooltip: 'labels.validated_models'.t # BOILERPLATE_ONLY
 
