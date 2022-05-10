@@ -12,7 +12,7 @@
     = stylesheet_link_tag 'admin', media: 'all'
     = yield :stylesheets
 
-    = javascript_pack_tag 'admin', media: 'all', 'data-turbolinks-track': true, 'data-turbolinks-eval': false, cache: true, defer: "defer"
+    = javascript_include_tag 'admin', media: 'all', 'data-turbolinks-track': true, 'data-turbolinks-eval': false, cache: true, defer: "defer"
     = yield :scripts
 
 

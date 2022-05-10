@@ -4,7 +4,7 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 //
-// To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
+// To reference this file, add <%= javascript_include_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
 
@@ -17,7 +17,7 @@
 
 import Cookies from 'js.cookie';
 window.Cookies = Cookies;
-import 'gdpr/cookie_consent';
+import '../../../vendor/assets/javascripts/gdpr/cookie_consent';
 
 import '../js/templates/index.js';
 import './admin';

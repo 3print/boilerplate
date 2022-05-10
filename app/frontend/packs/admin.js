@@ -4,13 +4,13 @@ Rails.start();
 import I18n from '../js/utils/i18n';
 I18n.attachToWindow();
 
-import FastClick from 'fastclick';
+import FastClick from '../../../vendor/assets/javascripts/fastclick';
 FastClick.attach(document.body);
 
 import widgets from 'widjet';
 import {asArray, asPair, parent, getNode, merge} from 'widjet-utils';
 import {getTextPreview, getPDFPreview} from 'widjet-file-upload';
-import 'nested_form';
+import '../../../vendor/assets/javascripts/nested_form';
 
 // Importing 'bootstrap' in the context of webpack will lead
 // to include the esm version, which does not initialize

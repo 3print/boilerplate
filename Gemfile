@@ -37,7 +37,7 @@ gem 'jbuilder'#, '~> 2.0'
 gem 'bootstrap'
 gem 'bourbon'
 gem 'ejs'
-gem 'webpacker'
+gem 'jsbundling-rails'
 
 # Models
 gem 'kaminari'
