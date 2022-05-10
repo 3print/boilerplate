@@ -1,0 +1,105 @@
+.row
+  .col-md-6
+    = card 'BEM' do
+      .card-body
+        The BEM utility helpers allow to build a BEM context
+        without the need to micromanage each classes.
+        It starts with a <code>bem_block</code> call that will initiate the context
+        and then nested calls to <code>bem_element</code> will further build the BEM context.
+        %p.mt-2
+          As can be seen in the example below, there's no need to recall the context whenever building a new element in the block. It also means that it becomes really easy to adjust any structure to any kind of block root by making the block name a variable.
+
+
+      %pre.mb-0
+        %code.language-haml
+          \= bem_block(:foo, modifier: 'active', attrs: {class: 'card'}) do
+          \  = bem_element(:bar, attrs: {class: 'card-body'}) do
+          \    %a{class: bem_element_class('link', 'disabled')} BEM Link
+
+      .card-body HTML Output:
+
+      %pre.mb-0
+        %code.language-html
+          \&lt;div class="card foo--active"&gt;
+          \  &lt;div class="card-body foo__bar"&gt;
+          \    &lt;a class="foo__bar__link--disabled"&gt;BEM Link&lt;/a&gt;
+          \  &lt;/div&gt;
+          \&lt;/div&gt;
+
+      %table.table
+        %tr
+          %th{colspan: 2} Block Options
+
+        %tr
+          %td
+            %code name
+          %td
+            The BEM block name
+
+        %tr
+          %td
+            %code type:
+          %td
+            The node type of the produced node, defaults to `div`
+
+        %tr
+          %td
+            %code modifier:
+          %td
+            An optional BEM modifier for the produced node
+
+        %tr
+          %td
+            %code attrs:
+          %td
+            A hash of attributes for the block node. The class attribute can be provided and will be appended with the generated BEM class if needed.
+
+        %tr
+          %th{colspan: 2} Elements Options
+
+        %tr
+          %td
+            %code name
+          %td
+            The BEM element name
+
+        %tr
+          %td
+            %code type:
+          %td
+            The node type of the produced node, defaults to `div`
+
+        %tr
+          %td
+            %code modifier:
+          %td
+            An optional BEM modifier for the produced node
+
+        %tr
+          %td
+            %code attrs:
+          %td
+            A hash of attributes for the element node. The class attribute can be provided and will be appended with the generated BEM class if needed.
+
+        %tr
+          %th{colspan: 2} Element Class Options
+        %tr
+          %td{colspan: 2} A simple method to build only the class name from the current BEM context
+
+        %tr
+          %td
+            %code name
+          %td
+            The BEM element name
+
+        %tr
+          %td
+            %code modifier
+          %td
+            An optional BEM modifier for the produced class
+
+
+  .col-md-6
+    = bem_block(:foo, modifier: 'active', attrs: {class: 'card'}) do
+      = bem_element(:bar, attrs: {class: 'card-body'}) do
+        %a{class: bem_element_class('link', 'disabled')} BEM Link
