@@ -315,6 +315,10 @@ th, td {
   }
 }
 
+.table > :not(:first-child) {
+  border-top: none;
+}
+
 .table.dragged {
   pointer-events: none;
   background: white;
