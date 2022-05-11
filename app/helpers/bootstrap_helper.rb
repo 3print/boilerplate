@@ -5,7 +5,8 @@ module BootstrapHelper
                 :current_tab_id,
                 :current_carousel_id,
                 :current_carousel_slide_index,
-                :current_offcanvas_id
+                :current_off_canvas_id,
+                :current_modal_id
 
   def dropdown(label, options={}, &block)
     self.current_dropdown_id = options.delete(:id) || "dropdown_#{next_dropdown_id}"
@@ -324,7 +325,7 @@ module BootstrapHelper
   def off_canvas(title=nil, options={}, &block)
     title, options = [nil, title] if title.is_a?(Hash)
 
-    self.current_offcanvas_id = options.delete(:id) || "offcanvas_#{next_offcanvas_id}"
+    self.current_off_canvas_id = options.delete(:id) || "off_canvas_#{next_off_canvas_id}"
     canvas_options = options.delete(:canvas) || {}
     header_options = options.delete(:header) || {}
     title_options = options.delete(:title) || {}
@@ -333,16 +334,16 @@ module BootstrapHelper
 
     canvas_content = capture_haml(&block)
 
-    trigger = @view_flow.get(:offanvas_trigger)
+    trigger = @view_flow.get(:off_canvas_trigger)
 
     capture_haml do
       concat(trigger) if trigger.present?
 
       concat(content_tag(:div, canvas_options.reverse_merge({
         class: 'offcanvas offcanvas-start',
-        id: current_offcanvas_id,
+        id: current_off_canvas_id,
         tabindex: -1,
-        'aria-labelledby': "#{current_offcanvas_id}_trigger",
+        'aria-labelledby': "#{current_off_canvas_id}_trigger",
       })) do
         concat(content_tag(:div, header_options.reverse_merge({
           class: 'offcanvas-header',
@@ -369,21 +370,100 @@ module BootstrapHelper
   def off_canvas_trigger(options={}, &block)
     trigger_tag = options.delete(:tag) || :a
     trigger_options = options.delete(:trigger) || {}
-    @view_flow.set(:offanvas_trigger, content_tag(trigger_tag, trigger_options.reverse_merge({
+    @view_flow.set(:off_canvas_trigger, content_tag(trigger_tag, trigger_options.reverse_merge({
       class: 'btn btn-outline-primary',
       role: :button,
-      id: "#{current_offcanvas_id}_trigger",
-      'aria-controls': current_offcanvas_id,
+      id: "#{current_off_canvas_id}_trigger",
+      'aria-controls': current_off_canvas_id,
       data: {
         bs_toggle: 'offcanvas',
-        bs_target: "##{current_offcanvas_id}",
+        bs_target: "##{current_off_canvas_id}",
       },
     }), &block))
 
     nil
   end
 
-  %w(accordion accordion_item dropdown tab carousel offcanvas).each do |k|
+  def modal(title=nil, options={}, &block)
+    title, options = [nil, title] if title.is_a?(Hash)
+
+    self.current_modal_id = options.delete(:id) || "modal_#{next_modal_id}"
+    modal_options = options.delete(:modal) || {}
+    header_options = options.delete(:header) || {}
+    title_options = options.delete(:title) || {}
+    close_options = options.delete(:close) || {}
+    body_options = options.delete(:body) || {}
+
+    modal_content = capture_haml(&block)
+
+    trigger = @view_flow.get(:modal_trigger)
+    footer = @view_flow.get(:modal_footer)
+
+    capture_haml do
+      concat(trigger) if trigger.present?
+
+      concat(content_tag(:div, modal_options.reverse_merge({
+        class: 'modal fade',
+        id: current_modal_id,
+        tabindex: -1,
+        'aria-labelledby': "#{current_modal_id}_trigger",
+      })) do
+        concat(content_tag(:div, header_options.reverse_merge({
+          class: 'modal-dialog',
+        })) do
+          concat(content_tag(:div, header_options.reverse_merge({
+            class: 'modal-content',
+          })) do
+            concat(content_tag(:div, header_options.reverse_merge({
+              class: 'modal-header',
+            })) do
+              if title.present?
+                concat(content_tag(:h5, title, title_options.reverse_merge({
+                  class: 'modal-title',
+                })))
+              end
+              concat(content_tag(:button, '', close_options.reverse_merge({
+                class: 'btn-close text-reset',
+                type: :button,
+                'data-bs-dismiss': 'modal',
+                'aria-label': 'actions.close'.t,
+              })))
+            end)
+            concat(content_tag(:div, modal_content, body_options.reverse_merge({
+              class: 'modal-body',
+            })))
+
+            concat(footer) if footer.present?
+          end)
+        end)
+      end)
+    end
+  end
+
+  def modal_trigger(options={}, &block)
+    trigger_tag = options.delete(:tag) || :a
+    trigger_options = options.delete(:trigger) || {}
+    @view_flow.set(:modal_trigger, content_tag(trigger_tag, trigger_options.reverse_merge({
+      class: 'btn btn-outline-primary',
+      role: :button,
+      id: "#{current_modal_id}_trigger",
+      'aria-controls': current_modal_id,
+      data: {
+        bs_toggle: 'modal',
+        bs_target: "##{current_modal_id}",
+      },
+    }), &block))
+
+    nil
+  end
+
+  def modal_footer(options={}, &block)
+    @view_flow.set(:modal_footer, content_tag(:div, options.reverse_merge({class: 'modal-footer'}), &block))
+
+    nil
+  end
+
+  %w(accordion accordion_item dropdown tab carousel off_canvas modal).each do |k|
     name = "next_#{k}_id"
     var_name = "@#{name}"
     define_method name do

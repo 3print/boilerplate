@@ -1,0 +1,100 @@
+.row
+  .col-md-6
+    = card 'Modals', card: { id: 'modals' } do
+      %pre.mb-0
+        %code.language-haml
+          \ = modal 'Modal Title' do
+          \   - modal_trigger do
+          \     Trigger Content
+          \
+          \   Modal Content
+          \
+          \   - modal_footer do
+          \     Footer Content
+
+      .card-body Methods signatures
+      %pre.mb-0
+        %code.language-ruby
+          def modal(title=nil, options={}, &block)
+      %pre.mb-0
+        %code.language-ruby
+          def modal_trigger(options={}, &block)
+      %pre.mb-0
+        %code.language-ruby
+          def modal_footer(options={}, &block)
+
+      %table.table
+        %tr
+          %th{colspan: 2} Modal Options
+
+        %tr
+          %td
+            %code id
+          %td
+            Overrides the default modal id attribute
+
+        %tr
+          %td
+            %code modal
+          %td
+            A hash of attributes for the modal wrapper node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code header
+          %td
+            A hash of attributes for the modal header node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code title
+          %td
+            A hash of attributes for the modal title node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code close
+          %td
+            A hash of attributes for the modal close button node. Default attributes may be overriden through this
+
+        %tr
+          %td
+            %code body
+          %td
+            A hash of attributes for the modal body node. Default attributes may be overriden through this
+
+      %table.table
+        %tr
+          %th{colspan: 2} Modal Trigger Options
+
+        %tr
+          %td
+            %code tag
+          %td
+            The node name to use for the trigger node. Defaults to <code>a</code>
+
+        %tr
+          %td
+            %code trigger
+          %td
+            A hash of attributes for the trigger node. Default attributes may be overriden through this
+
+      %table.table
+        %tr
+          %th Modal Footer Options
+
+        %tr
+          %td The whole <code>options</code> is passed as node attributes
+
+  .col-md-6
+    = modal 'Modal Title' do
+      - modal_trigger do
+        = icon('credit-card')
+        Open Modal
+
+      %p Some HTML Content
+
+      - modal_footer do
+        Some footer content
+
+
