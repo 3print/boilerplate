@@ -6,8 +6,8 @@
     "url": "https://github.com/3print/boilerplate"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.15.0",
     "@babel/core": "^7",
+    "@babel/preset-env": "^7.15.0",
     "babel-loader": "^8"
   },
   "dependencies": {
@@ -35,6 +35,8 @@
     "build": "webpack --config config/webpack/webpack.config.js"
   },
   "babel": {
-    "presets": ["@babel/preset-env"]
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }
