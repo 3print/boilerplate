@@ -7,9 +7,18 @@
           \  = accordion_item 'Accordion Item Title', icon: icon('icon'), expanded: true|false do
           \    Accordion Item Content
 
+      .card-body Methods signatures
+      %pre.mb-0
+        %code.language-ruby
+          def accordion(options={}, &block)
+      %pre.mb-0
+        %code.language-ruby
+          def accordion_item(label, options={}, &block)
+
       %table.table
         %tr
           %th{colspan: 2} Accordion Options
+
 
         %tr
           %td
@@ -21,6 +30,7 @@
         All remaining options are passed as attributes for the accordion node.
 
       %hr.my-0
+
       %table.table
         %tr
           %th{colspan: 2} Accordion Item Options

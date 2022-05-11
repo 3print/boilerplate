@@ -9,6 +9,14 @@
           \    = icon('icon')
           \    item label
 
+      .card-body Methods signatures
+      %pre.mb-0
+        %code.language-ruby
+          def dropdown(label, options={}, &block)
+      %pre.mb-0
+        %code.language-ruby
+          def dropdown_item(label, action=nil, options={}, &block)
+
       %table.table
         %tr
           %th{colspan: 2} Dropdown Options
