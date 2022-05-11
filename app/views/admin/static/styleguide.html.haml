@@ -31,9 +31,17 @@
 
     = render partial: 'admin/static/styleguide/bem'
 
-  .col-md-2.ps-4.fixed-top{style: 'top: 204px; left: initial'}
+  .col-md-2.ps-4.fixed-top{style: 'top: 204px; left: initial; z-index: 999;'}
     = card 'Table Of Content' do
       %ol
-        %li= link_to 'Bootstrap Helpers', '#bootstrap'
+        %li
+          = link_to 'Bootstrap Helpers', '#bootstrap'
+          %ol
+            %li= link_to 'Cards', '#cards'
+            %li= link_to 'Dropdowns', '#dropdowns'
+            %li= link_to 'Tabs', '#tabs'
+            %li= link_to 'Accordions', '#accordions'
+            %li= link_to 'Carousels', '#carousels'
+            %li= link_to 'Off Canvas', '#off_canvas'
         %li= link_to 'Custom Markdown', '#markdown'
         %li= link_to 'BEM Helpers', '#bem'

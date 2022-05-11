@@ -1,6 +1,6 @@
 .row
   .col-md-6
-    = card 'Carousels' do
+    = card 'Carousels', card: { id: 'carousels' } do
       %pre.mb-0
         %code.language-haml
           \= carousel with_controls: true, with_indicators: true do
