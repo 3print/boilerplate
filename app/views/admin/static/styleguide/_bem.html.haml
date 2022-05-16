@@ -102,4 +102,9 @@
   .col-md-6
     = bem_block(:foo, modifier: 'active', attrs: {class: 'card'}) do
       = bem_element(:bar, attrs: {class: 'card-body'}) do
+
+        = bem_block(:bar) do
+          = bem_element(:foo) do
+            %a{class: bem_element_class('link', 'active')} Nested BEM Link
+
         %a{class: bem_element_class('link', 'disabled')} BEM Link
