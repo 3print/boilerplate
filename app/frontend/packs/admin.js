@@ -34,6 +34,7 @@ import '../js/widgets/table-sort-header';
 import '../js/widgets/order-table';
 import '../js/widgets/submit-on-change';
 import '../js/widgets/flatpickr';
+import '../js/widgets/lazy-image';
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY';
@@ -52,6 +53,7 @@ widgets('admin-navigation-highlight', '.sidebar-nav', {on: DEFAULT_EVENTS});
 widgets('submit-on-change', '.submit-on-change', {on: DEFAULT_EVENTS})
 widgets('popover', '[data-toggle=popover]', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
+widgets('lazy-image', '[data-lazy]', {on: DEFAULT_EVENTS, unless: isInTemplate});
 widgets('auto-resize', 'textarea', {on: DEFAULT_EVENTS, unless: isInTemplate});
 widgets('collapse-toggle', '[data-collapse]', {
   collapseClass: 'collapsed',

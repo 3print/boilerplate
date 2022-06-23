@@ -1,0 +1,35 @@
+.row
+  .col-md-6
+    = card 'Images' do
+      %pre.mb-0
+        %code.language-haml
+          \= lazy_image_tag '16/9', image_path('default-src.png'), srcset: {image_path('alternate-src?png') => '480w'}
+
+      %table.table
+        %tr
+          %th{colspan: 2} Lazy Image Tag Options
+
+        %tr
+          %td
+            %code format
+          %td
+            The image ratio (i.e. 4/3, 16/9, etc.) as a string using the <code>width/height</code> pattern.
+            %br
+            Please note that this format will be used to generate a placeholder
+            image using a <code>data:</code> url to fill the lazy image prior to the proper loading of the image. That means that you should strive to keep the format as small as possible: if your image is 400/300 you should indicate 4/3 and then use css to scale the image up in its container. Otherwise the generated data uri will be so big that it might impact page loading performances.
+        %tr
+          %td
+            %code src
+          %td
+            The default <code>src</code> attribute for the image
+        %tr
+          %td
+            %code options
+          %td
+            The additional options for the image, such as <code>srcset</code>.
+            %br
+            A <code>usepicture</code>flag can also be passed to force the use of a <code>picture</code> tag to wrap the lazy image. You'll generally want to use that option when the <code>srcset</code> contains media queries that cannot fit in an  image's <code>srcset</code> attribute.
+
+
+  .col-md-6
+    = lazy_image_tag '1/1', image_path('logo.svg'), srcset: { image_path('logo.svg') => '2x' }

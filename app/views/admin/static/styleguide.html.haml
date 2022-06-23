@@ -12,7 +12,6 @@
 - content_for :page_title do
   Admin Styleguide
 
-
 .row
   .col-md-10
     %h3.text-muted.mb-4#bootstrap Bootstrap Helpers
@@ -32,6 +31,10 @@
 
     = render partial: 'admin/static/styleguide/bem'
 
+    %h3.text-muted.mb-4#img Image Helpers
+
+    = render partial: 'admin/static/styleguide/img'
+
   .col-md-2.ps-4.fixed-top{style: 'top: 204px; left: initial; z-index: 999;'}
     = card 'Table Of Content' do
       %ol
@@ -47,3 +50,4 @@
             %li= link_to 'Modals', '#modals'
         %li= link_to 'Custom Markdown', '#markdown'
         %li= link_to 'BEM Helpers', '#bem'
+        %li= link_to 'Image Helpers', '#img'
