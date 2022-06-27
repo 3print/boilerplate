@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'home#index'
 
-    resources :users
+    resources :users do
+      member do
+        put :unlock_access
+      end
+    end
     resources :seo_meta
     resources :bp_tests  do   # BOILERPLATE_ONLY
       collection do           # BOILERPLATE_ONLY

@@ -4,6 +4,10 @@ class UserPolicy < AdminPolicy
     only_admin || user == record
   end
 
+  def unlock_access?
+    only_super_admin || (only_admin && !record.is_super_admin?)
+  end
+
   def edit?
     only_super_admin || (only_admin && !record.is_super_admin?) || user == record
   end

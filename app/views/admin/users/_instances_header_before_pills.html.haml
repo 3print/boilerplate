@@ -1,0 +1,4 @@
+- if can?(:unlock_access, resource) && resource.locked_at.present?
+  - pill unlock_access_admin_user_path(resource), method: :put, class: 'btn btn-outline-warning', data: {confirm: "confirmations.unlock_access".t} do |on|
+    = icon('lock')
+    %span.text= 'actions.unlock_access'.t

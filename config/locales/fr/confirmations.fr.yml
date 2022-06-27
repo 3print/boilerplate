@@ -2,6 +2,7 @@ fr:
   confirmations:
     default: "Souhaitez-vous poursuivre cette action ?"
     destroy: "Souhaitez-vous supprimer définitivement cette entrée ?"
+    unlock_access: "Souhaitez-vous réactiver l'accès pour ce compte utilisateur"
     bp_test:                                                   # BOILERPLATE_ONLY
       approve: "Souhaitez-vous approuver cet utilisateur ?"    # BOILERPLATE_ONLY
       revocate: "Souhaitez-vous approuver cet utilisateur ?"   # BOILERPLATE_ONLY
