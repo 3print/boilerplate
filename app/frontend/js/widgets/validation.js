@@ -69,6 +69,14 @@ function getPasswordCriterium() {
   return asArray(document.querySelectorAll('.password-validation-criterium li'));
 }
 
+function validateImagePresence(subValidator=()=>null) {
+  return (i18n, value, input) => {
+    const controls = parent(input, '.form-control');
+    const currentValue = controls.querySelector('.currentValue img');
+    return currentValue ? null : subValidator(i18n, value, input);
+  }
+}
+
 export default {
   resolvers: [
     [numberPredicate, i => i.value],
@@ -77,7 +85,7 @@ export default {
     [passwordPredicate, validatePassword],
     [passwordConfirmationPredicate, matchPassword],
     [compose(numberPredicate, requiredPredicate), validatePresence],
-    [compose(filePredicate, requiredPredicate), validatePresence],
+    [compose(filePredicate, requiredPredicate), validateImagePresence(validatePresence)],
     [
       requiredPredicate,
       (i18n,v,i) => validatePresence(i18n,v,i) || nativeValidation(i18n,v,i)
