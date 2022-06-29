@@ -8,6 +8,12 @@ module YAML
   end
 
   def YAML.load_file file_name
-    YAML::load(YAML::include(file_name))
+    src = YAML::include(file_name)
+    YAML::load(src, aliases: true)
+  end
+
+  def YAML.unsafe_load_file file_name, options={}
+    src = YAML::include(file_name)
+    YAML::load(src, aliases: true)
   end
 end

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.7.4'
+ruby '3.1.2'
 gem 'rails', '~> 6.1.5.1'
 gem 'puma', '>= 4.3.8'
 gem 'settingslogic'
@@ -56,6 +56,9 @@ gem 'delayed_job_active_record'
 # Notifier
 gem 'exception_notification'
 gem 'slack-notifier'
+gem 'net-smtp' # to send email
+gem 'net-imap' # for rspec
+gem 'net-pop'  # for rspec
 
 # Sumo custom tools
 gem 'tprint-debug', git: 'https://github.com/3print/tprint-debug'
