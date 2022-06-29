@@ -7,13 +7,13 @@ module YAML
     ERB.new(IO.read(file_name)).result
   end
 
-  def YAML.load_file file_name
+  def YAML.load_file file_name, **kwargs
     src = YAML::include(file_name)
-    YAML::load(src, aliases: true)
+    YAML::load(src, **kwargs.merge(aliases: true))
   end
 
-  def YAML.unsafe_load_file file_name, options={}
+  def YAML.unsafe_load_file file_name, **kwargs
     src = YAML::include(file_name)
-    YAML::load(src, aliases: true)
+    YAML::unsafe_load(src, **kwargs)
   end
 end
