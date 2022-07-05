@@ -13,6 +13,11 @@ Rails.application.routes.draw do
       get :mail          # BOILERPLATE_ONLY
     end                  # BOILERPLATE_ONLY
   end                    # BOILERPLATE_ONLY
+
+  namespace :api do
+    get '/s3/sign', to: 'signed_urls#index'
+  end
+
   namespace :admin do
     root to: 'home#index'
 
