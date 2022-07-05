@@ -10,12 +10,12 @@ CarrierWave.configure do |config|
     config.aws_credentials = {
     access_key_id:     ENV['AWS_ACCESS_KEY_ID'],
     secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-    region:            'eu-west-1', # Required
+    region:            ENV['AWS_REGION'], # Required
     stub_responses:    Rails.env.test?,
   }
 
     config.aws_bucket  = ENV['AWS_BUCKET']
-    config.aws_acl     = 'private'
+    config.aws_acl     = ENV['AWS_ACL']
     config.asset_host  = "https://#{ENV['ASSET_HOST']}"
 
     config.aws_attributes = {
@@ -30,7 +30,7 @@ module PublicUploader
     # if Rails.env.production?
     if base.storage.name == base.storage_engines[:aws]
       base.asset_host   "https://#{ENV['ASSET_HOST']}"
-      base.aws_acl 'public-read'
+      base.aws_acl ENV['AWS_ACL']
     end
   end
 end
