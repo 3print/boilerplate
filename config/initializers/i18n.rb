@@ -115,6 +115,12 @@ class Date
   end
 end
 
+class ActiveSupport::TimeWithZone
+  def l(**params)
+    I18n.l(self, **params)
+  end
+end
+
 class ActiveRecord::Base
   def self.t
     "models.#{model_name.to_s.underscore.gsub('/', '_').pluralize}".t
