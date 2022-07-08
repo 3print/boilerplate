@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   if Rails.env.development?
     get '/styleguide', to: 'static#styleguide'
+    put '/s3-upload/:name', to: 'static#upload', as: :s3_upload
   end
 
   get "/404", to: "errors#routing"
