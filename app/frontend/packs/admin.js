@@ -10,6 +10,7 @@ FastClick.attach(document.body);
 import widgets from 'widjet';
 import {asArray, asPair, parent, getNode, merge} from 'widjet-utils';
 import {getTextPreview, getPDFPreview} from 'widjet-file-upload';
+import s3DirectUpload from '../js/utils/s3-direct-upload';
 import '../../../vendor/assets/javascripts/nested_form';
 
 // Importing 'bootstrap' in the context of webpack will lead
@@ -214,6 +215,20 @@ widgets('file-preview', 'input[type="file"]', {
     return wrapper;
   },
 });
+
+widgets('file-upload', 'input.direct-upload[type="file"]', {
+  on: DEFAULT_EVENTS,
+  nameAttribute: 'data-name',
+  upload: s3DirectUpload({
+    s3: {
+      path: '/uploads/',
+    },
+    signing: {
+      url: '/api/s3/sign',
+      method: 'GET',
+    },
+  }),
+})
 
 // widgets('json_form', 'form', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
