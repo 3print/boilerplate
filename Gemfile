@@ -16,7 +16,6 @@ gem 'devise-i18n'
 gem 'pundit'
 gem 'createsend'
 gem 'authtrail'
-gem 'gdpr'
 
 # Database
 gem 'pg'

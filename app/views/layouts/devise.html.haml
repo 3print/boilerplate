@@ -16,7 +16,6 @@
 
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
-    = render partial: 'gdpr/cookie_consent'
     = render partial: 'shared/html_templates'
     %main.d-flex.w-100.h-100
       .container.d-flex.flex-column
