@@ -62,39 +62,35 @@
 
 
     .container
-      - if content_for?(:content_header)
-        - content_header_class = yield :content_header_class
-        - content_header_style = yield :content_header_style
-        .content-header{class: content_header_class, style: content_header_style}
-          .container= yield :content_header
-
       - content_class = yield :extra_content_class
       #content{class: content_class}
-        .container
-          = yield :before_page
+        = yield :before_page
 
-          #content-header
-            %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'app_name'.t
-            = yield :content_header
-
-          - if content_for?(:pills)
-            = yield :pills
-
-          - if content_for?(:breadcrumb)
-            = yield :breadcrumb
-
-          = yield :before_content
-
-          = yield
-
-          = yield :after_content
-          = yield :after_page
-
-          / .row
-          /   - FEATHER_SVGS.keys.each do |k|
-          /     .col-md-2
-          /       = svg_icon(k)
-          /       = k
+        - content_header_class = yield :content_header_class
+        - content_header_style = yield :content_header_style
+        #content-header.mt-3{class: content_header_class, style: content_header_style}
+          %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'app_name'.t
+          = yield :content_header
 
 
-    = yield :inline_scripts
+        - if content_for?(:pills)
+          = yield :pills
+
+        - if content_for?(:breadcrumb)
+          = yield :breadcrumb
+
+        = yield :before_content
+
+        = yield
+
+        = yield :after_content
+        = yield :after_page
+
+        / .row
+        /   - FEATHER_SVGS.keys.each do |k|
+        /     .col-md-2
+        /       = svg_icon(k)
+        /       = k
+
+
+  = yield :inline_scripts
