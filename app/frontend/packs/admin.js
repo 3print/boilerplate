@@ -36,6 +36,8 @@ import '../js/widgets/order-table';
 import '../js/widgets/submit-on-change';
 import '../js/widgets/flatpickr';
 import '../js/widgets/lazy-image';
+import '../js/widgets/blueprint-add-button';
+import '../js/widgets/blueprint-remove-button';
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY';
@@ -60,6 +62,15 @@ widgets('collapse-toggle', '[data-collapse]', {
   collapseClass: 'collapsed',
   on: DEFAULT_EVENTS,
   unless: isInTemplate
+});
+widgets('blueprint-add-button', '[data-blueprint]', {
+  on: DEFAULT_EVENTS,
+  unless: isInTemplate,
+  newIndex: (t) => t.children.length - 1,
+});
+widgets('blueprint-remove-button', '[data-remove]', {
+  on: DEFAULT_EVENTS,
+  unless: isInTemplate,
 });
 
 widgets('select', 'select.form-control:not([multiple])', {on: DEFAULT_EVENTS})
