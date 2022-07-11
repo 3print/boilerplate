@@ -47,35 +47,31 @@ window.TIME_FORMAT = 'HH:mm Z';
 window.TIME_DISPLAY_FORMAT = 'HH:mm';
 
 const DEFAULT_EVENTS = 'init load page:load turbolinks:load nested:fieldAdded';
+const DEFAULT_CONFIG = {
+  on: DEFAULT_EVENTS,
+  unless: isInTemplate,
+}
 
 const isMobile = () => window.innerWidth < 992;
 const isInTemplate = el => parent(el, '.tpl') != null;
 const isMobileOrInTemplate = el => isMobile() || isInTemplate(el);
 
-widgets('admin-navigation-highlight', '.sidebar-nav', {on: DEFAULT_EVENTS});
-widgets('submit-on-change', '.submit-on-change', {on: DEFAULT_EVENTS})
-widgets('popover', '[data-toggle=popover]', {on: DEFAULT_EVENTS, unless: isInTemplate});
+widgets('admin-navigation-highlight', '.sidebar-nav', DEFAULT_CONFIG);
+widgets('submit-on-change', '.submit-on-change', DEFAULT_CONFIG);
+widgets('popover', '[data-toggle=popover]', DEFAULT_CONFIG);
 
-widgets('lazy-image', '[data-lazy]', {on: DEFAULT_EVENTS, unless: isInTemplate});
-widgets('auto-resize', 'textarea', {on: DEFAULT_EVENTS, unless: isInTemplate});
-widgets('collapse-toggle', '[data-collapse]', {
+widgets('lazy-image', '[data-lazy]', DEFAULT_CONFIG);
+widgets('auto-resize', 'textarea', DEFAULT_CONFIG);
+widgets('collapse-toggle', '[data-collapse]', merge(DEFAULT_CONFIG, {
   collapseClass: 'collapsed',
-  on: DEFAULT_EVENTS,
-  unless: isInTemplate
-});
-widgets('blueprint-add-button', '[data-blueprint]', {
-  on: DEFAULT_EVENTS,
-  unless: isInTemplate,
+}));
+widgets('blueprint-add-button', '[data-blueprint]', merge(DEFAULT_CONFIG, {
   newIndex: (t) => t.children.length - 1,
-});
-widgets('blueprint-remove-button', '[data-remove]', {
-  on: DEFAULT_EVENTS,
-  unless: isInTemplate,
-});
+}));
+widgets('blueprint-remove-button', '[data-remove]', DEFAULT_CONFIG);
 
-widgets('select', 'select.form-control:not([multiple])', {on: DEFAULT_EVENTS})
-widgets('select-multiple', 'select[multiple]', {
-  on: DEFAULT_EVENTS,
+widgets('select', 'select.form-control:not([multiple])', DEFAULT_CONFIG)
+widgets('select-multiple', 'select[multiple]', merge(DEFAULT_CONFIG, {
   wrapperClass: 'select-multiple form-control',
   itemClass: 'option badge bg-light text-dark',
   formatValue: (option) => {
@@ -94,26 +90,24 @@ widgets('select-multiple', 'select[multiple]', {
 
     return div;
   }
-})
+}));
 
-widgets('order-table', '.sortable', {on: DEFAULT_EVENTS});
+widgets('order-table', '.sortable', DEFAULT_CONFIG);
 
-widgets('table-sort-header', '[data-sort]', {
-  on: DEFAULT_EVENTS,
+widgets('table-sort-header', '[data-sort]', merge(DEFAULT_CONFIG, {
   iconAsc: document.querySelector('.tpl.icon-asc').innerHTML,
   iconDesc: document.querySelector('.tpl.icon-desc').innerHTML,
   iconReset: document.querySelector('.tpl.icon-reset').innerHTML,
-});
-widgets('settings-editor', '.settings_editor', {on: DEFAULT_EVENTS});
-widgets('settings-form', '[data-settings]', {on: DEFAULT_EVENTS});
+}));
+widgets('settings-editor', '.settings_editor', DEFAULT_CONFIG);
+widgets('settings-form', '[data-settings]', DEFAULT_CONFIG);
 
-widgets('flatpickr', '.datetimepicker', {
-  on: DEFAULT_EVENTS,
+widgets('flatpickr', '.datetimepicker', merge(DEFAULT_CONFIG, {
   enableTime: true,
   altInput: true,
   altFormat: 'l d F Y à H:i',
   dateFormat: 'Z',
-});
+}));
 
 widgets('text-editor', '.form-group.markdown', {
   on: DEFAULT_EVENTS,
@@ -128,20 +122,15 @@ widgets('text-editor', '.form-group.markdown', {
   // function to increment automatically the list bullet in ordered lists
   repeatOrderedList: Markdown.repeatOrderedList
 });
-widgets('propagate-input-value', 'input:not(.select2-offscreen):not(.select2-input), select', {on: DEFAULT_EVENTS, unless: isInTemplate});
+widgets('propagate-input-value', 'input:not(.select2-offscreen):not(.select2-input), select', DEFAULT_CONFIG);
 
-widgets('field-limit', '[data-limit]', {on: DEFAULT_EVENTS, unless: isInTemplate});
+widgets('field-limit', '[data-limit]', DEFAULT_CONFIG);
 
 widgets('live-validation', 'input, select, textarea', merge({
-  on: DEFAULT_EVENTS,
-  unless: isInTemplate,
   events: 'input change blur',
   inputBuffer: 500,
-}, VALIDATION_OPTIONS));
-widgets('form-validation', 'form', merge({
-  on: DEFAULT_EVENTS,
-  unless: isInTemplate,
-}, VALIDATION_OPTIONS));
+}, merge(DEFAULT_CONFIG, VALIDATION_OPTIONS)));
+widgets('form-validation', 'form', merge(DEFAULT_CONFIG, VALIDATION_OPTIONS));
 
 const versionSiblings = (el) =>
   asArray(parent(el, '.controls').querySelectorAll('input[data-size]'));
@@ -181,8 +170,7 @@ const getVersion = ((img, version) => {
   return div;
 });
 
-widgets('file-versions', '.with-regions input[type="file"]', {
-  on: 'load',
+widgets('file-versions', '.with-regions input[type="file"]', merge(DEFAULT_CONFIG, {
   containerSelector: '.file-input-container',
   initialValueSelector: '.current-value img',
   previewSelector: '.new-value img',
@@ -190,10 +178,9 @@ widgets('file-versions', '.with-regions input[type="file"]', {
   versionBoxesProvider,
   onVersionsChange,
   getVersion,
-});
+}));
 
-widgets('file-preview', 'input[type="file"]', {
-  on: DEFAULT_EVENTS,
+widgets('file-preview', 'input[type="file"]', merge(DEFAULT_CONFIG, {
   previewers: [
     [o => o.file.type === 'application/pdf', getPDFPreview],
     [o => o.file.type === 'text/plain', getTextPreview]
@@ -225,7 +212,7 @@ widgets('file-preview', 'input[type="file"]', {
     label.parentNode.insertBefore(input, label);
     return wrapper;
   },
-});
+}));
 
 const uploader = s3DirectUpload({
   s3: {
@@ -237,25 +224,10 @@ const uploader = s3DirectUpload({
   },
 });
 
-widgets('file-upload', 'input.direct-upload[type="file"][name]', {
-  on: DEFAULT_EVENTS,
+widgets('file-upload', 'input.direct-upload[type="file"][name]', merge(DEFAULT_CONFIG, {
   upload: uploader,
-});
-widgets('file-upload', 'input.direct-upload[type="file"][data-name]', {
-  on: DEFAULT_EVENTS,
+}));
+widgets('file-upload', 'input.direct-upload[type="file"][data-name]', merge(DEFAULT_CONFIG, {
   nameAttribute: 'data-name',
   upload: uploader,
-});
-
-// widgets('json_form', 'form', {on: DEFAULT_EVENTS, unless: isInTemplate});
-
-// hljs.initHighlightingOnLoad();
-
-// $(function() {
-//   FastClick.attach(document.body);
-
-//   return $('[data-toggle="collapse"]').on('click', function(e) {
-//     e.preventDefault();
-//     return $($(this).attr('data-target')).toggleClass('in');
-//   });
-// });
+}));
