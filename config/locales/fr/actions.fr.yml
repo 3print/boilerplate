@@ -35,6 +35,7 @@ fr:
     read_more: 'Lire la suite'
     recover_password: Mot de passe oublié ?
     remove: Enlever
+    remove_image: "Supprimer l'image"
     reset: Remettre à zéro
     reset_password: Démarrer le changement de mot de passe
     retry: Réessayer

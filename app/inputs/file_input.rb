@@ -2,6 +2,7 @@ class FileInput < SimpleForm::Inputs::FileInput
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::FormTagHelper
   include ActionView::Helpers::FormOptionsHelper
+  include IconHelper
 
   def input(wrapper_options = nil)
     has_versions = object.respond_to?(:"exposed_versions_for_#{attribute_name}")
@@ -86,6 +87,12 @@ class FileInput < SimpleForm::Inputs::FileInput
     if object.try("#{attribute_name}?")
       template.content_tag :div, class: 'current-value' do
         s = ''.html_safe
+
+        unless required_field?
+          s << "<label class=\"btn btn-sm btn-outline-danger image-delete\" title=\"#{'actions.remove_image'.t}\">".html_safe
+          s << @builder.check_box(:"remove_#{attribute_name}", class: 'form-check-input').html_safe
+          s << '</label>'.html_safe
+        end
 
         image = object.send(attribute_name)
         ext = image.present? ? clear_url_query(File.extname(image.url)) : nil
