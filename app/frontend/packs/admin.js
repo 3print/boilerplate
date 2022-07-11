@@ -227,19 +227,25 @@ widgets('file-preview', 'input[type="file"]', {
   },
 });
 
-widgets('file-upload', 'input.direct-upload[type="file"]', {
+const uploader = s3DirectUpload({
+  s3: {
+    path: '/uploads/',
+  },
+  signing: {
+    url: '/api/s3/sign',
+    method: 'GET',
+  },
+});
+
+widgets('file-upload', 'input.direct-upload[type="file"][name]', {
+  on: DEFAULT_EVENTS,
+  upload: uploader,
+});
+widgets('file-upload', 'input.direct-upload[type="file"][data-name]', {
   on: DEFAULT_EVENTS,
   nameAttribute: 'data-name',
-  upload: s3DirectUpload({
-    s3: {
-      path: '/uploads/',
-    },
-    signing: {
-      url: '/api/s3/sign',
-      method: 'GET',
-    },
-  }),
-})
+  upload: uploader,
+});
 
 // widgets('json_form', 'form', {on: DEFAULT_EVENTS, unless: isInTemplate});
 
