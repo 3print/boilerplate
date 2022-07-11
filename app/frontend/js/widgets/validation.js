@@ -72,7 +72,7 @@ function getPasswordCriterium() {
 function validateImagePresence(subValidator=()=>null) {
   return (i18n, value, input) => {
     const controls = parent(input, '.form-control');
-    const currentValue = controls.querySelector('.currentValue img');
+    const currentValue = controls.querySelector('.current-value img');
     return currentValue ? null : subValidator(i18n, value, input);
   }
 }
