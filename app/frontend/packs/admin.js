@@ -46,32 +46,32 @@ window.DATETIME_DISPLAY_FORMAT = 'DD/MM/YYYY HH:mm';
 window.TIME_FORMAT = 'HH:mm Z';
 window.TIME_DISPLAY_FORMAT = 'HH:mm';
 
-const DEFAULT_EVENTS = 'init load page:load turbolinks:load nested:fieldAdded';
-const DEFAULT_CONFIG = {
-  on: DEFAULT_EVENTS,
-  unless: isInTemplate,
-}
-
 const isMobile = () => window.innerWidth < 992;
 const isInTemplate = el => parent(el, '.tpl') != null;
 const isMobileOrInTemplate = el => isMobile() || isInTemplate(el);
 
-widgets('admin-navigation-highlight', '.sidebar-nav', DEFAULT_CONFIG);
-widgets('submit-on-change', '.submit-on-change', DEFAULT_CONFIG);
-widgets('popover', '[data-toggle=popover]', DEFAULT_CONFIG);
+const DEFAULT_EVENTS = 'init load page:load turbolinks:load nested:fieldAdded';
+const DEFAULT_CONFIG = () => ({
+  on: DEFAULT_EVENTS,
+  unless: isInTemplate,
+});
 
-widgets('lazy-image', '[data-lazy]', DEFAULT_CONFIG);
-widgets('auto-resize', 'textarea', DEFAULT_CONFIG);
-widgets('collapse-toggle', '[data-collapse]', merge(DEFAULT_CONFIG, {
+widgets('admin-navigation-highlight', '.sidebar-nav', DEFAULT_CONFIG());
+widgets('submit-on-change', '.submit-on-change', DEFAULT_CONFIG());
+widgets('popover', '[data-toggle=popover]', DEFAULT_CONFIG());
+
+widgets('lazy-image', '[data-lazy]', DEFAULT_CONFIG());
+widgets('auto-resize', 'textarea', DEFAULT_CONFIG());
+widgets('collapse-toggle', '[data-collapse]', merge(DEFAULT_CONFIG(), {
   collapseClass: 'collapsed',
 }));
-widgets('blueprint-add-button', '[data-blueprint]', merge(DEFAULT_CONFIG, {
+widgets('blueprint-add-button', '[data-blueprint]', merge(DEFAULT_CONFIG(), {
   newIndex: (t) => t.children.length - 1,
 }));
-widgets('blueprint-remove-button', '[data-remove]', DEFAULT_CONFIG);
+widgets('blueprint-remove-button', '[data-remove]', DEFAULT_CONFIG());
 
-widgets('select', 'select.form-control:not([multiple])', DEFAULT_CONFIG)
-widgets('select-multiple', 'select[multiple]', merge(DEFAULT_CONFIG, {
+widgets('select', 'select.form-control:not([multiple])', DEFAULT_CONFIG())
+widgets('select-multiple', 'select[multiple]', merge(DEFAULT_CONFIG(), {
   wrapperClass: 'select-multiple form-control',
   itemClass: 'option badge bg-light text-dark',
   formatValue: (option) => {
@@ -92,17 +92,17 @@ widgets('select-multiple', 'select[multiple]', merge(DEFAULT_CONFIG, {
   }
 }));
 
-widgets('order-table', '.sortable', DEFAULT_CONFIG);
+widgets('order-table', '.sortable', DEFAULT_CONFIG());
 
-widgets('table-sort-header', '[data-sort]', merge(DEFAULT_CONFIG, {
+widgets('table-sort-header', '[data-sort]', merge(DEFAULT_CONFIG(), {
   iconAsc: document.querySelector('.tpl.icon-asc').innerHTML,
   iconDesc: document.querySelector('.tpl.icon-desc').innerHTML,
   iconReset: document.querySelector('.tpl.icon-reset').innerHTML,
 }));
-widgets('settings-editor', '.settings_editor', DEFAULT_CONFIG);
-widgets('settings-form', '[data-settings]', DEFAULT_CONFIG);
+widgets('settings-editor', '.settings_editor', DEFAULT_CONFIG());
+widgets('settings-form', '[data-settings]', DEFAULT_CONFIG());
 
-widgets('flatpickr', '.datetimepicker', merge(DEFAULT_CONFIG, {
+widgets('flatpickr', '.datetimepicker', merge(DEFAULT_CONFIG(), {
   enableTime: true,
   altInput: true,
   altFormat: 'l d F Y à H:i',
@@ -122,15 +122,15 @@ widgets('text-editor', '.form-group.markdown', {
   // function to increment automatically the list bullet in ordered lists
   repeatOrderedList: Markdown.repeatOrderedList
 });
-widgets('propagate-input-value', 'input:not(.select2-offscreen):not(.select2-input), select', DEFAULT_CONFIG);
+widgets('propagate-input-value', 'input:not(.select2-offscreen):not(.select2-input), select', DEFAULT_CONFIG());
 
-widgets('field-limit', '[data-limit]', DEFAULT_CONFIG);
+widgets('field-limit', '[data-limit]', DEFAULT_CONFIG());
 
 widgets('live-validation', 'input, select, textarea', merge({
   events: 'input change blur',
   inputBuffer: 500,
-}, merge(DEFAULT_CONFIG, VALIDATION_OPTIONS)));
-widgets('form-validation', 'form', merge(DEFAULT_CONFIG, VALIDATION_OPTIONS));
+}, merge(DEFAULT_CONFIG(), VALIDATION_OPTIONS)));
+widgets('form-validation', 'form', merge(DEFAULT_CONFIG(), VALIDATION_OPTIONS));
 
 const versionSiblings = (el) =>
   asArray(parent(el, '.controls').querySelectorAll('input[data-size]'));
@@ -170,7 +170,7 @@ const getVersion = ((img, version) => {
   return div;
 });
 
-widgets('file-versions', '.with-regions input[type="file"]', merge(DEFAULT_CONFIG, {
+widgets('file-versions', '.with-regions input[type="file"]', merge(DEFAULT_CONFIG(), {
   containerSelector: '.file-input-container',
   initialValueSelector: '.current-value img',
   previewSelector: '.new-value img',
@@ -180,7 +180,7 @@ widgets('file-versions', '.with-regions input[type="file"]', merge(DEFAULT_CONFI
   getVersion,
 }));
 
-widgets('file-preview', 'input[type="file"]', merge(DEFAULT_CONFIG, {
+widgets('file-preview', 'input[type="file"]', merge(DEFAULT_CONFIG(), {
   previewers: [
     [o => o.file.type === 'application/pdf', getPDFPreview],
     [o => o.file.type === 'text/plain', getTextPreview]
@@ -224,10 +224,10 @@ const uploader = s3DirectUpload({
   },
 });
 
-widgets('file-upload', 'input.direct-upload[type="file"][name]', merge(DEFAULT_CONFIG, {
+widgets('file-upload', 'input.direct-upload[type="file"][name]', merge(DEFAULT_CONFIG(), {
   upload: uploader,
 }));
-widgets('file-upload', 'input.direct-upload[type="file"][data-name]', merge(DEFAULT_CONFIG, {
+widgets('file-upload', 'input.direct-upload[type="file"][data-name]', merge(DEFAULT_CONFIG(), {
   nameAttribute: 'data-name',
   upload: uploader,
 }));
