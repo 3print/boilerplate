@@ -17,12 +17,23 @@
   }
 
   .meta {
-    display: flex;
-    flex-direction: row;
-    * {
-      flex: 1 1 33%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+
+    .mime {
+      grid-column: 1 / 2;
+      grid-row: 1;
     }
 
+    .size {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .dimensions {
+      grid-column: 2;
+      grid-row: 2;
+    }
   }
   .name {
     white-space: nowrap;
@@ -49,6 +60,7 @@
 
     .current-value, .new-value  {
       flex: 1 1 50%;
+      width: 50%;
       position: relative;
 
       img {
@@ -93,7 +105,14 @@
       }
     }
 
-    .btn-outline-danger {
+    .current-value pre,
+    .new-value .preview pre {
+      padding: 4px;
+      overflow: hidden;
+      max-height: 100px;
+    }
+
+    .btn-outline-danger, .btn-danger {
       position: absolute;
       right: 8px;
       top: 8px;
@@ -115,7 +134,7 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        font-size: 40px;
+        font-size: 24px;
         text-align: center;
 
         svg {
@@ -128,6 +147,7 @@
       }
     }
   }
+
 
   .form-group.is-valid {
     & .controls > .form-control {

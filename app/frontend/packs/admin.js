@@ -183,7 +183,8 @@ widgets('file-versions', '.with-regions input[type="file"]', merge(DEFAULT_CONFI
 widgets('file-preview', 'input[type="file"]', merge(DEFAULT_CONFIG(), {
   previewers: [
     [o => o.file.type === 'application/pdf', getPDFPreview],
-    [o => o.file.type === 'text/plain', getTextPreview]
+    [o => o.file.type === 'text/plain', getTextPreview],
+    [o => o.file.type === 'text/csv', getTextPreview],
   ],
   nameMetaSelector: '.new-value .name',
   wrap: (input) => {

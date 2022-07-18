@@ -97,7 +97,9 @@ class FileInput < SimpleForm::Inputs::FileInput
         image = object.send(attribute_name)
         ext = image.present? ? clear_url_query(File.extname(image.url)) : nil
         if image_extensions.include?(ext)
-          s << build_preview(image).html_safe
+          s << build_image_preview(image).html_safe
+        elsif plain_text_extensions.include?(ext)
+          s << build_text_preview(image).html_safe
         else
           s << build_file_path(image).html_safe
         end
@@ -120,7 +122,12 @@ class FileInput < SimpleForm::Inputs::FileInput
     template.content_tag(:div, '', class: "fa fa-file-#{file_ext}-o") + ' ' + file_name
   end
 
-  def build_preview(image)
+  def build_text_preview(image)
+    content = image.read
+    template.content_tag(:pre, content) << field_label(image)
+  end
+
+  def build_image_preview(image)
     version = get_version(image)
     if version.present?
       '' << template.image_tag(version.url) << field_label(image)
@@ -143,6 +150,10 @@ class FileInput < SimpleForm::Inputs::FileInput
     %w(.png .gif .jpg .jpeg .PNG .GIF .JPG .JPEG)
   end
 
+  def plain_text_extensions
+    %w(.txt .TXT .csv .CSV)
+  end
+
   def clear_url_query(ext)
     ext.split('?').first
   end
@@ -152,7 +163,9 @@ class FileInput < SimpleForm::Inputs::FileInput
     s += "<div class='meta'>"
     s += "<div class='mime'>#{res.content_type}</div>"
     s += "<div class='size'>#{(res.file.size rescue 0) / 1024}ko</div>"
-    s += "<div class='dimensions'>#{res.width rescue '?'}x#{res.height rescue '?'}px</div>"
+    if res.respond_to? :width
+      s += "<div class='dimensions'>#{res.width rescue '?'}x#{res.height rescue '?'}px</div>"
+    end
     s += "</div>"
 
     s.html_safe
