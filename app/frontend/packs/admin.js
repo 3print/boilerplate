@@ -122,7 +122,8 @@ widgets('text-editor', '.form-group.markdown', {
   // function to increment automatically the list bullet in ordered lists
   repeatOrderedList: Markdown.repeatOrderedList
 });
-widgets('propagate-input-value', 'input:not(.select2-offscreen):not(.select2-input), select', DEFAULT_CONFIG());
+
+widgets('propagate-input-value', '.form-group input:not(.select2-offscreen):not(.select2-input):not(.flatpickr-trigger), .form-group select', DEFAULT_CONFIG());
 
 widgets('field-limit', '[data-limit]', DEFAULT_CONFIG());
 

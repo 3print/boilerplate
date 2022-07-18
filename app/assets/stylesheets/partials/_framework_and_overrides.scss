@@ -58,6 +58,15 @@ ul.pagination {
   height: 14px;
 }
 
+.btn-xl {
+  font-size: 1.6rem;
+
+  .feather {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 .btn-icon {
   .text {
     display: none;
@@ -430,3 +439,30 @@ th, td {
     font-size: 150%;
   }
 }
+
+// Grids
+
+.cards-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+
+  &.col-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &.col-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card {
+    margin: 0;
+  }
+
+  .remove_nested_fields_link {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+  }
+}
+
