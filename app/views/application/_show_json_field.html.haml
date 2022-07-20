@@ -1,4 +1,4 @@
-%strong= "#{resource.class.table_name.singularize}.#{column}".tmf
+= render partial: 'show_field_label', locals: local_assigns
 - if value.present?
   %pre
     %code.json= JSON.pretty_generate(value)

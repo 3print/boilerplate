@@ -1,2 +1,2 @@
-%strong= "#{resource.class.table_name.singularize}.#{column}".tmfc
+= render partial: 'show_field_label', locals: local_assigns
 = value.respond_to?(:to_sentence) ? value.select(&:present?).to_sentence : value

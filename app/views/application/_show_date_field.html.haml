@@ -1,2 +1,2 @@
-%strong= "#{resource.class.table_name.singularize}.#{column}".tmfc
-= value.l
+= render partial: 'show_field_label', locals: local_assigns
+= value.l(format: options[:format] || :short)
