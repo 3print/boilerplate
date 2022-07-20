@@ -11,7 +11,7 @@ export default class NestedFormEvents {
     const assoc = link.dataset.associationPath;
 
     const container = link.dataset.insertInto
-      ? document.getElementById(link.dataset.insertInto)
+      ? document.querySelector(link.dataset.insertInto)
       : parent(link);
 
     const blueprint = container.querySelector(`script`).textContent;
@@ -32,16 +32,20 @@ export default class NestedFormEvents {
   insertFields(content, assoc, link, container) {
     const node = getNode(content, container.nodeName);
 
-    if (content.indexOf('<tr') !== -1) {
+    if (node.nodeName == 'TD') {
       const tr = parent(link, 'tr');
       tr.parentNode.insertBefore(node, tr);
-    } else if (content.indexOf('<li') !== -1) {
-      const li = parent(link, 'li');
+    } else if (node.nodeName == 'LI') {
+      const li = parent(link, 'ul');
       li.parentNode.insertBefore(node, li);
     } else {
-      const target = link.dataset.target;
+      const target = document.querySelector(link.dataset.insertInto);
       if (target) {
-        target.appendChild(node);
+        if(link.parentNode == target) {
+          target.insertBefore(node, link);
+        } else {
+          target.appendChild(node);
+        }
       } else {
         link.parentNode.insertBefore(node, link);
       }
