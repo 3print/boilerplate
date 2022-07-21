@@ -5,6 +5,7 @@ task :clone, [:name] do |t, args|
 
   to_be_removed = [
     "app/controllers/**/bp_*",
+    "app/frontend/**/bp_*",
     "app/models/bp_*",
     "app/views/admin/bp_*",
     "app/views/bp_*",
