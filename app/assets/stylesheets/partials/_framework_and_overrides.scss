@@ -341,9 +341,38 @@ th, td {
   .btn {
     .text {
       display: none;
+      position: absolute;
     }
+
     .feather {
       margin-right: 0;
+    }
+
+    &:hover, &:active, &:focus {
+      position: relative;
+      .text {
+        display: inline-block;
+        background: black;
+        color: white;
+        pointer-events: none;
+        left: 50%;
+        bottom: 100%;
+        transform: translate(-50%, -8px);
+        padding: 4px 6px;
+        border-radius: 0.25em;
+
+        &::before {
+          position: absolute;
+          content: "";
+          border-color: transparent;
+          border-style: solid;
+          left: 50%;
+          bottom: -$tooltip-arrow-height;
+          border-width: $tooltip-arrow-height ($tooltip-arrow-width * .5) 0;
+          border-top-color: $tooltip-arrow-color;
+          transform: translate(-50%, 0);
+        }
+      }
     }
   }
 }

@@ -35,7 +35,7 @@ module ActionsHelper
         return unless instance_exec(&if_clause)
       end
 
-      link_to label, resolve_action_url(action, resource), {class: button_class_for_action(action), title: title}.merge(options)
+      link_to label, resolve_action_url(action, resource), {class: button_class_for_action(action)}.merge(options)
     end
   end
 
