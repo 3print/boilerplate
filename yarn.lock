@@ -2436,15 +2436,15 @@ widjet-disposables@^1.0, widjet-disposables@^1.0.0, widjet-disposables@^1.1.0:
   resolved "https://registry.yarnpkg.com/widjet-disposables/-/widjet-disposables-1.1.0.tgz#e9ed0575cf9ece5071deaff7df9fa72d29418330"
   integrity sha512-cDWkLL5HPH1khFF/V5FXeqzGYmHHLOZrnWibnHIuEBqjvT1WPpOP6qleCcg+SQSi2APXVY5eA/YcPWoNpunRcg==
 
-widjet-file-upload@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/widjet-file-upload/-/widjet-file-upload-1.4.1.tgz#0fe64e9f069ca4266b961e6575eb4bf5c29d7de7"
-  integrity sha512-yKN7noJJ6XouwTeKuKvtj58HUobVmtDcjJGfqQXtfnVo2mIggigyk0IX2o7LHkBipWMu8ZEMLCSPrN75xNGz9w==
+widjet-file-upload@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/widjet-file-upload/-/widjet-file-upload-1.4.2.tgz#86b1450c1196a6100c14be9745ab37cf38dca58d"
+  integrity sha512-mRn4ylLA5plKjFA4VKX+uUHPt3eK8QHuh74skVXgEUHOwcWaFmh6JvxdwBMjuXKPg/6rmeYH2AZNwbq3ZVQuNA==
 
-widjet-json-form@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/widjet-json-form/-/widjet-json-form-1.1.1.tgz#6da395a2ea9b5076b14c2689f4a6dd550254f018"
-  integrity sha512-X3sKhaXVPS3CmRmk6rp7SVwCRn2xgDV3n5N12OoX/OWlmnzVabVVBdb6bcgkNAamV+kdXMUIF39Xir4vk/mf/Q==
+widjet-json-form@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/widjet-json-form/-/widjet-json-form-1.2.1.tgz#139353907f2c2b910cd64d220c99e1b1450a7e27"
+  integrity sha512-LjDK6/cXJcqNHM6bFy5c4TFINNUp1bY6tYtNz5pfeDVolQ9qL2w+hDZ+v3JHDsP4y6J6vwCFI+xJQEjcY1g9kA==
 
 widjet-select-multiple@^1.2.2:
   version "1.2.2"
@@ -2468,10 +2468,10 @@ widjet-utils@^1.2.0, widjet-utils@^1.3:
   dependencies:
     widjet-disposables "^1.0.0"
 
-widjet-validation@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/widjet-validation/-/widjet-validation-1.5.2.tgz#d026f8406de38e3cbcf7badb4773c3bf7c101e3c"
-  integrity sha512-hEWN4p47xdtiU2wd9VyhpDj203M1LgNGKtd4da0pSmHUJ9966351DRVFR1MsF8TvKw82JEZAKT/2Dz5cBQMpFw==
+widjet-validation@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/widjet-validation/-/widjet-validation-1.7.0.tgz#b22c4e68b127a7ee36e1959a695bc4c52128451b"
+  integrity sha512-mDtcOiwVr6W8U5f1+AOCqOZjRKIRaUgP6V3WbgnvV9wy9BCjzmlj2IzyWbpny5XfCHQxjLET45RzzUlGsr4/tw==
 
 widjet@^1.2.0:
   version "1.3.0"
