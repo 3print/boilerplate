@@ -1,0 +1,69 @@
+.consent-banner
+  %script{type: 'application/json'}= render_scripts_config
+  = javascript_include_tag 'consents'
+
+  .card.visible.main-panel
+    .card-header.text-center
+      = image_tag 'logo-dark.svg', width: 60
+      %h5.card-title= 'views.consents.title'.t
+
+    %hr.my-0
+
+    .card-body= 'views.consents.main.content'.t
+
+    %hr.my-0
+
+    .card-footer.text-center
+      %a.btn.btn-outline-secondary.remote-link{href: consents_path, data: { method: 'post', body: reject_all_payload, handle_success: 'onRejectAll'}}
+        = 'actions.reject_all'.t
+        .spinner-border.spinner-border-sm{role: :status}
+          .visually-hidden= 'labels.loading'.t
+
+      .btn.btn-outline-secondary.configure-cookies= 'actions.configure_cookies'.t
+      %a.btn.btn-outline-primary.remote-link{href: consents_path, data: { method: 'post', body: accept_all_payload, handle_success: 'onAcceptAll'}}
+        = 'actions.accept_all'.t
+        .spinner-border.spinner-border-sm{role: :status}
+          .visually-hidden= 'labels.loading'.t
+
+  .card.configure-panel
+    .card-header.text-center
+      = image_tag 'logo-dark.svg', width: 60
+      %h5.card-title= 'views.consents.title'.t
+
+    .card-body
+      %h4= 'views.consents.configure.title'.t
+      %p= 'views.consents.configure.content'.t
+
+    %hr.my-0
+
+    %form.remote-form{action: consents_path, method: :post, data: { handle_success: 'onConfigureCookies' }}
+      %ul.list-group.list-group-flush
+        %li.list-group-item
+          .form-check.form-switch.form-switch-lg.d-flex
+            .description
+              %strong= 'views.consents.necessary.label'.t
+              .text-muted.text-sm= 'views.consents.necessary.description'.t
+            .control
+              %input.form-check-input.disabled{type: :checkbox, name: :necessary, checked: true, value: 1}
+        - GdprConsent.get_all_scripts.each_pair do |k,v|
+          %li.list-group-item
+            .form-check.form-switch.form-switch-lg.d-flex
+              .description
+                %strong= "views.consents.#{k}.label".t
+                .text-muted.text-sm= "views.consents.#{k}.description".t
+              .control
+                %input{type: :hidden, name: k, value: 0}
+                %input.form-check-input{type: :checkbox, name: k, value: 1}
+
+      %hr.my-0
+
+      .card-footer.text-center
+        .btn.btn-outline-secondary.remote-link{href: consents_path, data: { method: 'post', body: reject_all_payload, handle_success: 'onRejectAll'}}
+          = 'actions.reject_all'.t
+          .spinner-border.spinner-border-sm{role: :status}
+            .visually-hidden= 'labels.loading'.t
+        .btn.btn-outline-primary.remote-link{href: consents_path, data: { method: 'post', body: accept_all_payload, handle_success: 'onAcceptAll'}}
+          = 'actions.accept_all'.t
+          .spinner-border.spinner-border-sm{role: :status}
+            .visually-hidden= 'labels.loading'.t
+        %button.btn.btn-outline-primary.save{type: :submit}= 'actions.save'.t

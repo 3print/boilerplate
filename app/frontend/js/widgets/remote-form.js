@@ -2,10 +2,9 @@ import widgets from 'widjet';
 import {getNode} from 'widjet-utils';
 import {DisposableEvent} from 'widjet-disposables';
 
-widgets.define('remote-link', (options) => (el) => {
-  const method = el.dataset.method;
-  const body = el.dataset.body ? el.dataset.body : {};
-  const url = el.getAttribute('href');
+widgets.define('remote-form', (options) => (el) => {
+  const method = el.method;
+  const action = el.action;
 
   const onError = (data) => {
     if (data.errors != null) {
@@ -21,7 +20,7 @@ widgets.define('remote-link', (options) => (el) => {
     }
   };
 
-  return new DisposableEvent(el, 'click', (e) => {
+  return new DisposableEvent(el, 'submit', (e) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -33,8 +32,16 @@ widgets.define('remote-link', (options) => (el) => {
 
     el.classList.add('loading');
 
+    const formData = new FormData(el);
+    const body = {};
+
+    for(let e of formData.entries()) {
+      body[e[0]] = e[1] == '1';
+    }
+
     const options = {
       method,
+      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -42,11 +49,7 @@ widgets.define('remote-link', (options) => (el) => {
       },
     };
 
-    if(body) {
-      options.body = body
-    }
-
-    return fetch(url, options)
+    return fetch(action, options)
     .then((res) => res.json())
     .then((res) => {
       handleSuccess && handleSuccess(res);

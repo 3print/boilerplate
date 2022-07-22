@@ -38,6 +38,8 @@ import '../js/widgets/flatpickr';
 import '../js/widgets/lazy-image';
 import '../js/widgets/blueprint-add-button';
 import '../js/widgets/blueprint-remove-button';
+import '../js/widgets/remote-link';
+import '../js/widgets/remote-form';
 
 window.DATE_FORMAT = 'YYYY-MM-DD';
 window.DATE_DISPLAY_FORMAT = 'DD/MM/YYYY';
@@ -91,6 +93,9 @@ widgets('select-multiple', 'select[multiple]', merge(DEFAULT_CONFIG(), {
     return div;
   }
 }));
+
+widgets('remote-link', '.remote-link', DEFAULT_CONFIG());
+widgets('remote-form', 'form.remote-form', DEFAULT_CONFIG());
 
 widgets('order-table', '.sortable', DEFAULT_CONFIG());
 

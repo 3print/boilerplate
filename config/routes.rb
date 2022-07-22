@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   }
   resource :two_factor_settings, except: [:index, :show]
 
+  post '/consents', to: 'consents#register'
+
   resources :bp_tests do # BOILERPLATE_ONLY
     collection do        # BOILERPLATE_ONLY
       get :mail          # BOILERPLATE_ONLY
@@ -54,6 +56,7 @@ Rails.application.routes.draw do
   put "/404", to: "errors#routing"
   patch "/404", to: "errors#routing"
   delete "/404", to: "errors#routing"
+
 
   get 'robots.txt' => 'application#robots'
 end

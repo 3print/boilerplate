@@ -1,5 +1,6 @@
 fr:
   actions: &actions
+    accept_all: Accepter tout
     add: Ajouter
     admin: Admin
     approve: Approuver
@@ -8,6 +9,7 @@ fr:
     cancel: Annuler
     clone: Dupliquer
     close: Fermer
+    configure_cookies: Paramétrer les cookies
     connect: Connexion
     create: Nouveau
     create_new: Nouveau
@@ -34,12 +36,14 @@ fr:
     publish: Publier
     read_more: 'Lire la suite'
     recover_password: Mot de passe oublié ?
+    reject_all: Refuser tout
     remove: Enlever
     remove_image: "Supprimer l'image"
     reset: Remettre à zéro
     reset_password: Démarrer le changement de mot de passe
     retry: Réessayer
     revocate: Révoquer
+    save: Sauvegarder
     select_file: Choisissez une image
     send_password: Envoyer le mot de passe
     show: Voir

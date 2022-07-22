@@ -16,6 +16,7 @@ module.exports = {
   entry: {
     application: "./app/frontend/packs/application.js",
     admin: "./app/frontend/packs/admin.js",
+    consents: "./app/frontend/packs/consents.js",
     bp_test: "./app/frontend/packs/bp_test.js", // BOILERPLATE_ONLY
   },
   output: {

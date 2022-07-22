@@ -20,6 +20,11 @@
   @extend .form-label;
 }
 
+.form-switch-lg .form-check-input {
+  width: 4em;
+  height: 2em;
+}
+
 // Pagination
 
 ul.pagination {
@@ -36,6 +41,15 @@ ul.pagination {
   height: 18px;
   vertical-align: sub;
   margin-right: 0.5em;
+}
+
+.btn .spinner-border {
+  display: none;
+}
+
+.btn.loading .spinner-border {
+  display: inline-block;
+  margin-left: 0.5em;
 }
 
 .btn-xs, .btn-group-xs > .btn {

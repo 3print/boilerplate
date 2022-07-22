@@ -44,7 +44,10 @@
     = yield :styles
 
     = javascript_include_tag 'application', 'data-turbolinks-track': true, 'data-turbolinks-eval': false, cache: true, defer: "defer"
+    - if has_consent_cookie?
+      = render_scripts
     = yield :scripts
+
 
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
   %body{class: body_class}
@@ -59,7 +62,6 @@
           %a.navbar-brand{href: "/"}
             = icon :flag
             %span.text= 'app_name'.t
-
 
     .container
       - content_class = yield :extra_content_class
@@ -85,5 +87,8 @@
 
         = yield :after_content
         = yield :after_page
+
+    - if !has_consent_cookie?
+      = render partial: 'shared/consent_banner'
 
   = yield :inline_scripts
