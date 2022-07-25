@@ -5,6 +5,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
   const configurePanel = banner.querySelector('.configure-panel');
   const mainPanel = banner.querySelector('.main-panel');
   const settingsOpeners = [].slice.call(document.querySelectorAll('.open-cookies-settings'));
+  const closeButton = configurePanel.querySelector('.btn-close');
 
   settingsOpeners.forEach((el) => {
     el.addEventListener('click', (e) => {
@@ -16,6 +17,10 @@ window.addEventListener('DOMContentLoaded', (e) => {
   if(configureButton) {
     configureButton.addEventListener('click', switchToEditCookies);
   }
+
+  closeButton.addEventListener('click', () => {
+    banner.classList.remove('visible');
+  });
 
   window.onAcceptAll = function onAcceptAll() {
     Object.entries(config).forEach(([key, value]) => {
@@ -64,6 +69,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
   window.openCookiesSettings = function openCookiesSettings() {
     banner.classList.add('visible');
     configurePanel.classList.add('visible');
+    closeButton.classList.add('visible');
   }
 
   function switchToEditCookies() {
