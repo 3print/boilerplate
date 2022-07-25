@@ -6,11 +6,11 @@ end
 module GdprHelper
 
   def has_consent_cookie?
-   cookies[:cookies_consent].present?
+    cookies[:cookies_consent].present?
   end
 
   def consent_to?(type)
-   cookies[:cookies_consent].present? && cookies[:cookies_consent][type]
+    cookies[:cookies_consent].present? && JSON.parse(cookies[:cookies_consent])[type]
   end
 
   def render_scripts
@@ -19,7 +19,7 @@ module GdprHelper
       if consent_to?(type)
         scripts.each do |script|
           if script[:inline].present?
-            content_tag(:script, script[:inline])
+            html << content_tag(:script, script[:inline].html_safe)
           else
             url = script[:url]
             url = path_to_javascript(script[:asset]) if url.nil? && script[:asset].present?
