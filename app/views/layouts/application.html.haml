@@ -50,18 +50,10 @@
 
 
   - body_class = "#{yield :extra_body_class} #{controller_path.gsub('/', ' ')} #{action_name}".strip
-  %body{class: body_class}
+  %body.d-flex.flex-column{class: body_class}
     = render partial: 'shared/html_templates'
 
-    %nav.navbar.navbar-expand-lg.navbar-light.bg-light{role: :navigation}
-      .container
-        .navbar-header
-          %button.navbar-toggler{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
-            %span.sr-only Toggle navigation
-            %i.fa.fa-navicon
-          %a.navbar-brand{href: "/"}
-            = icon :flag
-            %span.text= 'app_name'.t
+    = render partial: 'shared/header'
 
     .container
       - content_class = yield :extra_content_class
@@ -88,6 +80,7 @@
         = yield :after_content
         = yield :after_page
 
+    = render partial: 'shared/footer'
     = render partial: 'shared/consent_banner'
 
   = yield :inline_scripts

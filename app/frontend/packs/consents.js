@@ -4,6 +4,14 @@ window.addEventListener('DOMContentLoaded', (e) => {
   const configureButton = banner.querySelector('.configure-cookies');
   const configurePanel = banner.querySelector('.configure-panel');
   const mainPanel = banner.querySelector('.main-panel');
+  const settingsOpeners = [].slice.call(document.querySelectorAll('.open-cookies-settings'));
+
+  settingsOpeners.forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      openCookiesSettings();
+    });
+  });
 
   if(configureButton) {
     configureButton.addEventListener('click', switchToEditCookies);
@@ -59,7 +67,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
   }
 
   function switchToEditCookies() {
-    mainPanel.classList.remove('visible');
+    mainPanel && mainPanel.classList.remove('visible');
     configurePanel.classList.add('visible');
   }
 });
