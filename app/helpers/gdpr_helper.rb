@@ -1,5 +1,6 @@
 GdprConsent.configure do |config|
   config.add_script :bp_test, asset: :bp_test # BOILERPLATE_ONLY
+  config.add_script :bp_test, inline: 'console.log("inline js loaded");' # BOILERPLATE_ONLY
 end
 
 module GdprHelper
@@ -17,9 +18,13 @@ module GdprHelper
     GdprConsent.get_all_scripts.each_pair do |type, scripts|
       if consent_to?(type)
         scripts.each do |script|
-          url = script[:url]
-          url = path_to_javascript(script[:asset]) if url.nil? && script[:asset].present?
-          html << content_tag(:script, '', src: url) if url.present?
+          if script[:inline].present?
+            content_tag(:script, script[:inline])
+          else
+            url = script[:url]
+            url = path_to_javascript(script[:asset]) if url.nil? && script[:asset].present?
+            html << content_tag(:script, '', src: url) if url.present?
+          end
         end
       end
     end
@@ -35,9 +40,13 @@ module GdprHelper
   def render_scripts_config
     GdprConsent.get_all_scripts.map do |k,v|
       scripts = v.map do |script|
-        url = script[:url]
-        url = path_to_javascript(script[:asset]) if url.nil? && script[:asset].present?
-        url
+        if script[:inline].present?
+          {inline: script[:inline]}
+        else
+          url = script[:url]
+          url = path_to_javascript(script[:asset]) if url.nil? && script[:asset].present?
+          {url: url}
+        end
       end
       [k, scripts]
     end.to_h.to_json.html_safe

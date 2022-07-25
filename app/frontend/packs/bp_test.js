@@ -1,1 +1,1 @@
-console.log('BP js loaded');
+console.log('external js loaded');

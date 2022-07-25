@@ -12,9 +12,14 @@ window.addEventListener('DOMContentLoaded', (e) => {
 
   window.onAcceptAll = function onAcceptAll() {
     Object.entries(config).forEach(([key, value]) => {
-      value.forEach((src) => {
+      value.forEach((scr) => {
+
         const script = document.createElement('script');
-        script.src = src;
+        if(scr.url) {
+          script.src = scr.url;
+        } else if(scr.inline) {
+          script.innerText = scr.inline;
+        }
         document.head.appendChild(script);
       });
     });
@@ -28,9 +33,13 @@ window.addEventListener('DOMContentLoaded', (e) => {
   window.onConfigureCookies = function onConfigureCookies(setup) {
     Object.entries(config).forEach(([key, value]) => {
       if(setup[key]) {
-        value.forEach((src) => {
+        value.forEach((scr) => {
           const script = document.createElement('script');
-          script.src = src;
+          if(scr.url) {
+            script.src = scr.url;
+          } else if(scr.inline) {
+            script.innerText = scr.inline;
+          }
           document.head.appendChild(script);
         });
       }
