@@ -5,15 +5,14 @@ window.addEventListener('DOMContentLoaded', (e) => {
   const configurePanel = banner.querySelector('.configure-panel');
   const mainPanel = banner.querySelector('.main-panel');
 
-  configureButton.addEventListener('click', (e) => {
-    mainPanel.classList.remove('visible');
-    configurePanel.classList.add('visible');
-  })
+  if(configureButton) {
+    configureButton.addEventListener('click', switchToEditCookies);
+  }
 
   window.onAcceptAll = function onAcceptAll() {
     Object.entries(config).forEach(([key, value]) => {
+      banner.querySelector(`.form-check-input[name="${key}"]`).checked = true;
       value.forEach((scr) => {
-
         const script = document.createElement('script');
         if(scr.url) {
           script.src = scr.url;
@@ -23,16 +22,22 @@ window.addEventListener('DOMContentLoaded', (e) => {
         document.head.appendChild(script);
       });
     });
-    banner.remove();
+    banner.classList.remove('visible');
+    switchToEditCookies();
   }
 
   window.onRejectAll = function onRejectAll() {
-    banner.remove();
+    Object.entries(config).forEach(([key, value]) => {
+      banner.querySelector(`.form-check-input[name="${key}"]`).checked = false;
+    });
+    banner.classList.remove('visible');
+    switchToEditCookies();
   }
 
   window.onConfigureCookies = function onConfigureCookies(setup) {
     Object.entries(config).forEach(([key, value]) => {
       if(setup[key]) {
+        banner.querySelector(`.form-check-input[name="${key}"]`).checked = true;
         value.forEach((scr) => {
           const script = document.createElement('script');
           if(scr.url) {
@@ -44,6 +49,17 @@ window.addEventListener('DOMContentLoaded', (e) => {
         });
       }
     });
-    banner.remove();
+    banner.classList.remove('visible');
+    switchToEditCookies();
+  }
+
+  window.openCookiesSettings = function openCookiesSettings() {
+    banner.classList.add('visible');
+    configurePanel.classList.add('visible');
+  }
+
+  function switchToEditCookies() {
+    mainPanel.classList.remove('visible');
+    configurePanel.classList.add('visible');
   }
 });

@@ -88,7 +88,6 @@
         = yield :after_content
         = yield :after_page
 
-    - if !has_consent_cookie?
-      = render partial: 'shared/consent_banner'
+    = render partial: 'shared/consent_banner'
 
   = yield :inline_scripts

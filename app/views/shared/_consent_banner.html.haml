@@ -1,29 +1,30 @@
-.consent-banner
+.consent-banner{class: !has_consent_cookie? ? 'visible' : ''}
   %script{type: 'application/json'}= render_scripts_config
   = javascript_include_tag 'consents'
 
-  .card.visible.main-panel
-    .card-header.text-center
-      = image_tag 'logo-dark.svg', width: 60
-      %h5.card-title= 'views.consents.title'.t
+  - if !has_consent_cookie?
+    .card.visible.main-panel
+      .card-header.text-center
+        = image_tag 'logo-dark.svg', width: 60
+        %h5.card-title= 'views.consents.title'.t
 
-    %hr.my-0
+      %hr.my-0
 
-    .card-body= 'views.consents.main.content'.t
+      .card-body= 'views.consents.main.content'.t
 
-    %hr.my-0
+      %hr.my-0
 
-    .card-footer.text-center
-      %a.btn.btn-outline-secondary.remote-link{href: consents_path, data: { method: 'post', body: reject_all_payload, handle_success: 'onRejectAll'}}
-        = 'actions.reject_all'.t
-        .spinner-border.spinner-border-sm{role: :status}
-          .visually-hidden= 'labels.loading'.t
+      .card-footer.text-center
+        %a.btn.btn-outline-secondary.remote-link{href: consents_path, data: { method: 'post', body: reject_all_payload, handle_success: 'onRejectAll'}}
+          = 'actions.reject_all'.t
+          .spinner-border.spinner-border-sm{role: :status}
+            .visually-hidden= 'labels.loading'.t
 
-      .btn.btn-outline-secondary.configure-cookies= 'actions.configure_cookies'.t
-      %a.btn.btn-outline-primary.remote-link{href: consents_path, data: { method: 'post', body: accept_all_payload, handle_success: 'onAcceptAll'}}
-        = 'actions.accept_all'.t
-        .spinner-border.spinner-border-sm{role: :status}
-          .visually-hidden= 'labels.loading'.t
+        .btn.btn-outline-secondary.configure-cookies= 'actions.configure_cookies'.t
+        %a.btn.btn-outline-primary.remote-link{href: consents_path, data: { method: 'post', body: accept_all_payload, handle_success: 'onAcceptAll'}}
+          = 'actions.accept_all'.t
+          .spinner-border.spinner-border-sm{role: :status}
+            .visually-hidden= 'labels.loading'.t
 
   .card.configure-panel
     .card-header.text-center
@@ -53,7 +54,7 @@
                 .text-muted.text-sm= "views.consents.#{k}.description".t
               .control
                 %input{type: :hidden, name: k, value: 0}
-                %input.form-check-input{type: :checkbox, name: k, value: 1}
+                %input.form-check-input{type: :checkbox, name: k, value: 1, checked: consent_to?(k)}
 
       %hr.my-0
 
