@@ -66,8 +66,6 @@ window.addEventListener('DOMContentLoaded', (e) => {
   function enableScript(scr, group, index) {
     const id = `script-${group}-${index}`;
 
-    console.log(`enable ${scr}, ${group}: ${!scripts[group] || !scripts[group].find(n => n.id == id)}`);
-
     if(!scripts[group] || !scripts[group].find(n => n.id == id)) {
       const script = document.createElement('script');
       script.id = id;
@@ -83,7 +81,6 @@ window.addEventListener('DOMContentLoaded', (e) => {
   }
 
   function disableScripts(name) {
-    console.log(`disable ${name}: ${scripts[name] && scripts[name].length}`);
     if(scripts[name] && scripts[name].length) {
       scripts[name].forEach(s => s.remove());
       config[name].forEach(scr => {
@@ -98,7 +95,6 @@ window.addEventListener('DOMContentLoaded', (e) => {
   }
 
   function deleteCookie(name) {
-    console.log(`delete cookie ${name}`);
     document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
   }
 });
