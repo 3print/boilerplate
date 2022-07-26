@@ -151,6 +151,7 @@ module BootstrapHelper
     header_options = options.delete(:header) || {}
     header_button_options = options.delete(:header_button) || {}
     content_options = options.delete(:content) || {}
+    body_options = options.delete(:body) || {}
 
     content_tag :div, item_options.reverse_merge(class: 'accordion-item', id: current_accordion_item_id) do
       concat(content_tag( :h4, header_options.reverse_merge(class: 'accordion-header')) do
@@ -178,7 +179,7 @@ module BootstrapHelper
           bs_parent: "##{current_accordion_id}"
         }
       })) do
-        concat(content_tag :div, class: 'accordion-body', &block)
+        concat(content_tag :div, body_options.reverse_merge(class: 'accordion-body'), &block)
       end)
     end
   end
