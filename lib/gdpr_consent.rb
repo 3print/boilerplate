@@ -1,5 +1,5 @@
 module GdprConsent
-  def self.add_script(type, **params)
+  def self.add_script(type, params={})
     @scripts ||= {}.with_indifferent_access
     @scripts[type] ||= []
 

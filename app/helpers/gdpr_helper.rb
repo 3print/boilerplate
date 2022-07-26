@@ -1,6 +1,13 @@
 GdprConsent.configure do |config|
-  config.add_script :bp_test, asset: :bp_test # BOILERPLATE_ONLY
-  config.add_script :bp_test, inline: 'console.log("inline js loaded");' # BOILERPLATE_ONLY
+  config.add_script :bp_test, {                   # BOILERPLATE_ONLY
+    asset: :bp_test,                              # BOILERPLATE_ONLY
+    cookies: %w(bp_external),                     # BOILERPLATE_ONLY
+  }                                               # BOILERPLATE_ONLY
+  config.add_script :bp_test, {                   # BOILERPLATE_ONLY
+    inline: 'console.log("inline js loaded");' +  # BOILERPLATE_ONLY
+            'document.cookie = "bp_inline=foo";', # BOILERPLATE_ONLY
+    cookies: %w(bp_inline)                        # BOILERPLATE_ONLY
+  }                                               # BOILERPLATE_ONLY
 end
 
 module GdprHelper
@@ -41,11 +48,11 @@ module GdprHelper
     GdprConsent.get_all_scripts.map do |k,v|
       scripts = v.map do |script|
         if script[:inline].present?
-          {inline: script[:inline]}
+          {inline: script[:inline], cookies: script[:cookies]}
         else
           url = script[:url]
           url = path_to_javascript(script[:asset]) if url.nil? && script[:asset].present?
-          {url: url}
+          {url: url, cookies: script[:cookies]}
         end
       end
       [k, scripts]
