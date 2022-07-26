@@ -1,12 +1,35 @@
 GdprConsent.configure do |config|
+  config.add_policy '_boilerplate_session', {
+    type: 'views.policies.necessary.session.type'.t,
+    duration: 'views.policies.necessary.session.duration'.t,
+    origin: 'views.policies.necessary.session.origin'.t,
+    purpose: 'views.policies.necessary.session.purpose'.t,
+  }
+
   config.add_script :bp_test, {                   # BOILERPLATE_ONLY
     asset: :bp_test,                              # BOILERPLATE_ONLY
     cookies: %w(bp_external),                     # BOILERPLATE_ONLY
+    policies: {                                   # BOILERPLATE_ONLY
+      bp_external: {                              # BOILERPLATE_ONLY
+        type: 'Non-essential (some purpose)',     # BOILERPLATE_ONLY
+        duration: 'Some duration',                # BOILERPLATE_ONLY
+        origin: 'First party',                    # BOILERPLATE_ONLY
+        purpose: 'Some purpose explanation',      # BOILERPLATE_ONLY
+      },                                          # BOILERPLATE_ONLY
+    }                                             # BOILERPLATE_ONLY
   }                                               # BOILERPLATE_ONLY
   config.add_script :bp_test, {                   # BOILERPLATE_ONLY
     inline: 'console.log("inline js loaded");' +  # BOILERPLATE_ONLY
             'document.cookie = "bp_inline=foo";', # BOILERPLATE_ONLY
-    cookies: %w(bp_inline)                        # BOILERPLATE_ONLY
+    cookies: %w(bp_inline),                       # BOILERPLATE_ONLY
+    policies: {                                   # BOILERPLATE_ONLY
+      bp_inline: {                                # BOILERPLATE_ONLY
+        type: 'Non-essential (some purpose)',     # BOILERPLATE_ONLY
+        duration: 'Some duration',                # BOILERPLATE_ONLY
+        origin: 'First party',                    # BOILERPLATE_ONLY
+        purpose: 'Some purpose explanation',      # BOILERPLATE_ONLY
+      },                                          # BOILERPLATE_ONLY
+    }                                             # BOILERPLATE_ONLY
   }                                               # BOILERPLATE_ONLY
 end
 
@@ -36,12 +59,6 @@ module GdprHelper
       end
     end
     html.html_safe
-  end
-
-  def render_consents_config
-    {
-      scripts: GdprConsent.get_all_scripts,
-    }.to_json
   end
 
   def render_scripts_config

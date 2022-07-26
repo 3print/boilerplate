@@ -1,0 +1,42 @@
+fr:
+  actions:
+    configure_cookies: Paramétrer les cookies
+    edit_cookies: Modifier mes préférences en matière de cookies
+    save_cookies: Sauvegarder
+    accept_all: Accepter tout
+    reject_all: Refuser tout
+
+  tables:
+    columns:
+      cookies:
+        name: Nom du cookie
+        type: Type de cookie
+        duration: Durée de validité
+        origin: Origine du cookie
+        purpose: Rôle du cookie
+
+  views:
+    consents:
+      title: Cookies
+      main:
+        content: >
+          Nous ainsi que des tiers sélectionnés utilisons des cookies ou des technologies similaires à des finalités techniques et, avec votre consentement, pour d'autres finalités, comme décrit dans la politique relative aux cookies. Un refus peut entraîner l’indisponibilité des fonctionnalités connexes.
+      configure:
+        title: Vos préférences en matière de consentement
+        content: >
+          Le panneau suivant vous permet de personnaliser vos préférences en matière de consentement pour toute technologie de suivi utilisée pour nous permettre de réaliser les fonctionnalités et de mener à bien les activités décrites ci-dessous. Pour en savoir plus sur la façon dont ces traqueurs nous aident et comment ils fonctionnent, veuillez consulter la . Vous pouvez revoir et modifier vos choix à tout moment. Gardez à l’esprit que le refus de consentement à une finalité précise peut entraîner l’indisponibilité des fonctionnalités connexes.
+      necessary:
+        label: Cookies nécessaires
+        description: Ces traqueurs sont utilisés pour des activités strictement nécessaires au fonctionnement ou à la prestation des services que vous nous avez demandée et, par conséquent, n’exigent pas votre consentement.
+
+      bp_test:                        # BOILERPLATE_ONLY
+        label: Cookies de test        # BOILERPLATE_ONLY
+        description: Une description  # BOILERPLATE_ONLY
+
+    policies:
+      necessary:
+        session:
+          type: Essentiel (données de session)
+          duration: Session
+          origin: Interne
+          purpose: Stocke l'identifiant de la session et autres données essentielles au fonctionnement de l'application.

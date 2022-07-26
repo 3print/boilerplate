@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   }
   resource :two_factor_settings, except: [:index, :show]
 
+  get '/cookies', to: 'legals#cookies'
+  get '/privacy', to: 'legals#privacy'
   post '/consents', to: 'consents#register'
 
   resources :bp_tests do # BOILERPLATE_ONLY

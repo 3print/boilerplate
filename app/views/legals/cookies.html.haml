@@ -1,0 +1,16 @@
+%table.table
+  %thead
+    %tr
+      %th= 'tables.columns.cookies.name'.t
+      %th= 'tables.columns.cookies.type'.t
+      %th= 'tables.columns.cookies.duration'.t
+      %th= 'tables.columns.cookies.origin'.t
+      %th= 'tables.columns.cookies.purpose'.t
+  %tbody
+    - GdprConsent.get_policies.each_pair do |cookie, policy|
+      %tr
+        %td= cookie
+        %td= policy[:type]
+        %td= policy[:duration]
+        %td= policy[:origin]
+        %td= policy[:purpose]
