@@ -81,7 +81,7 @@ end
 
 class String
   def t(**params)
-    I18n.t_with_default(self.to_s, **params)
+    TypographicHelper.clean I18n.t_with_default(self.to_s, **params)
   end
 
   def tc(**params)
