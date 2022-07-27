@@ -1,4 +1,4 @@
-.consent-banner{class: !has_consent_cookie? ? 'visible' : ''}
+.consent-banner{class: !has_consent_cookie? && !params[:no_consents] ? 'visible' : ''}
   %script{type: 'application/json'}= render_scripts_config
   = javascript_include_tag 'consents'
 
@@ -8,10 +8,11 @@
         = image_tag 'logo-dark.svg', width: 60
         %h5.card-title= 'views.consents.title'.t
 
+        = link_to 'actions.read_policy'.t, cookies_path(no_consents: true), class: 'btn btn-outline-primary', target: :_blank
+
       %hr.my-0
 
-      .card-body= 'views.consents.main.content'.t
-
+      .card-body= clean 'views.consents.main.content'.t
       %hr.my-0
 
       .card-footer.text-center
@@ -31,11 +32,13 @@
       = image_tag 'logo-dark.svg', width: 60
       %h5.card-title= 'views.consents.title'.t
 
+      = link_to 'actions.read_policy'.t, cookies_path(no_consents: true), class: 'btn btn-outline-primary', target: :_blank
+
       .btn.btn-close
 
     .card-body
       %h4= 'views.consents.configure.title'.t
-      %p= 'views.consents.configure.content'.t
+      %p= 'views.consents.configure.content'.t(url: cookies_path(no_consents: true)).html_safe
 
     %hr.my-0
 

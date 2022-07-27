@@ -1,3 +1,4 @@
 %footer.footer.mt-auto
   .container.text-end
-    %a.open-cookies-settings{href: '#'}= 'actions.edit_cookies'.t
+    - if has_consent_cookie?
+      %a.open-cookies-settings{href: '#'}= 'actions.edit_cookies'.t

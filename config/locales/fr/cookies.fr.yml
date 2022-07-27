@@ -5,6 +5,7 @@ fr:
     save_cookies: Sauvegarder
     accept_all: Accepter tout
     reject_all: Refuser tout
+    read_policy: Lire notre politique d'utilisation des cookies
 
   tables:
     columns:
@@ -20,14 +21,14 @@ fr:
       title: Cookies
       main:
         content: >
-          Nous ainsi que des tiers sélectionnés utilisons des cookies ou des technologies similaires à des finalités techniques et, avec votre consentement, pour d'autres finalités, comme décrit dans la politique relative aux cookies. Un refus peut entraîner l’indisponibilité des fonctionnalités connexes.
+          Nous ainsi que des tiers sélectionnés utilisons des cookies ou des technologies similaires à des finalités techniques et, avec votre consentement, pour d'autres finalités, comme décrit dans la politique relative aux cookies. Un refus peut entraîner l'indisponibilité des fonctionnalités connexes.
       configure:
         title: Vos préférences en matière de consentement
         content: >
-          Le panneau suivant vous permet de personnaliser vos préférences en matière de consentement pour toute technologie de suivi utilisée pour nous permettre de réaliser les fonctionnalités et de mener à bien les activités décrites ci-dessous. Pour en savoir plus sur la façon dont ces traqueurs nous aident et comment ils fonctionnent, veuillez consulter la . Vous pouvez revoir et modifier vos choix à tout moment. Gardez à l’esprit que le refus de consentement à une finalité précise peut entraîner l’indisponibilité des fonctionnalités connexes.
+          Le panneau suivant vous permet de personnaliser vos préférences en matière de consentement pour toute technologie de suivi utilisée pour nous permettre de réaliser les fonctionnalités et de mener à bien les activités décrites ci-dessous. Pour en savoir plus sur la façon dont ces traqueurs nous aident et comment ils fonctionnent, veuillez consulter <a href="%{url}" target="_blank">notre politique d'utilisation des cookies</a>. Vous pouvez revoir et modifier vos choix à tout moment. Gardez à l'esprit que le refus de consentement à une finalité précise peut entraîner l'indisponibilité des fonctionnalités connexes.
       necessary:
         label: Cookies nécessaires
-        description: Ces traqueurs sont utilisés pour des activités strictement nécessaires au fonctionnement ou à la prestation des services que vous nous avez demandée et, par conséquent, n’exigent pas votre consentement.
+        description: Ces traqueurs sont utilisés pour des activités strictement nécessaires au fonctionnement ou à la prestation des services que vous nous avez demandée et, par conséquent, n'exigent pas votre consentement.
 
       bp_test:                        # BOILERPLATE_ONLY
         label: Cookies de test        # BOILERPLATE_ONLY
