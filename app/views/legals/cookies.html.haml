@@ -1,16 +1,40 @@
-%table.table
-  %thead
-    %tr
-      %th= 'tables.columns.cookies.name'.t
-      %th= 'tables.columns.cookies.type'.t
-      %th= 'tables.columns.cookies.duration'.t
-      %th= 'tables.columns.cookies.origin'.t
-      %th= 'tables.columns.cookies.purpose'.t
-  %tbody
-    - GdprConsent.get_policies.each_pair do |cookie, policy|
-      %tr
-        %td= cookie
-        %td= policy[:type]
-        %td= policy[:duration]
-        %td= policy[:origin]
-        %td= policy[:purpose]
+- content_for :title, "Politique d'utilisation des cookies"
+
+%h3= clean 'Qui sommes-nous ? '
+%p= clean "__________________ (nom complet de la société, l'adresse et le numéro d'enregistrement de l'entreprise) est une société de droit __________ (entrer la nationalité de l'entreprise). Les références à \"nous\", \"nos\" ou \"notre\" dans cette politique sont à _________________ (nom complet de la société). \"Vous\" et \"votre\" désignent une personne qui utilise notre site web."
+
+%h3= clean 'À propos de cette politique de cookies'
+%p= clean "Cette politique vous fournit des informations sur plusieurs types de fichiers témoins et vous explique pourquoi ils sont utilisés. Cette information vise à vous donner une meilleure compréhension de ce que sont les fichiers témoins et du rôle qu'ils jouent dans votre visite de notre site web. Depuis la fin mai 2012, la réglementation de l'UE exige que tous les sites qui utilisent des fichiers témoins ou cookies s'assurent que vous soyez bien informés de ceci et que vous donniez votre autorisation expresse pour la récolte et le stockage de vos habitudes de navigation."
+
+%h3= clean "Qu'est-ce qu'un cookie ?"
+%p= clean "Un fichier témoin ou cookie est un fichier créé sur l'appareil que le visiteur d'un site utilise (ou sur un serveur) pour faciliter la communication entre cet appareil (quel qu'en soit le type - ordinateur, smartphone, console de jeux vidéo, etc.) et le serveur du site visité. Dans ce sens restreint, le fichier témoin joue le rôle d'un simple \"témoin\" de ce que vous faites lors de votre visite du site, en stockant certaines informations et détails s'y rapportant."
+%p= clean "Des avancées technologiques permettent maintenant l'utilisation de cookies pour surveiller le rendement du site, son auditoire, ses statistiques, la mémorisation des préférences et même de la publicité ciblée. Dans ce sens plus large, le fichier témoin comprend tous les fichiers qui stockent des informations générées dans les échanges entre le site visité et ses visiteurs, qu'ils soient stockés sur un appareil utilisé pour la consultation du site ou sur le serveur du site visité. C'est dans ce sens plus large que nous utilisons indistinctement dans la présente politique, les termes fichier témoin ou cookies (voir ci-après: catégories de cookies utilisés sur notre site web)."
+
+%h3= clean "Pourquoi utilisons-nous les cookies ?"
+%p= clean "Les cookies nous aident à améliorer notre site et vous permettent une visite et des services personnalisés, par exemple en stockant des informations par rapport à vos préférences et en nous permettant de vous reconnaître quand vous revenez sur notre site. Vous pouvez en tout temps régler les options de votre navigateur pour refuser l'utilisation des cookies. Sachez cependant que dans tels cas, il est possible que ceci affecte ou empêche certaines fonctionnalités du site web que vous visitez."
+%p= clean "L'information que nous recueillons comprend des adresses IP, le type de navigateur utilisé et sa version, le nombre de visites, les pages web visitées et vos préférences de visionnement. L'information sur la durée de stockage des cookies que nous utilisons normalement se trouve <a href='#used_cookies'>ci-dessous</a>. Les cookies constituent des données personnelles lorsqu'ils se rapportent directement ou indirectement à une personne identifiable, par exemple, l'adresse IP de l'appareil que vous utilisez. Cette politique doit donc être lue et interprétée avec notre politique de protection de la vie privée que vous retrouverez ici: #{link_to 'Politique de protection de la vie privée', privacy_path}."
+
+%h3= clean "Consentement à notre utilisation de cookies"
+%p= clean "Nous demandons votre consentement exprès pour le stockage de cookies sur votre appareil. (Ce paragraphe se rapporte à la pratique courante d'utiliser des fenêtres surgissantes (pop-up) pour informer les visiteurs d'un site de l'utilisation des cookies sur ce site. Si vous utilisez une autre méthode, veuillez modifier ce paragraphe en conséquence.) Veuillez noter que si vous continuez votre visite de notre site après avoir reçu notre avertissement quant aux cookies, ceci nous signifie votre consentement à notre utilisation des cookies."
+%p= clean "Vous pouvez retirer votre consentement à notre utilisation de cookies en tout temps. Vous pouvez limiter ou bloquer les cookies en ajustant les paramètres de votre navigateur. L'option \"aide\" de votre navigateur vous expliquera comment faire si vous n'en êtes pas certain. Vous pouvez aussi utiliser les options de votre navigateur pour supprimer les cookies stockés. Cependant, ce faisant, il est possible que vous ne puissiez plus avoir un accès complet au site ou à toutes ses fonctionnalités."
+%p= clean "Plusieurs sites web spécialisés peuvent aussi vous fournir plus de détails quant à cette technologie de fichiers témoins et leur fonctionnement."
+%p= clean "Si vous désirez vous désabonner (option d'exclusion ou \"opt-out\") de l'utilisation de fichiers témoins de tiers se rapportant à la publicité comportementale, veuillez visiter www.youronlinechoices.eu. Notez que ceci ne bloquera pas toute publicité sur le site, mais uniquement la publicité ciblée à votre utilisation du site, telle que stockée dans le fichier témoin."
+
+= accordion do
+  = accordion_item clean('Cookies utilisés sur ce site'), id: 'used_cookies', body: {class: 'accordion-body p-0'} do
+    %table.table.mb-0
+      %thead
+        %tr
+          %th= clean 'tables.columns.cookies.name'.t
+          %th= clean 'tables.columns.cookies.type'.t
+          %th= clean 'tables.columns.cookies.duration'.t
+          %th= clean 'tables.columns.cookies.origin'.t
+          %th= clean 'tables.columns.cookies.purpose'.t
+      %tbody
+        - GdprConsent.get_policies.each_pair do |cookie, policy|
+          %tr
+            %td= cookie
+            %td= clean policy[:type]
+            %td= clean policy[:duration]
+            %td= clean policy[:origin]
+            %td= clean policy[:purpose]

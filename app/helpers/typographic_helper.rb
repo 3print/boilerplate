@@ -23,6 +23,10 @@ TypographicCleaner.configure :fr do |cleaner|
   cleaner.ignore /(`{1,2}).*?\1/ # syntax coloring patch: `
   # Ignore plain urls in text
   cleaner.ignore /\b((?:[a-zA-Z][\w-]+:(?:\/{1,3}|[a-zA-Z0-9%])|www\d{0,3}[.]|[a-zA-Z0-9.\-]+[.][a-zA-Z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]))/
+  # Ignore html entities
+  cleaner.ignore /&[^;]+;/
+  # Ignore html node
+  cleaner.ignore /<[^>]+>/
 
   cleaner.group :spaces do
     # Replace multiple spaces with a single one
@@ -37,8 +41,9 @@ TypographicCleaner.configure :fr do |cleaner|
   end
 
   cleaner.group :punctuation do
-    # Use non-breaking spaces before !, ?, ; and :
-    cleaner.rule /(?:\s|&nbsp;)([!?;:])/, '&#8239;\1'
+    # Use non-breaking spaces before !, ? and :
+    cleaner.rule /(?<!\s)([!?:])/, '&#8239;\1'
+    cleaner.rule /(?:\s|&nbsp;)([!?:])/, '&#8239;\1'
     # Percentages should have a non-breaking space between value and symbol
     cleaner.rule /(\d+)%(?![\d\w])/, '\1&nbsp;%'
     # Replace repeated ! or ? with a single instance
@@ -49,8 +54,12 @@ TypographicCleaner.configure :fr do |cleaner|
     cleaner.rule /\.{3,}/, '&hellip;'
     # Mr. is an outdated form, M. is now preferred
     cleaner.rule /Mr\./, 'M.'
-    # the ° on a keyboard is for degree and not a numero sign
+    # The ° on a keyboard is for degree and not a numero sign
     cleaner.rule /[Nn]°/, '&#8470;'
+    # Replace - in composed words with non-breaking version
+    cleaner.rule /(\w)-(\w)/, '\1&#8209;\2'
+    # Replace between words with dash
+    cleaner.rule /(\w)\s+-\s+(\w)/, '\1 &#8212; \2'
   end
 
   cleaner.group :ordinal_numbers do
@@ -88,8 +97,8 @@ TypographicCleaner.configure :fr do |cleaner|
     # replace single quotes with typographic ones
     cleaner.rule /(\w)'(\w)/, '\1&rsquo;\2' # syntax coloring patch: '
     # replace double quotes with typographic ones plus proper spacing
-    cleaner.rule /"\s+([^"]+)\s+"/, '&ldquo;&#8239;\1&#8239;&rdquo;' # syntax coloring patch: "
-    cleaner.rule /"([^"]+)"/, '&ldquo;&#8239;\1&#8239;&rdquo;' # syntax coloring patch: "
+    cleaner.rule /"([^"]+)"/, '&#171;&#8239;\1&#8239;&#187;' # syntax coloring patch: "
+    cleaner.rule /"\s+([^"]+)\s+"/, '&#171;&#8239;\1&#8239;&#187;' # syntax coloring patch: "
   end
 
   # Replace some basic symbols with html entities

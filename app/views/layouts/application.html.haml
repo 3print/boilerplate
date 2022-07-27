@@ -63,7 +63,7 @@
         - content_header_class = yield :content_header_class
         - content_header_style = yield :content_header_style
         #content-header.mt-3{class: content_header_class, style: content_header_style}
-          %h1= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'app_name'.t
+          %h1.my-4.text-center= content_for?(:page_title) ? yield(:page_title) : content_for?(:title) ? yield(:title) : 'app_name'.t
           = yield :content_header
 
 

@@ -2,9 +2,10 @@
 
 module TypographicCleaner
   class Rule
-    def initialize(expression, replacement)
+    def initialize(expression, replacement, debug=false)
       @expression = expression
       @replacement = replacement
+      @debug = debug
     end
 
     def source
@@ -35,8 +36,9 @@ module TypographicCleaner
   end
 
   class Ignore
-    def initialize(expression)
+    def initialize(expression, debug=false)
       @expression = expression
+      @debug = debug
     end
 
     def source
@@ -64,7 +66,7 @@ module TypographicCleaner
       while !match.nil? do
         break if !ranges.empty? && (match.begin(0) == ranges.last.first || match.end(0) == ranges.last.last)
         ranges << [match.begin(0), match.end(0)]
-        match = re.match(string)
+        match = re.match(string, match.end(0))
       end
 
       return ranges
@@ -115,13 +117,13 @@ module TypographicCleaner
       @group = previous_group
     end
 
-    def ignore(expr)
+    def ignore(expr, debug=false)
       @ignores ||= {}
       @ignores[@locale] ||= []
-      @ignores[@locale] << Ignore.new(expr)
+      @ignores[@locale] << Ignore.new(expr, debug)
     end
 
-    def rule (expr, repl=nil, &block)
+    def rule (expr, repl=nil, debug=false, &block)
       @rules ||= {}
       @rules[@locale] ||= {}
 
@@ -129,9 +131,9 @@ module TypographicCleaner
       @rules[@locale][@group] ||= []
 
       if block_given?
-        @rules[@locale][@group] << Rule.new(expr, block)
+        @rules[@locale][@group] << Rule.new(expr, block, debug)
       else
-        @rules[@locale][@group] << Rule.new(expr, repl)
+        @rules[@locale][@group] << Rule.new(expr, repl, debug)
       end
     end
 
