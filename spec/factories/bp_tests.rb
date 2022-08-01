@@ -15,7 +15,6 @@
 #  approved_at    :datetime
 #  validated_at   :datetime
 #  sequence       :integer
-#  multiple_enum  :integer          default([]), is an Array
 #  image_gravity  :integer
 #  image_alt_text :string
 #  visual         :string

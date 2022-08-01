@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_28_122920) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_08_01_122046) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,13 +21,12 @@ ActiveRecord::Schema.define(version: 2021_10_28_122920) do
     t.json "json"
     t.text "markdown"
     t.text "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "enum"
-    t.datetime "approved_at"
-    t.datetime "validated_at"
+    t.datetime "approved_at", precision: nil
+    t.datetime "validated_at", precision: nil
     t.integer "sequence"
-    t.integer "multiple_enum", default: [], array: true
     t.integer "image_gravity"
     t.string "image_alt_text"
     t.string "visual"
@@ -52,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_122920) do
     t.string "country"
     t.float "latitude"
     t.float "longitude"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["identity"], name: "index_login_activities_on_identity"
     t.index ["ip"], name: "index_login_activities_on_ip"
     t.index ["user_type", "user_id"], name: "index_login_activities_on_user_type_and_user_id"
@@ -63,7 +61,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_122920) do
     t.string "password_archivable_type"
     t.integer "password_archivable_id"
     t.string "password_salt"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["password_archivable_type", "password_archivable_id"], name: "index_password_archivable"
   end
 
@@ -74,8 +72,8 @@ ActiveRecord::Schema.define(version: 2021_10_28_122920) do
     t.text "description"
     t.string "static_action"
     t.boolean "static_mode"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["meta_owner_id", "meta_owner_type"], name: "index_seo_meta_on_meta_owner_id_and_meta_owner_type"
   end
 
@@ -83,21 +81,21 @@ ActiveRecord::Schema.define(version: 2021_10_28_122920) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "first_name"
     t.string "last_name"
     t.integer "role"
     t.string "avatar"
-    t.datetime "password_changed_at"
-    t.datetime "locked_at"
+    t.datetime "password_changed_at", precision: nil
+    t.datetime "locked_at", precision: nil
     t.integer "failed_attempts"
     t.string "unlock_token"
     t.json "avatar_regions"

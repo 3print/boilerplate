@@ -15,7 +15,6 @@
 #  approved_at    :datetime
 #  validated_at   :datetime
 #  sequence       :integer
-#  multiple_enum  :integer          default([]), is an Array
 #  image_gravity  :integer
 #  image_alt_text :string
 #  visual         :string
@@ -32,8 +31,7 @@ class BpTest < ApplicationRecord
   mount_uploader :visual, ImageUploader
   mount_uploader :pdf, PdfUploader
 
-  enum enum: %i(foo bar baz), _prefix: true
-  enum multiple_enum: %i(foo bar baz), _prefix: true, _multiple: true
+  enum :enum, %i(foo bar baz), prefix: true
 
   markdown_attr :markdown
 

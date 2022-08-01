@@ -1,14 +1,3 @@
-class EnumHelp::SimpleForm::EnumInput < ::SimpleForm::Inputs::CollectionSelectInput
-
-  def input_html_options
-    super.reverse_merge(placeholder: placeholder_text).merge(multiple: multiple?)
-  end
-
-  def multiple?
-    object.class.defined_multiple_enums.has_key?(attribute_name.to_s)
-  end
-end
-
 EnumHelp::Helper.class_eval do
   def self.translate_enum_label(klass, attr_name, enum_label)
     if enum_label.is_a?(Array)

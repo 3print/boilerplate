@@ -31,3 +31,9 @@ fr:
         time: Horaire
         image: Image
         resource: Resource
+
+    bp_test:
+      enum:
+        foo: Fooooo
+        bar: Baaaar
+        baz: Baaaaz
