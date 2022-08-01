@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '3.1.2'
-gem 'rails', '~> 6.1.5.1'
+gem 'rails', '~> 7'
 gem 'puma', '>= 4.3.8'
 gem 'settingslogic'
 gem 'sendgrid'
