@@ -43,6 +43,7 @@ module Boilerplate
     config.autoload_paths << "#{config.root}/lib"
 
     config.active_record.belongs_to_required_by_default = false
+    config.active_record.encryption.support_unencrypted_data = true
 
     config.exceptions_app = self.routes
 

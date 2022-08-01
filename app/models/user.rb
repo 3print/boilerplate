@@ -33,6 +33,9 @@
 #
 
 class User < ApplicationRecord
+  encrypts :email, deterministic: true, downcase: true
+  encrypts :first_name, deterministic: true
+  encrypts :last_name, deterministic: true
 
   extend LightSearch
   include ImageVersions
