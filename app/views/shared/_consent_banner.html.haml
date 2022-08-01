@@ -6,9 +6,9 @@
     .card.visible.main-panel
       .card-header.text-center
         = image_tag 'logo-dark.svg', width: 60
-        %h5.card-title= 'views.consents.title'.t
+        %h5.card-title= clean 'views.consents.title'.t
 
-        = link_to 'actions.read_policy'.t, cookies_path(no_consents: true), class: 'btn btn-outline-primary', target: :_blank
+        = link_to clean ('actions.read_policy'.t), cookies_path(no_consents: true), class: 'btn btn-outline-primary', target: :_blank
 
       %hr.my-0
 
@@ -17,28 +17,28 @@
 
       .card-footer.text-center
         %a.btn.btn-outline-secondary.remote-link{href: consents_path, data: { method: 'post', body: reject_all_payload, handle_success: 'onRejectAll'}}
-          = 'actions.reject_all'.t
+          = clean 'actions.reject_all'.t
           .spinner-border.spinner-border-sm{role: :status}
-            .visually-hidden= 'labels.loading'.t
+            .visually-hidden= clean 'labels.loading'.t
 
         .btn.btn-outline-secondary.configure-cookies= 'actions.configure_cookies'.t
         %a.btn.btn-outline-primary.remote-link{href: consents_path, data: { method: 'post', body: accept_all_payload, handle_success: 'onAcceptAll'}}
-          = 'actions.accept_all'.t
+          = clean 'actions.accept_all'.t
           .spinner-border.spinner-border-sm{role: :status}
-            .visually-hidden= 'labels.loading'.t
+            .visually-hidden= clean 'labels.loading'.t
 
   .card.configure-panel
     .card-header.text-center
       = image_tag 'logo-dark.svg', width: 60
-      %h5.card-title= 'views.consents.title'.t
+      %h5.card-title= clean 'views.consents.title'.t
 
-      = link_to 'actions.read_policy'.t, cookies_path(no_consents: true), class: 'btn btn-outline-primary', target: :_blank
+      = link_to clean('actions.read_policy'.t), cookies_path(no_consents: true), class: 'btn btn-outline-primary', target: :_blank
 
       .btn.btn-close
 
     .card-body
-      %h4= 'views.consents.configure.title'.t
-      %p= 'views.consents.configure.content'.t(url: cookies_path(no_consents: true)).html_safe
+      %h4= clean 'views.consents.configure.title'.t
+      %p= clean 'views.consents.configure.content'.t(url: cookies_path(no_consents: true)).html_safe
 
     %hr.my-0
 
@@ -47,16 +47,16 @@
         %li.list-group-item
           .form-check.form-switch.form-switch-lg.d-flex
             .description
-              %strong= 'views.consents.necessary.label'.t
-              .text-muted.text-sm= 'views.consents.necessary.description'.t
+              %strong= clean 'views.consents.necessary.label'.t
+              .text-muted.text-sm= clean 'views.consents.necessary.description'.t
             .control
               %input.form-check-input.disabled{type: :checkbox, name: :necessary, checked: true, value: 1}
         - GdprConsent.get_all_scripts.each_pair do |k,v|
           %li.list-group-item
             .form-check.form-switch.form-switch-lg.d-flex
               .description
-                %strong= "views.consents.#{k}.label".t
-                .text-muted.text-sm= "views.consents.#{k}.description".t
+                %strong= clean "views.consents.#{k}.label".t
+                .text-muted.text-sm= clean "views.consents.#{k}.description".t
               .control
                 %input{type: :hidden, name: k, value: 0}
                 %input.form-check-input{type: :checkbox, name: k, value: 1, checked: consent_to?(k)}
@@ -65,11 +65,11 @@
 
       .card-footer.text-center
         .btn.btn-outline-secondary.remote-link{href: consents_path, data: { method: 'post', body: reject_all_payload, handle_success: 'onRejectAll'}}
-          = 'actions.reject_all'.t
+          = clean 'actions.reject_all'.t
           .spinner-border.spinner-border-sm{role: :status}
             .visually-hidden= 'labels.loading'.t
         .btn.btn-outline-primary.remote-link{href: consents_path, data: { method: 'post', body: accept_all_payload, handle_success: 'onAcceptAll'}}
-          = 'actions.accept_all'.t
+          = clean 'actions.accept_all'.t
           .spinner-border.spinner-border-sm{role: :status}
             .visually-hidden= 'labels.loading'.t
-        %button.btn.btn-outline-primary.save{type: :submit}= 'actions.save_cookies'.t
+        %button.btn.btn-outline-primary.save{type: :submit}= clean 'actions.save_cookies'.t

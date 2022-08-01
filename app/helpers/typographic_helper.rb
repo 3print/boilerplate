@@ -1,6 +1,6 @@
 module TypographicHelper
   def clean(str)
-    TypographicCleaner.clean(str)
+    TypographicCleaner.clean(str).html_safe
   end
 end
 

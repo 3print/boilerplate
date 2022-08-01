@@ -25,11 +25,11 @@
     %table.table.mb-0
       %thead
         %tr
-          %th= 'tables.columns.cookies.name'.t
-          %th= 'tables.columns.cookies.type'.t
-          %th= 'tables.columns.cookies.duration'.t
-          %th= 'tables.columns.cookies.origin'.t
-          %th= 'tables.columns.cookies.purpose'.t
+          %th= clean 'tables.columns.cookies.name'.t
+          %th= clean 'tables.columns.cookies.type'.t
+          %th= clean 'tables.columns.cookies.duration'.t
+          %th= clean 'tables.columns.cookies.origin'.t
+          %th= clean 'tables.columns.cookies.purpose'.t
       %tbody
         - GdprConsent.get_policies.each_pair do |cookie, policy|
           %tr
