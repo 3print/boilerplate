@@ -2,7 +2,7 @@ use_in_query:
 - text
 seeds:
 - image:
-    _asset: images/logo.png
+    _asset: images/logo.svg
   int: 10
   json:
     foo:
