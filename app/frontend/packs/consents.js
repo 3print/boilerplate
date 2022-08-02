@@ -61,6 +61,8 @@ window.addEventListener('DOMContentLoaded', (e) => {
   function switchToEditCookies() {
     mainPanel && mainPanel.classList.remove('visible');
     configurePanel.classList.add('visible');
+
+    [].slice.call(document.querySelectorAll('.open-cookies-settings')).forEach(n => n.classList.add('visible'));
   }
 
   function enableScript(scr, group, index) {

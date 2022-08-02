@@ -1,3 +1,10 @@
+.open-cookies-settings {
+  display: none;
+
+  &.visible {
+    display: inline;
+  }
+}
 
 .consent-banner {
   background: transparentize($gray-400, 0.3);
