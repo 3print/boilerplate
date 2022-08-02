@@ -22,14 +22,12 @@
     </div>
   </div>
 
-  <div class='controls'>
-    <textarea id='<%= locals.id %>'
-              data-name='<%= locals.setting %>'
-              data-iconlibrary='fa'
-              data-editor='markdown'
-              data-language='fr'
-              data-resize='vertical'
-              <% if(locals.settingParameters.required) { %>required<% } %>
-              class='form-control'><%= locals.value || locals.settingParameters.default || "" %></textarea>
-  </div>
+  <textarea id='<%= locals.id %>'
+            data-name='<%= locals.setting %>'
+            data-iconlibrary='fa'
+            data-editor='markdown'
+            data-language='fr'
+            data-resize='vertical'
+            <% if(locals.settingParameters.required) { %>required<% } %>
+            class='form-control'><%= locals.value || locals.settingParameters.default || "" %></textarea>
 </div>

@@ -2,21 +2,19 @@
   <label for="<%= locals.id %>"><%= locals.label %></label>
 
   <div class="form-group">
-    <div class="controls">
-      <div class="file-content form-control <% if(locals.value) { %>with-value<% } %>">
-        <% if(locals.value) { %>
-          <div class="current-value">
-            <img class="loaded" src="<%= locals.value %>">
-          </div>
-        <% } %>
+    <div class="file-content form-control <% if(locals.value) { %>with-value<% } %>">
+      <% if(locals.value) { %>
+        <div class="current-value">
+          <img class="loaded" src="<%= locals.value %>">
+        </div>
+      <% } %>
 
-        <input id="<%= locals.id %>"
-               data-name="<%= locals.setting %>"
-               type="file"
-               value="<%= locals.value %>"
-               <% if(locals.settingParameters.required) { %>required<% } %>
-               class="form-control-file file form-control direct-upload"></input>
-      </div>
+      <input id="<%= locals.id %>"
+             data-name="<%= locals.setting %>"
+             type="file"
+             value="<%= locals.value %>"
+             <% if(locals.settingParameters.required) { %>required<% } %>
+             class="form-control-file file form-control direct-upload"></input>
     </div>
   </div>
 </div>

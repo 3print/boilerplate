@@ -5,27 +5,6 @@
     .form-group.has-feedback
       %label{for:'{{= id}}'} {{= label}}
 
-      %select.form-control{id: '{{= id}}', style: 'width: 100%', required:'{{= settingParameters.required ? \'required\' : \'no\'}}', placeholder: 'simple_form.placeholders.select'.t}
-    -#     = options_for_select([['', '']] +  Page.custom_resources.keys.map {|c| [c.t, c.name]})
-    -#
-    -# - Page.custom_resources.each_pair do |cls, routes|
-    -#   :ruby
-    -#     collection = [['','']]
-    -#     routes.each do |action|
-    -#       action = action.to_s
-    -#
-    -#       case action
-    -#       when 'instance'
-    -#         cls.all.each do |m|
-    -#           collection << [m.to_s, m.id]
-    -#         end
-    -#       else
-    -#         collection << ["routes.#{action}".t, action]
-    -#       end
-    -#     end
-    -#
-    -#   .form-group.has-feedback.slave{class: cls.name.downcase, data: {master: '[name*="target_model"]'}}
-    -#     = select_tag '', options_for_select(collection, resource.target_model), style: 'width: 100%', input_html: {required:'{{= settingParameters.required ? \'required\' : \'no\'}}'}
-
+      %select.form-select{id: '{{= id}}', style: 'width: 100%', required:'{{= settingParameters.required ? \'required\' : \'no\'}}', placeholder: 'simple_form.placeholders.select'.t}
 
 = render 'shared/setting_field_templates_extra'

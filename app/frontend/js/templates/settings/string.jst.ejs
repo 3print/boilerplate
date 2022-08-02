@@ -1,24 +1,22 @@
 <div class='form-group has-feedback'>
   <label for='<%= locals.id %>'><%= locals.label %></label>
 
-  <div class='controls'>
-    <% if(locals.settingParameters.textarea) { %>
-      <textarea id='<%= locals.id %>'
-                data-name='<%= locals.setting %>'
-                <% if(locals.settingParameters.limit) { %>
-                data-limit='<%= locals.settingParameters.limit %>'<% } %>
-                <% if(locals.settingParameters.required) { %>required<% } %>
-                class='form-control'><%= locals.value || locals.settingParameters.default || "" %></textarea>
-    <% } else { %>
-      <input type='text'
-             id='<%= locals.id %>'
-             value='<%= locals.value || locals.settingParameters.default || "" %>'
-             data-name='<%= locals.setting %>'
-             <% if(locals.settingParameters.limit) { %>
-             data-limit='<%= locals.settingParameters.limit %>'<% } %>
-             <% if(locals.settingParameters.required) { %>required<% } %>
-             class='form-control'>
-      </input>
-    <% } %>
-  </div>
+  <% if(locals.settingParameters.textarea) { %>
+    <textarea id='<%= locals.id %>'
+              data-name='<%= locals.setting %>'
+              <% if(locals.settingParameters.limit) { %>
+              data-limit='<%= locals.settingParameters.limit %>'<% } %>
+              <% if(locals.settingParameters.required) { %>required<% } %>
+              class='form-control'><%= locals.value || locals.settingParameters.default || "" %></textarea>
+  <% } else { %>
+    <input type='text'
+           id='<%= locals.id %>'
+           value='<%= locals.value || locals.settingParameters.default || "" %>'
+           data-name='<%= locals.setting %>'
+           <% if(locals.settingParameters.limit) { %>
+           data-limit='<%= locals.settingParameters.limit %>'<% } %>
+           <% if(locals.settingParameters.required) { %>required<% } %>
+           class='form-control'>
+    </input>
+  <% } %>
 </div>

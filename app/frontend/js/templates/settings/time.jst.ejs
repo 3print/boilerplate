@@ -1,18 +1,16 @@
 <div class='form-group has-feedback'>
   <label for='<%= locals.id %>'><%= locals.label %></label>
 
-  <div class='controls'>
-    <div class='input-group'>
-      <label class='input-group-text' for='<%= locals.id %>'>
-        <svg class="feather feather-clock" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-      </label>
-      <input type='time'
-             id='<%= locals.id %>'
-             value='<%= locals.value || locals.settingParameters.default || "" %>'
-             data-name='<%= locals.setting %>'
-             <% if(locals.settingParameters.required) { %>required<% } %>
-             class='form-control timepicker'>
-      </input>
-    </div>
+  <div class='input-group'>
+    <label class='input-group-text' for='<%= locals.id %>'>
+      <svg class="feather feather-clock" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+    </label>
+    <input type='time'
+           id='<%= locals.id %>'
+           value='<%= locals.value || locals.settingParameters.default || "" %>'
+           data-name='<%= locals.setting %>'
+           <% if(locals.settingParameters.required) { %>required<% } %>
+           class='form-control timepicker'>
+    </input>
   </div>
 </div>
