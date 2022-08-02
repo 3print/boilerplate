@@ -10,22 +10,23 @@
           - else
             .col-md-12= f.input :email
 
-        .row
+        .row.mt-2
           .col-md-6= f.input :first_name
           .col-md-6= f.input :last_name
 
         - if !resource.persisted? || resource == current_user || current_user.is_super_admin?
-          .row
+          .row.mt-2
             .col-md-6= f.input :password, required: params[:action] == 'new'
             .col-md-6= f.input :password_confirmation, required: params[:action] == 'new'
 
         = render_partial_for_user 'form_extra_fields', locals: {form: f}
 
         - if resource == current_user
-          - if current_user.otp_required_for_login
-            = link_to('2fa.disable'.t, two_factor_settings_path, class: 'btn btn-outline-danger', method: 'delete', data: {confirm: '2fa.confirm_disable'.t})
-          - else
-            = link_to('2fa.enable'.t, new_two_factor_settings_path, class: 'btn btn-outline-primary')
+          .mt-2
+            - if current_user.otp_required_for_login
+              = link_to('2fa.disable'.t, two_factor_settings_path, class: 'btn btn-outline-danger', method: 'delete', data: {confirm: '2fa.confirm_disable'.t})
+            - else
+              = link_to('2fa.enable'.t, new_two_factor_settings_path, class: 'btn btn-outline-primary')
 
       .col-md-6= f.input :avatar
 

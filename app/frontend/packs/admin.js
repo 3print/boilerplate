@@ -29,7 +29,6 @@ import '../js/widgets/field-limit';
 import '../js/widgets/navigation-highlight';
 import '../js/widgets/popover';
 import '../js/widgets/propagate-input-value';
-import '../js/widgets/select';
 import '../js/widgets/settings-editor';
 import '../js/widgets/table-sort-header';
 import '../js/widgets/order-table';
@@ -72,7 +71,6 @@ widgets('blueprint-add-button', '[data-blueprint]', merge(DEFAULT_CONFIG(), {
 }));
 widgets('blueprint-remove-button', '[data-remove]', DEFAULT_CONFIG());
 
-widgets('select', 'select.form-control:not([multiple])', DEFAULT_CONFIG())
 widgets('select-multiple', 'select[multiple]', merge(DEFAULT_CONFIG(), {
   wrapperClass: 'select-multiple form-control',
   itemClass: 'option badge bg-light text-dark',

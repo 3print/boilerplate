@@ -13,3 +13,9 @@ EnumHelp::Helper.class_eval do
     "enums.#{klass.to_s.underscore.gsub('/', '.')}.#{attr_name}.#{enum_label}"
   end
 end
+
+EnumHelp::SimpleForm::EnumInput.class_eval do
+  def input_html_classes
+    super.push('form-select')
+  end
+end
