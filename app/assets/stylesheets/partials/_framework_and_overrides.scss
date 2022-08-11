@@ -37,10 +37,15 @@ ul.pagination {
 }
 
 .btn .feather {
+  pointer-events: none;
   width: 18px;
   height: 18px;
   vertical-align: sub;
   margin-right: 0.5em;
+}
+
+.btn .text {
+  pointer-events: none;
 }
 
 .btn .spinner-border {
@@ -65,6 +70,10 @@ ul.pagination {
 
 .btn-sm {
   border-radius: 0.25em;
+
+  &.btn-icon .feather {
+    vertical-align: bottom;
+  }
 }
 
 .btn-sm .feather {
