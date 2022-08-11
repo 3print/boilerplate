@@ -3,6 +3,7 @@
 
   <input type='number'
          id='<%= locals.id %>'
+         data-name="<%= locals.setting %>"
          value='<%= locals.value || locals.settingParameters.default || "" %>'
          step='<%= locals.settingParameters.step || 1 %>'
          <% if(locals.settingParameters.min != undefined) { %>min="<%= locals.settingParameters.min %>"<% } %>
