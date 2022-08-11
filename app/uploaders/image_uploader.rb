@@ -6,7 +6,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   include Sprockets::Rails::Helper
 
   def store_dir
-    "#{ENV['AWS_ENV']}/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}/"
+    "#{ENV['AWS_ENV'] || :development}/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}/"
   end
 
   def extension_allowlist
