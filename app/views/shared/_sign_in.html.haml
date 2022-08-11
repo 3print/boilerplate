@@ -3,7 +3,7 @@
   .alert.alert-danger= alert
 
 = simple_form_for(sign_in_model, url: session_path(:user), html: { role: 'form', class: 'sign_in'}) do |f|
-  .mb-3= f.input :email, autofocus: true
+  .mb-3= f.input :email, autofocus: true, as: :email
   .mb-3
     = f.input :password, hint: false, required: true
     %small= link_to 'actions.recover_password'.t, new_password_path(resource)

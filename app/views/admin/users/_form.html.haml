@@ -5,14 +5,14 @@
       .col-md-6
         .row
           - if current_user.admin?
-            .col-md-6= f.input :email
+            .col-md-6= f.input :email, as: :email
             .col-md-6= f.input :role
           - else
-            .col-md-12= f.input :email
+            .col-md-12= f.input :email, as: :email
 
         .row.mt-2
-          .col-md-6= f.input :first_name
-          .col-md-6= f.input :last_name
+          .col-md-6= f.input :first_name, as: :string
+          .col-md-6= f.input :last_name, as: :string
 
         - if !resource.persisted? || resource == current_user || current_user.is_super_admin?
           .row.mt-2
