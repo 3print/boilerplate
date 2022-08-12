@@ -1,5 +1,8 @@
+:ruby
+  options ||= nil
+
 %strong
   = "#{resource_name.singularize}.#{column}".tmfc
-  - if options[:hint]
+  - if option.present? && options[:hint]
     %abbr{title: options[:hint]}= icon('help-circle')
 
