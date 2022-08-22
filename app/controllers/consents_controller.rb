@@ -8,6 +8,6 @@ class ConsentsController < ApplicationController
   end
 
   def consent_params
-    params.require(:consent).permit!
+    params[:consent].nil? ? {} : params.require(:consent).permit!
   end
 end
