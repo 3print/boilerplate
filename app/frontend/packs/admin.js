@@ -16,13 +16,15 @@ import '../../../vendor/assets/javascripts/nested_form';
 // Importing 'bootstrap' in the context of webpack will lead
 // to include the esm version, which does not initialize
 // bootstrap's components. Importing this version will do.
-import 'bootstrap/dist/js/bootstrap.js';
+import Bootstrap from 'bootstrap/dist/js/bootstrap.js';
+window.Bootstrap = Bootstrap;
 import 'widjet-validation';
 import 'widjet-select-multiple';
 import 'widjet-file-upload';
 import {Markdown} from 'widjet-text-editor'
 
 import VALIDATION_OPTIONS from '../js/widgets/validation';
+import '../js/templates/index.js';
 import '../js/widgets/auto-resize';
 import '../js/widgets/collapse';
 import '../js/widgets/field-limit';
