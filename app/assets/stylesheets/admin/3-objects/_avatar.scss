@@ -1,9 +1,14 @@
-
 .avatar {
+  overflow: hidden;
+  position: relative;
+  border-radius: 50%;
+  display: inline-block;
   width: auto;
   height: auto;
 
   &.default {
+    text-align: center;
+
     &.thumb svg {
       width: 40px;
       height: 40px;

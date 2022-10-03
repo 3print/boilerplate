@@ -1,0 +1,47 @@
+.open-cookies-settings {
+  display: none;
+
+  &.visible {
+    display: inline;
+  }
+}
+
+.consents {
+  .modal-dialog {
+    max-width: 600px;
+  }
+
+  .modal-header {
+    flex-direction: column;
+  }
+
+  .btn-close {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+  }
+
+  .description {
+    flex: 1 1 0
+  }
+
+  .form-switch {
+    padding-left: 0;
+  }
+
+  .control {
+    flex: 0 0 5em;
+    justify-content: end;
+    display: flex;
+    align-items: center;
+
+    .form-check-input {
+      margin-left: 0;
+
+      &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+    }
+  }
+}

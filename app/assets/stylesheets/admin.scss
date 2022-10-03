@@ -1,20 +1,28 @@
+
 @import "adminkit/app";
 
-@import "flatpickr";
+@import "admin/0-vendors/flatpickr";
 
-@import "partials/responsive";
-@import "partials/markdown_content";
-@import "partials/mixins";
-@import "partials/framework_and_overrides";
-@import "partials/avatar";
-@import "partials/sign_up";
-@import "partials/consent_banner";
+@import "admin/1-base/variables";
+@import "mixins";
 
-@import "partials/inputs/select";
-@import "partials/inputs/file";
-@import "partials/inputs/file_versions";
-@import "partials/inputs/markdown";
-@import "partials/inputs/flatpickr";
-@import "partials/inputs/settings";
+@import "admin/2-generics/framework_and_overrides";
+@import "admin/2-generics/markdown_content";
+@import 'shared/backgrounds';
 
-@import "partials/admin/avatar";
+@import "admin/3-objects/inputs/select";
+@import "admin/3-objects/inputs/file";
+@import "admin/3-objects/inputs/file_versions";
+@import "admin/3-objects/inputs/markdown";
+@import "admin/3-objects/inputs/flatpickr";
+@import "admin/3-objects/inputs/settings";
+@import "admin/3-objects/avatar";
+
+@import "admin/4-components/password_validation";
+@import "shared/consent_banner";
+
+.color-icon {
+  @include box-inline(32px);
+  vertical-align: middle;
+  border: 1px solid $gray-500;
+}

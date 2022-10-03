@@ -1,0 +1,32 @@
+.background-cover {
+  background-size: cover;
+  background-position: center;
+}
+
+.background-no-repeat {
+  background-repeat: no-repeat;
+}
+
+.background-fade-white {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(to top, white 0%, transparent 100%);
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.inverse-color {
+  -webkit-mix-blend-mode: difference;
+  mix-blend-mode: difference;
+}

@@ -1,0 +1,329 @@
+@import "adminkit/1-variables/app";
+@import "bootstrap/variables";
+
+.expander, .collapser {
+  * {
+    pointer-events: none;
+  }
+}
+
+// Feather
+.feather {
+  vertical-align: sub;
+}
+
+// Forms
+@import 'shared/overrides/forms';
+
+// Pagination
+
+ul.pagination {
+  margin: 0;
+}
+
+// Buttons
+.pills {
+  margin-top: -10px;
+}
+
+@import 'shared/overrides/buttons';
+
+// Sidebar
+.sidebar-brand {
+  img {
+    height: 40px;
+  }
+}
+
+.sidebar-toggle .feather {
+  width: 26px;
+  height: 26px;
+}
+
+.sidebar {
+  [data-bs-toggle=collapse] {
+    position:relative;
+  }
+  [data-bs-toggle=collapse]:after {
+    content:" ";
+    border:solid;
+    border-width:0 .075rem .075rem 0;
+    display:inline-block;
+    padding:2px;
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
+    position:absolute;
+    top:1.2rem;
+    right:1.5rem;
+    transition:all .2s ease-out;
+  }
+  [aria-expanded=true]:after,
+  [data-bs-toggle=collapse]:not(.collapsed):after {
+    -webkit-transform:rotate(-135deg);
+    transform:rotate(-135deg);
+    top:1.4rem;
+  }
+
+  // Popper seems to to do shit with dropdown insets
+  .dropdown-menu.show {
+    inset: auto !important;
+  }
+
+  [data-bs-toggle=dropdown] {
+    cursor: pointer;
+    color: $sidebar-link-color;
+  }
+}
+.sidebar-dropdown {
+  [data-bs-toggle=collapse]:after {
+    top:1rem;
+  }
+
+  [aria-expanded=true]:after,
+  [data-bs-toggle=collapse]:not(.collapsed):after {
+    top:1.2rem;
+  }
+
+  .sidebar-item .sidebar-link {
+    padding-left: 3rem;
+  }
+
+  .sidebar-item .sidebar-link:hover {
+    font-weight: 400;
+    border-left: 0;
+    color: $sidebar-link-hover-color;
+    background: transparent;
+  }
+
+  .sidebar-item.active .sidebar-link {
+    font-weight: 400;
+    border-left: 0;
+    color: $blue;
+    background: transparent;
+
+    svg {
+      stroke: $blue;
+    }
+  }
+}
+.sidebar-user {
+  padding: .75rem 1.5rem;
+}
+
+// Navbar
+.dropdown-mega-list {
+  min-width: 250px;
+}
+
+.navbar .avatar {
+  img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.input-group-navbar {
+  .btn,
+  .form-control {
+    height: calc(2.1875rem + 2px);
+    background: $gray-200;
+    box-shadow: none;
+    border: 0;
+    padding: .4rem 1rem;
+    border-radius: 20px;
+
+    &:focus {
+      background: $gray-200;
+      box-shadow: none;
+      outline: 0;
+    }
+  }
+
+  .btn {
+    color: $gray-600;
+  }
+  .btn .feather {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// Cards
+@import 'shared/overrides/cards';
+
+th, td {
+  &.nowrap {
+    white-space: nowrap;
+  }
+
+  &.compact {
+    width: 0;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.table > :not(:first-child) {
+  border-top: none;
+}
+
+.table.dragged {
+  pointer-events: none;
+  background: white;
+  opacity: 0.5;
+}
+
+.dnd-placeholder {
+  background: $gray-200;
+}
+
+.drag-handle {
+  cursor: move;
+}
+
+.no-action-labels {
+  .btn {
+    .text {
+      display: none;
+      position: absolute;
+    }
+
+    .feather {
+      margin-right: 0;
+    }
+
+    &:hover, &:active, &:focus {
+      position: relative;
+      .text {
+        display: inline-block;
+        background: black;
+        color: white;
+        pointer-events: none;
+        left: 50%;
+        bottom: 100%;
+        transform: translate(-50%, -8px);
+        padding: 4px 6px;
+        border-radius: 0.25em;
+
+        &::before {
+          position: absolute;
+          content: "";
+          border-color: transparent;
+          border-style: solid;
+          left: 50%;
+          bottom: -$tooltip-arrow-height;
+          border-width: $tooltip-arrow-height ($tooltip-arrow-width * .5) 0;
+          border-top-color: $tooltip-arrow-color;
+          transform: translate(-50%, 0);
+        }
+      }
+    }
+  }
+}
+
+[data-sort] .btn {
+  padding: 0;
+  svg {
+    vertical-align: middle;
+  }
+}
+
+.table-active {
+  --bs-table-accent-bg: rgba(245, 247, 251, 1);
+}
+
+.form-group, .file-input-container {
+  & + & {
+    margin-top: 12px;
+  }
+}
+
+// Carousel
+
+.carousel-caption {
+  h1, h2, h3, h4, h5, h6 {
+    color: white;
+  }
+}
+
+.carousel-caption {
+  h1, h2, h3, h4, h5, h6 {
+    color: white;
+  }
+}
+
+.carousel-dark .carousel-caption {
+  h1, h2, h3, h4, h5, h6 {
+    color: black;
+  }
+}
+
+.wheel-settings {
+  display: none;
+}
+.scratch-settings {
+  display: none;
+}
+
+[data-value="Wheel"] .wheel-settings {
+  display: block;
+}
+[data-value="Scratch"] .scratch-settings {
+  display: block;
+}
+
+// Tables
+th, .table th {
+  white-space: nowrap;
+
+  &.with-sort {
+    padding-right: 20px;
+    position: relative;
+
+    .btn {
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+td fieldset legend {
+  display: none;
+}
+
+.dropcap {
+  &.dc-1 {
+    font-size: 300%;
+  }
+
+  &.dc-2 {
+    font-size: 250%;
+  }
+
+  &.dc-3 {
+    font-size: 200%;
+  }
+  &.dc-4 {
+    font-size: 150%;
+  }
+}
+
+// Grids
+
+.gifts-grid {
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+
+  .card {
+    margin: 0;
+  }
+
+  .remove_nested_fields_link {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+  }
+}

@@ -1,0 +1,79 @@
+.btn .feather {
+  pointer-events: none;
+  width: 18px;
+  height: 18px;
+  vertical-align: sub;
+  margin-right: 0.5em;
+}
+
+.btn .text {
+  pointer-events: none;
+}
+
+.btn .spinner-border {
+  display: none;
+}
+
+.btn.loading .spinner-border {
+  display: inline-block;
+  margin-left: 0.5em;
+}
+
+.btn-xs, .btn-group-xs > .btn {
+  padding: 0.1rem 0.25rem;
+  font-size: 0.6rem;
+  border-radius: 0.1rem;
+
+  .feather {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.btn-sm {
+  border-radius: 0.25em;
+
+  &.btn-icon .feather {
+    vertical-align: bottom;
+  }
+}
+
+.btn-sm .feather {
+  width: 14px;
+  height: 14px;
+}
+
+.btn-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-xl {
+  font-size: 1.6rem;
+
+  .feather {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.btn-icon {
+  .text {
+    display: none;
+  }
+  .feather {
+    margin-right: 0;
+  }
+}
+
+.dropdown-toggle.no-caret {
+  &::after {
+    content: none;
+  }
+}
+
+.dropdown-item .feather {
+  margin-right: 0.4em;
+}

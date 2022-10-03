@@ -1,0 +1,11 @@
+.form-control.form-check-input {
+  padding: 0;
+}
+.control-label {
+  @extend .form-label;
+}
+
+.form-switch-lg .form-check-input {
+  width: 4em;
+  height: 2em;
+}

@@ -1,18 +1,3 @@
-$breakpoint-phone: 480px;
-$breakpoint-tablet: 768px;
-$breakpoint-desktop: 992px;
-$breakpoint-large: 1200px;
-$breakpoint-extra-large: 1600px;
-
-$breakpoint-tablet-1: $breakpoint-tablet - 1;
-$breakpoint-desktop-1: $breakpoint-desktop - 1;
-$breakpoint-large-1: $breakpoint-large - 1;
-$breakpoint-extra-large-1: $breakpoint-extra-large - 1;
-
-$size_names: xs sm md lg xl xxl;
-$size_breakpoints: $breakpoint-phone $breakpoint-tablet $breakpoint-desktop $breakpoint-large $breakpoint-extra-large;
-$sizes_count: 6;
-
 @mixin for-webkit {
   @media screen and (-webkit-min-device-pixel-ratio: 0) {
     @content;
