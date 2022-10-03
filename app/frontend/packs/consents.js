@@ -1,12 +1,22 @@
 window.addEventListener('DOMContentLoaded', (e) => {
-  const banner = document.querySelector('.consent-banner');
-  const config = JSON.parse(banner.querySelector('script').textContent);
-  const configureButton = banner.querySelector('.configure-cookies');
-  const configurePanel = banner.querySelector('.configure-panel');
-  const mainPanel = banner.querySelector('.main-panel');
+  const consents = document.querySelector('.consents');
+  const cookies = consents.querySelector('#cookies-consent');
+  const configurePanel = consents.querySelector('#cookies-configure');
+
+  const cookiesModal = Bootstrap.Modal.getOrCreateInstance(cookies);
+  const configurePanelModal = Bootstrap.Modal.getOrCreateInstance(configurePanel);
+
+  const config = JSON.parse(consents.querySelector('script').textContent);
+  const configureButton = cookies.querySelector('.configure-cookies');
   const settingsOpeners = [].slice.call(document.querySelectorAll('.open-cookies-settings'));
-  const closeButton = configurePanel.querySelector('.btn-close');
   const scripts = {};
+  let hasSetCookiesConsent = false;
+
+  if(window.openCookies) {
+    cookiesModal.show();
+  } else {
+    hasSetCookiesConsent = true;
+  }
 
   settingsOpeners.forEach((el) => {
     el.addEventListener('click', (e) => {
@@ -19,8 +29,10 @@ window.addEventListener('DOMContentLoaded', (e) => {
     configureButton.addEventListener('click', switchToEditCookies);
   }
 
-  closeButton.addEventListener('click', () => {
-    banner.classList.remove('visible');
+  configurePanel.addEventListener('hide.bs.modal', () => {
+    if(!hasSetCookiesConsent) {
+      cookiesModal.show();
+    }
   });
 
   window.onAcceptAll = function onAcceptAll() {
@@ -28,7 +40,9 @@ window.addEventListener('DOMContentLoaded', (e) => {
       toggleCheckbox(key, true);
       value.forEach((scr) => enableScript(scr, key));
     });
-    banner.classList.remove('visible');
+    hasSetCookiesConsent = true;
+    cookiesModal.hide();
+    configurePanelModal.hide();
     switchToEditCookies();
   }
 
@@ -37,7 +51,9 @@ window.addEventListener('DOMContentLoaded', (e) => {
       toggleCheckbox(key, false);
       disableScripts(key);
     });
-    banner.classList.remove('visible');
+    hasSetCookiesConsent = true;
+    cookiesModal.hide();
+    configurePanelModal.hide();
     switchToEditCookies();
   }
 
@@ -48,19 +64,19 @@ window.addEventListener('DOMContentLoaded', (e) => {
         ? value.forEach((scr, i) => enableScript(scr, key, i))
         : disableScripts(key);
     });
-    banner.classList.remove('visible');
+    hasSetCookiesConsent = true;
+    configurePanelModal.hide();
     switchToEditCookies();
   }
 
   window.openCookiesSettings = function openCookiesSettings() {
-    banner.classList.add('visible');
-    configurePanel.classList.add('visible');
-    closeButton.classList.add('visible');
+    cookiesModal.hide();
+    configurePanelModal.show();
   }
 
   function switchToEditCookies() {
-    mainPanel && mainPanel.classList.remove('visible');
-    configurePanel.classList.add('visible');
+    cookiesModal.hide();
+    configurePanelModal.show();
 
     [].slice.call(document.querySelectorAll('.open-cookies-settings')).forEach(n => n.classList.add('visible'));
   }
@@ -93,7 +109,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
   }
 
   function toggleCheckbox(name, value) {
-    banner.querySelector(`.form-check-input[name="${name}"]`).checked = value;
+    cookies.querySelector(`.form-check-input[name="${name}"]`).checked = value;
   }
 
   function deleteCookie(name) {

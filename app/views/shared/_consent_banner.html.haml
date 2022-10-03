@@ -1,75 +1,76 @@
-.consent-banner{class: !has_consent_cookie? && !params[:no_consents] ? 'visible' : ''}
+.consents
   %script{type: 'application/json'}= render_scripts_config
+  - if !has_consent_cookie? && !params[:no_consents]
+    %script
+      window.openCookies = true;
+
   = javascript_include_tag 'consents'
 
   - if !has_consent_cookie?
-    .card.visible.main-panel
-      .card-header.text-center
-        = image_tag 'logo-dark.svg', width: 60
-        %h5.card-title= clean 'views.consents.title'.t
+    .modal.fade#cookies-consent{data: {bs_backdrop: :static}}
+      .modal-dialog
+        .modal-content
+          .modal-header.text-center
+            = image_tag 'logo-dark.svg', width: 60
+            %h5.modal-title= clean 'views.consents.title'.t
 
-        = link_to clean('actions.read_policy'.t), cookies_path(no_consents: true), class: 'btn btn-outline-primary', target: :_blank
+            = link_to clean('actions.read_policy'.t), cookies_path(no_consents: true), class: 'btn btn-outline-primary', target: :_blank
 
-      %hr.my-0
+          .modal-body= clean 'views.consents.main.content'.t
 
-      .card-body= clean 'views.consents.main.content'.t
-      %hr.my-0
+          .modal-footer.justify-content-center
+            %a.btn.btn-outline-secondary.remote-link{href: consents_path, data: { method: 'post', body: reject_all_payload, handle_success: 'onRejectAll'}}
+              = clean 'actions.reject_all'.t
+              .spinner-border.spinner-border-sm{role: :status}
+                .visually-hidden= clean 'labels.loading'.t
 
-      .card-footer.text-center
-        %a.btn.btn-outline-secondary.remote-link{href: consents_path, data: { method: 'post', body: reject_all_payload, handle_success: 'onRejectAll'}}
-          = clean 'actions.reject_all'.t
-          .spinner-border.spinner-border-sm{role: :status}
-            .visually-hidden= clean 'labels.loading'.t
+            .btn.btn-outline-secondary.configure-cookies= 'actions.configure_cookies'.t
+            %a.btn.btn-outline-primary.remote-link{href: consents_path, data: { method: 'post', body: accept_all_payload, handle_success: 'onAcceptAll'}}
+              = clean 'actions.accept_all'.t
+              .spinner-border.spinner-border-sm{role: :status}
+                .visually-hidden= clean 'labels.loading'.t
 
-        .btn.btn-outline-secondary.configure-cookies= 'actions.configure_cookies'.t
-        %a.btn.btn-outline-primary.remote-link{href: consents_path, data: { method: 'post', body: accept_all_payload, handle_success: 'onAcceptAll'}}
-          = clean 'actions.accept_all'.t
-          .spinner-border.spinner-border-sm{role: :status}
-            .visually-hidden= clean 'labels.loading'.t
+  .modal.fade#cookies-configure
+    .modal-dialog
+      .modal-content
+        .modal-header.text-center
+          .btn.btn-close{data: {bs_dismiss: :modal}, aria: {label: 'actions/close'.t}}
+          = image_tag 'logo-dark.svg', width: 60
+          %h5.modal-title= clean 'views.consents.title'.t
 
-  .card.configure-panel
-    .card-header.text-center
-      = image_tag 'logo-dark.svg', width: 60
-      %h5.card-title= clean 'views.consents.title'.t
+          = link_to clean('actions.read_policy'.t), cookies_path(no_consents: true), class: 'btn btn-outline-primary', target: :_blank
 
-      = link_to clean('actions.read_policy'.t), cookies_path(no_consents: true), class: 'btn btn-outline-primary', target: :_blank
 
-      .btn.btn-close
+        .modal-body
+          %h4= clean 'views.consents.configure.title'.t
+          %p= clean 'views.consents.configure.content'.t(url: cookies_path(no_consents: true)).html_safe
 
-    .card-body
-      %h4= clean 'views.consents.configure.title'.t
-      %p= clean 'views.consents.configure.content'.t(url: cookies_path(no_consents: true)).html_safe
+        %form.remote-form{action: consents_path, method: :post, data: { handle_success: 'onConfigureCookies' }}
+          %ul.list-group.list-group-flush
+            %li.list-group-item
+              .form-check.form-switch.form-switch-lg.d-flex
+                .description
+                  %strong= clean 'views.consents.necessary.label'.t
+                  .text-muted.text-sm= clean 'views.consents.necessary.description'.t
+                .control
+                  %input.form-check-input.disabled{type: :checkbox, name: :necessary, checked: true, value: 1}
+            - GdprConsent.get_all_scripts.each_pair do |k,v|
+              %li.list-group-item
+                .form-check.form-switch.form-switch-lg.d-flex
+                  .description
+                    %strong= clean "views.consents.#{k}.label".t
+                    .text-muted.text-sm= clean "views.consents.#{k}.description".t
+                  .control
+                    %input{type: :hidden, name: k, value: 0}
+                    %input.form-check-input{type: :checkbox, name: k, value: 1, checked: consent_to?(k)}
 
-    %hr.my-0
-
-    %form.remote-form{action: consents_path, method: :post, data: { handle_success: 'onConfigureCookies' }}
-      %ul.list-group.list-group-flush
-        %li.list-group-item
-          .form-check.form-switch.form-switch-lg.d-flex
-            .description
-              %strong= clean 'views.consents.necessary.label'.t
-              .text-muted.text-sm= clean 'views.consents.necessary.description'.t
-            .control
-              %input.form-check-input.disabled{type: :checkbox, name: :necessary, checked: true, value: 1}
-        - GdprConsent.get_all_scripts.each_pair do |k,v|
-          %li.list-group-item
-            .form-check.form-switch.form-switch-lg.d-flex
-              .description
-                %strong= clean "views.consents.#{k}.label".t
-                .text-muted.text-sm= clean "views.consents.#{k}.description".t
-              .control
-                %input{type: :hidden, name: k, value: 0}
-                %input.form-check-input{type: :checkbox, name: k, value: 1, checked: consent_to?(k)}
-
-      %hr.my-0
-
-      .card-footer.text-center
-        .btn.btn-outline-secondary.remote-link{href: consents_path, data: { method: 'post', body: reject_all_payload, handle_success: 'onRejectAll'}}
-          = clean 'actions.reject_all'.t
-          .spinner-border.spinner-border-sm{role: :status}
-            .visually-hidden= 'labels.loading'.t
-        .btn.btn-outline-primary.remote-link{href: consents_path, data: { method: 'post', body: accept_all_payload, handle_success: 'onAcceptAll'}}
-          = clean 'actions.accept_all'.t
-          .spinner-border.spinner-border-sm{role: :status}
-            .visually-hidden= 'labels.loading'.t
-        %button.btn.btn-outline-primary.save{type: :submit}= clean 'actions.save_cookies'.t
+          .modal-footer.justify-content-center
+            .btn.btn-outline-secondary.remote-link{href: consents_path, data: { method: 'post', body: reject_all_payload, handle_success: 'onRejectAll'}}
+              = clean 'actions.reject_all'.t
+              .spinner-border.spinner-border-sm{role: :status}
+                .visually-hidden= 'labels.loading'.t
+            .btn.btn-outline-primary.remote-link{href: consents_path, data: { method: 'post', body: accept_all_payload, handle_success: 'onAcceptAll'}}
+              = clean 'actions.accept_all'.t
+              .spinner-border.spinner-border-sm{role: :status}
+                .visually-hidden= 'labels.loading'.t
+            %button.btn.btn-outline-primary.save{type: :submit}= clean 'actions.save_cookies'.t
