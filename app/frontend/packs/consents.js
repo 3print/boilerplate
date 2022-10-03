@@ -3,17 +3,26 @@ window.addEventListener('DOMContentLoaded', (e) => {
   const cookies = consents.querySelector('#cookies-consent');
   const configurePanel = consents.querySelector('#cookies-configure');
 
-  const cookiesModal = Bootstrap.Modal.getOrCreateInstance(cookies);
-  const configurePanelModal = Bootstrap.Modal.getOrCreateInstance(configurePanel);
+  let cookiesModal;
+  if(cookies) {
+    cookiesModal = Bootstrap.Modal.getOrCreateInstance(cookies);
+    const configureButton = cookies.querySelector('.configure-cookies');
+    if(configureButton) {
+      configureButton.addEventListener('click', () => {
+        switchToEditCookies();
+        configurePanelModal.show();
+      });
+    }
+  }
 
+  const configurePanelModal = Bootstrap.Modal.getOrCreateInstance(configurePanel);
   const config = JSON.parse(consents.querySelector('script').textContent);
-  const configureButton = cookies.querySelector('.configure-cookies');
   const settingsOpeners = [].slice.call(document.querySelectorAll('.open-cookies-settings'));
   const scripts = {};
   let hasSetCookiesConsent = false;
 
   if(window.openCookies) {
-    cookiesModal.show();
+    cookiesModal && cookiesModal.show();
   } else {
     hasSetCookiesConsent = true;
   }
@@ -25,13 +34,9 @@ window.addEventListener('DOMContentLoaded', (e) => {
     });
   });
 
-  if(configureButton) {
-    configureButton.addEventListener('click', switchToEditCookies);
-  }
-
   configurePanel.addEventListener('hide.bs.modal', () => {
     if(!hasSetCookiesConsent) {
-      cookiesModal.show();
+      cookiesModal && cookiesModal.show();
     }
   });
 
@@ -41,7 +46,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
       value.forEach((scr) => enableScript(scr, key));
     });
     hasSetCookiesConsent = true;
-    cookiesModal.hide();
+    cookiesModal && cookiesModal.hide();
     configurePanelModal.hide();
     switchToEditCookies();
   }
@@ -52,7 +57,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
       disableScripts(key);
     });
     hasSetCookiesConsent = true;
-    cookiesModal.hide();
+    cookiesModal && cookiesModal.hide();
     configurePanelModal.hide();
     switchToEditCookies();
   }
@@ -70,14 +75,11 @@ window.addEventListener('DOMContentLoaded', (e) => {
   }
 
   window.openCookiesSettings = function openCookiesSettings() {
-    cookiesModal.hide();
+    cookiesModal && cookiesModal.hide();
     configurePanelModal.show();
   }
 
   function switchToEditCookies() {
-    cookiesModal.hide();
-    configurePanelModal.show();
-
     [].slice.call(document.querySelectorAll('.open-cookies-settings')).forEach(n => n.classList.add('visible'));
   }
 
@@ -109,7 +111,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
   }
 
   function toggleCheckbox(name, value) {
-    cookies.querySelector(`.form-check-input[name="${name}"]`).checked = value;
+    configurePanel.querySelector(`.form-check-input[name="${name}"]`).checked = value;
   }
 
   function deleteCookie(name) {
