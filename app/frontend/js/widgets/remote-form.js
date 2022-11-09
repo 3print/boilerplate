@@ -36,7 +36,10 @@ widgets.define('remote-form', (options) => (el) => {
     const body = {};
 
     for(let e of formData.entries()) {
-      body[e[0]] = e[1] == '1';
+      const path = pathFromFormData(e[0]);
+      const isArray = formDataIsArray(e[0]);
+
+      setAtPath(body, path, isArray ? [e[1]] : e[1]);
     }
 
     const options = {
@@ -50,11 +53,44 @@ widgets.define('remote-form', (options) => (el) => {
     };
 
     return fetch(action, options)
-    .then((res) => res.json())
     .then((res) => {
-      handleSuccess && handleSuccess(res);
+      if (res.status < 300) {
+        return res.json();
+      } else {
+        return res.json().then(data => {
+          console.log(data);
+          throw new Error(data.message);
+        });
+      }
+    })
+    .then((res) => {
+      handleSuccess && handleSuccess(res, el);
       el.classList.remove('loading');
     })
-    .catch((err) => handleError && handleError(err));
+    .catch((err) => handleError && handleError(err, el));
   });
+
+  function pathFromFormData(name) {
+    return name.replace(/\]$/, '').split(/\]?\[/).filter(s => s != '');
+  }
+
+  function formDataIsArray(name) {
+    return /\[\]$/.test(name);
+  }
+
+  function setAtPath(object, path, value) {
+    path.forEach((n,i) => {
+      if(i < path.length - 1) {
+        object[n] ||= {};
+
+        object = object[n]
+      } else {
+        if(Array.isArray(object[n]) && Array.isArray(value)) {
+          object[n] = object[n].concat(value).filter(v => v != '');
+        } else {
+          object[n] = value;
+        }
+      }
+    });
+  }
 });
