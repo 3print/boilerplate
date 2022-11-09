@@ -28,6 +28,7 @@ fr:
     modify: Modifier
     more: Plus d'actions
     next: Suivant
+    pick_icon: Choisissez un icône
     preview: Aperçu
     previous: Précédent
     print: Imprimer
@@ -40,6 +41,7 @@ fr:
     reset_password: Démarrer le changement de mot de passe
     retry: Réessayer
     revocate: Révoquer
+    save_sequence: Enregister l'ordre
     select_file: Choisissez une image
     send_password: Envoyer le mot de passe
     show: Voir
@@ -49,6 +51,7 @@ fr:
     sign_out: Se déconnecter
     sign_up: S'inscrire
     submit: Envoyer
+    toggle_nav: Afficher/Masquer le menu
     unfeature: Désactiver
     unhandle: Ré-ouvrir le traitement
     unlock_access: Débloquer l'accès

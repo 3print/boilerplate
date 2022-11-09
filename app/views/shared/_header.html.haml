@@ -1,9 +1,10 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light{role: :navigation}
   .container
     .navbar-header
-      %button.navbar-toggler{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
-        %span.sr-only Toggle navigation
-        %i.fa.fa-navicon
+      %button.navbar-toggler{type: :button, data: {bs_target: '#menu', bs_toggle: "collapse"}}
+        %span.sr-only= 'actions.toggle_nav'.t
+        = icon :menu
+
       %a.navbar-brand{href: "/"}
         = icon :flag
         %span.text= 'app_name'.t
