@@ -148,7 +148,7 @@ SimpleForm.setup do |config|
   config.input_class = 'form-control'
 end
 
-Rails.application.reloader.to_prepare do  # BOILERPLATE ONLY
-  SettingsInput.types << :user            # BOILERPLATE ONLY
-  SettingsInput.types << :bp_test         # BOILERPLATE ONLY
-end                                       # BOILERPLATE ONLY
+Rails.application.reloader.to_prepare do  # BOILERPLATE_ONLY
+  SettingsInput.types << :user            # BOILERPLATE_ONLY
+  SettingsInput.types << :bp_test         # BOILERPLATE_ONLY
+end                                       # BOILERPLATE_ONLY
