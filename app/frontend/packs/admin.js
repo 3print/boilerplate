@@ -94,9 +94,6 @@ widgets('select-multiple', 'select[multiple]', merge(DEFAULT_CONFIG(), {
   }
 }));
 
-widgets('remote-link', '.remote-link', DEFAULT_CONFIG());
-widgets('remote-form', 'form.remote-form', DEFAULT_CONFIG());
-
 widgets('order-table', '.sortable', DEFAULT_CONFIG());
 
 widgets('table-sort-header', '[data-sort]', merge(DEFAULT_CONFIG(), {
@@ -137,6 +134,11 @@ widgets('live-validation', 'input, select, textarea', merge({
   inputBuffer: 500,
 }, merge(DEFAULT_CONFIG(), VALIDATION_OPTIONS)));
 widgets('form-validation', 'form', merge(DEFAULT_CONFIG(), VALIDATION_OPTIONS));
+
+// Remote form must be handled after validation so that it does not ignore it
+widgets('remote-link', '.remote-link', DEFAULT_CONFIG());
+widgets('remote-form', 'form.remote-form', DEFAULT_CONFIG());
+
 
 const versionSiblings = (el) =>
   asArray(parent(el, '.controls').querySelectorAll('input[data-size]'));
