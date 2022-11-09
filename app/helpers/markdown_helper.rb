@@ -40,6 +40,7 @@ class HTMLWithWell < Redcarpet::Render::HTML
     .gsub(/%\(([^)]+)\)/) { |m|
       Feather[m[2..-2]]
     }
+    .gsub(/<blockquote>/, '<blockquote class="blockquote">')
 
     if full_document.scan(/<p>/).size == 1
       full_document = Regexp.new(/\A<p>(.*)<\/p>\Z/m).match(full_document)[1] rescue full_document

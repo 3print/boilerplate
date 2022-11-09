@@ -1,0 +1,54 @@
+fr:
+  markdown_help:
+    main_title: Aide Markdown
+
+    styles:
+      title: Styles de texte
+      italic: Italique
+      bold: Gras
+      striked: Raturé
+      link: Lien
+      quote: Citation
+
+    aligns:
+      title: Alignements
+      left: Texte à gauche
+      right: Texte à droite
+      center: Texte centré
+
+    titles:
+      title: Titraille
+      placeholder: Titre
+
+    images:
+      title: Images
+      alt: Texte image non disponible
+      hover: Légende au survol
+
+    icons:
+      title: Icônes
+      intro: La bibliothèque d'icônes SVG <a href="https://feathericons.com/" target="_blank">Feather</a> est utilisée ici.
+
+    buttons:
+      title: Boutons
+      placeholder: Texte du bouton
+
+    lists:
+      title: Listes
+      placeholder: item
+
+    tables:
+      title: Tableaux
+      placeholder_column: Titre Colonne
+      placeholder_cell: Cellule
+      row: ligne
+      column: colonne
+
+    caps:
+      title: Lettrines
+
+    insets:
+      title: Encarts
+
+
+

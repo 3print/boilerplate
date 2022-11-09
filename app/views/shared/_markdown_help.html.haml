@@ -1,162 +1,180 @@
-.markdown-help.visible
-  %button.btn.btn-secondary
-    = icon :times
+.modal.fade#markdown-help
+  .modal-dialog{style: 'max-width: 800px'}
+    .modal-content
+      .modal-header.text-center
+        %h5.modal-title= 'markdown_help.main_title'.t
+        .btn.btn-close{data: {bs_dismiss: :modal}, aria: {label: 'actions/close'.t}}
 
-  .wrapper
-    %h2 Aide Markdown
+      .modal-body
+        %h3= 'markdown_help.styles.title'.t
 
-    %h3 Styles de texte
+        .row.section
+          - content = capture_haml do
+            :plain
+              _#{'markdown_help.styles.italic'.t}_
+              *#{'markdown_help.styles.italic'.t}*
+              __#{'markdown_help.styles.bold'.t}__
+              **#{'markdown_help.styles.bold'.t}**
+              ~~#{'markdown_help.styles.striked'.t}~~
+              [#{'markdown_help.styles.link'.t}](http://www.google.fr/)
+              > #{'markdown_help.styles.quote'.t}
 
-    .row.section
-      - content = capture_haml do
-        :plain
-          _Italique_
-          *Italique*
-          __Gras__
-          **Gras**
-          ~~Raturé~~
-          [Lien](http://www.google.fr/)
-          > Citation
+          .col-md-6
+            %pre
+              %code.code<>= content.gsub(/^[ ]+/m, '')
+          .col-md-6.preview
+            .text-content= markdown(content)
 
-      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
-      .col-md-6.preview
-        .text-content= markdown(content)
+        %h3= 'markdown_help.aligns.title'.t
 
-    %h3 Alignements
+        .row.section
+          - content = capture_haml do
+            :plain
+              -->>
+              #{'markdown_help.aligns.right'.t}
+              -->>
 
-    .row.section
-      - content = capture_haml do
-        :plain
-          -->>
-          Texte à droite
-          -->>
+              <<--
+              #{'markdown_help.aligns.left'.t}
+              <<--
 
-          <<--
-          Texte à gauche
-          <<--
+              -><-
+              #{'markdown_help.aligns.center'.t}
+              -><-
 
-          -><-
-          Text centré
-          -><-
+          .col-md-6
+            %pre
+              %code.code<>= content.gsub(/^[ ]+/m, '')
+          .col-md-6.preview
+            .text-content= markdown(content)
 
-      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
-      .col-md-6.preview
-        .text-content= markdown(content)
+        %h3= 'markdown_help.titles.title'.t
 
-    %h3 Titraille
+        .row.section
+          - content = capture_haml do
+            :plain
+              # #{'markdown_help.titles.placeholder'.t} 1
+              ## #{'markdown_help.titles.placeholder'.t} 2
+              ### #{'markdown_help.titles.placeholder'.t} 3
+              #### #{'markdown_help.titles.placeholder'.t} 4
+              ##### #{'markdown_help.titles.placeholder'.t} 5
+              ###### #{'markdown_help.titles.placeholder'.t} 6
 
-    .row.section
-      - content = capture_haml do
-        :plain
-          # Titre 1
-          ## Titre 2
-          ### Titre 3
-          #### Titre 4
-          ##### Titre 5
-          ###### Titre 6
+          .col-md-6
+            %pre
+              %code.code<>= content.gsub(/^[ ]+/m, '')
+          .col-md-6.preview
+            .text-content= markdown(content)
 
-      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
-      .col-md-6.preview
-        .text-content= markdown(content)
+        %h3= 'markdown_help.images.title'.t
 
-    %h3 Images
+        .row.section
+          - content = capture_haml do
+            :plain
+              ![#{'markdown_help.images.alt'.t}](https://placehold.it/348x100?text=PICTURE "#{'markdown_help.images.hover'.t}")
+          .col-md-6
+            %pre
+              %code.code<>= content.gsub(/^[ ]+/m, '')
+          .col-md-6.preview
+            .text-content= markdown(content)
 
-    .row.section
-      - content = capture_haml do
-        :plain
-          ![Texte image non disponible](https://placehold.it/348x100?text=PICTURE "Légende au survol")
-      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
-      .col-md-6.preview
-        .text-content= markdown(content)
+        %h3= 'markdown_help.icons.title'.t
 
-    %h3 Icônes
+        = 'markdown_help.icons.intro'.t.html_safe
 
-    Seules les icônes de la section <a href='http://fontawesome.io/icons/#web-application'>web application</a> de FontAwesome sont disponibles dans le sélecteur, mais toutes les icônes peuvent être utilisées.
+        .row.section
+          - content = capture_haml do
+            :plain
+              %(globe)
 
-    .row.section
-      - content = capture_haml do
-        :plain
-          %(globe)
+          .col-md-6
+            %pre
+              %code.code<>= content.gsub(/^[ ]+/m, '')
+          .col-md-6.preview
+            .text-content= markdown(content)
 
-      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
-      .col-md-6.preview
-        .text-content= markdown(content)
+        %h3= 'markdown_help.buttons.title'.t
 
-    %h3 Boutons
+        .row.section
+          - content = capture_haml do
+            :plain
+              (#{'markdown_help.buttons.placeholder'.t}=>http://www.google.fr/)
+          .col-md-6
+            %pre
+              %code.code<>= content.gsub(/^[ ]+/m, '')
+          .col-md-6.preview
+            .text-content= markdown(content)
 
-    .row.section
-      - content = capture_haml do
-        :plain
-          (Texte du bouton=>http://www.google.fr/)
-      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
-      .col-md-6.preview
-        .text-content= markdown(content)
+        %h3= 'markdown_help.lists.title'.t
 
-    %h3 Listes
+        .row.section
+          - content = capture_haml do
+            :plain
+              - #{'markdown_help.lists.placeholder'.t} 1
+              * #{'markdown_help.lists.placeholder'.t} 2
+              + #{'markdown_help.lists.placeholder'.t} 3
 
-    .row.section
-      - content = capture_haml do
-        :plain
-          - Item 1
-          * Item 2
-          + Item 3
+              1. #{'markdown_help.lists.placeholder'.t} 1
+              2. #{'markdown_help.lists.placeholder'.t} 2
+              3. #{'markdown_help.lists.placeholder'.t} 3
 
-          1. Item 1
-          2. Item 2
-          3. Item 3
+          .col-md-6
+            %pre
+              %code.code<>= content.gsub(/^[ ]+/m, '')
+          .col-md-6.preview
+            .text-content= markdown(content)
 
-      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
-      .col-md-6.preview
-        .text-content= markdown(content)
+        %h3= 'markdown_help.tables.title'.t
 
-    %h3 Table
+        .row.section
+          - content = capture_haml do
+            :plain
+              #{'markdown_help.tables.placeholder_column'.t} 1|#{'markdown_help.tables.placeholder_column'.t} 2
+              ---|---
+              #{'markdown_help.tables.placeholder_cell'.t} #{'markdown_help.tables.row'.t} 1, #{'markdown_help.tables.column'.t} 1|#{'markdown_help.tables.placeholder_cell'.t} #{'markdown_help.tables.row'.t} 1, #{'markdown_help.tables.column'.t} 2
+              #{'markdown_help.tables.placeholder_cell'.t} #{'markdown_help.tables.row'.t} 2, #{'markdown_help.tables.column'.t} 1|#{'markdown_help.tables.placeholder_cell'.t} #{'markdown_help.tables.row'.t} 2, #{'markdown_help.tables.column'.t} 2
 
-    .row.section
-      - content = capture_haml do
-        :plain
-          Titre Colonne 1|Titre Colonne 2
-          ---|---
-          Cellule ligne 1, colonne 1|Cellule ligne 1, colonne 2
-          Cellule ligne 2, colonne 1|Cellule ligne 2, colonne 2
+          .col-md-6
+            %pre
+              %code.code<>= content.gsub(/^[ ]+/m, '')
+          .col-md-6.preview
+            .text-content= markdown(content)
 
-      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
-      .col-md-6.preview
-        .text-content= markdown(content)
+        %h3= 'markdown_help.caps.title'.t
 
-    %h3 Lettrines
+        .row.section
+          - content = capture_haml do
+            :plain
+              ^Ut^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
 
-    .row.section
-      - content = capture_haml do
-        :plain
-          ^Ut^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
+              ^^Ut^^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
 
-          ^^Ut^^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
+              ^^^Ut^^^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
 
-          ^^^Ut^^^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+              ^^^^Ut^^^^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
 
-          ^^^^Ut^^^^ wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+          .col-md-6
+            %pre
+              %code.code<>= content.gsub(/^[ ]+/m, '')
+          .col-md-6.preview
+            .text-content= markdown(content)
 
-      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
-      .col-md-6.preview
-        .text-content= markdown(content)
+        %h3= 'markdown_help.insets.title'.t
 
-    %h3 Encarts
+        .row.section
+          - content = capture_haml do
+            :plain
+              Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
 
-    .row.section
-      - content = capture_haml do
-        :plain
-          Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
+              %%% Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio. %%%
 
-          %%%
-          Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
-          %%%
+              Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
 
-          Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+              %% Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio %%
 
-          %%
-          Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
-          %%
-
-      .col-md-6.code<>= content.gsub(/^[ ]+/m, '')
-      .col-md-6.preview
-        .text-content= markdown(content)
+          .col-md-6
+            %pre
+              %code.code<>= content.gsub(/^[ ]+/m, '')
+          .col-md-6.preview
+            .text-content= markdown(content)
+  }

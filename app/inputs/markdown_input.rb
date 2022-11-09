@@ -22,6 +22,12 @@ class MarkdownInput < SimpleForm::Inputs::TextInput
 
     html << '</div>'
 
+    html << '<div class="btn-group me-2">'
+
+    html << @builder.button(:button, Feather['help-circle'], class: 'btn btn-outline-secondary btn-sm btn-icon', data: {bs_toggle: 'modal', bs_target: '#markdown-help'})
+
+    html << '</div>'
+
 
     html << '</div>'
 

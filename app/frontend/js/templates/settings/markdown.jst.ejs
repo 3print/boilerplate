@@ -1,5 +1,7 @@
 <div class='form-group has-feedback markdown'>
-  <label for='<%= locals.id %>'><%= locals.label %></label>
+  <label for='<%= locals.id %>'>
+    <%= locals.label %>
+  </label>
 
   <div class="toolbar mb-2">
     <div class="btn-group me-2">
@@ -19,6 +21,13 @@
       </button>
       <button name="button" type="submit" class="btn btn btn-outline-secondary btn-sm btn-icon" data-wrap="![|]($url)" data-keystroke="ctrl-shift-i"><svg class="feather feather-image" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
       </button>
+    </div>
+    <div class="btn-group me-2">
+      <a href="#markdown-help" class="btn btn btn-outline-secondary btn-sm btn-icon" data-bs-toggle="modal">
+        <svg class="feather feather-help-circle" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </a>
     </div>
   </div>
 
