@@ -62,7 +62,21 @@ SimpleForm.setup do |config|
   end
 
   # vertical input for radio buttons and check boxes
-  config.wrappers :vertical_collection, item_wrapper_class: 'form-check', item_label_class: 'form-check-label', tag: 'fieldset', class: 'form-group', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+  config.wrappers :vertical_collection, item_wrapper_class: 'form-check', item_wrapper_tag: :label, item_label_class: 'form-check-label', tag: 'fieldset', class: 'form-group', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper :legend_tag, tag: 'legend', class: 'col-form-label pt-0' do |ba|
+      ba.use :label_text
+    end
+    b.wrapper :inputs, tag: :div, class: 'form-check-input-group' do |ba|
+      ba.use :input, class: 'form-check-input', error_class: 'is-invalid', valid_class: 'is-valid'
+    end
+    b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback d-block' }
+    b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+  end
+
+  # vertical input for grouped check boxes
+  config.wrappers :vertical_grouped_collection, item_wrapper_class: 'form-check', item_wrapper_tag: :label, item_label_class: 'form-check-label', tag: 'fieldset', class: 'form-group', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
     b.use :html5
     b.optional :readonly
     b.wrapper :legend_tag, tag: 'legend', class: 'col-form-label pt-0' do |ba|
@@ -80,6 +94,7 @@ SimpleForm.setup do |config|
     b.wrapper :legend_tag, tag: 'legend', class: 'col-form-label pt-0' do |ba|
       ba.use :label_text
     end
+
     b.use :input, class: 'form-check-input', error_class: 'is-invalid', valid_class: 'is-valid'
     b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback d-block' }
     b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
@@ -414,6 +429,7 @@ SimpleForm.setup do |config|
   config.wrapper_mappings = {
     boolean:       :vertical_boolean,
     check_boxes:   :vertical_collection,
+    collection_grouped_check_boxes:   :vertical_grouped_collection,
     date:          :vertical_multi_select,
     datetime:      :vertical_multi_select,
     file:          :vertical_file,
