@@ -18,6 +18,7 @@ Feather.config do |i|
 
   i.set_icon User, :users
   i.set_icon BpTest, :package # BOILERPLATE_ONLY
+  i.set_icon StaticContent, 'file-text'
 end
 
 module IconHelper

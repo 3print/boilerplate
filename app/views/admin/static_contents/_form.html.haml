@@ -1,0 +1,21 @@
+
+= simple_form_for resource, url: controller.controller_namespace + [resource] do |f|
+
+  %fieldset.card-body
+
+    = f.input :name
+
+    .mt-3= f.input :content, as: :markdown
+
+    %legend SEO
+
+    = f.simple_fields_for :seo_meta, f.object.seo_meta || SeoMeta.new do |ff|
+      .row
+        .col-sm-6
+          = ff.input :title, input_html: {data: {limit: 65}}
+          - if ff.object.persisted?
+            = ff.input :id, as: :hidden
+
+        .col-sm-6= ff.input :description, input_html: {data: {limit: 156}}
+
+  = default_actions

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         put :unlock_access
       end
     end
+    resources :static_contents, only: %w(show edit update)
     resources :seo_meta
     resources :bp_tests  do   # BOILERPLATE_ONLY
       collection do           # BOILERPLATE_ONLY

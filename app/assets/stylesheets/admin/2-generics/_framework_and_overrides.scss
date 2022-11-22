@@ -86,6 +86,13 @@ ul.pagination {
 
   .sidebar-item .sidebar-link {
     padding-left: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .feather {
+      flex: 0 0 auto;
+    }
   }
 
   .sidebar-item .sidebar-link:hover {

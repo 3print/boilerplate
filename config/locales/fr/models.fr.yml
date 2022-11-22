@@ -3,11 +3,13 @@ fr:
     users: Utilisateurs
     bp_tests: Tests # BOILERPLATE_ONLY
     seo_meta: SEO
+    static_contents: Contenus Froid
 
   models: &models
     <<: *collections
 
     user: Utilisateur
+    static_content: Contenu Froid
     bp_test: Test # BOILERPLATE_ONLY
     dashboard:
       <<: *collections

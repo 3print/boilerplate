@@ -52,3 +52,8 @@ fr:
         meta_owner_type: Nom du modèle cible
         static_mode: Pour une page statique
         static_action: Page
+
+      static_content:
+        name: Nom
+        key: Clé
+        content: Contenu

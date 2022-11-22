@@ -5,3 +5,8 @@
       = admin_nav_link_to User
       = admin_nav_link_to BpTest, badge: BpTest.validated.size, badge_tooltip: 'labels.validated_models'.t # BOILERPLATE_ONLY
 
+
+    - if StaticContent.any?
+      = admin_nav_link_to '#static_content', label: 'nav.admin.static_content'.t, icon: 'folder' do
+        - StaticContent.all.each do |sc|
+          = admin_nav_link_to sc

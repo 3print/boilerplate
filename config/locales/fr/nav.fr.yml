@@ -16,3 +16,4 @@ fr:
       root: Admin
       resources: Resources
       dashboard: Dashboard
+      static_content: Contenu Froid

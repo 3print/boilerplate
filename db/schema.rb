@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_01_122046) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_22_094348) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_122046) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.index ["meta_owner_id", "meta_owner_type"], name: "index_seo_meta_on_meta_owner_id_and_meta_owner_type"
+  end
+
+  create_table "static_contents", force: :cascade do |t|
+    t.string "name"
+    t.string "key"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

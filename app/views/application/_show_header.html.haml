@@ -15,7 +15,7 @@
 
 - controller_breadcrumb
 
-- breadcrumb resource_class.t, can?(:index, resource_class) ? controller.resource_path(:index) : nil
+- breadcrumb resource_class.t, can?(:index, resource_class) && controller.route_exists_for?(:index) ? controller.resource_path(:index) : nil
 - breadcrumb resource_label
 
 - content_for :pills do
