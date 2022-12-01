@@ -1,3 +1,3 @@
 # Deployment check list
 
--[] Test
+-[ ] Test
