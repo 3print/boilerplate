@@ -30,6 +30,7 @@
   - [ ] Is `DEFAULT_PASSWORD` properly defined?
   - [ ] Is `DEFAULT_LOCALE` properly defined?
   - [ ] Is `HOST` and `DOMAIN_NAME` properly defined?
+  - [ ] IS `SECRET_KEY_BASE` properly defined?
   - [ ] Does `config/credentials/production.yml.enc` exists?
     - [ ] Is `RAILS_MASTER_KEY` env var properly defined?
   - [ ] Or does `config/credentials.yml.enc` exists on the server?
