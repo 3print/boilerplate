@@ -1,6 +1,6 @@
 # Deployment check list
 
-### [ ] Deploy on Heroku?
+- [ ] Deploy on Heroku?
   - [ ] Does `config/credentials/production.yml.enc` exists?
     - [ ] Is `RAILS_MASTER_KEY` env var properly defined?
   - [ ] Is postgres addon properly defined on a non-free version?
@@ -24,7 +24,7 @@
   - [ ] Does the project uses a map?
     - [ ] Is `GOOGLE_MAP_KEY` env var properly defined?
 
-### [ ] Deploy on OVH?
+- [ ] Deploy on OVH?
   - [ ] Does `./3print_games_ruby` file exists?
   - [ ] Is `RAILS_ENV` properly defined?
   - [ ] Is `DEFAULT_PASSWORD` properly defined?
@@ -48,7 +48,7 @@
     - [ ] Are `INFOMIL_*` env vars properly defined?
     - [ ] Are `CIAM_*` env vars properly defined?
 
-### [ ] Is S3 Bucket created?
+- [ ] Is S3 Bucket created?
   - [ ] With proper CORS settings?
   - [ ] With proper ACL settings? (public-read most of the time)
   - [ ] Does `AWS_*` env vars have been specified?
