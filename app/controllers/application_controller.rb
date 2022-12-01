@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :access_denied
 
+  before_action :redirect_root_domain, if: -> { ENV['ENABLE_ROOT_REDIRECT'].present? }
+
   before_action do
     # there MUST be a cleaner way :/
     if Rails.env.development?
@@ -49,5 +51,12 @@ class ApplicationController < ActionController::Base
 
   def reject_unauthorized_user!
     unauthorized unless current_user.present? && current_user.is_admin?
+  end
+
+  private
+
+  def redirect_root_domain
+    return unless request.host === ENV['HOST'].gsub('www.', '')
+    redirect_to("#{request.protocol}#{ENV['HOST']}#{request.fullpath}", status: 301)
   end
 end
