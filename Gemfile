@@ -5,6 +5,7 @@ gem 'puma', '>= 4.3.8'
 gem 'settingslogic'
 gem 'sendgrid'
 gem "nokogiri", ">= 1.13.4"
+gem "loofah", ">= 2.19.1"
 
 # Auth
 gem 'devise'
