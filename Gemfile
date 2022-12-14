@@ -6,6 +6,7 @@ gem 'settingslogic'
 gem 'sendgrid'
 gem "nokogiri", ">= 1.13.4"
 gem "loofah", ">= 2.19.1"
+gem "rails-html-sanitizer", ">= 1.4.4"
 
 # Auth
 gem 'devise'
