@@ -4,19 +4,19 @@ module SimpleFormHelper
   def default_actions(options={}, &block)
     capture_haml do
       content_tag 'div', class: options[:class] || 'card-footer' do
-        content_tag 'fieldset', class: 'form-actions' do
-          content_tag 'button', class: "btn btn-outline-success #{options[:class]}", type: :submit do
+        content_tag 'fieldset', class: 'form-actions btn-group' do
+          concat(content_tag('button', class: "btn btn-outline-success #{options[:class]}", type: :submit) do
             concat icon(options[:icon] || 'check')
             concat options[:submit] || "actions.submit".t
-          end
+          end)
 
-          concat capture_haml(&block) if block_given?
+          concat(capture_haml(&block)) if block_given?
 
           if request.referrer && !options[:no_cancel]
-            content_tag 'a', href: request.referrer, class: "btn btn-outline-danger #{options[:class]}" do
+            concat(content_tag('a', href: request.referrer, class: "btn btn-outline-danger #{options[:class]}") do
               concat icon(options[:cancel_icon] || 'x')
               concat options[:cancel] || 'actions.cancel'.t
-            end
+            end)
           end
         end
       end

@@ -3,14 +3,14 @@ module NestedFormHelper
 
   def nested_form_add(form, options={}, &block)
     capture_haml do
-      content_tag 'tr', class: 'fields actions' do
-        content_tag 'td', colspan: options[:cols] do
-          content_tag 'div', class: 'btn-group' do
-            concat capture_haml(&block) if block_given?
+      content_tag('tr', class: 'fields actions') do
+        content_tag('td', colspan: options[:cols]) do
+          content_tag('div', class: 'btn-group') do
+            concat(capture_haml(&block)) if block_given?
 
             concat(form.link_to_add(options[:for], class: 'btn btn-success') do
-                content_tag 'span', class: icon_class('plus')
-                concat 'actions.add'.t
+              content_tag 'span', class: icon_class('plus')
+              concat 'actions.add'.t
             end)
           end
         end
@@ -26,10 +26,9 @@ module NestedFormHelper
           concat 'actions.remove'.t
         end)
 
-        content_tag 'div', class: 'btn-group' do
+        concat(content_tag('div', class: 'btn-group') do
           concat capture_haml(&block).html_safe if block_given?
-        end
-
+        end)
       end
     end
   end
