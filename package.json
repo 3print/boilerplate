@@ -15,6 +15,7 @@
     "@rails/actioncable": "^6.1.4-1",
     "@rails/ujs": "^6.1.4-1",
     "bootstrap": "^5.0.0-beta3",
+    "ejs": "^3.1.7",
     "ejs-compiled-loader": "^3.1.0",
     "flatpickr": "^4.6.9",
     "js.cookie": "^0.0.4",
