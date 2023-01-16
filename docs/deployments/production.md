@@ -4,6 +4,7 @@
   - [ ] Does `config/credentials/production.yml.enc` exist?
     - [ ] Is `RAILS_MASTER_KEY` env var properly defined?
   - [ ] Is postgres addon properly defined on a non-free version?
+    - [ ] Is there's a proper backup schedule setup for the database? (i.e. games may require hourly/daily backups)
   - [ ] Is `DEFAULT_PASSWORD` properly defined?
   - [ ] Is `DEFAULT_LOCALE` properly defined?
   - [ ] Is `HOST` and `DOMAIN_NAME` properly defined?
